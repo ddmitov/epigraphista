@@ -1,0 +1,52 @@
+
+HTML, CSS & JAVASCRIPT
+====================
+http://www.w3schools.com/jsref/dom_obj_all.asp
+http://www.w3schools.com/jsref/met_node_appendchild.asp
+http://www.w3schools.com/jsref/met_element_setattribute.asp
+http://www.w3schools.com/js/js_popup.asp
+http://www.w3schools.com/tags/att_textarea_readonly.asp
+http://www.w3schools.com/jsref/prop_style_marginbottom.asp
+http://www.w3schools.com/js/js_htmldom_css.asp
+http://www.w3schools.com/jsref/met_node_removechild.asp
+http://www.w3schools.com/jsref/prop_textarea_value.asp
+http://www.w3schools.com/jsref/jsref_length_string.asp
+http://www.w3schools.com/jsref/event_oninput.asp
+http://www.w3schools.com/bootstrap/bootstrap_case_container.asp
+
+http://stackoverflow.com/questions/22888298/bootstrap-3-how-to-get-two-form-inputs-on-one-line-and-other-inputs-on-individu
+http://stackoverflow.com/questions/18036315/centering-bootstrap-input-fields
+http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3
+http://stackoverflow.com/questions/11080620/how-to-remove-div-elements-in-javascript-using-their-id
+http://stackoverflow.com/questions/9196954/how-to-read-line-by-line-of-a-text-area
+http://stackoverflow.com/questions/24557828/bootstrap-input-group-text-area-with-button
+http://stackoverflow.com/questions/3676927/why-if-element-innerhtml-is-not-working-in-firefox
+http://stackoverflow.com/questions/2363022/toggle-checkbox
+http://stackoverflow.com/questions/24557828/bootstrap-input-group-text-area-with-button
+http://stackoverflow.com/questions/769135/run-javascript-when-an-element-loses-focus
+http://stackoverflow.com/questions/9855656/how-to-submit-a-form-using-javascript
+
+https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
+https://learn.jquery.com/using-jquery-core/document-ready/
+
+http://www.randomsnippets.com/2008/02/21/how-to-dynamically-add-form-elements-via-javascript/
+http://www.coderanch.com/t/112558/HTML-CSS-JavaScript/Adding-alerts-Reset-button
+http://amaury.carrade.eu/projects/jquery/autoResize.html
+http://www.typegreek.com/
+http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/
+http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm
+http://fettblog.eu/style-select-elements/
+http://cds.library.brown.edu/projects/chet-c/chetc.html
+https://github.com/steko/epidoc/tree/master/chetc-js
+http://www.javascript-coder.com/javascript-form/javascript-form-submit.phtml
+
+PERL
+====================
+https://metacpan.org/pod/distribution/XML-LibXML/lib/XML/LibXML/Element.pod
+https://metacpan.org/pod/distribution/XML-LibXML/lib/XML/LibXML/Node.pod
+
+http://www.perlmonks.org/?node_id=530519 - Namespaced XML::LibXML XPath query
+http://www.perlmonks.org/?node_id=782694 - Edit a node value in xml
+http://www.perlmonks.org/?node_id=900439 - How do I get LibXML to replace attribute values?
+
+http://www.tutorialspoint.com/perl/perl_cgi.htm
