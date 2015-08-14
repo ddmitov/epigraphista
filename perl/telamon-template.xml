@@ -9,20 +9,21 @@
 			</titleStmt>
 			<publicationStmt>
 				<authority/>
-				<idno type="filename"/>
+				<idno type="filename">filename</idno>
 			</publicationStmt>
 			<sourceDesc>
 				<msDesc>
 					<msIdentifier>
-						<repository>museum/archive</repository>
+						<repository>museum</repository>
 						<idno>inventory number</idno>
 					</msIdentifier>
 					<physDesc>
 						<objectDesc>
 							<supportDesc>
 								<support>
-									description of object/monument - likely to include
-									<material/>and <objectType/> information <dimensions/> etc.
+									description of object/monument
+									<material>material</material>
+									<objectType>object type</objectType>
 								</support>
 							</supportDesc>
 							<layoutDesc>
@@ -30,10 +31,7 @@
 							</layoutDesc>
 						</objectDesc>
 						<handDesc>
-							<handNote>
-								description of letters, possibly including
-								<height>letter-heights</height>
-							</handNote>
+							<handNote>description of letters</handNote>
 						</handDesc>
 					</physDesc>
 					<history>
@@ -48,18 +46,12 @@
 			</sourceDesc>
 		</fileDesc>
 	</teiHeader>
-	<facsimile>
-		<graphic url="photograph_of_text_or_monument_URL"/>
-	</facsimile>
 	<text>
 		<body>
 			<div type="edition">
-				<ab><lb n="1"/>
-					Greek or Latin text here
-					<supplied reason="lost"></supplied>
-					<gap reason="lost" quantity="1" unit="character"></gap>
-					<gap reason="lost" extent="unknown" unit="line"></gap>
-					Greek or Latin text here
+				<ab>
+					<lb n="1"/>Greek or Latin text here
+					<lb n="2"/>Greek or Latin text here
 				</ab>
 			</div>
 			<div type="apparatus">

@@ -23,26 +23,36 @@
 		<style type='text/css'>
 			fieldset {
 				border: 2px solid green;
-				border-radius: 5px;
-				padding: 10px;
+				border-radius: 8px;
+				padding-top: 10px;
+				padding-bottom: 0px;
+				padding-left: 10px;
+				padding-right: 10px;
+				margin: 10px;
 			}
 			legend {
 				border: 2px solid green;
-				border-radius: 5px;
+				border-radius: 8px;
+				padding: 2px 2px;
 				margin-top: 0px;
 				margin-bottom: 0px;
-				padding: 2px 2px;
-				font-size: 13px;
+				font-size: 100%;
 				text-align: left;
+			}
+			.element-fieldset {
+				display: inline-block;
+			}
+			.element-legend {
+				text-align: center;
 			}
 			pre {
 				margin-bottom: 0px;
 			}
+			.input-text {
+				font-size: 18px;
+			}
 			.greek {
 				font-family: "FreeSans", "Liberation Sans", "Gentium", "New Athena Unicode", "Palatino Linotype", "Arial Unicode MS";
-			}
-			.greek-text {
-				font-size: 18px;
 			}
 			.greek-help {
 				font-size: 24px;
@@ -53,24 +63,30 @@
 			.btn {
 				margin-top: 2px;
 				margin-bottom: 2px;
-			}
-			.input-group-addon {
-				border: 0px solid transparent;
+				margin-left: 2px;
+				margin-right: 2px;
 			}
 			.btn-letters {
 				font-size: 18px;
 			}
+			.input-group-addon {
+				border: 0px solid transparent;
+			}
 		</style>
 
 		<script type="text/javascript">
+			// Global variables:
+			var framedTextAreaElementsCounter = 0;
+			var currentTextAreaForAdditionalKeyboard;
+			var clientBrowser = navigator.userAgent.toLowerCase();
+			var isGeckoBrowser = ((clientBrowser.indexOf('gecko')!=-1) && (clientBrowser.indexOf('khtml') == -1));
+			var chetcXmlResult = null;
+			var chetcHtmlResult = null;
 			// Necessary to avoid conflicts between jQuery and Prototype.js:
 			var $jQuery = jQuery.noConflict();
 
-			// Dynamic HTML code:
-			function newFileSelected() {
-				document.getElementById("NewFileSelection").innerHTML = "Избери друго име на файл";
-			}
 
+			// Dynamic HTML code:
 			function addGreekKeyboardHelp(partialDivName) {
 				var greekKeyboardHelpContents = "" +
 					"&nbsp;&nbsp;Q&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Θ&nbsp;&nbsp;" +
@@ -124,6 +140,7 @@
 					placeholderElement.style.marginBottom = "0px";
 				}
 			}
+
 
 			function addAdditionalKeyboard(elementId) {
 				var additionalKeyboardFirstRowContents = "" +
@@ -210,64 +227,73 @@
 				}
 			}
 
-			function addTextAreaElement(label){
+
+			function addTextAreaElement(label, placeholderText, size, greekSupport, additionalKeyboard, mandatory) {
 				var name = label.replace(/-/g, "_");
 
-				var placeholder;
-				if (label == "orig-place") {
-					placeholder = "Място на намиране";
-				}
-				if (label == "orig-date") {
-					placeholder = "Време на намиране";
-				}
-				if (label == "description") {
-					placeholder = "Описание на паметника";
-				}
-				if (label == "layout") {
-					placeholder = "Описание на текстовото поле";
-				}
-				if (label == "hand-note") {
-					placeholder = "Описание на шрифта";
-				}
-				if (label == "apparatus-criticus") {
-					placeholder = "Критичен апарат";
-				}
-				if (label == "translation") {
-					placeholder = "Превод";
-				}
-				if (label == "commentary") {
-					placeholder = "Коментар";
-				}
-				if (label == "bibliography") {
-					placeholder = "Библиография";
-				}
-
-				var textElementContents = "" +
-					"<textarea rows='1' id='" + label + "' name='" + name + "' class='form-control greek greek-text' spellcheck='false'" +
-						"title='" + placeholder + "' placeholder='" + placeholder + "'" +
-						"onkeypress=\"return convertCharToggle(this, document.main_form." + name + "_switch_greek.checked, event);\"" +
-						"onkeyup=\"return convertStr(this, event);\"" +
-						"onfocus=\"setCurrentTextArea('" + label + "')\"></textarea>" +
+				var greekSupportCode01 = "" +
+					"onkeypress=\"return convertCharToggle(this, document.main_form." + name + "_switch_greek.checked, event);\"" +
+					"onkeyup=\"return convertStr(this, event);\"";
+				var greekSupportCode02 = "" +
 					"<span class='input-group-addon'>" +
 						"<input type='checkbox' id='" + label + "-switch-greek' name='" + name + "_switch_greek'" +
-						"onclick=\"switchGreek('" + label + "');\" title='Въвеждане на политоничен гръцки текст'/>&nbsp;" +
+							"onclick=\"switchGreek('" + label + "');\" title='Въвеждане на политоничен гръцки текст'/>&nbsp;" +
 						"<a href=\"javascript:addGreekKeyboardHelp('" + label + "');\"" +
 							"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>" +
-					"</span>" +
+					"</span>";
+				var additionalKeyboardSupportCode01 = "onfocus=\"setCurrentTextArea('" + label + "')\"";
+				var additionalKeyboardSupportCode02 = "" +
 					"<span class='input-group-addon btn btn-info'" +
 						"onclick=\"javascript:addAdditionalKeyboard('" + label + "-additional-keyboard')\" title='Допълнителна клавиатура'>" +
 						"<span class='glyphicon glyphicon-font'></span>" +
-					"</span>" +
-					"<span class='input-group-addon btn btn-danger' onclick=\"clearTextElementGroup('" + label + "');\" title='Премахване на елемента'>" +
+					"</span>";
+				var elementRemovalCode = "" +
+					"<span class='input-group-addon btn btn-danger' onclick=\"javascript:clearElementGroup('" + label + "');\" title='Премахване на елемента'>" +
 						"<span class='glyphicon glyphicon-remove'></span>" +
 					"</span>";
+
+				if (greekSupport == null) {
+					greekSupportCode01 = "";
+					greekSupportCode02 = "";
+				}
+				if (additionalKeyboard == null) {
+					additionalKeyboardSupportCode01 = "";
+					additionalKeyboardSupportCode02 = "";
+				}
+				if (mandatory == "mandatory") {
+					elementRemovalCode = "";
+				}
+
+				var textElementContents = "" +
+					"<textarea rows='1' id='" + label + "' name='" + name + "' class='form-control greek input-text' spellcheck='false'" +
+						"title='" + placeholderText + "' placeholder='" + placeholderText + "'" +
+						greekSupportCode01 +
+						additionalKeyboardSupportCode01 + ">" +
+					"</textarea>" +
+					greekSupportCode02 +
+					additionalKeyboardSupportCode02 +
+					elementRemovalCode;
 
 				var textElementInputGroup = document.createElement("div");
 				textElementInputGroup.setAttribute("class", "input-group");
 				textElementInputGroup.innerHTML = textElementContents;
 
 				var textElementBox = document.createElement("div");
-				textElementBox.setAttribute("class", "form-group col-xs-12");
+				if (size == "full") {
+					textElementBox.setAttribute("class", "form-group col-xs-12");
+				}
+				if (size == "large") {
+					textElementBox.setAttribute("class", "form-group col-xs-10 col-xs-offset-1");
+				}
+				if (size == "medium") {
+					textElementBox.setAttribute("class", "form-group col-xs-8 col-xs-offset-2");
+				}
+				if (size == "small") {
+					textElementBox.setAttribute("class", "form-group col-xs-6 col-xs-offset-3");
+				}
+				if (size == "tiny") {
+					textElementBox.setAttribute("class", "form-group col-xs-4 col-xs-offset-4");
+				}
 				textElementBox.appendChild(textElementInputGroup);
 
 				var textElementRow = document.createElement("div");
@@ -277,34 +303,241 @@
 				var placeholderElement = document.getElementById(label + "-group");
 				placeholderElement.appendChild(textElementRow);
 
-				var textElementGreekKeyboardHelpPlaceholder = document.createElement("div");
-				textElementGreekKeyboardHelpPlaceholder.setAttribute("id", label + "-greek-keyboard-help");
-				textElementGreekKeyboardHelpPlaceholder.setAttribute("class", "greek greek-help");
-				placeholderElement.appendChild(textElementGreekKeyboardHelpPlaceholder);
+				if (greekSupport == "greek") {
+					var textElementGreekKeyboardHelpPlaceholder = document.createElement("div");
+					textElementGreekKeyboardHelpPlaceholder.setAttribute("id", label + "-greek-keyboard-help");
+					textElementGreekKeyboardHelpPlaceholder.setAttribute("class", "greek greek-help");
+					placeholderElement.appendChild(textElementGreekKeyboardHelpPlaceholder);
+				}
 
-				var textElementAdditionalKeyboardPlaceholder = document.createElement("div");
-				textElementAdditionalKeyboardPlaceholder.setAttribute("id", label + "-additional-keyboard");
-				placeholderElement.appendChild(textElementAdditionalKeyboardPlaceholder);
+				if (additionalKeyboard == "additional-keyboard") {
+					var textElementAdditionalKeyboardPlaceholder = document.createElement("div");
+					textElementAdditionalKeyboardPlaceholder.setAttribute("id", label + "-additional-keyboard");
+					placeholderElement.appendChild(textElementAdditionalKeyboardPlaceholder);
+				}
 
 				$jQuery("#" + label).autoResize();
 
-				var buttonToDisable = document.getElementById(label + "-button");
-				buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+				if (mandatory == null) {
+					var buttonToDisable = document.getElementById(label + "-button");
+					buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+				}
 			}
 
-			function clearTextElementGroup(partialDivName){
-				if (confirm("Ако в този елемент е попълнен текст, той ще бъде изтрит!\n" +
+
+			function addFramedTextAreaElement(placeholderId, label, placeholderText, mandatory, unique){
+				var id;
+				var groupId;
+				var name;
+				var fullPlaceholderText;
+				if (unique == null) {
+					framedTextAreaElementsCounter++;
+					id = label + "-" + framedTextAreaElementsCounter;
+					groupId = id + "-group"
+					name = id.replace(/-/g, "_");
+					fullPlaceholderText = framedTextAreaElementsCounter + ". " + placeholderText;
+				}
+				if (unique == "unique") {
+					id = label;
+					groupId = id + "-group"
+					name = id.replace(/-/g, "_");
+					fullPlaceholderText = placeholderText;
+				}
+
+				var framedTextAreaElementBox = document.createElement("div");
+				framedTextAreaElementBox.setAttribute("class", "form-group");
+				var framedTextAreaElementContents = "" +
+				"<textarea rows='1' id='" + id + "' name='" + name + "' class='form-control greek input-text' spellcheck='false'" +
+					"title='" + fullPlaceholderText + "' placeholder='" + fullPlaceholderText + "'" +
+					"onkeypress=\"return convertCharToggle(this, document.main_form." + name + "_switch_greek.checked, event);\"" +
+					"onkeyup=\"return convertStr(this, event);\"" +
+					"onfocus=\"setCurrentTextArea('" + id + "')\">" +
+				"</textarea>";
+				framedTextAreaElementBox.innerHTML = framedTextAreaElementContents;
+
+				var fieldsetElement = document.createElement("fieldset");
+				fieldsetElement.setAttribute("id", groupId);
+				fieldsetElement.setAttribute("class", "element-fieldset ");
+
+				var legendElement = document.createElement("legend");
+				legendElement.setAttribute("class", "element-legend");
+
+				var legendElementContents = "" +
+					"&nbsp;" + fullPlaceholderText + "&nbsp;&nbsp;" +
+					"<input type='checkbox' id='" + id + "-switch-greek' name='" + name + "_switch_greek'" +
+					"onclick=\"switchGreek('" + id + "');\" title='Въвеждане на политоничен гръцки текст'/>&nbsp;&nbsp;" +
+					"<a href=\"javascript:addGreekKeyboardHelp('" + id + "');\"" +
+							"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>&nbsp;" +
+					"<a href=\"javascript:addAdditionalKeyboard('" + id + "-additional-keyboard')\" class='btn btn-info btn-xs'>" +
+						"<span class='glyphicon glyphicon-font'></span></a>";
+				if (mandatory == null) {
+					if (unique == null) {
+						var removeButton = "" +
+							"<a href=\"javascript:removeElement('" + groupId + "');\" class='btn btn-danger btn-xs'>" +
+								"<span class='glyphicon glyphicon-remove'></span></a>";
+						legendElementContents = legendElementContents + removeButton;
+					}
+					if (unique == "unique") {
+						var removeButton = "" +
+							"<a href=\"javascript:removeUniqueElement('" + label + "');\" class='btn btn-danger btn-xs'>" +
+								"<span class='glyphicon glyphicon-remove'></span></a>";
+						legendElementContents = legendElementContents + removeButton;
+					}
+				}
+
+				legendElement.innerHTML = legendElementContents;
+
+				fieldsetElement.appendChild(legendElement);
+				fieldsetElement.appendChild(framedTextAreaElementBox);
+
+				var framedTextAreaElementGreekKeyboardHelpPlaceholder = document.createElement("div");
+				framedTextAreaElementGreekKeyboardHelpPlaceholder.setAttribute("id", id + "-greek-keyboard-help");
+				framedTextAreaElementGreekKeyboardHelpPlaceholder.setAttribute("class", "greek greek-help");
+				fieldsetElement.appendChild(framedTextAreaElementGreekKeyboardHelpPlaceholder);
+
+				var framedTextAreaElementAdditionalKeyboardPlaceholder = document.createElement("div");
+				framedTextAreaElementAdditionalKeyboardPlaceholder.setAttribute("id", id + "-additional-keyboard");
+				fieldsetElement.appendChild(framedTextAreaElementAdditionalKeyboardPlaceholder);
+
+				document.getElementById(placeholderId).appendChild(fieldsetElement);
+
+				$jQuery("#" + id).autoResize();
+
+				if (unique == "unique") {
+					var buttonToDisable = document.getElementById(label + "-button");
+					buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+				}
+			}
+
+
+			function addSupportGroup(placeholderId){
+				var fieldsetElement = document.createElement("fieldset");
+				fieldsetElement.setAttribute("id", "support-fieldset");
+
+				var legendElement = document.createElement("legend");
+				var supportButtonsElement = document.createElement("div");
+				supportButtonsElement.setAttribute("id", "support-buttons");
+				supportButtonsElement.innerHTML = "" +
+					"&nbsp;" +
+					"Описание на паметника" +
+					"&nbsp;" +
+					"<input type='button' id='material-button' value='Материал'" +
+						"onClick=\"addFramedTextAreaElement('support-elements', 'material', 'Материал', null, 'unique');\" class='btn btn-info btn-xs'>" +
+					"<input type='button' id='object-type-button' value='Категория'" +
+						"onClick=\"addFramedTextAreaElement('support-elements', 'object-type', 'Категория', null, 'unique');\" class='btn btn-info btn-xs'>" +
+					"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger btn-xs'>" +
+						"<span class='glyphicon glyphicon-remove'></span></a>";
+
+				legendElement.appendChild(supportButtonsElement);
+
+				var supportBoxesElement = document.createElement("div");
+				supportBoxesElement.setAttribute("class", "row");
+				supportBoxesElement.setAttribute("id", "support-elements");
+
+				var supportRootPlaceholder = document.createElement("div");
+				supportRootPlaceholder.setAttribute("id", "support-root-group");
+				supportBoxesElement.appendChild(supportRootPlaceholder);
+
+				fieldsetElement.appendChild(legendElement);
+				fieldsetElement.appendChild(supportBoxesElement);
+
+				document.getElementById(placeholderId).appendChild(fieldsetElement);
+
+				var buttonToDisable = document.getElementById("support-button");
+				buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+
+				addTextAreaElement("support-root", "Описание на паметника", "large", "greek", "additional-keyboard", "mandatory");
+			}
+
+
+			function addHistoryGroup(placeholderId){
+				var fieldsetElement = document.createElement("fieldset");
+				fieldsetElement.setAttribute("id", "history-fieldset");
+
+				var legendElement = document.createElement("legend");
+				var historyButtonsElement = document.createElement("div");
+				historyButtonsElement.setAttribute("id", "history-buttons");
+				historyButtonsElement.innerHTML = "" +
+					"&nbsp;" +
+					"История на паметника" +
+					"&nbsp;" +
+					"<input type='button' id='provenance-found-button' value='Контекст'" +
+						"onClick=\"addTextAreaElement('provenance-found', 'Контекст', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
+					"<input type='button' id='provenance-observed-button' value='Съвременно място'" +
+						"onClick=\"addFramedTextAreaElement('history-elements', 'provenance-observed', 'Съвременно място', null, 'unique');\" class='btn btn-info btn-xs'>" +
+					"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger btn-xs'>" +
+						"<span class='glyphicon glyphicon-remove'></span></a>";
+
+				legendElement.appendChild(historyButtonsElement);
+
+				var historyBoxesElement = document.createElement("div");
+				historyBoxesElement.setAttribute("class", "row");
+				historyBoxesElement.setAttribute("id", "history-elements");
+
+				var origPlacePlaceholder = document.createElement("div");
+				origPlacePlaceholder.setAttribute("id", "orig-place-group");
+				historyBoxesElement.appendChild(origPlacePlaceholder);
+
+				var origDatePlaceholder = document.createElement("div");
+				origDatePlaceholder.setAttribute("id", "orig-date-group");
+				historyBoxesElement.appendChild(origDatePlaceholder);
+
+				var contextPlaceholder = document.createElement("div");
+				contextPlaceholder.setAttribute("id", "provenance-found-group");
+				historyBoxesElement.appendChild(contextPlaceholder);
+
+				fieldsetElement.appendChild(legendElement);
+				fieldsetElement.appendChild(historyBoxesElement);
+
+				document.getElementById(placeholderId).appendChild(fieldsetElement);
+
+				var buttonToDisable = document.getElementById("history-button");
+				buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+
+				addTextAreaElement("orig-place", "Място на намиране", "large", "greek", "additional-keyboard", "mandatory");
+				addTextAreaElement("orig-date", "Време на намиране", "large", null, "additional-keyboard", "mandatory");
+			}
+
+
+			function clearElementGroup(partialId){
+				if (confirm("Ако в този елемент е попълнен текст, той ще бъде загубен!\n" +
 					"Въведената информация не може да бъде възстановена!\n" +
 					"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
-					var placeholderElement = document.getElementById(partialDivName + "-group");
+					var placeholderElement = document.getElementById(partialId + "-group");
 					while (placeholderElement.hasChildNodes()) {
 						placeholderElement.removeChild(placeholderElement.firstChild);
 					}
-					var buttonToEnable = document.getElementById(partialDivName + "-button");
+					var buttonToEnable = document.getElementById(partialId + "-button");
 					buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
 				}
 				return false;
 			}
+
+
+			function removeElement(elementId){
+				if (confirm("Ако в този елемент е попълнен текст, той ще бъде загубен!\n" +
+					"Въведената информация не може да бъде възстановена!\n" +
+					"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
+					var elementToRemove = document.getElementById(elementId);
+					elementToRemove.parentNode.removeChild(elementToRemove);
+				}
+				return false;
+			}
+
+
+			function removeUniqueElement(partialId){
+				if (confirm("Ако в този елемент е попълнен текст, той ще бъде загубен!\n" +
+					"Въведената информация не може да бъде възстановена!\n" +
+					"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
+					var elementToRemove = document.getElementById(partialId + "-group");
+					elementToRemove.parentNode.removeChild(elementToRemove);
+
+					var buttonToEnable = document.getElementById(partialId + "-button");
+					buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+				}
+				return false;
+			}
+
 
 			function resetAlert(){
 				if (confirm("Сигурни ли сте, че искате да изтриете\n" +
@@ -315,31 +548,32 @@
 				return false;
 			}
 
+
 			// TypeGreek code:
 			function switchGreek(textAreaId) {
 				document.getElementById(textAreaId).focus();
 			}
 
+
 			// Additional keyboard code:
 			// The following code is adapted from Steev's JavaScript keyboard (GPL).
 			// http://www.bluedust.com/pub/web/sjk.htm
-			var currentTextArea;
 			function setCurrentTextArea(textAreaId) {
-				currentTextArea = document.getElementById(textAreaId);
+				currentTextAreaForAdditionalKeyboard = document.getElementById(textAreaId);
 			}
+
+
+			// Additional keyboard code:
 			// The following code is adapted from wikibits.js - MediaWiki JavaScript support functions and phpBB (both GPL).
 			// http://www.mediawiki.org/wiki/MediaWiki
 			// http://www.phpbb.com/support/license.php
-			var clientBrowser = navigator.userAgent.toLowerCase();
-			// Get client info:
-			var is_gecko = ((clientBrowser.indexOf('gecko')!=-1) && (clientBrowser.indexOf('khtml') == -1));
 			function insertTags(tagOpen, tagClose, sampleText) {
 				// IE:
-				if (document.selection && !is_gecko) {
+				if (document.selection && !isGeckoBrowser) {
 					var theSelection = document.selection.createRange().text;
 					if (!theSelection)
 						theSelection=sampleText;
-					currentTextArea.focus();
+					currentTextAreaForAdditionalKeyboard.focus();
 					// Exclude ending space char, if any:
 					if (theSelection.charAt(theSelection.length - 1) == " ") {
 						theSelection = theSelection.substring(0, theSelection.length - 1);
@@ -348,14 +582,14 @@
 						document.selection.createRange().text = tagOpen + theSelection + tagClose;
 					}
 				// Mozilla:
-				} else if(currentTextArea.selectionStart || currentTextArea.selectionStart == '0') {
+				} else if(currentTextAreaForAdditionalKeyboard.selectionStart || currentTextAreaForAdditionalKeyboard.selectionStart == '0') {
 					var replaced = false;
-					var startPos = currentTextArea.selectionStart;
-					var endPos = currentTextArea.selectionEnd;
+					var startPos = currentTextAreaForAdditionalKeyboard.selectionStart;
+					var endPos = currentTextAreaForAdditionalKeyboard.selectionEnd;
 					if (endPos-startPos)
 						replaced = true;
-					var scrollTop = currentTextArea.scrollTop;
-					var myText = (currentTextArea.value).substring(startPos, endPos);
+					var scrollTop = currentTextAreaForAdditionalKeyboard.scrollTop;
+					var myText = (currentTextAreaForAdditionalKeyboard.value).substring(startPos, endPos);
 					if (!myText)
 						myText=sampleText;
 					// Exclude ending space char, if any:
@@ -364,46 +598,50 @@
 					} else {
 						subst = tagOpen + myText + tagClose;
 					}
-					currentTextArea.value = currentTextArea.value.substring(0, startPos) + subst +
-						currentTextArea.value.substring(endPos, currentTextArea.value.length);
-					currentTextArea.focus();
+					currentTextAreaForAdditionalKeyboard.value = currentTextAreaForAdditionalKeyboard.value.substring(0, startPos) + subst +
+						currentTextAreaForAdditionalKeyboard.value.substring(endPos, currentTextAreaForAdditionalKeyboard.value.length);
+					currentTextAreaForAdditionalKeyboard.focus();
 					// Set new selection:
 					if (replaced) {
 						var cPos = startPos+(tagOpen.length+myText.length+tagClose.length);
-						currentTextArea.selectionStart = cPos;
-						currentTextArea.selectionEnd = cPos;
+						currentTextAreaForAdditionalKeyboard.selectionStart = cPos;
+						currentTextAreaForAdditionalKeyboard.selectionEnd = cPos;
 					} else {
-						currentTextArea.selectionStart = startPos+tagOpen.length;
-						currentTextArea.selectionEnd = startPos+tagOpen.length+myText.length;
+						currentTextAreaForAdditionalKeyboard.selectionStart = startPos+tagOpen.length;
+						currentTextAreaForAdditionalKeyboard.selectionEnd = startPos+tagOpen.length+myText.length;
 					}
-					currentTextArea.scrollTop = scrollTop;
+					currentTextAreaForAdditionalKeyboard.scrollTop = scrollTop;
 				}
 				// Reposition cursor, if possible:
-				if (currentTextArea.createTextRange)
-					currentTextArea.caretPos = document.selection.createRange().duplicate();
+				if (currentTextAreaForAdditionalKeyboard.createTextRange)
+					currentTextAreaForAdditionalKeyboard.caretPos = document.selection.createRange().duplicate();
 			}
 
-			// Chapel Hill Epigraphic Text Converter modified code:
-			var xml = null;
-			var result = null;
 
+			// Chapel Hill Epigraphic Text Converter modified code:
+			// http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
+			// http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
+			// http://cds.library.brown.edu/projects/chet-c/chetc.html
+			// https://github.com/steko/epidoc/tree/master/chetc-js
 			function startEpigraphicConverter() {
 				request = doSimpleXMLHttpRequest("chetc/replacements.txt");
 				request.addCallback(convertEpigraphicDocument);
 			}
 
+
+			// Chapel Hill Epigraphic Text Converter modified code:
 			function convertEpigraphicDocument(xmlHttpRequest) {
 				var epigraphicConverter = new Epigraph2Markup(xmlHttpRequest.responseText);
 				epigraphicConverter.lineBreaks("false");
-				result = epigraphicConverter.convert(strip($('original-text').value));
+				chetcHtmlResult = epigraphicConverter.convert(strip($('original-text').value));
 
-				var xmlLines = result.split('lineNumber');
+				var xmlLines = chetcHtmlResult.split('lineNumber');
 				for (var lineNumber = 1; lineNumber < xmlLines.length; lineNumber++) {
-					result = result.replace(/lineNumber/, lineNumber + 1);
+					chetcHtmlResult = chetcHtmlResult.replace(/lineNumber/, lineNumber + 1);
 				}
-				xml = "<lb n=\"1\"/> " + result;
+				chetcXmlResult = "<lb n=\"1\"/> " + chetcHtmlResult;
 
-				var resultHTML = escapeHTML("<ab><lb n=\"1\"/> " + result);
+				var resultHTML = escapeHTML("<ab><lb n=\"1\"/> " + chetcHtmlResult);
 				resultHTML = resultHTML.replace(/(&lt;lb[^\/]*\/&gt;)/g, "<br>$1");
 				resultHTML = resultHTML + "<br>&lt;/ab&gt;"
 				var lines = resultHTML.split('lineNumber');
@@ -412,11 +650,17 @@
 				}
 
 				document.getElementById("original-text-html").innerHTML = resultHTML;
-				document.getElementById("original-text-xml").setAttribute("value", xml);
+				document.getElementById("original-text-xml").setAttribute("value", chetcXmlResult);
 				$jQuery("#original-text-formatted").show();
 			}
 
+
 			function finalCheckAndSubmit() {
+				var originalText = document.getElementById("title").value;
+				if (originalText.length < 3) {
+					alert("Моля, попълнете заглавие на надписа!");
+					return false;
+				}
 				var originalText = document.getElementById("original-text").value;
 				if (originalText.length < 3) {
 					alert("Моля, попълнете оригиналния текст на надписа!");
@@ -440,48 +684,42 @@
 								&nbsp;
 								Описание на надписа
 								&nbsp;
-								<input type="button" id="description-button" value="Описание на паметника"
-									onClick="javascript:addTextAreaElement('description');" class="btn btn-info btn-xs">
+
+								<input type="button" id="repository-button" value="Музей"
+									onClick="javascript:addTextAreaElement('repository', 'Музей', 'tiny', null, null, null);" class="btn btn-info btn-xs">
+
+								<input type="button" id="idno-button" value="Инвентарен номер"
+									onClick="javascript:addTextAreaElement('idno', 'Инвентарен номер', 'tiny', null, null, null);" class="btn btn-info btn-xs">
+
+								<input type="button" id="support-button" value="Описание на паметника"
+									onClick="javascript:addSupportGroup('support-group');" class="btn btn-info btn-xs">
 
 								<input type="button" id="layout-button" value="Описание на текстовото поле"
-									onClick="javascript:addTextAreaElement('layout');" class="btn btn-info btn-xs">
+									onClick="javascript:addTextAreaElement('layout', 'Описание на текстовото поле', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
 								<input type="button" id="hand-note-button" value="Описание на шрифта"
-									onClick="javascript:addTextAreaElement('hand-note');" class="btn btn-info btn-xs">
+									onClick="javascript:addTextAreaElement('hand-note', 'Описание на шрифта', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
-								<input type="button" id="orig-place-button" value="Място на намиране"
-									onClick="javascript:addTextAreaElement('orig-place');" class="btn btn-info btn-xs">
-
-								<input type="button" id="orig-date-button" value="Време на намиране"
-									onClick="javascript:addTextAreaElement('orig-date');" class="btn btn-info btn-xs">
+								<input type="button" id="history-button" value="История"
+									onClick="javascript:addHistoryGroup('history-group');" class="btn btn-info btn-xs">
 							</div>
 						</legend>
 
 					<div class="row">
 						<div class="form-group col-xs-4 col-xs-offset-4">
 							<div class="input-prepend">
-								<textarea rows="1" id="title" name="title" class="form-control greek-text" spellcheck="false" placeholder="Заглавие"></textarea>
+								<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="Заглавие"></textarea>
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="form-group col-xs-4 col-xs-offset-4">
-							<div class="input-prepend">
-								<textarea rows="1" id="repository" name="repository" class="form-control greek-text" spellcheck="false" placeholder="Музей"></textarea>
-							</div>
-						</div>
+					<div id="repository-group">
 					</div>
 
-					<div class="row">
-						<div class="form-group col-xs-2 col-xs-offset-5">
-							<div class="input-prepend">
-								<textarea rows="1" id="idno" name="idno" class="form-control greek-text" spellcheck="false" placeholder="Инвентарен номер"></textarea>
-							</div>
-						</div>
+					<div id="idno-group">
 					</div>
 
-					<div id="description-group">
+					<div id="support-group">
 					</div>
 
 					<div id="layout-group">
@@ -490,11 +728,9 @@
 					<div id="hand-note-group">
 					</div>
 
-					<div id="orig-place-group">
+					<div id="history-group">
 					</div>
 
-					<div id="orig-date-group">
-					</div>
 				</fieldset>
 
 				<br>
@@ -507,16 +743,16 @@
 							Текст на надписа
 							&nbsp;
 							<input type="button" id="apparatus-criticus-button" value="Критичен апарат"
-								onClick="javascript:addTextAreaElement('apparatus-criticus');" class="btn btn-info btn-xs">
+								onClick="javascript:addTextAreaElement('apparatus-criticus', 'Критичен апарат', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
 							<input type="button" id="translation-button" value="Превод"
-								onClick="javascript:addTextAreaElement('translation');" class="btn btn-info btn-xs">
+								onClick="javascript:addTextAreaElement('translation', 'Превод', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
 							<input type="button" id="commentary-button" value="Коментар"
-								onClick="javascript:addTextAreaElement('commentary');" class="btn btn-info btn-xs">
+								onClick="javascript:addTextAreaElement('commentary', 'Коментар', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
 							<input type="button" id="bibliography-button" value="Библиография"
-								onClick="javascript:addTextAreaElement('bibliography');" class="btn btn-info btn-xs">
+								onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 						</div>
 					</legend>
 
@@ -524,8 +760,8 @@
 						<div class="row">
 							<div class="form-group col-xs-12">
 								<div class="input-group">
-									<textarea rows="1" id="original-text" class="form-control greek greek-text" spellcheck="false"
-										 title="Оригинален текст" placeholder="Оригинален текст"
+									<textarea id="original-text" class="form-control greek input-text" spellcheck="false"
+										title="Оригинален текст" placeholder="Оригинален текст"
 										onkeypress="javascript:return convertCharToggle(this, document.main_form.original_text_switch_greek.checked, event);"
 										onkeyup="javascript:return convertStr(this, event);"
 										onfocus="javascript:setCurrentTextArea('original-text')" oninput="javascript:startEpigraphicConverter();"></textarea>
@@ -554,7 +790,7 @@
 						<div id="original-text-formatted">
 							<div class="row">
 								<div class="form-group col-xs-12">
-									<pre id="original-text-html" title="Epidoc XML фрагмент с оригиналния текст" class="greek greek-text xml"></pre>
+									<pre id="original-text-html" title="Epidoc XML фрагмент с оригиналния текст" class="greek input-text xml"></pre>
 								</div>
 							</div>
 							<input type="hidden" id="original-text-xml" name="original_text_xml" value="">
@@ -570,19 +806,16 @@
 					<div id="bibliography-group"></div>
 				</fieldset>
 
-				<!-- Submitt & Reset Buttons -->
+				<!-- Submit & Reset Buttons -->
 				<br>
 				<input type="reset" value="Изтрий всички полета!" onclick='return resetAlert();' class="btn btn-danger">
 				<br><br>
 				<input type="button" value="Запиши" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
-				<br><br>
 			</form>
 
 			<script type="text/javascript">
 				$jQuery(document).ready(function() {
 					$jQuery("#title").autoResize();
-					$jQuery("#repository").autoResize();
-					$jQuery("#idno").autoResize();
 					$jQuery("#original-text").autoResize();
 				});
 
