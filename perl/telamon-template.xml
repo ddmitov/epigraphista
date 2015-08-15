@@ -5,42 +5,41 @@
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
-				<title>title of document</title>
+				<title></title>
 			</titleStmt>
 			<publicationStmt>
 				<authority/>
-				<idno type="filename">filename</idno>
+				<idno type="filename"></idno>
 			</publicationStmt>
 			<sourceDesc>
 				<msDesc>
 					<msIdentifier>
-						<repository>museum</repository>
-						<idno>inventory number</idno>
+						<repository></repository>
+						<idno></idno>
 					</msIdentifier>
 					<physDesc>
 						<objectDesc>
 							<supportDesc>
 								<support>
-									description of object/monument
-									<material>material</material>
-									<objectType>object type</objectType>
+									<material></material>
+									<objectType></objectType>
 								</support>
 							</supportDesc>
 							<layoutDesc>
-								<layout>description of text field/campus</layout>
+								<layout></layout>
 							</layoutDesc>
 						</objectDesc>
 						<handDesc>
-							<handNote>description of letters</handNote>
+							<handNote></handNote>
 						</handDesc>
 					</physDesc>
 					<history>
 						<origin>
-							<origPlace>place of origin</origPlace>
-							<origDate>date of origin</origDate>
+							<origPlace></origPlace>
+							<origDate></origDate>
 						</origin>
-						<provenance type="found">findspot and circumstances/context</provenance>
-						<provenance type="observed">modern location(s)</provenance>
+						<provenance type="found"></provenance>
+						<provenance type="observed"></provenance>
 					</history>
 				</msDesc>
 			</sourceDesc>
@@ -49,22 +48,19 @@
 	<text>
 		<body>
 			<div type="edition">
-				<ab>
-					<lb n="1"/>Greek or Latin text here
-					<lb n="2"/>Greek or Latin text here
-				</ab>
+				<ab></ab>
 			</div>
 			<div type="apparatus">
-				<p>external apparatus criticus</p>
+				<p></p>
 			</div>
 			<div type="translation">
-				<p>translation(s)</p>
+				<p></p>
 			</div>
 			<div type="commentary">
-				<p>commentary</p>
+				<p></p>
 			</div>
 			<div type="bibliography">
-				<p>bibliography of previous editions, discussion, etc.</p>
+				<p></p>
 			</div>
 		</body>
 	</text>

@@ -101,7 +101,7 @@
 (\w)(?:-)\n    =    $1<lb type="worddiv"/>
 
 # Line Break
-\n    =    <lb n="lineNumber"/> 
+\n    =    <lb n="lineNumber"/>
 
 # Text Direction Right to Left (Unicode LEFTWARDS ARROW 2190)
 ^((←)+)    =    <lb rend="right-to-left"/>

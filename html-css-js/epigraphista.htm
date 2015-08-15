@@ -81,7 +81,7 @@
 			var clientBrowser = navigator.userAgent.toLowerCase();
 			var isGeckoBrowser = ((clientBrowser.indexOf('gecko')!=-1) && (clientBrowser.indexOf('khtml') == -1));
 			var chetcXmlResult = null;
-			var chetcHtmlResult = null;
+			var chetcResult = null;
 			// Necessary to avoid conflicts between jQuery and Prototype.js:
 			var $jQuery = jQuery.noConflict();
 
@@ -629,27 +629,24 @@
 			}
 
 
-			// Chapel Hill Epigraphic Text Converter modified code:
 			function convertEpigraphicDocument(xmlHttpRequest) {
 				var epigraphicConverter = new Epigraph2Markup(xmlHttpRequest.responseText);
 				epigraphicConverter.lineBreaks("false");
-				chetcHtmlResult = epigraphicConverter.convert(strip($('original-text').value));
-
-				var xmlLines = chetcHtmlResult.split('lineNumber');
+				chetcResult = epigraphicConverter.convert(strip($('original-text').value));
+				var xmlLines = chetcResult.split('lineNumber');
 				for (var lineNumber = 1; lineNumber < xmlLines.length; lineNumber++) {
+					chetcResult = chetcResult.replace(/lineNumber/, lineNumber + 1);
+				}
+				chetcXmlResult = "<lb n=\"1\"/> " + chetcResult;
+
+				var chetcHtmlResult = escapeHTML("<ab><lb n=\"1\"/>" + chetcResult);
+				chetcHtmlResult = chetcHtmlResult.replace(/(&lt;lb[^\/]*\/&gt;)/g, "<br>$1");
+				chetcHtmlResult = chetcHtmlResult + "<br>&lt;/ab&gt;"
+				var lines = chetcHtmlResult.split('lineNumber');
+				for (var lineNumber = 1; lineNumber < lines.length; lineNumber++) {
 					chetcHtmlResult = chetcHtmlResult.replace(/lineNumber/, lineNumber + 1);
 				}
-				chetcXmlResult = "<lb n=\"1\"/> " + chetcHtmlResult;
-
-				var resultHTML = escapeHTML("<ab><lb n=\"1\"/> " + chetcHtmlResult);
-				resultHTML = resultHTML.replace(/(&lt;lb[^\/]*\/&gt;)/g, "<br>$1");
-				resultHTML = resultHTML + "<br>&lt;/ab&gt;"
-				var lines = resultHTML.split('lineNumber');
-				for (var lineNumber = 1; lineNumber < lines.length; lineNumber++) {
-					resultHTML = resultHTML.replace(/lineNumber/, lineNumber + 1);
-				}
-
-				document.getElementById("original-text-html").innerHTML = resultHTML;
+				document.getElementById("original-text-html").innerHTML = chetcHtmlResult;
 				document.getElementById("original-text-xml").setAttribute("value", chetcXmlResult);
 				$jQuery("#original-text-formatted").show();
 			}
