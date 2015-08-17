@@ -637,10 +637,15 @@
 				for (var lineNumber = 1; lineNumber < xmlLines.length; lineNumber++) {
 					chetcResult = chetcResult.replace(/lineNumber/, lineNumber + 1);
 				}
-				chetcXmlResult = "<lb n=\"1\"/> " + chetcResult;
+				chetcXmlResult = "<ab><lb n=\"1\"/>" + chetcResult + "</ab>";
 
+				// Opening tag and conversion of XML code to HTML code:
 				var chetcHtmlResult = escapeHTML("<ab><lb n=\"1\"/>" + chetcResult);
+				// Insertion of <br> before every new line:
 				chetcHtmlResult = chetcHtmlResult.replace(/(&lt;lb[^\/]*\/&gt;)/g, "<br>$1");
+				// Indentation for the HTML result:
+				chetcHtmlResult = chetcHtmlResult.replace(/&lt;lb/g, "&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb");
+				// Closing tag:
 				chetcHtmlResult = chetcHtmlResult + "<br>&lt;/ab&gt;"
 				var lines = chetcHtmlResult.split('lineNumber');
 				for (var lineNumber = 1; lineNumber < lines.length; lineNumber++) {

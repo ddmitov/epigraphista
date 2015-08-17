@@ -37,7 +37,7 @@ foreach my $pair (@pairs) {
 	$value =~ s/%(..)/pack("C", hex($1))/eg;
 	$FORM{$name} = $value;
 
-	if ($name =~ "title") {
+	if ($name =~ "title" and length($value) > 0) {
 		my $new_title_node = $document->createElement("title");
 		$new_title_node->appendText($value);
 		my ($current_title_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:titleStmt/TEI:title');
@@ -55,7 +55,7 @@ foreach my $pair (@pairs) {
 		$current_filename_node->replaceNode($new_filename_node);
 	}
 
-	if ($name =~ "repository") {
+	if ($name =~ "repository" and length($value) > 0) {
 		my $new_node = $document->createElement("repository");
 		$new_node->appendText($value);
 		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:msIdentifier/TEI:repository');
@@ -63,7 +63,7 @@ foreach my $pair (@pairs) {
 		$current_node->replaceNode($new_node);
 	}
 
-	if ($name =~ "idno") {
+	if ($name =~ "idno" and length($value) > 0) {
 		my $new_node = $document->createElement("idno");
 		$new_node->appendText($value);
 		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:msIdentifier/TEI:idno');
@@ -72,35 +72,59 @@ foreach my $pair (@pairs) {
 	}
 
 # Support group:
-	if ($name =~ "support") {
+	if ($name =~ "support" and length($value) > 0) {
 		$support_value = $value;
 	}
 
-	if ($name =~ "material") {
+	if ($name =~ "material" and length($value) > 0) {
 		$material_value = $value;
 	}
 
-	if ($name =~ "object_type") {
+	if ($name =~ "object_type" and length($value) > 0) {
 		$object_type_value = $value;
 	}
 
-	if ($name =~ "layout") {
-		my $new_node = $document->createElement("layout");
-		$new_node->appendText($value);
+	if ($name =~ "layout" and length($value) > 0) {
+		my $node_level = 8;
+		my $tag_indent = "\t" x $node_level;
+		my $contents_indent = "\t" x ($node_level + 1);
+		my $formatted_value = $value;
+		$formatted_value =~ s/\n/\n$contents_indent/g;
+		# Escaping all XML special characters:
+		$formatted_value =~ s/\</&lt;/g;
+		$formatted_value =~ s/\>/&gt;/g;
+		$formatted_value =~ s/&/&amp;/g;
+		$formatted_value =~ s/\'/&apos;/g;
+		$formatted_value =~ s/\"/&quot;/g;
+		$formatted_value = "<layout>\n$contents_indent$formatted_value\n$tag_indent</layout>";
+		my $fragment = $parser->parse_balanced_chunk($formatted_value );
+
 		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:physDesc/TEI:objectDesc/TEI:layoutDesc/TEI:layout');
 		# Replacing the old node with the new one:
-		$current_node->replaceNode($new_node);
+		$current_node->replaceNode($fragment);
 	}
 
-	if ($name =~ "hand_note") {
-		my $new_node = $document->createElement("handNote");
-		$new_node->appendText($value);
+	if ($name =~ "hand_note" and length($value) > 0) {
+		my $node_level = 7;
+		my $tag_indent = "\t" x $node_level;
+		my $contents_indent = "\t" x ($node_level + 1);
+		my $formatted_value = $value;
+		$formatted_value =~ s/\n/\n$contents_indent/g;
+		# Escaping all XML special characters:
+		$formatted_value =~ s/\</&lt;/g;
+		$formatted_value =~ s/\>/&gt;/g;
+		$formatted_value =~ s/&/&amp;/g;
+		$formatted_value =~ s/\'/&apos;/g;
+		$formatted_value =~ s/\"/&quot;/g;
+		$formatted_value = "<handNote>\n$contents_indent$formatted_value\n$tag_indent</handNote>";
+		my $fragment = $parser->parse_balanced_chunk($formatted_value );
+
 		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:physDesc/TEI:handDesc/TEI:handNote');
 		# Replacing the old node with the new one:
-		$current_node->replaceNode($new_node);
+		$current_node->replaceNode($fragment);
 	}
 
-	if ($name =~ "orig_place") {
+	if ($name =~ "orig_place" and length($value) > 0) {
 		my $new_node = $document->createElement("origPlace");
 		$new_node->appendText($value);
 		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:history/TEI:origin/TEI:origPlace');
@@ -108,7 +132,7 @@ foreach my $pair (@pairs) {
 		$current_node->replaceNode($new_node);
 	}
 
-	if ($name =~ "orig_date") {
+	if ($name =~ "orig_date" and length($value) > 0) {
 		my $new_node = $document->createElement("origDate");
 		$new_node->appendText($value);
 		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:history/TEI:origin/TEI:origDate');
@@ -116,7 +140,7 @@ foreach my $pair (@pairs) {
 		$current_node->replaceNode($new_node);
 	}
 
-	if ($name =~ "provenance_found") {
+	if ($name =~ "provenance_found" and length($value) > 0) {
 		my $new_node = $document->createElement("provenance");
 		$new_node->setAttribute("type", "found");
 		$new_node->appendText($value);
@@ -125,7 +149,7 @@ foreach my $pair (@pairs) {
 		$current_node->replaceNode($new_node);
 	}
 
-	if ($name =~ "provenance_observed") {
+	if ($name =~ "provenance_observed" and length($value) > 0) {
 		my $new_node = $document->createElement("provenance");
 		$new_node->setAttribute("type", "observed");
 		$new_node->appendText($value);
@@ -134,62 +158,130 @@ foreach my $pair (@pairs) {
 		$current_node->replaceNode($new_node);
 	}
 
-	if ($name =~ "original_text_xml") {
-		my $fragment = $parser->parse_balanced_chunk($value);
+	if ($name =~ "original_text_xml" and length($value) > 0) {
+		my $node_level = 4;
+		my $tag_indent = "\t" x $node_level;
+		my $contents_indent = "\t" x ($node_level + 1);
+		my $formatted_value = $value;
+		$formatted_value =~ s/\<lb/\n$contents_indent\<lb/g;
+		$formatted_value =~ s/\<\/ab\>/\n$tag_indent\<\/ab\>/g;
+		my $fragment = $parser->parse_balanced_chunk($formatted_value);
+
 		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="edition"]/TEI:ab');
 		# Replacing the old node vaue with the new one:
-		$current_node->removeChildNodes();
-		$current_node->appendChild($fragment);
+		$current_node->replaceNode($fragment);
 	}
 
-	if ($name =~ "apparatus_criticus") {
-		my $new_node = $document->createElement("p");
-		$new_node->appendText($value);
+	if ($name =~ "apparatus_criticus" and length($value) > 0) {
+		my $node_level = 4;
+		my $tag_indent = "\t" x $node_level;
+		my $contents_indent = "\t" x ($node_level + 1);
+		my $formatted_value = $value;
+		$formatted_value =~ s/\n/\n$contents_indent/g;
+		# Escaping all XML special characters:
+		$formatted_value =~ s/\</&lt;/g;
+		$formatted_value =~ s/\>/&gt;/g;
+		$formatted_value =~ s/&/&amp;/g;
+		$formatted_value =~ s/\'/&apos;/g;
+		$formatted_value =~ s/\"/&quot;/g;
+		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
+		my $fragment = $parser->parse_balanced_chunk($formatted_value);
+
 		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="apparatus"]/TEI:p');
 		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
+		$current_node->replaceNode($fragment);
 	}
 
-	if ($name =~ "translation") {
-		my $new_node = $document->createElement("p");
-		$new_node->appendText($value);
+	if ($name =~ "translation" and length($value) > 0) {
+		my $node_level = 4;
+		my $tag_indent = "\t" x $node_level;
+		my $contents_indent = "\t" x ($node_level + 1);
+		my $formatted_value = $value;
+		$formatted_value =~ s/\n/\n$contents_indent/g;
+		# Escaping all XML special characters:
+		$formatted_value =~ s/\</&lt;/g;
+		$formatted_value =~ s/\>/&gt;/g;
+		$formatted_value =~ s/&/&amp;/g;
+		$formatted_value =~ s/\'/&apos;/g;
+		$formatted_value =~ s/\"/&quot;/g;
+		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
+		my $fragment = $parser->parse_balanced_chunk($formatted_value);
+
 		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="translation"]/TEI:p');
 		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
+		$current_node->replaceNode($fragment);
 	}
 
-	if ($name =~ "commentary") {
-		my $new_node = $document->createElement("p");
-		$new_node->appendText($value);
+	if ($name =~ "commentary" and length($value) > 0) {
+		my $node_level = 4;
+		my $tag_indent = "\t" x $node_level;
+		my $contents_indent = "\t" x ($node_level + 1);
+		my $formatted_value = $value;
+		$formatted_value =~ s/\n/\n$contents_indent/g;
+		# Escaping all XML special characters:
+		$formatted_value =~ s/\</&lt;/g;
+		$formatted_value =~ s/\>/&gt;/g;
+		$formatted_value =~ s/&/&amp;/g;
+		$formatted_value =~ s/\'/&apos;/g;
+		$formatted_value =~ s/\"/&quot;/g;
+		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
+		my $fragment = $parser->parse_balanced_chunk($formatted_value);
+
 		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="commentary"]/TEI:p');
 		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
+		$current_node->replaceNode($fragment);
 	}
 
-	if ($name =~ "bibliography") {
-		my $new_node = $document->createElement("p");
-		$new_node->appendText($value);
+	if ($name =~ "bibliography" and length($value) > 0) {
+		my $node_level = 4;
+		my $tag_indent = "\t" x $node_level;
+		my $contents_indent = "\t" x ($node_level + 1);
+		my $formatted_value = $value;
+		$formatted_value =~ s/\n/\n$contents_indent/g;
+		# Escaping all XML special characters:
+		$formatted_value =~ s/\</&lt;/g;
+		$formatted_value =~ s/\>/&gt;/g;
+		$formatted_value =~ s/&/&amp;/g;
+		$formatted_value =~ s/\'/&apos;/g;
+		$formatted_value =~ s/\"/&quot;/g;
+		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
+		my $fragment = $parser->parse_balanced_chunk($formatted_value );
+
 		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="bibliography"]/TEI:p');
 		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
+		$current_node->replaceNode($fragment);
 	}
 }
 
 # Support group:
 my $new_support_node = $document->createElement("support");
 if (length($support_value)) {
-	$new_support_node->appendText($support_value);
+	my $node_level = 8;
+	my $tag_indent = "\t" x $node_level;
+	my $contents_indent = "\t" x ($node_level + 1);
+	my $formatted_value = $support_value;
+	$formatted_value =~ s/\n/\n$contents_indent/g;
+	# Escaping all XML special characters:
+	$formatted_value =~ s/\</&lt;/g;
+	$formatted_value =~ s/\>/&gt;/g;
+	$formatted_value =~ s/&/&amp;/g;
+	$formatted_value =~ s/\'/&apos;/g;
+	$formatted_value =~ s/\"/&quot;/g;
+	$new_support_node->appendText($formatted_value);
 }
+
 my $material_node = $document->createElement("material");
 if (length($material_value)) {
 	$material_node->appendText($material_value);
 }
 $new_support_node->appendChild($material_node);
+
 my $object_type_node = $document->createElement("objectType");
 if (length($object_type_value)) {
 	$object_type_node->appendText($object_type_value);
 }
 $new_support_node->appendChild($object_type_node);
+
 my ($current_support_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:physDesc/TEI:objectDesc/TEI:supportDesc/TEI:support');
 $current_support_node->replaceNode($new_support_node);
 
@@ -206,10 +298,9 @@ print <<HTML
 
 		<title>Epigraphista</title>
 
-		<link rel="stylesheet" type="text/css" href="$domain/html-css-js/bootstrap/css/bootstrap.css" media="all"/>
 		<script type="text/javascript" src="$domain/html-css-js/bootstrap/js/bootstrap-min.js"></script>
+		<link rel="stylesheet" type="text/css" href="$domain/html-css-js/bootstrap/css/bootstrap.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="$domain/html-css-js/bootstrap/css/current.css" media="all"/>
-
 	</head>
 
 	<body>
