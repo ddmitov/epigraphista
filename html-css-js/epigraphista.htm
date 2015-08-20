@@ -658,14 +658,27 @@
 
 
 			function finalCheckAndSubmit() {
+				// Check for text in all mandatory fields:
 				var originalText = document.getElementById("title").value;
 				if (originalText.length < 3) {
 					alert("Моля, попълнете заглавие на надписа!");
 					return false;
 				}
+
 				var originalText = document.getElementById("original-text").value;
 				if (originalText.length < 3) {
 					alert("Моля, попълнете оригиналния текст на надписа!");
+					return false;
+				}
+
+				// Check for any square bracket, that was opened, but was not closed or vice versa:
+				var epigraphicText = document.getElementById("original-text").value;
+				epigraphicText = epigraphicText.replace(/\[.*[^\[\]]\]/g, "");
+				epigraphicText = epigraphicText.replace(/\[.*\n.*[^\[\]]\]/g, "\n");
+
+				if (epigraphicText.match(/\[|\]/)) {
+					alert ("Намерена е единична квадратна скоба в текста!\n" +
+						"Моля, поправете въведения епиграфски текст!");
 					return false;
 				}
 
