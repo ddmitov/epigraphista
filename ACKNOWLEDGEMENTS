@@ -13,6 +13,7 @@ http://www.w3schools.com/jsref/prop_textarea_value.asp
 http://www.w3schools.com/jsref/jsref_length_string.asp
 http://www.w3schools.com/jsref/event_oninput.asp
 http://www.w3schools.com/bootstrap/bootstrap_case_container.asp
+http://www.w3schools.com/js/js_loop_while.asp
 
 http://stackoverflow.com/questions/22888298/bootstrap-3-how-to-get-two-form-inputs-on-one-line-and-other-inputs-on-individu
 http://stackoverflow.com/questions/18036315/centering-bootstrap-input-fields
@@ -26,6 +27,9 @@ http://stackoverflow.com/questions/24557828/bootstrap-input-group-text-area-with
 http://stackoverflow.com/questions/769135/run-javascript-when-an-element-loses-focus
 http://stackoverflow.com/questions/9855656/how-to-submit-a-form-using-javascript
 http://stackoverflow.com/questions/670693/how-do-i-repeat-a-character-n-times-in-a-string
+http://stackoverflow.com/questions/6715025/regexp-match-length-returns-null-if-not-found
+http://stackoverflow.com/questions/494035/how-do-you-pass-a-variable-to-a-regular-expression-javascript
+http://stackoverflow.com/questions/4029109/javascript-regex-how-to-put-a-variable-inside-a-regular-expression
 
 https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
 https://learn.jquery.com/using-jquery-core/document-ready/
@@ -40,6 +44,7 @@ http://fettblog.eu/style-select-elements/
 http://cds.library.brown.edu/projects/chet-c/chetc.html
 https://github.com/steko/epidoc/tree/master/chetc-js
 http://www.javascript-coder.com/javascript-form/javascript-form-submit.phtml
+https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx
 
 PERL
 ====================
