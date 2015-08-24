@@ -24,12 +24,12 @@
 function convertEpigraphicText(elementId) {
 	var epigraphicText = document.getElementById(elementId).value;
 
-	var unicodeLetters = "[" +
-		"\u0041-\u005a\u0061-\u007a\u00aa\u00b5\u00ba\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u01ba\u01bc-\u01bf " +
+	var unicodeBlocks = "\u0041-\u005a\u0061-\u007a\u00aa\u00b5\u00ba\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u01ba\u01bc-\u01bf " +
 		"\u01c4-\u02ad\u0386\u0388-\u0481\u048c-\u0556\u0561-\u0587\u10a0-\u10c5\u1e00-\u1fbc\u1fbe\u1fc2-\u1fcc " +
 		"\u1fd0-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ffc\u207f\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126 " +
-		"\u2128\u212a-\u212d\u212f-\u2131\u2133\u2134\u2139\ufb00-\ufb17\uff21-\uff3a\uff41-\uff5a" +
-	"]";
+		"\u2128\u212a-\u212d\u212f-\u2131\u2133\u2134\u2139\ufb00-\ufb17\uff21-\uff3a\uff41-\uff5a";
+	var unicodeLetters = "[" + unicodeBlocks + "]";
+	var unicodeLettersAndDigits = "[" + unicodeBlocks + "0-9]";
 
 	// Single Angle Bracket Enclosures -
 	// placed first before XML tags are inserted:
@@ -54,33 +54,16 @@ function convertEpigraphicText(elementId) {
 	epigraphicText = epigraphicText.replace(RegExp("'((?:" + unicodeLetters + "|\s)+)'", "g"), "<add>$1</add>");
 
 	// Brackets:
-	// The following regular expression will match:
 	// [ - - ?]
-	var lostLine01RegExp = /\s*\[-\s(?:[-\s\]]+)\?\]\s*(\n)*/;
-	while (epigraphicText.match(lostLine01RegExp)) {
-		var id = new String(Math.random());
-		id = "id" + id.substr(2,5);
-		epigraphicText = epigraphicText.replace(lostLine01RegExp,
-			"<gap reason=\"lost\" extent=\"1\" unit=\"line\" id=\"" + id + "\"/><certainty target=\"" + id + "\" locus=\"extent\" degree=\"low\"/>");
-	}
+	epigraphicText = epigraphicText.replace(/\s*\[-\s(?:[-\s\]]+)\?\]\s*(\n)*/g, "<gap reason=\"lost\" extent=\"1\" unit=\"line\"/>");
 
-	// The following regular expression will match:
 	// [- -] ?
 	// followed by space and followed by one or more new line character(s)
-	var lostLine02RegExp = /-\s(?:[-\s\]]+)\?\s*(\n)*/;
-	while (epigraphicText.match(lostLine02RegExp)) {
-		var id = new String(Math.random());
-		id = "id" + id.substr(2,5);
-		epigraphicText = epigraphicText.replace(lostLine02RegExp,
-			"<gap reason=\"lost\" extent=\"unknown\" unit=\"line\" id=\"" + id + "\"/><certainty target=\"" + id + "\" locus=\"extent\" degree=\"low\"/>");
-	}
+	epigraphicText = epigraphicText.replace(/-\s(?:[-\s\]]+)\?\s*(\n)*/g, "<gap reason=\"lost\" extent=\"unknown\" unit=\"line\"/>");
 
-	// The following regular expression will match:
 	// [--]
 	var lostCharactersRegExp = /([^\[]*)\[([-\s\]]+)\]/;
 	while (epigraphicText.match(lostCharactersRegExp)) {
-		var id = new String(Math.random());
-		id = "id" + id.substr(2,5);
 		// The length of the second group of characters within the regular expression is measured.
 		// ([^\[]*)  -->  first group of characters
 		// [^\[]*  --> negative matching: no left square bracket could be placed before the opening left square bracket,
@@ -90,8 +73,7 @@ function convertEpigraphicText(elementId) {
 		// \[  -->  escaped, or litteral, left square bracket
 		// \]  -->  escaped, or litteral, right square bracket
 		epigraphicText = epigraphicText.replace(lostCharactersRegExp,
-			"$1<gap reason=\"lost\" extent=\"" + RegExp.$2.length + "\" unit=\"character\" id=\"" + id + "\"/><certainty target=\"" + id + "\" locus=\"extent\" degree=\"low\"/>");
-		var matchLength = 0;
+			"$1<gap reason=\"lost\" extent=\"" + RegExp.$2.length + "\" unit=\"character\"/>");
 	}
 
 	// Brackets (again):
@@ -109,17 +91,19 @@ function convertEpigraphicText(elementId) {
 	epigraphicText = epigraphicText.replace(/\(vac.(\?+)\)/g, "<space extent=\"unknown\" unit=\"character\"/>");
 	epigraphicText = epigraphicText.replace(/\(vac.((?:\d)+)\)/g, "<space extent=\"$1\" unit=\"character\"/>");
 	epigraphicText = epigraphicText.replace(/\svac\s/g, "<space extent=\"unknown\" unit=\"character\"/>");
+	epigraphicText = epigraphicText.replace(/\svacat\s/g, "<space extent=\"unknown\" unit=\"character\"/>");
 	epigraphicText = epigraphicText.replace(/^vac\s/g, "<space extent=\"unknown\" unit=\"character\"/>");
+	epigraphicText = epigraphicText.replace(/^vacat\s/g, "<space extent=\"unknown\" unit=\"character\"/>");
 	epigraphicText = epigraphicText.replace(/\(!\)/g, "<note>!</note>");
-	epigraphicText = epigraphicText.replace(/([A-Za-z0-9]+)\(([A-Za-z0-9]+)\)([A-Za-z0-9]+)/g, "<expan><abbr>$1</abbr><ex>$2</ex><abbr>$3</abbr></expan>");
-	epigraphicText = epigraphicText.replace(/\(([A-Za-z0-9]+)\)([A-Za-z0-9]+)/g, "<expan><ex>$1</ex><abbr>$2</abbr></expan>");
-	epigraphicText = epigraphicText.replace(/([A-Za-z0-9]+)\(([A-Za-z0-9]+)\)/g, "<expan><abbr>$1</abbr><ex>$2</ex></expan>");
-	epigraphicText = epigraphicText.replace(/\(([A-Za-z0-9]+)\)<expan>/g, "<expan><ex>$1</ex>");
-	epigraphicText = epigraphicText.replace(/\(([A-Za-z0-9]+)\)([A-Za-z0-9]+)\(([A-Za-z0-9]+)\)/g, "<expan><ex>$1</ex><abbr>$2</abbr><ex>$3</ex></expan>");
-	epigraphicText = epigraphicText.replace(/<\/ex><\/expan>([A-Za-z0-9]+)/g, "</ex><abbr>$1</abbr></expan>");
-	epigraphicText = epigraphicText.replace(/<\/expan>\(([A-Za-z0-9]+)\)/g, "<ex>$1</ex></expan>");
-	epigraphicText = epigraphicText.replace(/<\/expan>([A-Za-z0-9]+)\(([A-Za-z0-9]+)\)/g, "<abbr>$1</abbr><ex>$2</ex></expan>");
-	epigraphicText = epigraphicText.replace(/<\/expan>\(([A-Za-z0-9]+)\)<expan>/g, "<ex>$1</ex>");
+	epigraphicText = epigraphicText.replace(RegExp("(" + unicodeLettersAndDigits + "+)\\((" + unicodeLettersAndDigits + "+)\\)(" + unicodeLettersAndDigits + "+)", "g"), "<expan><abbr>$1</abbr><ex>$2</ex><abbr>$3</abbr></expan>");
+	epigraphicText = epigraphicText.replace(RegExp("\\((" + unicodeLettersAndDigits + "+)\\)(" + unicodeLettersAndDigits + "+)", "g"), "<expan><ex>$1</ex><abbr>$2</abbr></expan>");
+	epigraphicText = epigraphicText.replace(RegExp("(" + unicodeLettersAndDigits + "+)\\((" + unicodeLettersAndDigits + "+)\\)", "g"), "<expan><abbr>$1</abbr><ex>$2</ex></expan>");
+	epigraphicText = epigraphicText.replace(RegExp("\\((" + unicodeLettersAndDigits + "+)\\)<expan>", "g"), "<expan><ex>$1</ex>");
+	epigraphicText = epigraphicText.replace(RegExp("\\((" + unicodeLettersAndDigits + "+)\\)(" + unicodeLettersAndDigits + "+)\\((" + unicodeLettersAndDigits + "+)\\)", "g"), "<expan><ex>$1</ex><abbr>$2</abbr><ex>$3</ex></expan>");
+	epigraphicText = epigraphicText.replace(RegExp("<\/ex><\/expan>(" + unicodeLettersAndDigits + "+)", "g"), "</ex><abbr>$1</abbr></expan>");
+	epigraphicText = epigraphicText.replace(RegExp("<\/expan>\\((" + unicodeLettersAndDigits + "+)\\)", "g"), "<ex>$1</ex></expan>");
+	epigraphicText = epigraphicText.replace(RegExp("<\/expan>(" + unicodeLettersAndDigits + "+)\\((" + unicodeLettersAndDigits + "+)\\)", "g"), "<abbr>$1</abbr><ex>$2</ex></expan>");
+	epigraphicText = epigraphicText.replace(RegExp("<\/expan>\\((" + unicodeLettersAndDigits + "+)\\)<expan>", "g"), "<ex>$1</ex>");
 	epigraphicText = epigraphicText.replace(/<expan><abbr><expan>/g, "<expan>");
 	epigraphicText = epigraphicText.replace(/<\/expan><\/abbr><\/expan>/g, "</expan>");
 	epigraphicText = epigraphicText.replace(/<\/abbr><\/expan><expan><ex>/g, "</abbr><ex>");
