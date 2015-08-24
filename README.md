@@ -6,9 +6,11 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a des
   
 ## Runtime Requirements
   
-* Compiled version of Perl Executing Browser - only if you want to run Epigraphista as a desktop application.  
-* Perl 5 distribution - any standard Linux, Mac or Windows Perl distribution.  
-* ```unzip``` binary - only if you want to run Epigraphista from a ZIP package using Perl Executing Browser.  
+* Compiled version of Perl Executing Browser  
+(only if you want to run Epigraphista as a desktop application),  
+* Perl 5 distribution - any standard Linux, Mac or Windows Perl distribution,  
+* ```unzip``` binary  
+(only if you want to run Epigraphista from a ZIP package using Perl Executing Browser).  
   
 ## License
   
@@ -16,7 +18,7 @@ This program is free software;
 you can redistribute it and/or modify it under the terms of the GNU General Public License,  
 as published by the Free Software Foundation; either version 3 of the License,  
 or (at your option) any later version.  
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  
+This program is distributed in the hope that it will be useful, but WITHOUT A NY WARRANTY;  
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
   
 ## Author
