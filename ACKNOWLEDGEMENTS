@@ -1,5 +1,14 @@
 
-HTML, CSS & JAVASCRIPT
+JAVASCRIPT LIBRARIES
+====================
+https://jquery.com/
+http://amaury.carrade.eu/projects/jquery/autoResize.html
+http://getbootstrap.com/
+http://www.typegreek.com/
+http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
+http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
+
+HTML, CSS & JAVASCRIPT REFERENCE
 ====================
 http://www.w3schools.com/jsref/dom_obj_all.asp
 http://www.w3schools.com/jsref/met_node_appendchild.asp
@@ -36,21 +45,20 @@ https://learn.jquery.com/using-jquery-core/document-ready/
 
 http://www.randomsnippets.com/2008/02/21/how-to-dynamically-add-form-elements-via-javascript/
 http://www.coderanch.com/t/112558/HTML-CSS-JavaScript/Adding-alerts-Reset-button
-http://amaury.carrade.eu/projects/jquery/autoResize.html
-http://www.typegreek.com/
 http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/
 http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm
 http://fettblog.eu/style-select-elements/
-http://cds.library.brown.edu/projects/chet-c/chetc.html
-https://github.com/steko/epidoc/tree/master/chetc-js
 http://www.javascript-coder.com/javascript-form/javascript-form-submit.phtml
-https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx
+https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx (RegExp Object (JavaScript))
 
-PERL
+PERL MODULE
 ====================
+https://metacpan.org/pod/distribution/XML-LibXML/LibXML.pod
 https://metacpan.org/pod/distribution/XML-LibXML/lib/XML/LibXML/Element.pod
 https://metacpan.org/pod/distribution/XML-LibXML/lib/XML/LibXML/Node.pod
 
+PERL
+====================
 http://www.perlmonks.org/?node_id=530519 - Namespaced XML::LibXML XPath query
 http://www.perlmonks.org/?node_id=782694 - Edit a node value in xml
 http://www.perlmonks.org/?node_id=900439 - How do I get LibXML to replace attribute values?
