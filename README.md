@@ -12,18 +12,17 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a des
 * ```unzip``` binary  
 (only if you want to run Epigraphista from a ZIP package using Perl Executing Browser).
   
-## JavaScript Libraries & Code Fragments Used
+## Libraries, Modules & Code Fragments Used
 * [jQuery](https://jquery.com/)
 * [jQuery autoResize](http://amaury.carrade.eu/projects/jquery/autoResize.html) by Amaury Carrade
 * [Bootstrap](http://getbootstrap.com/)
 * [TypeGreek](http://www.typegreek.com/)
-* code fragments from Steev's JavaScript keyboard (http://www.bluedust.com/pub/web/sjk.htm - defunct)
+* regular expressions and code fragments from [Chapel Hill Electronic Text Convertor (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
+* code fragments from Steev's JavaScript keyboard  
+(http://www.bluedust.com/pub/web/sjk.htm - defunct)
 * code fragments from a deprecated version of wikibits.js:  
 MediaWiki JavaScript support functions
-* regular expressions and code fragments from [Chapel Hill Electronic Text Convertor (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
-  
-## Perl Module Used
-* [XML::LibXML](https://metacpan.org/pod/distribution/XML-LibXML/LibXML.pod)
+* Perl [XML::LibXML](https://metacpan.org/pod/distribution/XML-LibXML/LibXML.pod)
   
 ## License
   
