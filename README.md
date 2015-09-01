@@ -2,14 +2,14 @@
 Epigraphista
 ==================================
 
-Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a desktop GUI framework, HTML5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for writing the actual XML files. It's language is currently Bulgarian because it is intended, but not limited, to Bulgarian users. Epigraphista could also be used as a server-side application without Perl Executing Browser.
+Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a desktop GUI framework, HTML5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for file-writing backend. It's language is currently Bulgarian because it is intended, but not limited, to Bulgarian users. Epigraphista could also be used as a server-side application without Perl Executing Browser.
   
 ## Runtime Requirements
   
 * Any Linux, Mac or Windows Perl 5 distribution with XML::LibXML module included,
-* Compiled version of Perl Executing Browser
+* Compiled version of Perl Executing Browser  
 (only if you want to run Epigraphista as a desktop application),
-* ```unzip``` binary
+* ```unzip``` binary  
 (only if you want to run Epigraphista from a ZIP package using Perl Executing Browser).
   
 ## JavaScript Libraries & Code Fragments Used
@@ -17,8 +17,9 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a des
 * [jQuery autoResize](http://amaury.carrade.eu/projects/jquery/autoResize.html) by Amaury Carrade
 * [Bootstrap](http://getbootstrap.com/)
 * [TypeGreek](http://www.typegreek.com/)
-* code fragments used from Steev's JavaScript keyboard at http://www.bluedust.com/pub/web/sjk.htm (defunct)
-* code fragments used from a deprecated version of wikibits.js - MediaWiki JavaScript support functions
+* code fragments from Steev's JavaScript keyboard (http://www.bluedust.com/pub/web/sjk.htm - defunct)
+* code fragments from a deprecated version of wikibits.js:  
+MediaWiki JavaScript support functions
 * regular expressions and code fragments from [Chapel Hill Electronic Text Convertor (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
   
 ## Perl Module Used
@@ -26,12 +27,12 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a des
   
 ## License
   
-This program is free software;
-you can redistribute it and/or modify it under the terms of the GNU General Public License,
-as published by the Free Software Foundation; either version 3 of the License,
+This program is free software;  
+you can redistribute it and/or modify it under the terms of the GNU General Public License,  
+as published by the Free Software Foundation; either version 3 of the License,  
 or (at your option) any later version.  
-This program is distributed in the hope that it will be useful, but WITHOUT A NY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+This program is distributed in the hope that it will be useful, but WITHOUT A NY WARRANTY;  
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
   
 ## Author
   
