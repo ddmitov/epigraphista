@@ -315,13 +315,3 @@ function removeUniqueElement(partialId){
 	}
 	return false;
 }
-
-
-function resetAlert(){
-	if (confirm("Сигурни ли сте, че искате да изтриете\n" +
-			"попълнения текст във ВСИЧКИ полета?\n" +
-			"Въведената информация не може да бъде възстановена!")) {
-		return true;
-	}
-	return false;
-} 

@@ -1,6 +1,25 @@
 
 // UTF-8 encoded file!
 
+
+function resetForm(){
+	if (confirm("Сигурни ли сте, че искате да изтриете\n" +
+			"попълнения текст във ВСИЧКИ полета?\n" +
+			"Въведената информация не може да бъде възстановена!")) {
+
+		var originalTextHtml = document.getElementById("original-text-html");
+		originalTextHtml.innerHTML = "";
+
+		var originalTextXml = document.getElementById("original-text-xml");
+		originalTextHtml.setAttribute("value", "");
+
+		$jQuery("#original-text-formatted").hide();
+		return true;
+	}
+	return false;
+} 
+
+
 function finalCheckAndSubmit() {
 	// Check for title:
 	var title = document.getElementById("title").value;
