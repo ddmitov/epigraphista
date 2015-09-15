@@ -75,11 +75,11 @@ function addAdditionalKeyboard(elementId) {
 		"<input type='button' value='ϐ' onClick=\"javascript:insertTags('ϐ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='ϲ' onClick=\"javascript:insertTags('ϲ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='Ϛ' onClick=\"javascript:insertTags('Ϛ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ϛ' onClick=\"javascript:insertTags('ϛ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϛ' onClick=\"javascript:insertTags('ϛ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='Ϟ' onClick=\"javascript:insertTags('Ϟ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ϟ' onClick=\"javascript:insertTags('ϟ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϟ' onClick=\"javascript:insertTags('ϟ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='Ϡ' onClick=\"javascript:insertTags('Ϡ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ϡ' onClick=\"javascript:insertTags('ϡ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϡ' onClick=\"javascript:insertTags('ϡ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"&nbsp;&nbsp;&nbsp;" +
 		"<input type='button' value='Ё' onClick=\"javascript:insertTags('Ё', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='ё' onClick=\"javascript:insertTags('ё', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +

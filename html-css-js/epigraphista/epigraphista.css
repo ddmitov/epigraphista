@@ -1,3 +1,40 @@
+
+/* @font-face {
+	font-family: "FreeSans";
+	src: url("fonts/FreeSans.woff") format('woff');
+	src: url("fonts/FreeSans.ttf") format('truetype');
+	src: url("fonts/FreeSans.otf") format('opentype');
+}
+
+@font-face {
+	font-family: "FreeSans";
+	src: url("fonts/FreeSansBold.woff") format('woff');
+	src: url("fonts/FreeSansBold.ttf") format('truetype');
+	src: url("fonts/FreeSansBold.otf") format('opentype');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: "FreeSans";
+	src: url("fonts/FreeSansBoldOblique.woff") format('woff');
+	src: url("fonts/FreeSansBoldOblique.ttf") format('truetype');
+	src: url("fonts/FreeSansBoldOblique.otf") format('opentype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "FreeSans";
+	src: url("fonts/FreeSansOblique.woff") format('woff');
+	src: url("fonts/FreeSansOblique.ttf") format('truetype');
+	src: url("fonts/FreeSansOblique.otf") format('opentype');
+	font-style: italic;
+} */
+
+html *{
+	font-family: "FreeSans", "Arial Unicode MS";
+}
+
 fieldset {
 	border: 2px solid green;
 	border-radius: 8px;
@@ -7,6 +44,7 @@ fieldset {
 	padding-right: 10px;
 	margin: 10px;
 }
+
 legend {
 	border: 2px solid green;
 	border-radius: 8px;
@@ -16,36 +54,46 @@ legend {
 	font-size: 100%;
 	text-align: left;
 }
+
 .element-fieldset {
 	display: inline-block;
 }
+
 .element-legend {
 	text-align: center;
 }
+
 pre {
 	margin-bottom: 0px;
 }
+
 .input-text {
 	font-size: 18px;
 }
+
 .greek {
-	font-family: "FreeSans", "Liberation Sans", "Gentium", "New Athena Unicode", "Palatino Linotype", "Arial Unicode MS";
+	font-family: "FreeSans", "Arial Unicode MS";
 }
+
 .greek-help {
 	font-size: 24px;
 }
+
 .xml {
 	text-align: left;
 }
+
 .btn {
 	margin-top: 2px;
 	margin-bottom: 2px;
 	margin-left: 2px;
 	margin-right: 2px;
 }
+
 .btn-letters {
 	font-size: 18px;
 }
+
 .input-group-addon {
 	border: 0px solid transparent;
 }
