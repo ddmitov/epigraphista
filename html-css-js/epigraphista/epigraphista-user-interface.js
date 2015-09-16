@@ -16,13 +16,13 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 		"<span class='input-group-addon'>" +
 			"<input type='checkbox' id='" + label + "-switch-greek' name='" + name + "_switch_greek'" +
 				"onclick=\"switchGreek('" + label + "');\" title='Въвеждане на политоничен гръцки текст'/>&nbsp;" +
-			"<a href=\"javascript:addGreekKeyboardHelp('" + label + "');\"" +
+			"<a href=\"javascript:toggleGreekKeyboardHelp('" + label + "');\"" +
 				"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>" +
 		"</span>";
 	var additionalKeyboardSupportCode01 = "onfocus=\"setCurrentTextArea('" + label + "')\"";
 	var additionalKeyboardSupportCode02 = "" +
 		"<span class='input-group-addon btn btn-info'" +
-			"onclick=\"javascript:addAdditionalKeyboard('" + label + "-additional-keyboard')\" title='Допълнителна клавиатура'>" +
+			"onclick=\"javascript:toggleAdditionalKeyboard('" + label + "-additional-keyboard')\" title='Допълнителна клавиатура'>" +
 			"<span class='glyphicon glyphicon-font'></span>" +
 		"</span>";
 	var elementRemovalCode = "" +
@@ -144,9 +144,9 @@ function addFramedTextAreaElement(placeholderId, label, placeholderText, mandato
 		"&nbsp;" + fullPlaceholderText + "&nbsp;&nbsp;" +
 		"<input type='checkbox' id='" + id + "-switch-greek' name='" + name + "_switch_greek'" +
 		"onclick=\"switchGreek('" + id + "');\" title='Въвеждане на политоничен гръцки текст'/>&nbsp;&nbsp;" +
-		"<a href=\"javascript:addGreekKeyboardHelp('" + id + "');\"" +
+		"<a href=\"javascript:toggleGreekKeyboardHelp('" + id + "');\"" +
 				"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>&nbsp;" +
-		"<a href=\"javascript:addAdditionalKeyboard('" + id + "-additional-keyboard')\" class='btn btn-info btn-xs'>" +
+		"<a href=\"javascript:toggleAdditionalKeyboard('" + id + "-additional-keyboard')\" class='btn btn-info btn-xs'>" +
 			"<span class='glyphicon glyphicon-font'></span></a>";
 	if (mandatory == null) {
 		if (unique == null) {

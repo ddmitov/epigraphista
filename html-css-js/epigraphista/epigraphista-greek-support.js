@@ -14,7 +14,7 @@ function switchGreek(textAreaId) {
 }
 
 
-function addGreekKeyboardHelp(partialDivName) {
+function toggleGreekKeyboardHelp(partialDivName) {
 	var greekKeyboardHelpContents = "" +
 		"&nbsp;&nbsp;Q&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Θ&nbsp;&nbsp;" +
 		"&nbsp;&nbsp;W&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ω&nbsp;&nbsp;" +
@@ -70,7 +70,7 @@ function addGreekKeyboardHelp(partialDivName) {
 
 
 // Additional keyboard code:
-function addAdditionalKeyboard(elementId) {
+function toggleAdditionalKeyboard(elementId) {
 	var additionalKeyboardFirstRowContents = "" +
 		"<input type='button' value='ϐ' onClick=\"javascript:insertTags('ϐ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='ϲ' onClick=\"javascript:insertTags('ϲ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +

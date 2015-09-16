@@ -2,6 +2,11 @@
 // UTF-8 encoded file!
 
 
+function placeCursor(textAreaId) {
+	document.getElementById(textAreaId).style.cursor="text";
+}
+
+
 function resetForm(){
 	if (confirm("Сигурни ли сте, че искате да изтриете\n" +
 			"попълнения текст във ВСИЧКИ полета?\n" +
@@ -14,6 +19,8 @@ function resetForm(){
 		originalTextHtml.setAttribute("value", "");
 
 		$jQuery("#original-text-formatted").hide();
+		toggleGreekKeyboardHelp('original-text');
+		toggleAdditionalKeyboard('original-text-additional-keyboard');
 		return true;
 	}
 	return false;

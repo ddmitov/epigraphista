@@ -118,7 +118,9 @@
 										title="Оригинален текст" placeholder="Оригинален текст"
 										onkeypress="javascript:return convertCharToggle(this, document.main_form.original_text_switch_greek.checked, event);"
 										onkeyup="javascript:return convertStr(this, event);"
-										onfocus="javascript:setCurrentTextArea('original-text')" oninput="javascript:convertEpigraphicText('original-text');"></textarea>
+										onfocus="javascript:setCurrentTextArea('original-text');"
+										oninput="javascript:convertEpigraphicText('original-text');"
+										onpaste="javascript:placeCursor('original-text');"></textarea>
 									<span class="input-group-addon btn btn-info"
 										onclick="javascript:convertEpigraphicText('original-text');" title="Превръщане на оригиналния текст в Epidoc XML фрагмент">
 										<b>XML</b>
@@ -126,11 +128,11 @@
 									<span class="input-group-addon">
 										<input type="checkbox" id="original-text-switch-greek" name="original_text_switch_greek"
 											onclick="switchGreek('original-text');" title="Въвеждане на политоничен гръцки текст"/>&nbsp;
-										<a href="javascript:addGreekKeyboardHelp('original-text');"
+										<a href="javascript:toggleGreekKeyboardHelp('original-text');"
 											title="Помощ за въвеждането на политоничен гръцки текст">Ἐλληνική</a>
 									</span>
 									<span class="input-group-addon btn btn-info"
-										onclick="javascript:addAdditionalKeyboard('original-text-additional-keyboard')" title="Допълнителна клавиатура">
+										onclick="javascript:toggleAdditionalKeyboard('original-text-additional-keyboard');" title="Допълнителна клавиатура">
 										<span class="glyphicon glyphicon-font"></span>
 									</span>
 								</div>
@@ -171,7 +173,6 @@
 					$jQuery("#title").autoResize();
 					$jQuery("#original-text").autoResize();
 				});
-
 				$jQuery("#original-text-formatted").hide();
 			</script>
 
