@@ -31,7 +31,7 @@
 	<body>
 		<div class="container-fluid">
 
-			<form name="main_form" action="http://perl-executing-browser-pseudodomain/perl/epigraphista.pl" method="post" target="iframe_a">
+			<form id="main-form" name="main_form" action="http://perl-executing-browser-pseudodomain/perl/epigraphista.pl" method="post" target="iframe_a">
 
 				<fieldset>
 						<legend>
@@ -63,7 +63,7 @@
 					<div class="row">
 						<div class="form-group col-xs-4 col-xs-offset-4">
 							<div class="input-prepend">
-								<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="Заглавие"></textarea>
+								<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="Заглавие" title="Заглавие" ></textarea>
 							</div>
 						</div>
 					</div>
@@ -120,7 +120,7 @@
 										onkeyup="javascript:return convertStr(this, event);"
 										onfocus="javascript:setCurrentTextArea('original-text');"
 										oninput="javascript:convertEpigraphicText('original-text');"
-										onpaste="javascript:placeCursor('original-text');"></textarea>
+										onpaste="javascript:putFocus('original-text');"></textarea>
 									<span class="input-group-addon btn btn-info"
 										onclick="javascript:convertEpigraphicText('original-text');" title="Превръщане на оригиналния текст в Epidoc XML фрагмент">
 										<b>XML</b>
@@ -163,7 +163,14 @@
 				</fieldset>
 
 				<br>
-				<input type="reset" value="Изтрий всички полета!" onclick='return resetForm();' class="btn btn-danger">
+				<b>
+					Ctrl+A = Select All &nbsp;&nbsp;
+					Ctrl+X = Cut &nbsp;&nbsp;
+					Ctrl+C = Copy &nbsp;&nbsp;
+					Ctrl+V = Paste
+				</b>
+				<br><br>
+				<input type="reset" value="Изтрий всички полета!" onclick='javascript:resetForm();' class="btn btn-danger">
 				<br><br>
 				<input type="button" value="Запиши" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
 			</form>

@@ -31,7 +31,7 @@
 	font-style: italic;
 } */
 
-html *{
+html * {
 	font-family: "FreeSans", "Arial Unicode MS";
 }
 
@@ -55,16 +55,16 @@ legend {
 	text-align: left;
 }
 
+pre {
+	margin-bottom: 0px;
+}
+
 .element-fieldset {
 	display: inline-block;
 }
 
 .element-legend {
 	text-align: center;
-}
-
-pre {
-	margin-bottom: 0px;
 }
 
 .input-text {

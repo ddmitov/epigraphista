@@ -23,6 +23,7 @@
 
 function convertEpigraphicText(elementId) {
 	var epigraphicText = document.getElementById(elementId).value;
+	document.getElementById(elementId).focus();
 
 	var unicodeBlocks = "\u0041-\u005a\u0061-\u007a\u00aa\u00b5\u00ba\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u01ba\u01bc-\u01bf " +
 		"\u01c4-\u02ad\u0386\u0388-\u0481\u048c-\u0556\u0561-\u0587\u10a0-\u10c5\u1e00-\u1fbc\u1fbe\u1fc2-\u1fcc " +
@@ -226,8 +227,14 @@ function convertEpigraphicText(elementId) {
 	epigraphicTextHtml = epigraphicTextHtml.replace(/&lt;lb/g, "&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb");
 
 	// PLACING RESULTS IN THE HTML DOM TREE
-	document.getElementById("original-text-html").innerHTML = epigraphicTextHtml;
-	document.getElementById("original-text-xml").setAttribute("value", epigraphicText);
-	$jQuery("#original-text-formatted").show();
+	document.getElementById(elementId + "-html").innerHTML = epigraphicTextHtml;
+	document.getElementById(elementId + "-xml").setAttribute("value", epigraphicText);
+	$jQuery("#" + elementId + "-formatted").show();
+
+	// FINAL VISUAL ADJUSTMENTS
+	// Triggering textarea auto-resize:
+	document.getElementById(elementId).blur();
+	document.getElementById(elementId).focus();
+
 }
 // End of Epigraphista Text Converter code.

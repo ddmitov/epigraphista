@@ -87,7 +87,7 @@ function toggleAdditionalKeyboard(elementId) {
 		"<input type='button' value='ы' onClick=\"javascript:insertTags('ы', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='Э' onClick=\"javascript:insertTags('Э', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='э' onClick=\"javascript:insertTags('э', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ѝ' onClick=\"javascript:insertTags('ѝ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ѝ' onClick=\"javascript:insertTags('ѝ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"&nbsp;&nbsp;&nbsp;" +
 		"<input type='button' value='Ä' onClick=\"javascript:insertTags('Ä', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='ä' onClick=\"javascript:insertTags('ä', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +

@@ -2,8 +2,8 @@
 // UTF-8 encoded file!
 
 
-function placeCursor(textAreaId) {
-	document.getElementById(textAreaId).style.cursor="text";
+function putFocus(textAreaId) {
+	document.getElementById(textAreaId).focus();
 }
 
 
@@ -12,15 +12,34 @@ function resetForm(){
 			"попълнения текст във ВСИЧКИ полета?\n" +
 			"Въведената информация не може да бъде възстановена!")) {
 
-		var originalTextHtml = document.getElementById("original-text-html");
+/* 		var originalTextHtml = document.getElementById("original-text-html");
 		originalTextHtml.innerHTML = "";
 
 		var originalTextXml = document.getElementById("original-text-xml");
 		originalTextHtml.setAttribute("value", "");
 
 		$jQuery("#original-text-formatted").hide();
-		toggleGreekKeyboardHelp('original-text');
-		toggleAdditionalKeyboard('original-text-additional-keyboard');
+
+		var greekKeyboardHelpPlaceholderElement = document.getElementById("original-text-greek-keyboard-help");
+		var greekKeyboardCheckboxElement = document.getElementById("original-text-switch-greek");
+		if (greekKeyboardHelpPlaceholderElement.innerHTML.length > 0) {
+			greekKeyboardHelpPlaceholderElement.innerHTML = "";
+			greekKeyboardHelpPlaceholderElement.style.marginBottom = "0px";
+			greekKeyboardCheckboxElement.checked = false;
+		}
+
+		var additionalKeyboardPlaceholderElement = document.getElementById("original-text-additional-keyboard");
+		if (additionalKeyboardPlaceholderElement.hasChildNodes()) {
+			while (additionalKeyboardPlaceholderElement.hasChildNodes()) {
+				additionalKeyboardPlaceholderElement.removeChild(additionalKeyboardPlaceholderElement.firstChild);
+			}
+		}
+
+		document.getElementById("original-text").blur();
+		document.getElementById("original-text").focus(); */
+
+		location.reload(); 
+
 		return true;
 	}
 	return false;
