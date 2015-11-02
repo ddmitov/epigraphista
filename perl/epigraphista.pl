@@ -311,7 +311,7 @@ print <<HTML
 		<br>
 
 		<div class="form-group">
-			<a href='$domain/html-css-js/epigraphista.htm' class="btn btn-primary">Запиши нов файл</a>
+			<a href='$domain/html-css-js/index.htm' target='_self' class="btn btn-primary">Запиши нов файл</a>
 		</div>
 
 		</div>

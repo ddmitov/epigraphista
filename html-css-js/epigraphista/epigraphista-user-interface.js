@@ -277,6 +277,21 @@ function addHistoryGroup(placeholderId){
 }
 
 
+function displayKeyboardShortcutsHelp() {
+	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
+	
+	var keyboardShortcutsHelp = "" +
+		"<b>" +
+			"Ctrl+A = Select All &nbsp;&nbsp;" +
+			"Ctrl+X = Cut &nbsp;&nbsp;" +
+			"Ctrl+C = Copy &nbsp;&nbsp;" +
+			"Ctrl+V = Paste" +
+		"</b>";
+	
+	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsHelp;
+}
+
+
 function clearElementGroup(partialId){
 	if (confirm("Ако в този елемент е попълнен текст, той ще бъде загубен!\n" +
 		"Въведената информация не може да бъде възстановена!\n" +
