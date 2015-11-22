@@ -293,40 +293,101 @@ function displayKeyboardShortcutsHelp() {
 
 
 function clearElementGroup(partialId){
-	if (confirm("Ако в този елемент е попълнен текст, той ще бъде загубен!\n" +
-		"Въведената информация не може да бъде възстановена!\n" +
-		"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
-		var placeholderElement = document.getElementById(partialId + "-group");
+	var placeholderElement = document.getElementById(partialId + "-group");
+	var textEntered = false;
+	var textFields = new Array();
+	textFields = placeholderElement.getElementsByTagName('textarea');
+
+	for (i = 0; i < textFields.length; i++) { 
+		if (textFields[i].value.length > 0) {
+			textEntered = true;
+		}
+	}
+
+	if (textEntered == true) {
+		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
+			"Въведената информация не може да бъде възстановена!\n" +
+			"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
+			while (placeholderElement.hasChildNodes()) {
+				placeholderElement.removeChild(placeholderElement.firstChild);
+			}
+			var buttonToEnable = document.getElementById(partialId + "-button");
+			buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+		}
+	}
+
+	if (textEntered == false) {
 		while (placeholderElement.hasChildNodes()) {
 			placeholderElement.removeChild(placeholderElement.firstChild);
 		}
 		var buttonToEnable = document.getElementById(partialId + "-button");
 		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
 	}
+
 	return false;
 }
 
 
-function removeElement(elementId){
-	if (confirm("Ако в този елемент е попълнен текст, той ще бъде загубен!\n" +
-		"Въведената информация не може да бъде възстановена!\n" +
-		"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
-		var elementToRemove = document.getElementById(elementId);
-		elementToRemove.parentNode.removeChild(elementToRemove);
+function removeElement(elementId) {
+	var elementToRemove = document.getElementById(elementId);
+	var textEntered = false;
+	var textFields = new Array();
+	textFields = elementToRemove.getElementsByTagName('textarea');
+
+	for (i = 0; i < textFields.length; i++) { 
+		if (textFields[i].value.length > 0) {
+			textEntered = true;
+		}
 	}
-	return false;
-}
 
+	if (textEntered == true) {
+		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
+			"Въведената информация не може да бъде възстановена!\n" +
+			"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
+			elementToRemove.parentNode.removeChild(elementToRemove);
+		}
+	}
 
-function removeUniqueElement(partialId){
-	if (confirm("Ако в този елемент е попълнен текст, той ще бъде загубен!\n" +
-		"Въведената информация не може да бъде възстановена!\n" +
-		"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
-		var elementToRemove = document.getElementById(partialId + "-group");
+	if (textEntered == false) {
 		elementToRemove.parentNode.removeChild(elementToRemove);
 
 		var buttonToEnable = document.getElementById(partialId + "-button");
 		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
 	}
+
+	return false;
+}
+
+
+function removeUniqueElement(partialId) {
+	var elementToRemove = document.getElementById(partialId + "-group");
+	var textEntered = false;
+	var textFields = new Array();
+	textFields = elementToRemove.getElementsByTagName('textarea');
+
+	for (i = 0; i < textFields.length; i++) { 
+		if (textFields[i].value.length > 0) {
+			textEntered = true;
+		}
+	}
+
+	if (textEntered == true) {
+		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
+			"Въведената информация не може да бъде възстановена!\n" +
+			"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
+			elementToRemove.parentNode.removeChild(elementToRemove);
+
+			var buttonToEnable = document.getElementById(partialId + "-button");
+			buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+		}
+	}
+
+	if (textEntered == false) {
+		elementToRemove.parentNode.removeChild(elementToRemove);
+
+		var buttonToEnable = document.getElementById(partialId + "-button");
+		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+	}
+
 	return false;
 }
