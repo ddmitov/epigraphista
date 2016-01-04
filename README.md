@@ -6,9 +6,9 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a des
   
 ## Runtime Requirements
   
-* Any Linux, Mac or Windows Perl 5 distribution with XML::LibXML module included,
-* Compiled version of [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser)  
-(only if you want to run Epigraphista as a desktop application).
+* Any Linux, Mac or Windows Perl5 distribution with XML::LibXML module included,
+* Compiled version of [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser) -  
+only if you want to run Epigraphista as a desktop application.
   
 ## Frameworks, Libraries & Code Fragments Used
 * [jQuery](https://jquery.com/)
@@ -37,4 +37,4 @@ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   
 ## Author
   
-Dimitar D. Mitov, 2015.
+Dimitar D. Mitov, 2015 - 2016.

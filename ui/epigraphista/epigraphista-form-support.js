@@ -8,9 +8,9 @@ function putFocus(textAreaId) {
 
 
 function resetForm(){
-	if (confirm("Сигурни ли сте, че искате да изтриете\n" +
-			"попълнения текст във ВСИЧКИ полета?\n" +
-			"Въведената информация не може да бъде възстановена!")) {
+	if (confirm("Сигурни ли сте, че искате да изтриете попълнения текст във ВСИЧКИ полета?" +
+			"Въведената информация не може да бъде възстановена!",
+			"Epigraphista")) {
 
 /* 		var originalTextHtml = document.getElementById("original-text-html");
 		originalTextHtml.innerHTML = "";
@@ -50,14 +50,16 @@ function finalCheckAndSubmit() {
 	// Check for title:
 	var title = document.getElementById("title").value;
 	if (title.length < 3) {
-		alert("Моля, попълнете заглавие на надписа!");
+		alert("Моля, попълнете заглавие на надписа!",
+			"Epigraphista");
 		return false;
 	}
 
 	// Check for epigraphic text:
 	var epigraphicText = document.getElementById("original-text").value;
 	if (epigraphicText.length < 3) {
-		alert("Моля, попълнете оригиналния текст на надписа!");
+		alert("Моля, попълнете оригиналния текст на надписа!",
+			"Epigraphista");
 		return false;
 	}
 
@@ -65,8 +67,9 @@ function finalCheckAndSubmit() {
 	epigraphicText = epigraphicText.replace(/\[((.)*)\]/g, "");
 	epigraphicText = epigraphicText.replace(/\[((.)*)\n((.)*)\]/g, "\n");
 	if (epigraphicText.match(/\[|\]/)) {
-		alert ("Намерена е единична квадратна скоба в текста!\n" +
-			"Моля, поправете въведения епиграфски текст!");
+		alert ("Намерена е единична квадратна скоба в текста!" + " " +
+			"Моля, поправете въведения текст!",
+			"Epigraphista");
 		return false;
 	}
 

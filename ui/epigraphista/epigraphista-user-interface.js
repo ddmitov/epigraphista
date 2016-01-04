@@ -6,6 +6,62 @@
 var framedTextAreaElementsCounter = 0;
 
 
+window.alert = function(message, title) {
+	if ($jQuery('#bootstrap-alert-box-modal').length == 0) {
+		$jQuery('body').append('<div id="bootstrap-alert-box-modal" class="modal fade">\
+			<div class="modal-dialog">\
+			<div class="modal-content">\
+				<div class="modal-header" style="min-height:40px;">\
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+				<h4 class="modal-title"></h4>\
+				</div>\
+				<div class="modal-body"><p></p></div>\
+				<div class="modal-footer">\
+				<a href="#" data-dismiss="modal" class="btn btn-default">Close</a>\
+				</div>\
+			</div>\
+			</div>\
+		</div>');
+	}
+	$jQuery('#bootstrap-alert-box-modal .modal-header h4').text(title || '');
+	$jQuery('#bootstrap-alert-box-modal .modal-body p').text(message || '');
+	$jQuery('#bootstrap-alert-box-modal').modal('show');
+};
+
+
+window.confirm = function(message, title, yes_label, callback) {
+	$jQuery('#bootstrap-confirm-box-modal').data('confirm-yes', false);
+	if ($jQuery('#bootstrap-confirm-box-modal').length == 0) {
+		$jQuery('body').append('<div id="bootstrap-confirm-box-modal" class="modal fade">\
+			<div class="modal-dialog">\
+			<div class="modal-content">\
+				<div class="modal-header" style="min-height:40px;">\
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+				<h4 class="modal-title"></h4>\
+				</div>\
+				<div class="modal-body"><p></p></div>\
+				<div class="modal-footer">\
+				<a href="#" data-dismiss="modal" class="btn btn-default">Cancel</a>\
+				<a href="#" class="btn btn-primary">' + (yes_label || 'OK') + '</a>\
+				</div>\
+			</div>\
+			</div>\
+		</div>');
+		$jQuery ('#bootstrap-confirm-box-modal .modal-footer .btn-primary').on('click', function () {
+			$jQuery ('#bootstrap-confirm-box-modal').data('confirm-yes', true);
+			$jQuery ('#bootstrap-confirm-box-modal').modal('hide');
+			return false;
+		});
+		$jQuery ('#bootstrap-confirm-box-modal').on('hide.bs.modal', function () {
+			if(callback) callback($('#bootstrap-confirm-box-modal').data('confirm-yes'));
+		});
+	}
+	$jQuery ('#bootstrap-confirm-box-modal .modal-header h4').text(title || '');
+	$jQuery ('#bootstrap-confirm-box-modal .modal-body p').text(message || '');
+	$jQuery ('#bootstrap-confirm-box-modal').modal('show');
+};
+
+
 function addTextAreaElement(label, placeholderText, size, greekSupport, additionalKeyboard, mandatory) {
 	var name = label.replace(/-/g, "_");
 
