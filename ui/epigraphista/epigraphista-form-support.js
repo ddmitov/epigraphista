@@ -2,11 +2,6 @@
 // UTF-8 encoded file!
 
 
-function putFocus(textAreaId) {
-	document.getElementById(textAreaId).focus();
-}
-
-
 function finalCheckAndSubmit() {
 	// Check for title:
 	var title = document.getElementById("title").value;
@@ -31,5 +26,5 @@ function finalCheckAndSubmit() {
 		return false;
 	}
 
-	document.forms["main_form"].submit();
+	document.forms["form"].submit();
 }

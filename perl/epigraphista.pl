@@ -298,9 +298,9 @@ print <<HTML
 
 		<title>Epigraphista</title>
 
-		<script type="text/javascript" src="$domain/html-css-js/bootstrap/js/bootstrap-min.js"></script>
-		<link rel="stylesheet" type="text/css" href="$domain/html-css-js/bootstrap/css/bootstrap.css" media="all"/>
-		<link rel="stylesheet" type="text/css" href="$domain/html-css-js/bootstrap/css/current.css" media="all"/>
+		<script type="text/javascript" src="$domain/ui/bootstrap/js/bootstrap-min.js"></script>
+		<link rel="stylesheet" type="text/css" href="$domain/ui/bootstrap/css/bootstrap.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="$domain/ui/bootstrap/css/current-theme.css" media="all"/>
 	</head>
 
 	<body>
@@ -311,7 +311,7 @@ print <<HTML
 		<br>
 
 		<div class="form-group">
-			<a href='$domain/html-css-js/index.htm' target='_self' class="btn btn-primary">Запиши нов файл</a>
+			<a href='$domain/ui/index.htm' target='_self' class="btn btn-primary">Запиши нов файл</a>
 		</div>
 
 		</div>

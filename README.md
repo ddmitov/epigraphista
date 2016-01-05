@@ -31,10 +31,6 @@ or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT A NY WARRANTY;  
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
   
-## Version
-  
-0.1
-  
 ## Author
   
 Dimitar D. Mitov, 2015 - 2016.
