@@ -10,7 +10,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 	var name = label.replace(/-/g, "_");
 
 	var greekSupportCode01 = "" +
-		"onkeypress=\"return convertCharToggle(this, document.main_form." + name + "_switch_greek.checked, event);\"" +
+		"onkeypress=\"return convertCharToggle(this, document.form." + name + "_switch_greek.checked, event);\"" +
 		"onkeyup=\"return convertStr(this, event);\"";
 	var greekSupportCode02 = "" +
 		"<span class='input-group-addon'>" +
@@ -127,7 +127,7 @@ function addFramedTextAreaElement(placeholderId, label, placeholderText, mandato
 	var framedTextAreaElementContents = "" +
 	"<textarea rows='1' id='" + id + "' name='" + name + "' class='form-control greek input-text' spellcheck='false'" +
 		"title='" + fullPlaceholderText + "' placeholder='" + fullPlaceholderText + "'" +
-		"onkeypress=\"return convertCharToggle(this, document.main_form." + name + "_switch_greek.checked, event);\"" +
+		"onkeypress=\"return convertCharToggle(this, document.form." + name + "_switch_greek.checked, event);\"" +
 		"onkeyup=\"return convertStr(this, event);\"" +
 		"onfocus=\"setCurrentTextArea('" + id + "')\">" +
 	"</textarea>";
