@@ -182,18 +182,20 @@
 		<script type="text/javascript">
 			$jQuery(document).ready(function() {
 
-				var mobilis = isMobile();
-				if (mobilis == true) {
-					document.getElementsByClassName("container-fluid")[0].innerHTML =
-						"<h2>Epigraphista does not support<br>touchscreen devices!</h2>";
-				}
-				function isMobile() {
-					try {
-						document.createEvent("TouchEvent");
-						return true;
+				if (!navigator.userAgent.match(/PerlExecutingBrowser/)) {
+					var mobilis = isMobile();
+					if (mobilis == true) {
+						document.getElementsByClassName("container-fluid")[0].innerHTML =
+							"<h2>Epigraphista does not support<br>touchscreen devices!</h2>";
 					}
-					catch(exception) {
-						return false;
+					function isMobile() {
+						try {
+							document.createEvent("TouchEvent");
+							return true;
+						}
+						catch(exception) {
+							return false;
+						}
 					}
 				}
 
