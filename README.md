@@ -15,7 +15,7 @@ only if you want to run Epigraphista as a desktop application.
 * [jQuery autoResize](http://amaury.carrade.eu/projects/jquery/autoResize.html) by Amaury Carrade
 * [Bootstrap](http://getbootstrap.com/)
 * [TypeGreek](http://www.typegreek.com/)
-* regular expressions and code fragments from [Chapel Hill Electronic Text Convertor (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
+* regular expressions and code fragments from [Chapel Hill Electronic Text Converter (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
 * code fragments from Steev's JavaScript keyboard  
 (http://www.bluedust.com/pub/web/sjk.htm - defunct)
 * code fragments from a deprecated version of wikibits.js:  
