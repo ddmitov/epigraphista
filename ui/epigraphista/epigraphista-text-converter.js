@@ -229,12 +229,6 @@ function convertEpigraphicText(elementId) {
 	// PLACING RESULTS IN THE HTML DOM TREE
 	document.getElementById(elementId + "-html").innerHTML = epigraphicTextHtml;
 	document.getElementById(elementId + "-xml").setAttribute("value", epigraphicText);
-	$jQuery("#" + elementId + "-formatted").show();
-
-	// FINAL VISUAL ADJUSTMENTS
-	// Triggering textarea auto-resize:
-	document.getElementById(elementId).blur();
-	document.getElementById(elementId).focus();
 
 }
 // End of Epigraphista Text Converter code.

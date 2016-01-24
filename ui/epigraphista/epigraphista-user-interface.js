@@ -279,16 +279,33 @@ function addHistoryGroup(placeholderId){
 
 function displayKeyboardShortcutsHelp() {
 	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
-	
+
 	var keyboardShortcutsHelp = "" +
+		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-danger btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>" +
+		"&nbsp;&nbsp;" +
 		"<b>" +
 			"Ctrl+A = Select All &nbsp;&nbsp;" +
 			"Ctrl+X = Cut &nbsp;&nbsp;" +
 			"Ctrl+C = Copy &nbsp;&nbsp;" +
 			"Ctrl+V = Paste" +
-		"</b>";
-	
+		"</b>" +
+		"&nbsp;&nbsp;" +
+		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-danger btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>";
+
 	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsHelp;
+}
+
+
+function displayKeyboardShortcutsButton() {
+	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
+
+	var keyboardShortcutsButton = "" +
+		"<input type='button' value='Клавиатурни комбинации'" +
+			"onClick=\"javascript:displayKeyboardShortcutsHelp();\" class='btn btn-primary'>";
+
+	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsButton;
 }
 
 

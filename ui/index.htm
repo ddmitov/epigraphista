@@ -124,8 +124,7 @@
 										onkeypress="javascript:return convertCharToggle(this, document.form.original_text_switch_greek.checked, event);"
 										onkeyup="javascript:return convertStr(this, event);"
 										onfocus="javascript:setCurrentTextArea('original-text');"
-										oninput="javascript:convertEpigraphicText('original-text');"
-										onpaste="javascript:putFocus('original-text');"></textarea>
+										oninput="javascript:convertEpigraphicText('original-text');"></textarea>
 									<span class="input-group-addon btn btn-info"
 										onclick="javascript:convertEpigraphicText('original-text');" title="Превръщане на оригиналния текст в Epidoc XML фрагмент">
 										<b>XML</b>
@@ -151,7 +150,10 @@
 						<div id="original-text-formatted">
 							<div class="row">
 								<div class="form-group col-xs-12">
-									<pre id="original-text-html" title="Epidoc XML фрагмент с оригиналния текст" class="greek input-text xml"></pre>
+<pre id="original-text-html" title="Epidoc XML фрагмент с оригиналния текст" class="greek input-text xml">
+&lt;ab&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb n=&quot;1&quot;/&gt;
+&lt;/ab&gt;</pre>
 								</div>
 							</div>
 							<input type="hidden" id="original-text-xml" name="original_text_xml" value="">
@@ -182,7 +184,7 @@
 		<script type="text/javascript">
 			$jQuery(document).ready(function() {
 
-				if (!navigator.userAgent.match(/PerlExecutingBrowser/)) {
+				if (!navigator.userAgent.match(/WebKit/i)) {
 					var mobilis = isMobile();
 					if (mobilis == true) {
 						document.getElementsByClassName("container-fluid")[0].innerHTML =
@@ -203,8 +205,6 @@
 
 				$jQuery("#original-text").autoResize();
 			});
-
-			$jQuery("#original-text-formatted").hide();
 		</script>
 
 	</body>
