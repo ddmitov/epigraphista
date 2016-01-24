@@ -281,7 +281,7 @@ function displayKeyboardShortcutsHelp() {
 	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
 
 	var keyboardShortcutsHelp = "" +
-		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-danger btn-xs'>" +
+		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-primary btn-xs'>" +
 			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"&nbsp;&nbsp;" +
 		"<b>" +
@@ -291,7 +291,7 @@ function displayKeyboardShortcutsHelp() {
 			"Ctrl+V = Paste" +
 		"</b>" +
 		"&nbsp;&nbsp;" +
-		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-danger btn-xs'>" +
+		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-primary btn-xs'>" +
 			"<span class='glyphicon glyphicon-remove'></span></a>";
 
 	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsHelp;

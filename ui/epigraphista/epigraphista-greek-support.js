@@ -16,43 +16,45 @@ function switchGreek(textAreaId) {
 
 function toggleGreekKeyboardHelp(partialDivName) {
 	var greekKeyboardHelpContents = "" +
-		"&nbsp;&nbsp;Q&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Θ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;W&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ω&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;E&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ε&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;R&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ρ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;T&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Τ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;Y&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ψ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;U&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Υ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;I&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ι&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;O&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ο&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;P&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Π&nbsp;&nbsp;" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>Q&nbsp;<font color='red'>Θ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>W&nbsp;<font color='red'>Ω</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>E&nbsp;<font color='red'>Ε</font></p></fieldset>" +
+		
+		
+		"<fieldset class='letter-box'><p class='letter-box-p'>R&nbsp;<font color='red'>Ρ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>T&nbsp;<font color='red'>Τ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>Y&nbsp;<font color='red'>Ψ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>U&nbsp;<font color='red'>Υ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>I&nbsp;<font color='red'>Ι</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>O&nbsp;<font color='red'>Ο</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>P&nbsp;<font color='red'>Π</font></p></fieldset>" +
 		"<br>" +
-		"&nbsp;&nbsp;A&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Α&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;S&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Σ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;D&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Δ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;F&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Φ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;G&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Γ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;H&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Η&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;J&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Σ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;K&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Κ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;L&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Λ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;;&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;·&nbsp;&nbsp;" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>A&nbsp;<font color='red'>Α</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>S&nbsp;<font color='red'>Σ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>D&nbsp;<font color='red'>Δ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>F&nbsp;<font color='red'>Φ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>G&nbsp;<font color='red'>Γ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>H&nbsp;<font color='red'>Η</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>J&nbsp;<font color='red'>Σ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>K&nbsp;<font color='red'>Κ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>L&nbsp;<font color='red'>Λ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>;&nbsp;<font color='red'>·</font></p></fieldset>" +
 		"<br>" +
-		"&nbsp;&nbsp;Z&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ζ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;X&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Χ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;C&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ξ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;V&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ϝ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;B&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Β&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;N&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Ν&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;M&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;Μ&nbsp;&nbsp;" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>Z&nbsp;<font color='red'>Ζ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>X&nbsp;<font color='red'>Χ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>C&nbsp;<font color='red'>Ξ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>V&nbsp;<font color='red'>Ϝ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>B&nbsp;<font color='red'>Β</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>N&nbsp;<font color='red'>Ν</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>M&nbsp;<font color='red'>Μ</font></p></fieldset>" +
 		"<br>" +
-		"&nbsp;&nbsp;a&nbsp;<span class='glyphicon glyphicon-plus'></span>&nbsp;/&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;ά&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;a&nbsp;<span class='glyphicon glyphicon-plus'></span>&nbsp;\\&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;ὰ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;a&nbsp;<span class='glyphicon glyphicon-plus'></span>&nbsp;=&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;ᾶ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;a&nbsp;<span class='glyphicon glyphicon-plus'></span>&nbsp;)&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;ἀ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;a&nbsp;<span class='glyphicon glyphicon-plus'></span>&nbsp;(&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;ἁ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;a&nbsp;<span class='glyphicon glyphicon-plus'></span>&nbsp;|&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;ᾳ&nbsp;&nbsp;" +
-		"&nbsp;&nbsp;i&nbsp;<span class='glyphicon glyphicon-plus'></span>&nbsp;+&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;ϊ&nbsp;&nbsp;" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>a/&nbsp;<font color='red'>ά</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>a\\&nbsp;<font color='red'>ὰ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>a=&nbsp;<font color='red'>ᾶ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>a)&nbsp;<font color='red'>ἀ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>a(&nbsp;<font color='red'>ἁ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>a|&nbsp;<font color='red'>ᾳ</font></p></fieldset>" +
+		"<fieldset class='letter-box'><p class='letter-box-p'>i+&nbsp;<font color='red'>ϊ</font></p></fieldset>" +
 		"<br>";
 
 	var placeholderElement = document.getElementById(partialDivName + "-greek-keyboard-help");
@@ -128,8 +130,6 @@ function toggleAdditionalKeyboard(elementId) {
 		"<input type='button' value='ë' onClick=\"javascript:insertTags('ë', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='Ï' onClick=\"javascript:insertTags('Ï', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='ï' onClick=\"javascript:insertTags('ï', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ü' onClick=\"javascript:insertTags('Ü', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ü' onClick=\"javascript:insertTags('ü', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='Ÿ' onClick=\"javascript:insertTags('Ÿ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='ÿ' onClick=\"javascript:insertTags('ÿ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
 		"<input type='button' value='Ç' onClick=\"javascript:insertTags('Ç', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +

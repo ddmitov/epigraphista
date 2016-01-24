@@ -21,7 +21,6 @@ $xml->registerNs ("TEI", "http://www.tei-c.org/ns/1.0");
 
 # Reading new node values from POST data:
 my ($buffer, @pairs, $name, $value, %FORM);
-$ENV{'REQUEST_METHOD'} =~ tr/a-z/A-Z/;
 read (STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
 
 my $new_filename;
