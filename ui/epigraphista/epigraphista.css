@@ -5,6 +5,10 @@ html * {
 	font-family: "Open Sans", "FreeSans", "Arial Unicode MS";
 }
 
+body {
+	text-align: center;
+}
+
 fieldset {
 	border: 2px solid green;
 	border-radius: 8px;
