@@ -17,7 +17,7 @@ only if you want to run Epigraphista as a desktop application.
 * [TypeGreek](http://www.typegreek.com/) by Randy Hoyt
 * regular expressions and code fragments from [Chapel Hill Electronic Text Converter (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
 * code fragments from Steev's JavaScript keyboard  
-(http://www.bluedust.com/pub/web/sjk.htm - defunct)
+http://www.bluedust.com/pub/web/sjk.htm - defunct
 * code fragments from a deprecated version of wikibits.js:  
 MediaWiki JavaScript support functions
 * Perl [XML::LibXML](https://metacpan.org/pod/distribution/XML-LibXML/LibXML.pod)
