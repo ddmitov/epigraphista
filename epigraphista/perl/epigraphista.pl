@@ -6,14 +6,18 @@ use XML::LibXML;
 
 ########## SETTINGS START HERE ##########
 my $domain = "http://perl-executing-browser-pseudodomain";
-my $new_files_directory = "$ENV{DOCUMENT_ROOT}/inscriptions";
+my $new_files_directory = "$ENV{DATA_ROOT}";
 ########## SETTINGS END HERE ##########
 
-# Opening and parsing the template file:
+# Parsing the template:
 my $template_filename = "telamon-template.xml";
 my $parser = XML::LibXML->new();
-my $document = $parser->parse_file ($template_filename);
-$document->setEncoding ("utf-8");
+my $document = $parser->parse_file($template_filename);
+
+#~ my $template = "";
+#~ my $document = $parser->load_xml($template);
+
+$document->setEncoding("utf-8");
 
 my $xml = XML::LibXML::XPathContext->new ($document);
 $xml->registerNs ("TEI", "http://www.tei-c.org/ns/1.0");
