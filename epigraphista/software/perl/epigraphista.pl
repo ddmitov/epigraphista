@@ -5,20 +5,99 @@ use warnings;
 use XML::LibXML;
 
 ########## SETTINGS START HERE ##########
-my $domain = "http://perl-executing-browser-pseudodomain";
-my $new_files_directory = "$ENV{DATA_ROOT}";
+my $stylesheet_link = "http://perl-executing-browser-pseudodomain/bootstrap/css/bootstrap.css";
+my $index_page_link = "http://perl-executing-browser-pseudodomain/index.htm";
+my $template = "$ENV{DATA_ROOT}/template/telamon-template.xml";
+my $inscriptions_directory = "$ENV{DATA_ROOT}/inscriptions";
 ########## SETTINGS END HERE ##########
 
-# Parsing the template:
-my $template_filename = "telamon-template.xml";
+# Convert path separators to native path separators depending on the operating system:
+$template = to_native_separators($template);
+$inscriptions_directory = to_native_separators($inscriptions_directory);
+
+# Start a new parser:
 my $parser = XML::LibXML->new();
-my $document = $parser->parse_file($template_filename);
 
-#~ my $template = "";
-#~ my $document = $parser->load_xml($template);
+# Embedded template - a faster solution, but a bit more difficult to update:
+# The embedded template must not start with an empty line!
+#~ my $template = "<?xml version='1.0' encoding='UTF-8'?>
+#~ <?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://relaxng.org/ns/structure/1.0'?>
+#~ <?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://purl.oclc.org/dsdl/schematron'?>
+#~ <TEI xmlns='http://www.tei-c.org/ns/1.0' xml:space='preserve' xml:lang='en'>
+	#~ <teiHeader>
+		#~ <fileDesc>
+			#~ <titleStmt>
+				#~ <title></title>
+			#~ </titleStmt>
+			#~ <publicationStmt>
+				#~ <authority/>
+				#~ <idno type='filename'></idno>
+			#~ </publicationStmt>
+			#~ <sourceDesc>
+				#~ <msDesc>
+					#~ <msIdentifier>
+						#~ <repository></repository>
+						#~ <idno></idno>
+					#~ </msIdentifier>
+					#~ <physDesc>
+						#~ <objectDesc>
+							#~ <supportDesc>
+								#~ <support>
+									#~ <material></material>
+									#~ <objectType></objectType>
+								#~ </support>
+							#~ </supportDesc>
+							#~ <layoutDesc>
+								#~ <layout></layout>
+							#~ </layoutDesc>
+						#~ </objectDesc>
+						#~ <handDesc>
+							#~ <handNote></handNote>
+						#~ </handDesc>
+					#~ </physDesc>
+					#~ <history>
+						#~ <origin>
+							#~ <origPlace></origPlace>
+							#~ <origDate></origDate>
+						#~ </origin>
+						#~ <provenance type='found'></provenance>
+						#~ <provenance type='observed'></provenance>
+					#~ </history>
+				#~ </msDesc>
+			#~ </sourceDesc>
+		#~ </fileDesc>
+	#~ </teiHeader>
+	#~ <text>
+		#~ <body>
+			#~ <div type='edition'>
+				#~ <ab></ab>
+			#~ </div>
+			#~ <div type='apparatus'>
+				#~ <p></p>
+			#~ </div>
+			#~ <div type='translation'>
+				#~ <p></p>
+			#~ </div>
+			#~ <div type='commentary'>
+				#~ <p></p>
+			#~ </div>
+			#~ <div type='bibliography'>
+				#~ <p></p>
+			#~ </div>
+		#~ </body>
+	#~ </text>
+#~ </TEI>";
 
+# Parsing the embedded template:
+#~ my $document = $parser->load_xml(string => $template);
+
+# Parsing the external template:
+my $document = $parser->parse_file($template);
+
+# Set Unicode encoding:
 $document->setEncoding("utf-8");
 
+# Register TEI XML namespace:
 my $xml = XML::LibXML::XPathContext->new ($document);
 $xml->registerNs ("TEI", "http://www.tei-c.org/ns/1.0");
 
@@ -288,7 +367,9 @@ my ($current_support_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:s
 $current_support_node->replaceNode($new_support_node);
 
 # Save as a new file:
-$document->toFile ("$new_files_directory/$new_filename.xml");
+my $inscription_filepath = "$inscriptions_directory/$new_filename.xml";
+$inscription_filepath = to_native_separators($inscription_filepath);
+$document->toFile ($inscription_filepath);
 
 print <<HTML
 <!DOCTYPE html>
@@ -300,7 +381,7 @@ print <<HTML
 
 		<title>Epigraphista</title>
 
-		<link rel="stylesheet" type="text/css" href="$domain/ui/bootstrap/css/bootstrap.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="$stylesheet_link" media="all"/>
 
 		<style type='text/css'>
 			body {
@@ -317,7 +398,7 @@ print <<HTML
 		<br>
 
 		<div class="form-group">
-			<a href='$domain/ui/index.htm' target='_self' class="btn btn-primary">Запиши нов файл</a>
+			<a href='$index_page_link' target='_self' class="btn btn-primary">Запиши нов файл</a>
 		</div>
 
 		</div>
@@ -326,3 +407,14 @@ print <<HTML
 </html>
 HTML
 ;
+
+# Convert path separators to native path separators depending on the operating system:
+sub to_native_separators {
+	my ($path) = @_;
+	if ($^O eq "MSWin32") {
+		$path =~ s/\//\\/g;
+	} else {
+		$path =~ s/\\/\//g;
+	}
+	return $path;
+}
