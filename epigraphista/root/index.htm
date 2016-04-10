@@ -24,6 +24,20 @@
 		<script type="text/javascript">
 			// Necessary to avoid conflicts between jQuery and other JavaScript libraries like Prototype.js:
 			var $jQuery = jQuery.noConflict();
+			
+			// Perl Executing Browser exit confirmation.
+			// This function is not usefull outside Perl Executing Browser.
+			function pebCloseConfirmation() {
+				var confirmation = confirm("На тази страница е попълнен текст и той ще бъде загубен!\n" +
+										"Сигурни ли сте, че искате да изключите програмата?");
+				var result;
+				if (confirmation == true) {
+					result = "yes";
+				} else {
+					result = "no";
+				}
+				return result;
+			}
 		</script>
 	</head>
 
