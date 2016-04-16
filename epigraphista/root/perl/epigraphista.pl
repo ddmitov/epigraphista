@@ -7,8 +7,8 @@ use XML::LibXML;
 ########## SETTINGS START HERE ##########
 my $stylesheet_link = "http://perl-executing-browser-pseudodomain/bootstrap/css/bootstrap.css";
 my $index_page_link = "http://perl-executing-browser-pseudodomain/index.htm";
-my $template = "$ENV{DATA_ROOT}/template/telamon-template.xml";
-my $inscriptions_directory = "$ENV{DATA_ROOT}/inscriptions";
+my $template = "$ENV{PEB_DATA_DIR}/template/telamon-template.xml";
+my $inscriptions_directory = "$ENV{PEB_DATA_DIR}/inscriptions";
 ########## SETTINGS END HERE ##########
 
 # Convert path separators to native path separators depending on the operating system:
