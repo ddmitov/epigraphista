@@ -2,11 +2,11 @@
 Epigraphista
 ==================================
 
-Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a desktop GUI framework, HTML5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl5 for file-writing backend. It's language is currently Bulgarian because it is intended for, but not limited to, Bulgarian users. Epigraphista could also be used as a server-side application without Perl Executing Browser.
+Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a desktop GUI framework, HTML 5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for file-writing backend. It's language is currently Bulgarian because it is intended for, but not limited to, Bulgarian users. Epigraphista could also be used as a server-side application without Perl Executing Browser.
   
 ## Runtime Requirements
   
-* Any Linux, Mac or Windows Perl5 distribution with XML::LibXML module included,
+* Any Linux, Mac or Windows Perl 5 distribution with XML::LibXML module included,
 * Compiled version of [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser) -  
 only if you want to run Epigraphista as a desktop application.
   
