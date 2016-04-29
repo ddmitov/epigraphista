@@ -6,7 +6,7 @@ use XML::LibXML;
 
 ########## SETTINGS START HERE ##########
 my $stylesheet_link = "http://perl-executing-browser-pseudodomain/bootstrap/css/bootstrap.css";
-my $index_page_link = "http://perl-executing-browser-pseudodomain/index.htm";
+my $index_page_link = "http://perl-executing-browser-pseudodomain/index.html";
 my $template = "$ENV{PEB_DATA_DIR}/template/telamon-template.xml";
 my $inscriptions_directory = "$ENV{PEB_DATA_DIR}/inscriptions";
 ########## SETTINGS END HERE ##########
