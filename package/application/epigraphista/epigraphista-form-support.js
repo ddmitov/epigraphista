@@ -26,5 +26,8 @@ function finalCheckAndSubmit() {
 		return false;
 	}
 
-	document.forms["form"].submit();
+	// Convert to EpiDoc XML any text enetered at the last moment before form submission:
+	convertEpigraphicText('original-text');
+
+	document.forms["epigraphista_form"].submit();
 }

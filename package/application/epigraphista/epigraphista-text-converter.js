@@ -1,7 +1,7 @@
 
 // UTF-8 encoded file!
 
-// ETC - Epigraphista Text Converter
+// Epigraphista Text Converter (ETC)
 // Based on regular expressions and code fragments from Chapel Hill Electronic Text Convertor - JavaScript (CHETC-JS):
 // http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
 // http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
@@ -20,6 +20,7 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 function convertEpigraphicText(elementId) {
 	var epigraphicText = document.getElementById(elementId).value;
@@ -211,11 +212,11 @@ function convertEpigraphicText(elementId) {
 		epigraphicText = epigraphicText.replace(/\n/, "<lb n=\"" + (lineNumber + 1) + "\"/>");
 	}
 
+	epigraphicText = "<lb n=\"1\"/>" + epigraphicText;
+
 	// XML TO HTML CONVERSION
-	// Adding opening and closing tags:
-	epigraphicText = "<ab><lb n=\"1\"/>" + epigraphicText + "</ab>";
-	// Conversion of XML code to HTML code:
 	var epigraphicTextHtml = epigraphicText;
+	epigraphicTextHtml = "<ab>" + epigraphicTextHtml + "</ab>";
 	epigraphicTextHtml = epigraphicTextHtml.replace(/\</g, "&lt;");
 	epigraphicTextHtml = epigraphicTextHtml.replace(/\>/g, "&gt;");
 	epigraphicTextHtml = epigraphicTextHtml.replace(/\"/g, "&quot;");
@@ -229,6 +230,4 @@ function convertEpigraphicText(elementId) {
 	// PLACING RESULTS IN THE HTML DOM TREE
 	document.getElementById(elementId + "-html").innerHTML = epigraphicTextHtml;
 	document.getElementById(elementId + "-xml").setAttribute("value", epigraphicText);
-
 }
-// End of Epigraphista Text Converter code.

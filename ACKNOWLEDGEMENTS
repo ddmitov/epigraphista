@@ -69,20 +69,10 @@ https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx (RegExp Object (Ja
 https://gist.github.com/jnormore/7418776
 http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
 
-LIBXML PERL MODULE
-====================
-https://metacpan.org/pod/distribution/XML-LibXML/LibXML.pod
-https://metacpan.org/pod/distribution/XML-LibXML/lib/XML/LibXML/Element.pod
-https://metacpan.org/pod/distribution/XML-LibXML/lib/XML/LibXML/Node.pod
-
 PERL REFERENCE
 ====================
-http://www.perlmonks.org/?node_id=530519 - Namespaced XML::LibXML XPath query
-http://www.perlmonks.org/?node_id=782694 - Edit a node value in xml
-http://www.perlmonks.org/?node_id=900439 - How do I get LibXML to replace attribute values?
-http://www.perlmonks.org/?node_id=490846 - Stepping up from XML::Simple to XML::LibXML
-
-http://stackoverflow.com/questions/8411684/xmllibxml-replace-element-value
-
 http://www.tutorialspoint.com/perl/perl_cgi.htm
 http://www.tutorialspoint.com/perl/perl_subroutines.htm
+http://www.tutorialspoint.com/perl/perl_regular_expressions.htm
+
+http://stackoverflow.com/questions/1003632/how-can-i-see-if-a-perl-hash-already-has-a-certain-key

@@ -10,10 +10,8 @@
 		<script type="text/javascript" src="jquery/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js"></script>
 
-		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all"/>
-
-		<script type="text/javascript" src="typegreek/typegreek.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all"/>
 		<script type="text/javascript" src="epigraphista/epigraphista-form-support.js"></script>
@@ -21,53 +19,13 @@
 		<script type="text/javascript" src="epigraphista/epigraphista-text-converter.js"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-user-interface.js"></script>
 
+		<script type="text/javascript" src="typegreek/typegreek.js"></script>
+
+		<script type="text/javascript" src="peb/peb.js"></script>
+
 		<script type="text/javascript">
-			// Necessary to avoid conflicts between jQuery and other JavaScript libraries like Prototype.js:
+			// Necessary to avoid conflicts between jQuery and other JavaScript libraries :
 			var $jQuery = jQuery.noConflict();
-
-			// The following six functions are only usefull inside Perl Executing Browser.
-			// Perl Executing Browser custom title for the Alert dialog box:
-			function pebAlertTitle() {
-				var alertTitle = "Внимание";
-				return alertTitle;
-			}
-
-			// Perl Executing Browser OK button label:
-			function pebOkLabel() {
-				var okLabel = "Разбрах";
-				return okLabel;
-			}
-
-			// Perl Executing Browser custom title for the Confirm dialog box:
-			function pebConfirmTitle() {
-				var confirmTitle = "Потвърждение";
-				return confirmTitle;
-			}
-
-			// Perl Executing Browser close confirmation:
-			function pebCloseConfirmation() {
-				var confirmation = confirm("На тази страница е попълнен текст и той ще бъде загубен!\n" +
-										"Сигурни ли сте, че искате да изключите програмата?");
-				var result;
-				if (confirmation == true) {
-					result = "yes";
-				} else {
-					result = "no";
-				}
-				return result;
-			}
-
-			// Perl Executing Browser Yes button label:
-			function pebYesLabel() {
-				var yesLabel = "Да";
-				return yesLabel;
-			}
-
-			// Perl Executing Browser No button label:
-			function pebNoLabel() {
-				var noLabel = "Не";
-				return noLabel;
-			}
 		</script>
 	</head>
 
@@ -76,7 +34,7 @@
 
 		<br>
 
-			<form id="form" name="form" action="perl/epigraphista.pl" method="post">
+			<form id="epigraphista-form" name="epigraphista_form" action="perl/epigraphista.pl" method="post">
 
 				<fieldset>
 						<legend>
@@ -161,7 +119,7 @@
 								<div class="input-group">
 									<textarea id="original-text" class="form-control greek input-text" spellcheck="false"
 										title="Оригинален текст" placeholder="Оригинален текст"
-										onkeypress="javascript:return convertCharToggle(this, document.form.original_text_switch_greek.checked, event);"
+										onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.original_text_switch_greek.checked, event);"
 										onkeyup="javascript:return convertStr(this, event);"
 										onfocus="javascript:setCurrentTextArea('original-text');"
 										oninput="javascript:convertEpigraphicText('original-text');"></textarea>

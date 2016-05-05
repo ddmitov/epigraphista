@@ -2,114 +2,109 @@
 
 use strict;
 use warnings;
-use XML::LibXML;
 
 ########## SETTINGS START HERE ##########
 my $stylesheet_link = "http://perl-executing-browser-pseudodomain/bootstrap/css/bootstrap.css";
 my $index_page_link = "http://perl-executing-browser-pseudodomain/index.html";
-my $template = "$ENV{PEB_DATA_DIR}/template/telamon-template.xml";
 my $inscriptions_directory = "$ENV{PEB_DATA_DIR}/inscriptions";
 ########## SETTINGS END HERE ##########
 
-# Convert path separators to native path separators depending on the operating system:
-$template = to_native_separators($template);
-$inscriptions_directory = to_native_separators($inscriptions_directory);
+# Embedded template:
+my $xml = "<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://relaxng.org/ns/structure/1.0'?>
+<?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://purl.oclc.org/dsdl/schematron'?>
+<TEI xmlns='http://www.tei-c.org/ns/1.0' xml:space='preserve' xml:lang='en'>
+	<teiHeader>
+		<fileDesc>
+			<titleStmt>
+				<title>TITLE</title>
+			</titleStmt>
+			<publicationStmt>
+				<authority/>
+				<idno type='filename'>FILENAME</idno>
+			</publicationStmt>
+			<sourceDesc>
+				<msDesc>
+					<msIdentifier>
+						<repository>REPOSITORY</repository>
+						<idno>IDNO</idno>
+					</msIdentifier>
+					<physDesc>
+						<objectDesc>
+							<supportDesc>
+								<support>
+									SUPPORT
+									<material>MATERIAL</material>
+									<objectType>OBJECT_TYPE</objectType>
+								</support>
+							</supportDesc>
+							<layoutDesc>
+								<layout>
+									LAYOUT
+								</layout>
+							</layoutDesc>
+						</objectDesc>
+						<handDesc>
+							<handNote>
+								HAND_NOTE
+							</handNote>
+						</handDesc>
+					</physDesc>
+					<history>
+						<origin>
+							<origPlace>ORIG_PLACE</origPlace>
+							<origDate>ORIG_DATE</origDate>
+						</origin>
+						<provenance type='found'>
+							PROVENANCE_FOUND
+						</provenance>
+						<provenance type='observed'>
+							PROVENANCE_OBSERVED
+						</provenance>
+					</history>
+				</msDesc>
+			</sourceDesc>
+		</fileDesc>
+	</teiHeader>
+	<text>
+		<body>
+			<div type='edition'>
+				<ab>
+					INSCRIPTION_TEXT
+				</ab>
+			</div>
+			<div type='apparatus'>
+				<p>
+					APPARATUS_CRITICUS
+				</p>
+			</div>
+			<div type='translation'>
+				<p>
+					TRANSLATION
+				</p>
+			</div>
+			<div type='commentary'>
+				<p>
+					COMMENTARY
+				</p>
+			</div>
+			<div type='bibliography'>
+				<p>
+					BIBLIOGRAPHY
+				</p>
+			</div>
+		</body>
+	</text>
+</TEI>";
 
-# Start a new parser:
-my $parser = XML::LibXML->new();
+# Convert single quotes to double quotes inside the XML matrix:
+$xml =~ s/'/\"/g;
 
-# Embedded template - a faster solution, but a bit more difficult to update:
-# The embedded template must not start with an empty line!
-#~ my $template = "<?xml version='1.0' encoding='UTF-8'?>
-#~ <?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://relaxng.org/ns/structure/1.0'?>
-#~ <?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://purl.oclc.org/dsdl/schematron'?>
-#~ <TEI xmlns='http://www.tei-c.org/ns/1.0' xml:space='preserve' xml:lang='en'>
-	#~ <teiHeader>
-		#~ <fileDesc>
-			#~ <titleStmt>
-				#~ <title></title>
-			#~ </titleStmt>
-			#~ <publicationStmt>
-				#~ <authority/>
-				#~ <idno type='filename'></idno>
-			#~ </publicationStmt>
-			#~ <sourceDesc>
-				#~ <msDesc>
-					#~ <msIdentifier>
-						#~ <repository></repository>
-						#~ <idno></idno>
-					#~ </msIdentifier>
-					#~ <physDesc>
-						#~ <objectDesc>
-							#~ <supportDesc>
-								#~ <support>
-									#~ <material></material>
-									#~ <objectType></objectType>
-								#~ </support>
-							#~ </supportDesc>
-							#~ <layoutDesc>
-								#~ <layout></layout>
-							#~ </layoutDesc>
-						#~ </objectDesc>
-						#~ <handDesc>
-							#~ <handNote></handNote>
-						#~ </handDesc>
-					#~ </physDesc>
-					#~ <history>
-						#~ <origin>
-							#~ <origPlace></origPlace>
-							#~ <origDate></origDate>
-						#~ </origin>
-						#~ <provenance type='found'></provenance>
-						#~ <provenance type='observed'></provenance>
-					#~ </history>
-				#~ </msDesc>
-			#~ </sourceDesc>
-		#~ </fileDesc>
-	#~ </teiHeader>
-	#~ <text>
-		#~ <body>
-			#~ <div type='edition'>
-				#~ <ab></ab>
-			#~ </div>
-			#~ <div type='apparatus'>
-				#~ <p></p>
-			#~ </div>
-			#~ <div type='translation'>
-				#~ <p></p>
-			#~ </div>
-			#~ <div type='commentary'>
-				#~ <p></p>
-			#~ </div>
-			#~ <div type='bibliography'>
-				#~ <p></p>
-			#~ </div>
-		#~ </body>
-	#~ </text>
-#~ </TEI>";
-
-# Parsing the embedded template:
-#~ my $document = $parser->load_xml(string => $template);
-
-# Parsing the external template:
-my $document = $parser->parse_file($template);
-
-# Set Unicode encoding:
-$document->setEncoding("utf-8");
-
-# Register TEI XML namespace:
-my $xml = XML::LibXML::XPathContext->new ($document);
-$xml->registerNs ("TEI", "http://www.tei-c.org/ns/1.0");
+my $new_filename;
 
 # Reading new node values from POST data:
 my ($buffer, @pairs, $name, $value, %FORM);
 read (STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
-
-my $new_filename;
-
-my $support_value;
-my $material_value;
-my $object_type_value;
 
 @pairs = split (/&/, $buffer);
 foreach my $pair (@pairs) {
@@ -117,259 +112,214 @@ foreach my $pair (@pairs) {
 	$value =~ tr/+/ /;
 	$value =~ s/%(..)/pack("C", hex($1))/eg;
 	$FORM{$name} = $value;
-
-	if ($name =~ "title" and length($value) > 0) {
-		my $new_title_node = $document->createElement("title");
-		$new_title_node->appendText($value);
-		my ($current_title_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:titleStmt/TEI:title');
-		# Replacing the old node vaue with the new one:
-		$current_title_node->replaceNode($new_title_node);
-
-		# Filename is produced from title:
-		$new_filename = $value;
-		$new_filename =~ s/\s|,|;/_/g;
-		my $new_filename_node = $document->createElement("idno");
-		$new_filename_node->setAttribute("type", "filename");
-		$new_filename_node->appendText($new_filename);
-		my ($current_filename_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:publicationStmt/TEI:idno[@type="filename"]');
-		# Replacing the old node with the new one:
-		$current_filename_node->replaceNode($new_filename_node);
-	}
-
-	if ($name =~ "repository" and length($value) > 0) {
-		my $new_node = $document->createElement("repository");
-		$new_node->appendText($value);
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:msIdentifier/TEI:repository');
-		# Replacing the old node with the new one:
-		$current_node->replaceNode($new_node);
-	}
-
-	if ($name =~ "idno" and length($value) > 0) {
-		my $new_node = $document->createElement("idno");
-		$new_node->appendText($value);
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:msIdentifier/TEI:idno');
-		# Replacing the old node with the new one:
-		$current_node->replaceNode($new_node);
-	}
-
-# Support group:
-	if ($name =~ "support" and length($value) > 0) {
-		$support_value = $value;
-	}
-
-	if ($name =~ "material" and length($value) > 0) {
-		$material_value = $value;
-	}
-
-	if ($name =~ "object_type" and length($value) > 0) {
-		$object_type_value = $value;
-	}
-
-	if ($name =~ "layout" and length($value) > 0) {
-		my $node_level = 8;
-		my $tag_indent = "\t" x $node_level;
-		my $contents_indent = "\t" x ($node_level + 1);
-		my $formatted_value = $value;
-		$formatted_value =~ s/\n/\n$contents_indent/g;
-		# Escaping all XML special characters:
-		$formatted_value =~ s/\</&lt;/g;
-		$formatted_value =~ s/\>/&gt;/g;
-		$formatted_value =~ s/&/&amp;/g;
-		$formatted_value =~ s/\'/&apos;/g;
-		$formatted_value =~ s/\"/&quot;/g;
-		$formatted_value = "<layout>\n$contents_indent$formatted_value\n$tag_indent</layout>";
-		my $fragment = $parser->parse_balanced_chunk($formatted_value );
-
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:physDesc/TEI:objectDesc/TEI:layoutDesc/TEI:layout');
-		# Replacing the old node with the new one:
-		$current_node->replaceNode($fragment);
-	}
-
-	if ($name =~ "hand_note" and length($value) > 0) {
-		my $node_level = 7;
-		my $tag_indent = "\t" x $node_level;
-		my $contents_indent = "\t" x ($node_level + 1);
-		my $formatted_value = $value;
-		$formatted_value =~ s/\n/\n$contents_indent/g;
-		# Escaping all XML special characters:
-		$formatted_value =~ s/\</&lt;/g;
-		$formatted_value =~ s/\>/&gt;/g;
-		$formatted_value =~ s/&/&amp;/g;
-		$formatted_value =~ s/\'/&apos;/g;
-		$formatted_value =~ s/\"/&quot;/g;
-		$formatted_value = "<handNote>\n$contents_indent$formatted_value\n$tag_indent</handNote>";
-		my $fragment = $parser->parse_balanced_chunk($formatted_value );
-
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:physDesc/TEI:handDesc/TEI:handNote');
-		# Replacing the old node with the new one:
-		$current_node->replaceNode($fragment);
-	}
-
-	if ($name =~ "orig_place" and length($value) > 0) {
-		my $new_node = $document->createElement("origPlace");
-		$new_node->appendText($value);
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:history/TEI:origin/TEI:origPlace');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
-	}
-
-	if ($name =~ "orig_date" and length($value) > 0) {
-		my $new_node = $document->createElement("origDate");
-		$new_node->appendText($value);
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:history/TEI:origin/TEI:origDate');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
-	}
-
-	if ($name =~ "provenance_found" and length($value) > 0) {
-		my $new_node = $document->createElement("provenance");
-		$new_node->setAttribute("type", "found");
-		$new_node->appendText($value);
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:history/TEI:provenance[@type="found"]');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
-	}
-
-	if ($name =~ "provenance_observed" and length($value) > 0) {
-		my $new_node = $document->createElement("provenance");
-		$new_node->setAttribute("type", "observed");
-		$new_node->appendText($value);
-		my ($current_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:history/TEI:provenance[@type="observed"]');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($new_node);
-	}
-
-	if ($name =~ "original_text_xml" and length($value) > 0) {
-		my $node_level = 4;
-		my $tag_indent = "\t" x $node_level;
-		my $contents_indent = "\t" x ($node_level + 1);
-		my $formatted_value = $value;
-		$formatted_value =~ s/\<lb/\n$contents_indent\<lb/g;
-		$formatted_value =~ s/\<\/ab\>/\n$tag_indent\<\/ab\>/g;
-		my $fragment = $parser->parse_balanced_chunk($formatted_value);
-
-		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="edition"]/TEI:ab');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($fragment);
-	}
-
-	if ($name =~ "apparatus_criticus" and length($value) > 0) {
-		my $node_level = 4;
-		my $tag_indent = "\t" x $node_level;
-		my $contents_indent = "\t" x ($node_level + 1);
-		my $formatted_value = $value;
-		$formatted_value =~ s/\n/\n$contents_indent/g;
-		# Escaping all XML special characters:
-		$formatted_value =~ s/\</&lt;/g;
-		$formatted_value =~ s/\>/&gt;/g;
-		$formatted_value =~ s/&/&amp;/g;
-		$formatted_value =~ s/\'/&apos;/g;
-		$formatted_value =~ s/\"/&quot;/g;
-		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
-		my $fragment = $parser->parse_balanced_chunk($formatted_value);
-
-		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="apparatus"]/TEI:p');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($fragment);
-	}
-
-	if ($name =~ "translation" and length($value) > 0) {
-		my $node_level = 4;
-		my $tag_indent = "\t" x $node_level;
-		my $contents_indent = "\t" x ($node_level + 1);
-		my $formatted_value = $value;
-		$formatted_value =~ s/\n/\n$contents_indent/g;
-		# Escaping all XML special characters:
-		$formatted_value =~ s/\</&lt;/g;
-		$formatted_value =~ s/\>/&gt;/g;
-		$formatted_value =~ s/&/&amp;/g;
-		$formatted_value =~ s/\'/&apos;/g;
-		$formatted_value =~ s/\"/&quot;/g;
-		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
-		my $fragment = $parser->parse_balanced_chunk($formatted_value);
-
-		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="translation"]/TEI:p');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($fragment);
-	}
-
-	if ($name =~ "commentary" and length($value) > 0) {
-		my $node_level = 4;
-		my $tag_indent = "\t" x $node_level;
-		my $contents_indent = "\t" x ($node_level + 1);
-		my $formatted_value = $value;
-		$formatted_value =~ s/\n/\n$contents_indent/g;
-		# Escaping all XML special characters:
-		$formatted_value =~ s/\</&lt;/g;
-		$formatted_value =~ s/\>/&gt;/g;
-		$formatted_value =~ s/&/&amp;/g;
-		$formatted_value =~ s/\'/&apos;/g;
-		$formatted_value =~ s/\"/&quot;/g;
-		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
-		my $fragment = $parser->parse_balanced_chunk($formatted_value);
-
-		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="commentary"]/TEI:p');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($fragment);
-	}
-
-	if ($name =~ "bibliography" and length($value) > 0) {
-		my $node_level = 4;
-		my $tag_indent = "\t" x $node_level;
-		my $contents_indent = "\t" x ($node_level + 1);
-		my $formatted_value = $value;
-		$formatted_value =~ s/\n/\n$contents_indent/g;
-		# Escaping all XML special characters:
-		$formatted_value =~ s/\</&lt;/g;
-		$formatted_value =~ s/\>/&gt;/g;
-		$formatted_value =~ s/&/&amp;/g;
-		$formatted_value =~ s/\'/&apos;/g;
-		$formatted_value =~ s/\"/&quot;/g;
-		$formatted_value = "<p>\n$contents_indent$formatted_value\n$tag_indent</p>";
-		my $fragment = $parser->parse_balanced_chunk($formatted_value );
-
-		my ($current_node) = $xml->findnodes('//TEI:text/TEI:body/TEI:div[@type="bibliography"]/TEI:p');
-		# Replacing the old node vaue with the new one:
-		$current_node->replaceNode($fragment);
-	}
 }
 
-# Support group:
-my $new_support_node = $document->createElement("support");
-if (length($support_value)) {
+$xml =~ s/TITLE/$FORM{"title"}/;
+
+# Filename is produced from title:
+$new_filename = $FORM{"title"};
+$new_filename =~ s/\s|,|;/_/g;
+$xml =~ s/FILENAME/$new_filename/;
+
+if ($FORM{"repository"}) {
+	$xml =~ s/REPOSITORY/$FORM{"repository"}/;
+} else {
+	$xml =~ s/REPOSITORY//;
+}
+
+if ($FORM{"idno"}) {
+	$xml =~ s/IDNO/$FORM{"idno"}/;
+} else {
+	$xml =~ s/IDNO//;
+}
+
+if ($FORM{"support"}) {
 	my $node_level = 8;
-	my $tag_indent = "\t" x $node_level;
 	my $contents_indent = "\t" x ($node_level + 1);
-	my $formatted_value = $support_value;
+
+	my $formatted_value = $FORM{"support"};
 	$formatted_value =~ s/\n/\n$contents_indent/g;
+
 	# Escaping all XML special characters:
 	$formatted_value =~ s/\</&lt;/g;
 	$formatted_value =~ s/\>/&gt;/g;
 	$formatted_value =~ s/&/&amp;/g;
 	$formatted_value =~ s/\'/&apos;/g;
 	$formatted_value =~ s/\"/&quot;/g;
-	$new_support_node->appendText($formatted_value);
+
+	$xml =~ s/SUPPORT/$formatted_value/;
+} else {
+	$xml =~ s/SUPPORT//;
 }
 
-my $material_node = $document->createElement("material");
-if (length($material_value)) {
-	$material_node->appendText($material_value);
+if ($FORM{"material"}) {
+	$xml =~ s/MATERIAL/$FORM{"material"}/;
+} else {
+	$xml =~ s/MATERIAL//;
 }
-$new_support_node->appendChild($material_node);
 
-my $object_type_node = $document->createElement("objectType");
-if (length($object_type_value)) {
-	$object_type_node->appendText($object_type_value);
+if ($FORM{"object_type"}) {
+	$xml =~ s/OBJECT_TYPE/$FORM{"object_type"}/;
+} else {
+	$xml =~ s/OBJECT_TYPE//;
 }
-$new_support_node->appendChild($object_type_node);
 
-my ($current_support_node) = $xml->findnodes('//TEI:teiHeader/TEI:fileDesc/TEI:sourceDesc/TEI:msDesc/TEI:physDesc/TEI:objectDesc/TEI:supportDesc/TEI:support');
-$current_support_node->replaceNode($new_support_node);
+if ($FORM{"layout"}) {
+	my $node_level = 8;
+	my $contents_indent = "\t" x ($node_level + 1);
+
+	my $formatted_value = $FORM{"layout"};
+	$formatted_value =~ s/\n/\n$contents_indent/g;
+
+	# Escaping all XML special characters:
+	$formatted_value =~ s/\</&lt;/g;
+	$formatted_value =~ s/\>/&gt;/g;
+	$formatted_value =~ s/&/&amp;/g;
+	$formatted_value =~ s/\'/&apos;/g;
+	$formatted_value =~ s/\"/&quot;/g;
+
+	$xml =~ s/LAYOUT/$formatted_value/;
+} else {
+	$xml =~ s/LAYOUT//;
+}
+
+if ($FORM{"hand_note"}) {
+	my $node_level = 8;
+	my $contents_indent = "\t" x ($node_level + 1);
+
+	my $formatted_value = $FORM{"hand_note"};
+	$formatted_value =~ s/\n/\n$contents_indent/g;
+
+	# Escaping all XML special characters:
+	$formatted_value =~ s/\</&lt;/g;
+	$formatted_value =~ s/\>/&gt;/g;
+	$formatted_value =~ s/&/&amp;/g;
+	$formatted_value =~ s/\'/&apos;/g;
+	$formatted_value =~ s/\"/&quot;/g;
+
+	$xml =~ s/HAND_NOTE/$formatted_value/;
+} else {
+	$xml =~ s/HAND_NOTE//;
+}
+
+if ($FORM{"orig_place"}) {
+	$xml =~ s/ORIG_PLACE/$FORM{"orig_place"}/;
+} else {
+	$xml =~ s/ORIG_PLACE//;
+}
+
+if ($FORM{"orig_date"}) {
+	$xml =~ s/ORIG_DATE/$FORM{"orig_date"}/;
+} else {
+	$xml =~ s/ORIG_DATE//;
+}
+
+if ($FORM{"provenance_found"}) {
+	$xml =~ s/PROVENANCE_FOUND/$FORM{"provenance_found"}/;
+} else {
+	$xml =~ s/PROVENANCE_FOUND//;
+}
+
+if ($FORM{"provenance_observed"}) {
+	$xml =~ s/PROVENANCE_OBSERVED/$FORM{"provenance_observed"}/;
+} else {
+	$xml =~ s/PROVENANCE_OBSERVED//;
+}
+
+my $inscription_node_level = 4;
+my $inscription_contents_indent = "\t" x ($inscription_node_level + 1);
+
+my $inscription_formatted_value = $FORM{"original_text_xml"};
+$inscription_formatted_value =~ s/\<lb/\n$inscription_contents_indent\<lb/g;
+
+$xml =~ s/INSCRIPTION_TEXT/$inscription_formatted_value/;
+
+if ($FORM{"apparatus_criticus"}) {
+	my $node_level = 4;
+	my $contents_indent = "\t" x ($node_level + 1);
+
+	my $formatted_value = $FORM{"apparatus_criticus"};
+	$formatted_value =~ s/\n/\n$contents_indent/g;
+
+	# Escaping all XML special characters:
+	$formatted_value =~ s/\</&lt;/g;
+	$formatted_value =~ s/\>/&gt;/g;
+	$formatted_value =~ s/&/&amp;/g;
+	$formatted_value =~ s/\'/&apos;/g;
+	$formatted_value =~ s/\"/&quot;/g;
+
+	$xml =~ s/APPARATUS_CRITICUS/$formatted_value/;
+} else {
+	$xml =~ s/APPARATUS_CRITICUS//;
+}
+
+if ($FORM{"translation"}) {
+	my $node_level = 4;
+	my $contents_indent = "\t" x ($node_level + 1);
+
+	my $formatted_value = $FORM{"translation"};
+	$formatted_value =~ s/\n/\n$contents_indent/g;
+
+	# Escaping all XML special characters:
+	$formatted_value =~ s/\</&lt;/g;
+	$formatted_value =~ s/\>/&gt;/g;
+	$formatted_value =~ s/&/&amp;/g;
+	$formatted_value =~ s/\'/&apos;/g;
+	$formatted_value =~ s/\"/&quot;/g;
+
+	$xml =~ s/TRANSLATION/$formatted_value/;
+} else {
+	$xml =~ s/TRANSLATION//;
+}
+
+if ($FORM{"commentary"}) {
+	my $node_level = 4;
+	my $contents_indent = "\t" x ($node_level + 1);
+
+	my $formatted_value = $FORM{"commentary"};
+	$formatted_value =~ s/\n/\n$contents_indent/g;
+
+	# Escaping all XML special characters:
+	$formatted_value =~ s/\</&lt;/g;
+	$formatted_value =~ s/\>/&gt;/g;
+	$formatted_value =~ s/&/&amp;/g;
+	$formatted_value =~ s/\'/&apos;/g;
+	$formatted_value =~ s/\"/&quot;/g;
+
+	$xml =~ s/COMMENTARY/$formatted_value/;
+} else {
+	$xml =~ s/COMMENTARY//;
+}
+
+if ($FORM{"bibliography"}) {
+	my $node_level = 4;
+	my $contents_indent = "\t" x ($node_level + 1);
+
+	my $formatted_value = $FORM{"bibliography"};
+	$formatted_value =~ s/\n/\n$contents_indent/g;
+
+	# Escaping all XML special characters:
+	$formatted_value =~ s/\</&lt;/g;
+	$formatted_value =~ s/\>/&gt;/g;
+	$formatted_value =~ s/&/&amp;/g;
+	$formatted_value =~ s/\'/&apos;/g;
+	$formatted_value =~ s/\"/&quot;/g;
+
+	$xml =~ s/BIBLIOGRAPHY/$formatted_value/;
+} else {
+	$xml =~ s/BIBLIOGRAPHY//;
+}
+
+# Remove all emty lines:
+$xml =~ s/\n\s{1,}\n/\n/g;
 
 # Save as a new file:
 my $inscription_filepath = "$inscriptions_directory/$new_filename.xml";
 $inscription_filepath = to_native_separators($inscription_filepath);
-$document->toFile ($inscription_filepath);
+
+open my $output_filehandle, ">", $inscription_filepath or die "Can not open new file!";
+print $output_filehandle $xml;
+close $output_filehandle;
 
 print <<HTML
 <!DOCTYPE html>

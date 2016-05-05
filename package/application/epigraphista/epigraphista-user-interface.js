@@ -10,7 +10,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 	var name = label.replace(/-/g, "_");
 
 	var greekSupportCode01 = "" +
-		"onkeypress=\"return convertCharToggle(this, document.form." + name + "_switch_greek.checked, event);\"" +
+		"onkeypress=\"return convertCharToggle(this, document.epigraphista_form." + name + "_switch_greek.checked, event);\"" +
 		"onkeyup=\"return convertStr(this, event);\"";
 	var greekSupportCode02 = "" +
 		"<span class='input-group-addon'>" +
@@ -127,7 +127,7 @@ function addFramedTextAreaElement(placeholderId, label, placeholderText, mandato
 	var framedTextAreaElementContents = "" +
 	"<textarea rows='1' id='" + id + "' name='" + name + "' class='form-control greek input-text' spellcheck='false'" +
 		"title='" + fullPlaceholderText + "' placeholder='" + fullPlaceholderText + "'" +
-		"onkeypress=\"return convertCharToggle(this, document.form." + name + "_switch_greek.checked, event);\"" +
+		"onkeypress=\"return convertCharToggle(this, document.epigraphista_form." + name + "_switch_greek.checked, event);\"" +
 		"onkeyup=\"return convertStr(this, event);\"" +
 		"onfocus=\"setCurrentTextArea('" + id + "')\">" +
 	"</textarea>";
@@ -224,7 +224,7 @@ function addSupportGroup(placeholderId){
 	var buttonToDisable = document.getElementById("support-button");
 	buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
 
-	addTextAreaElement("support-root", "Описание на паметника", "large", "greek", "additional-keyboard", "mandatory");
+	addTextAreaElement("support", "Описание на паметника", "large", "greek", "additional-keyboard", "mandatory");
 }
 
 
@@ -323,7 +323,6 @@ function clearElementGroup(partialId){
 
 	if (textEntered == true) {
 		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
-			"Въведената информация не може да бъде възстановена!\n" +
 			"Сигурни ли сте, че искате да премахнете избрания елемент?",
 			"Epigraphista")) {
 			while (placeholderElement.hasChildNodes()) {
@@ -360,7 +359,6 @@ function removeElement(elementId) {
 
 	if (textEntered == true) {
 		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
-			"Въведената информация не може да бъде възстановена!\n" +
 			"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
 			elementToRemove.parentNode.removeChild(elementToRemove);
 		}
@@ -391,7 +389,6 @@ function removeUniqueElement(partialId) {
 
 	if (textEntered == true) {
 		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
-			"Въведената информация не може да бъде възстановена!\n" +
 			"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
 			elementToRemove.parentNode.removeChild(elementToRemove);
 
