@@ -33,7 +33,7 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 						<objectDesc>
 							<supportDesc>
 								<support>
-									SUPPORT
+									SUPPORT_ROOT
 									<material>MATERIAL</material>
 									<objectType>OBJECT_TYPE</objectType>
 								</support>
@@ -70,7 +70,7 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 		<body>
 			<div type='edition'>
 				<ab>
-					INSCRIPTION_TEXT
+					ORIGINAL_TEXT_XML
 				</ab>
 			</div>
 			<div type='apparatus'>
@@ -100,9 +100,7 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 # Convert single quotes to double quotes inside the XML matrix:
 $xml =~ s/'/\"/g;
 
-my $new_filename;
-
-# Reading new node values from POST data:
+# Read node values from POST data:
 my ($buffer, @pairs, $name, $value, %FORM);
 read (STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
 
@@ -117,9 +115,9 @@ foreach my $pair (@pairs) {
 $xml =~ s/TITLE/$FORM{"title"}/;
 
 # Filename is produced from title:
-$new_filename = $FORM{"title"};
-$new_filename =~ s/\s|,|;/_/g;
-$xml =~ s/FILENAME/$new_filename/;
+my $inscription_filename = $FORM{"title"};
+$inscription_filename =~ s/\s|,|;/_/g;
+$xml =~ s/FILENAME/$inscription_filename/;
 
 if ($FORM{"repository"}) {
 	$xml =~ s/REPOSITORY/$FORM{"repository"}/;
@@ -133,23 +131,12 @@ if ($FORM{"idno"}) {
 	$xml =~ s/IDNO//;
 }
 
-if ($FORM{"support"}) {
-	my $node_level = 8;
-	my $contents_indent = "\t" x ($node_level + 1);
-
-	my $formatted_value = $FORM{"support"};
-	$formatted_value =~ s/\n/\n$contents_indent/g;
-
-	# Escaping all XML special characters:
-	$formatted_value =~ s/\</&lt;/g;
-	$formatted_value =~ s/\>/&gt;/g;
-	$formatted_value =~ s/&/&amp;/g;
-	$formatted_value =~ s/\'/&apos;/g;
-	$formatted_value =~ s/\"/&quot;/g;
-
-	$xml =~ s/SUPPORT/$formatted_value/;
+if ($FORM{"support_root"}) {
+	my $formatted_value = indent_node_value(8, $FORM{"support_root"});
+	$formatted_value = escape_xml_special_characters($formatted_value);
+	$xml =~ s/SUPPORT_ROOT/$formatted_value/;
 } else {
-	$xml =~ s/SUPPORT//;
+	$xml =~ s/SUPPORT_ROOT//;
 }
 
 if ($FORM{"material"}) {
@@ -165,38 +152,16 @@ if ($FORM{"object_type"}) {
 }
 
 if ($FORM{"layout"}) {
-	my $node_level = 8;
-	my $contents_indent = "\t" x ($node_level + 1);
-
-	my $formatted_value = $FORM{"layout"};
-	$formatted_value =~ s/\n/\n$contents_indent/g;
-
-	# Escaping all XML special characters:
-	$formatted_value =~ s/\</&lt;/g;
-	$formatted_value =~ s/\>/&gt;/g;
-	$formatted_value =~ s/&/&amp;/g;
-	$formatted_value =~ s/\'/&apos;/g;
-	$formatted_value =~ s/\"/&quot;/g;
-
+	my $formatted_value = indent_node_value(8, $FORM{"layout"});
+	$formatted_value = escape_xml_special_characters($formatted_value);
 	$xml =~ s/LAYOUT/$formatted_value/;
 } else {
 	$xml =~ s/LAYOUT//;
 }
 
 if ($FORM{"hand_note"}) {
-	my $node_level = 8;
-	my $contents_indent = "\t" x ($node_level + 1);
-
-	my $formatted_value = $FORM{"hand_note"};
-	$formatted_value =~ s/\n/\n$contents_indent/g;
-
-	# Escaping all XML special characters:
-	$formatted_value =~ s/\</&lt;/g;
-	$formatted_value =~ s/\>/&gt;/g;
-	$formatted_value =~ s/&/&amp;/g;
-	$formatted_value =~ s/\'/&apos;/g;
-	$formatted_value =~ s/\"/&quot;/g;
-
+	my $formatted_value = indent_node_value(8, $FORM{"hand_note"});
+	$formatted_value = escape_xml_special_characters($formatted_value);
 	$xml =~ s/HAND_NOTE/$formatted_value/;
 } else {
 	$xml =~ s/HAND_NOTE//;
@@ -226,95 +191,48 @@ if ($FORM{"provenance_observed"}) {
 	$xml =~ s/PROVENANCE_OBSERVED//;
 }
 
-my $inscription_node_level = 4;
-my $inscription_contents_indent = "\t" x ($inscription_node_level + 1);
-
+my $inscription_contents_indent = "\t" x 5;
 my $inscription_formatted_value = $FORM{"original_text_xml"};
 $inscription_formatted_value =~ s/\<lb/\n$inscription_contents_indent\<lb/g;
-
-$xml =~ s/INSCRIPTION_TEXT/$inscription_formatted_value/;
+$xml =~ s/ORIGINAL_TEXT_XML/$inscription_formatted_value/;
 
 if ($FORM{"apparatus_criticus"}) {
-	my $node_level = 4;
-	my $contents_indent = "\t" x ($node_level + 1);
-
-	my $formatted_value = $FORM{"apparatus_criticus"};
-	$formatted_value =~ s/\n/\n$contents_indent/g;
-
-	# Escaping all XML special characters:
-	$formatted_value =~ s/\</&lt;/g;
-	$formatted_value =~ s/\>/&gt;/g;
-	$formatted_value =~ s/&/&amp;/g;
-	$formatted_value =~ s/\'/&apos;/g;
-	$formatted_value =~ s/\"/&quot;/g;
-
+	my $formatted_value = indent_node_value(4, $FORM{"apparatus_criticus"});
+	$formatted_value = escape_xml_special_characters($formatted_value);
 	$xml =~ s/APPARATUS_CRITICUS/$formatted_value/;
 } else {
 	$xml =~ s/APPARATUS_CRITICUS//;
 }
 
 if ($FORM{"translation"}) {
-	my $node_level = 4;
-	my $contents_indent = "\t" x ($node_level + 1);
-
-	my $formatted_value = $FORM{"translation"};
-	$formatted_value =~ s/\n/\n$contents_indent/g;
-
-	# Escaping all XML special characters:
-	$formatted_value =~ s/\</&lt;/g;
-	$formatted_value =~ s/\>/&gt;/g;
-	$formatted_value =~ s/&/&amp;/g;
-	$formatted_value =~ s/\'/&apos;/g;
-	$formatted_value =~ s/\"/&quot;/g;
-
+	my $formatted_value = indent_node_value(4, $FORM{"translation"});
+	$formatted_value = escape_xml_special_characters($formatted_value);
 	$xml =~ s/TRANSLATION/$formatted_value/;
 } else {
 	$xml =~ s/TRANSLATION//;
 }
 
 if ($FORM{"commentary"}) {
-	my $node_level = 4;
-	my $contents_indent = "\t" x ($node_level + 1);
-
-	my $formatted_value = $FORM{"commentary"};
-	$formatted_value =~ s/\n/\n$contents_indent/g;
-
-	# Escaping all XML special characters:
-	$formatted_value =~ s/\</&lt;/g;
-	$formatted_value =~ s/\>/&gt;/g;
-	$formatted_value =~ s/&/&amp;/g;
-	$formatted_value =~ s/\'/&apos;/g;
-	$formatted_value =~ s/\"/&quot;/g;
-
+	my $formatted_value = indent_node_value(4, $FORM{"commentary"});
+	$formatted_value = escape_xml_special_characters($formatted_value);
 	$xml =~ s/COMMENTARY/$formatted_value/;
 } else {
 	$xml =~ s/COMMENTARY//;
 }
 
 if ($FORM{"bibliography"}) {
-	my $node_level = 4;
-	my $contents_indent = "\t" x ($node_level + 1);
-
-	my $formatted_value = $FORM{"bibliography"};
-	$formatted_value =~ s/\n/\n$contents_indent/g;
-
-	# Escaping all XML special characters:
-	$formatted_value =~ s/\</&lt;/g;
-	$formatted_value =~ s/\>/&gt;/g;
-	$formatted_value =~ s/&/&amp;/g;
-	$formatted_value =~ s/\'/&apos;/g;
-	$formatted_value =~ s/\"/&quot;/g;
-
+	my $formatted_value = indent_node_value(4, $FORM{"bibliography"});
+	$formatted_value = escape_xml_special_characters($formatted_value);
 	$xml =~ s/BIBLIOGRAPHY/$formatted_value/;
 } else {
 	$xml =~ s/BIBLIOGRAPHY//;
 }
 
-# Remove all emty lines:
+# Remove all emty lines, if any:
 $xml =~ s/\n\s{1,}\n/\n/g;
 
 # Save as a new file:
-my $inscription_filepath = "$inscriptions_directory/$new_filename.xml";
+my $inscription_filepath = "$inscriptions_directory/$inscription_filename.xml";
 $inscription_filepath = to_native_separators($inscription_filepath);
 
 open my $output_filehandle, ">", $inscription_filepath or die "Can not open new file!";
@@ -361,10 +279,34 @@ HTML
 # Convert path separators to native path separators depending on the operating system:
 sub to_native_separators {
 	my ($path) = @_;
+
 	if ($^O eq "MSWin32") {
 		$path =~ s/\//\\/g;
 	} else {
 		$path =~ s/\\/\//g;
 	}
+
 	return $path;
+}
+
+# Escape all XML special characters:
+sub escape_xml_special_characters {
+	my ($text) = @_;
+
+	$text =~ s/\</&lt;/g;
+	$text =~ s/\>/&gt;/g;
+	$text =~ s/&/&amp;/g;
+	$text =~ s/\'/&apos;/g;
+	$text =~ s/\"/&quot;/g;
+
+	return $text;
+}
+
+sub indent_node_value {
+	my ($node_level, $node_value) = @_;
+
+	my $indent = "\t" x ($node_level + 1);
+	$node_value =~ s/\n/\n$indent/g;
+
+	return $node_value;
 }

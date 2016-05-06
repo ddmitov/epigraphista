@@ -224,7 +224,7 @@ function addSupportGroup(placeholderId){
 	var buttonToDisable = document.getElementById("support-button");
 	buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
 
-	addTextAreaElement("support", "Описание на паметника", "large", "greek", "additional-keyboard", "mandatory");
+	addTextAreaElement("support-root", "Описание на паметника", "large", "greek", "additional-keyboard", "mandatory");
 }
 
 
@@ -302,7 +302,7 @@ function displayKeyboardShortcutsButton() {
 	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
 
 	var keyboardShortcutsButton = "" +
-		"<input type='button' value='Клавиатурни комбинации'" +
+		"<input type='button' value='Копиране на текст'" +
 			"onClick=\"javascript:displayKeyboardShortcutsHelp();\" class='btn btn-primary'>";
 
 	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsButton;
