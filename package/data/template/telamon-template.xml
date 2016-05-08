@@ -5,41 +5,50 @@
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
-				<title></title>
+				<title>{TITLE}</title>
 			</titleStmt>
 			<publicationStmt>
 				<authority/>
-				<idno type="filename"></idno>
+				<idno type="filename">{FILENAME}</idno>
 			</publicationStmt>
 			<sourceDesc>
 				<msDesc>
 					<msIdentifier>
-						<repository></repository>
-						<idno></idno>
+						<repository>{REPOSITORY}</repository>
+						<idno>{IDNO}</idno>
 					</msIdentifier>
 					<physDesc>
 						<objectDesc>
 							<supportDesc>
 								<support>
-									<material></material>
-									<objectType></objectType>
+									{SUPPORT_ROOT}
+									<material>{MATERIAL}</material>
+									<objectType>{OBJECT_TYPE}</objectType>
 								</support>
 							</supportDesc>
 							<layoutDesc>
-								<layout></layout>
+								<layout>
+									{LAYOUT}
+								</layout>
 							</layoutDesc>
 						</objectDesc>
 						<handDesc>
-							<handNote></handNote>
+							<handNote>
+								{HAND_NOTE}
+							</handNote>
 						</handDesc>
 					</physDesc>
 					<history>
 						<origin>
-							<origPlace></origPlace>
-							<origDate></origDate>
+							<origPlace>{ORIG_PLACE}</origPlace>
+							<origDate>{ORIG_DATE}</origDate>
 						</origin>
-						<provenance type="found"></provenance>
-						<provenance type="observed"></provenance>
+						<provenance type="found">
+							{PROVENANCE_FOUND}
+						</provenance>
+						<provenance type="observed">
+							{PROVENANCE_OBSERVED}
+						</provenance>
 					</history>
 				</msDesc>
 			</sourceDesc>
@@ -48,19 +57,29 @@
 	<text>
 		<body>
 			<div type="edition">
-				<ab></ab>
+				<ab>
+					{ORIGINAL_TEXT_XML}
+				</ab>
 			</div>
 			<div type="apparatus">
-				<p></p>
+				<p>
+					{APPARATUS_CRITICUS}
+				</p>
 			</div>
 			<div type="translation">
-				<p></p>
+				<p>
+					{TRANSLATION}
+				</p>
 			</div>
 			<div type="commentary">
-				<p></p>
+				<p>
+					{COMMENTARY}
+				</p>
 			</div>
 			<div type="bibliography">
-				<p></p>
+				<p>
+					{BIBLIOGRAPHY}
+				</p>
 			</div>
 		</body>
 	</text>

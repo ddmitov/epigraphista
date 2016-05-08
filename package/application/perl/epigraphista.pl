@@ -6,6 +6,7 @@ use warnings;
 ########## SETTINGS START HERE ##########
 my $stylesheet_link = "http://perl-executing-browser-pseudodomain/bootstrap/css/bootstrap.css";
 my $index_page_link = "http://perl-executing-browser-pseudodomain/index.html";
+#~ my $template_filepath = "$ENV{PEB_DATA_DIR}/template/telamon-template.xml";
 my $inscriptions_directory = "$ENV{PEB_DATA_DIR}/inscriptions";
 ########## SETTINGS END HERE ##########
 
@@ -17,49 +18,49 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
-				<title>TITLE</title>
+				<title>{TITLE}</title>
 			</titleStmt>
 			<publicationStmt>
 				<authority/>
-				<idno type='filename'>FILENAME</idno>
+				<idno type='filename'>{FILENAME}</idno>
 			</publicationStmt>
 			<sourceDesc>
 				<msDesc>
 					<msIdentifier>
-						<repository>REPOSITORY</repository>
-						<idno>IDNO</idno>
+						<repository>{REPOSITORY}</repository>
+						<idno>{IDNO}</idno>
 					</msIdentifier>
 					<physDesc>
 						<objectDesc>
 							<supportDesc>
 								<support>
-									SUPPORT_ROOT
-									<material>MATERIAL</material>
-									<objectType>OBJECT_TYPE</objectType>
+									{SUPPORT_ROOT}
+									<material>{MATERIAL}</material>
+									<objectType>{OBJECT_TYPE}</objectType>
 								</support>
 							</supportDesc>
 							<layoutDesc>
 								<layout>
-									LAYOUT
+									{LAYOUT}
 								</layout>
 							</layoutDesc>
 						</objectDesc>
 						<handDesc>
 							<handNote>
-								HAND_NOTE
+								{HAND_NOTE}
 							</handNote>
 						</handDesc>
 					</physDesc>
 					<history>
 						<origin>
-							<origPlace>ORIG_PLACE</origPlace>
-							<origDate>ORIG_DATE</origDate>
+							<origPlace>{ORIG_PLACE}</origPlace>
+							<origDate>{ORIG_DATE}</origDate>
 						</origin>
 						<provenance type='found'>
-							PROVENANCE_FOUND
+							{PROVENANCE_FOUND}
 						</provenance>
 						<provenance type='observed'>
-							PROVENANCE_OBSERVED
+							{PROVENANCE_OBSERVED}
 						</provenance>
 					</history>
 				</msDesc>
@@ -70,27 +71,27 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 		<body>
 			<div type='edition'>
 				<ab>
-					ORIGINAL_TEXT_XML
+					{ORIGINAL_TEXT_XML}
 				</ab>
 			</div>
 			<div type='apparatus'>
 				<p>
-					APPARATUS_CRITICUS
+					{APPARATUS_CRITICUS}
 				</p>
 			</div>
 			<div type='translation'>
 				<p>
-					TRANSLATION
+					{TRANSLATION}
 				</p>
 			</div>
 			<div type='commentary'>
 				<p>
-					COMMENTARY
+					{COMMENTARY}
 				</p>
 			</div>
 			<div type='bibliography'>
 				<p>
-					BIBLIOGRAPHY
+					{BIBLIOGRAPHY}
 				</p>
 			</div>
 		</body>
@@ -100,10 +101,30 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 # Convert single quotes to double quotes inside the XML matrix:
 $xml =~ s/'/\"/g;
 
+# Read template from external file:
+#~ $template_filepath = to_native_separators($template_filepath);
+#~ open my $template_filehandle, "<", $template_filepath or die "Can not open template!";
+#~ $/ = undef;
+#~ $xml = <$template_filehandle>;
+#~ close $template_filehandle;
+
+# Get all placeholder names:
+my @placeholder_names;
+my @xml = split (/\n/, $xml);
+foreach my $line (@xml) {
+	if ($line =~ m/(\{.*\})/) {
+		my $placeholder_name = $1;
+		$placeholder_name =~ s/\{//;
+		$placeholder_name =~ s/\}//;
+		push @placeholder_names, $placeholder_name;
+	}
+}
+$xml =~ s/\{//g;
+$xml =~ s/\}//g;
+
 # Read node values from POST data:
 my ($buffer, @pairs, $name, $value, %FORM);
 read (STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
-
 @pairs = split (/&/, $buffer);
 foreach my $pair (@pairs) {
 	($name, $value) = split (/=/, $pair);
@@ -112,130 +133,50 @@ foreach my $pair (@pairs) {
 	$FORM{$name} = $value;
 }
 
+# Title - mandatory element:
 $xml =~ s/TITLE/$FORM{"title"}/;
 
 # Filename is produced from title:
 my $inscription_filename = $FORM{"title"};
 $inscription_filename =~ s/\s|,|;/_/g;
 $xml =~ s/FILENAME/$inscription_filename/;
+delete($FORM{"title"});
 
-if ($FORM{"repository"}) {
-	$xml =~ s/REPOSITORY/$FORM{"repository"}/;
-} else {
-	$xml =~ s/REPOSITORY//;
-}
-
-if ($FORM{"idno"}) {
-	$xml =~ s/IDNO/$FORM{"idno"}/;
-} else {
-	$xml =~ s/IDNO//;
-}
-
-if ($FORM{"support_root"}) {
-	my $formatted_value = indent_node_value(8, $FORM{"support_root"});
-	$formatted_value = escape_xml_special_characters($formatted_value);
-	$xml =~ s/SUPPORT_ROOT/$formatted_value/;
-} else {
-	$xml =~ s/SUPPORT_ROOT//;
-}
-
-if ($FORM{"material"}) {
-	$xml =~ s/MATERIAL/$FORM{"material"}/;
-} else {
-	$xml =~ s/MATERIAL//;
-}
-
-if ($FORM{"object_type"}) {
-	$xml =~ s/OBJECT_TYPE/$FORM{"object_type"}/;
-} else {
-	$xml =~ s/OBJECT_TYPE//;
-}
-
-if ($FORM{"layout"}) {
-	my $formatted_value = indent_node_value(8, $FORM{"layout"});
-	$formatted_value = escape_xml_special_characters($formatted_value);
-	$xml =~ s/LAYOUT/$formatted_value/;
-} else {
-	$xml =~ s/LAYOUT//;
-}
-
-if ($FORM{"hand_note"}) {
-	my $formatted_value = indent_node_value(8, $FORM{"hand_note"});
-	$formatted_value = escape_xml_special_characters($formatted_value);
-	$xml =~ s/HAND_NOTE/$formatted_value/;
-} else {
-	$xml =~ s/HAND_NOTE//;
-}
-
-if ($FORM{"orig_place"}) {
-	$xml =~ s/ORIG_PLACE/$FORM{"orig_place"}/;
-} else {
-	$xml =~ s/ORIG_PLACE//;
-}
-
-if ($FORM{"orig_date"}) {
-	$xml =~ s/ORIG_DATE/$FORM{"orig_date"}/;
-} else {
-	$xml =~ s/ORIG_DATE//;
-}
-
-if ($FORM{"provenance_found"}) {
-	$xml =~ s/PROVENANCE_FOUND/$FORM{"provenance_found"}/;
-} else {
-	$xml =~ s/PROVENANCE_FOUND//;
-}
-
-if ($FORM{"provenance_observed"}) {
-	$xml =~ s/PROVENANCE_OBSERVED/$FORM{"provenance_observed"}/;
-} else {
-	$xml =~ s/PROVENANCE_OBSERVED//;
-}
-
+# Inscription text - mandatory element:
 my $inscription_contents_indent = "\t" x 5;
 my $inscription_formatted_value = $FORM{"original_text_xml"};
 $inscription_formatted_value =~ s/\<lb/\n$inscription_contents_indent\<lb/g;
 $xml =~ s/ORIGINAL_TEXT_XML/$inscription_formatted_value/;
+delete($FORM{"original_text_xml"});
 
-if ($FORM{"apparatus_criticus"}) {
-	my $formatted_value = indent_node_value(4, $FORM{"apparatus_criticus"});
-	$formatted_value = escape_xml_special_characters($formatted_value);
-	$xml =~ s/APPARATUS_CRITICUS/$formatted_value/;
-} else {
-	$xml =~ s/APPARATUS_CRITICUS//;
-}
+# Save all other nodes:
+foreach my $placeholder_name (@placeholder_names) {
+	my $form_name = lc $placeholder_name;
+	if ($FORM{$form_name}) {
+		if ($xml =~ m/(\t{1,}.{0,}$placeholder_name)/) {
+			my $xml_matrix_placeholder_line = $1;
+			my ($tabcount) = $xml_matrix_placeholder_line =~ s/\t/ /g;
+			my $indent = "\t" x $tabcount;
 
-if ($FORM{"translation"}) {
-	my $formatted_value = indent_node_value(4, $FORM{"translation"});
-	$formatted_value = escape_xml_special_characters($formatted_value);
-	$xml =~ s/TRANSLATION/$formatted_value/;
-} else {
-	$xml =~ s/TRANSLATION//;
-}
-
-if ($FORM{"commentary"}) {
-	my $formatted_value = indent_node_value(4, $FORM{"commentary"});
-	$formatted_value = escape_xml_special_characters($formatted_value);
-	$xml =~ s/COMMENTARY/$formatted_value/;
-} else {
-	$xml =~ s/COMMENTARY//;
-}
-
-if ($FORM{"bibliography"}) {
-	my $formatted_value = indent_node_value(4, $FORM{"bibliography"});
-	$formatted_value = escape_xml_special_characters($formatted_value);
-	$xml =~ s/BIBLIOGRAPHY/$formatted_value/;
-} else {
-	$xml =~ s/BIBLIOGRAPHY//;
+			my $node_value = $FORM{$form_name};
+			$node_value =~ s/\n/\n$indent/g;
+			$node_value = escape_xml_special_characters($node_value);
+			$xml =~ s/$placeholder_name/$node_value/;
+		}
+	} else {
+		$xml =~ s/$placeholder_name//;
+	}
 }
 
 # Remove all emty lines, if any:
 $xml =~ s/\n\s{1,}\n/\n/g;
 
-# Save as a new file:
+# Inscription file path:
 my $inscription_filepath = "$inscriptions_directory/$inscription_filename.xml";
 $inscription_filepath = to_native_separators($inscription_filepath);
 
-open my $output_filehandle, ">", $inscription_filepath or die "Can not open new file!";
+# Save inscription file:
+open my $output_filehandle, ">", $inscription_filepath or die "Can not open file!";
 print $output_filehandle $xml;
 close $output_filehandle;
 
@@ -300,13 +241,4 @@ sub escape_xml_special_characters {
 	$text =~ s/\"/&quot;/g;
 
 	return $text;
-}
-
-sub indent_node_value {
-	my ($node_level, $node_value) = @_;
-
-	my $indent = "\t" x ($node_level + 1);
-	$node_value =~ s/\n/\n$indent/g;
-
-	return $node_value;
 }
