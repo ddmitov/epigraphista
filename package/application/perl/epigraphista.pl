@@ -2,12 +2,15 @@
 
 use strict;
 use warnings;
+use Cwd;
+
+my $cwd = cwd();
 
 ########## SETTINGS START HERE ##########
 my $stylesheet_link = "http://perl-executing-browser-pseudodomain/bootstrap/css/bootstrap.css";
 my $index_page_link = "http://perl-executing-browser-pseudodomain/index.html";
-#~ my $template_filepath = "$ENV{PEB_DATA_DIR}/template/telamon-template.xml";
-my $inscriptions_directory = "$ENV{PEB_DATA_DIR}/inscriptions";
+#~ my $template_filepath = "$cwd/package/data/template/telamon-template.xml";
+my $inscriptions_directory = "$cwd/package/data/inscriptions";
 ########## SETTINGS END HERE ##########
 
 # Embedded template:
