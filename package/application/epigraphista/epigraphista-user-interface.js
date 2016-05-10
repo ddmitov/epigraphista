@@ -2,10 +2,6 @@
 // UTF-8 encoded file!
 
 
-// Global variables:
-var framedTextAreaElementsCounter = 0;
-
-
 function addTextAreaElement(label, placeholderText, size, greekSupport, additionalKeyboard, mandatory) {
 	var name = label.replace(/-/g, "_");
 
@@ -103,110 +99,30 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 }
 
 
-function addFramedTextAreaElement(placeholderId, label, placeholderText, mandatory, unique){
-	var id;
-	var groupId;
-	var name;
-	var fullPlaceholderText;
-	if (unique == null) {
-		framedTextAreaElementsCounter++;
-		id = label + "-" + framedTextAreaElementsCounter;
-		groupId = id + "-group"
-		name = id.replace(/-/g, "_");
-		fullPlaceholderText = framedTextAreaElementsCounter + ". " + placeholderText;
-	}
-	if (unique == "unique") {
-		id = label;
-		groupId = id + "-group"
-		name = id.replace(/-/g, "_");
-		fullPlaceholderText = placeholderText;
-	}
-
-	var framedTextAreaElementBox = document.createElement("div");
-	framedTextAreaElementBox.setAttribute("class", "form-group");
-	var framedTextAreaElementContents = "" +
-	"<textarea rows='1' id='" + id + "' name='" + name + "' class='form-control greek input-text' spellcheck='false'" +
-		"title='" + fullPlaceholderText + "' placeholder='" + fullPlaceholderText + "'" +
-		"onkeypress=\"return convertCharToggle(this, document.epigraphista_form." + name + "_switch_greek.checked, event);\"" +
-		"onkeyup=\"return convertStr(this, event);\"" +
-		"onfocus=\"setCurrentTextArea('" + id + "')\">" +
-	"</textarea>";
-	framedTextAreaElementBox.innerHTML = framedTextAreaElementContents;
-
-	var fieldsetElement = document.createElement("fieldset");
-	fieldsetElement.setAttribute("id", groupId);
-	fieldsetElement.setAttribute("class", "element-fieldset ");
-
-	var legendElement = document.createElement("legend");
-	legendElement.setAttribute("class", "element-legend");
-
-	var legendElementContents = "" +
-		"&nbsp;" + fullPlaceholderText + "&nbsp;&nbsp;" +
-		"<input type='checkbox' id='" + id + "-switch-greek' name='" + name + "_switch_greek'" +
-		"onclick=\"switchGreek('" + id + "');\" title='Въвеждане на политоничен гръцки текст'/>&nbsp;&nbsp;" +
-		"<a href=\"javascript:toggleGreekKeyboardHelp('" + id + "');\"" +
-				"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>&nbsp;" +
-		"<a href=\"javascript:toggleAdditionalKeyboard('" + id + "-additional-keyboard')\" class='btn btn-info btn-xs'>" +
-			"<span class='glyphicon glyphicon-font'></span></a>";
-	if (mandatory == null) {
-		if (unique == null) {
-			var removeButton = "" +
-				"<a href=\"javascript:removeElement('" + groupId + "');\" class='btn btn-danger btn-xs'>" +
-					"<span class='glyphicon glyphicon-remove'></span></a>";
-			legendElementContents = legendElementContents + removeButton;
-		}
-		if (unique == "unique") {
-			var removeButton = "" +
-				"<a href=\"javascript:removeUniqueElement('" + label + "');\" class='btn btn-danger btn-xs'>" +
-					"<span class='glyphicon glyphicon-remove'></span></a>";
-			legendElementContents = legendElementContents + removeButton;
-		}
-	}
-
-	legendElement.innerHTML = legendElementContents;
-
-	fieldsetElement.appendChild(legendElement);
-	fieldsetElement.appendChild(framedTextAreaElementBox);
-
-	var framedTextAreaElementGreekKeyboardHelpPlaceholder = document.createElement("div");
-	framedTextAreaElementGreekKeyboardHelpPlaceholder.setAttribute("id", id + "-greek-keyboard-help");
-	framedTextAreaElementGreekKeyboardHelpPlaceholder.setAttribute("class", "greek greek-help");
-	fieldsetElement.appendChild(framedTextAreaElementGreekKeyboardHelpPlaceholder);
-
-	var framedTextAreaElementAdditionalKeyboardPlaceholder = document.createElement("div");
-	framedTextAreaElementAdditionalKeyboardPlaceholder.setAttribute("id", id + "-additional-keyboard");
-	fieldsetElement.appendChild(framedTextAreaElementAdditionalKeyboardPlaceholder);
-
-	document.getElementById(placeholderId).appendChild(fieldsetElement);
-
-	$jQuery("#" + id).autoResize();
-
-	if (unique == "unique") {
-		var buttonToDisable = document.getElementById(label + "-button");
-		buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
-	}
-}
-
-
 function addSupportGroup(placeholderId){
 	var fieldsetElement = document.createElement("fieldset");
 	fieldsetElement.setAttribute("id", "support-fieldset");
 
 	var legendElement = document.createElement("legend");
-	var supportButtonsElement = document.createElement("div");
-	supportButtonsElement.setAttribute("id", "support-buttons");
-	supportButtonsElement.innerHTML = "" +
+	legendElement.innerHTML = "" +
+		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"&nbsp;" +
 		"Описание на паметника" +
 		"&nbsp;" +
-		"<input type='button' id='material-button' value='Материал'" +
-			"onClick=\"addFramedTextAreaElement('support-elements', 'material', 'Материал', null, 'unique');\" class='btn btn-info btn-xs'>" +
-		"<input type='button' id='object-type-button' value='Категория'" +
-			"onClick=\"addFramedTextAreaElement('support-elements', 'object-type', 'Категория', null, 'unique');\" class='btn btn-info btn-xs'>" +
-		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger btn-xs'>" +
+		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
 			"<span class='glyphicon glyphicon-remove'></span></a>";
+	fieldsetElement.appendChild(legendElement);
 
-	legendElement.appendChild(supportButtonsElement);
+	var supportButtonsElement = document.createElement("div");
+	supportButtonsElement.setAttribute("id", "support-buttons");
+	supportButtonsElement.setAttribute("class", "buttons-group");
+	supportButtonsElement.innerHTML = "" +
+		"<input type='button' id='material-button' value='Материал'" +
+			"onClick=\"addTextAreaElement('material', 'Материал', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
+		"<input type='button' id='object-type-button' value='Категория'" +
+			"onClick=\"addTextAreaElement('object-type', 'Категория', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>";
+	fieldsetElement.appendChild(supportButtonsElement);
 
 	var supportBoxesElement = document.createElement("div");
 	supportBoxesElement.setAttribute("class", "row");
@@ -216,7 +132,14 @@ function addSupportGroup(placeholderId){
 	supportRootPlaceholder.setAttribute("id", "support-root-group");
 	supportBoxesElement.appendChild(supportRootPlaceholder);
 
-	fieldsetElement.appendChild(legendElement);
+	var supportMaterialPlaceholder = document.createElement("div");
+	supportMaterialPlaceholder.setAttribute("id", "material-group");
+	supportBoxesElement.appendChild(supportMaterialPlaceholder);
+
+	var supportObjectTypePlaceholder = document.createElement("div");
+	supportObjectTypePlaceholder.setAttribute("id", "object-type-group");
+	supportBoxesElement.appendChild(supportObjectTypePlaceholder);
+
 	fieldsetElement.appendChild(supportBoxesElement);
 
 	document.getElementById(placeholderId).appendChild(fieldsetElement);
@@ -233,20 +156,25 @@ function addHistoryGroup(placeholderId){
 	fieldsetElement.setAttribute("id", "history-fieldset");
 
 	var legendElement = document.createElement("legend");
-	var historyButtonsElement = document.createElement("div");
-	historyButtonsElement.setAttribute("id", "history-buttons");
-	historyButtonsElement.innerHTML = "" +
+	legendElement.innerHTML = "" +
+		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"&nbsp;" +
 		"История на паметника" +
 		"&nbsp;" +
+		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>";
+	fieldsetElement.appendChild(legendElement);
+
+	var historyButtonsElement = document.createElement("div");
+	historyButtonsElement.setAttribute("id", "history-buttons");
+	historyButtonsElement.setAttribute("class", "buttons-group");
+	historyButtonsElement.innerHTML = "" +
 		"<input type='button' id='provenance-found-button' value='Контекст'" +
 			"onClick=\"addTextAreaElement('provenance-found', 'Контекст', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
 		"<input type='button' id='provenance-observed-button' value='Съвременно място'" +
-			"onClick=\"addFramedTextAreaElement('history-elements', 'provenance-observed', 'Съвременно място', null, 'unique');\" class='btn btn-info btn-xs'>" +
-		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>";
-
-	legendElement.appendChild(historyButtonsElement);
+			"onClick=\"addTextAreaElement('provenance-observed', 'Съвременно място', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>";
+	fieldsetElement.appendChild(historyButtonsElement);
 
 	var historyBoxesElement = document.createElement("div");
 	historyBoxesElement.setAttribute("class", "row");
@@ -260,11 +188,14 @@ function addHistoryGroup(placeholderId){
 	origDatePlaceholder.setAttribute("id", "orig-date-group");
 	historyBoxesElement.appendChild(origDatePlaceholder);
 
-	var contextPlaceholder = document.createElement("div");
-	contextPlaceholder.setAttribute("id", "provenance-found-group");
-	historyBoxesElement.appendChild(contextPlaceholder);
+	var provenanceFoundPlaceholder = document.createElement("div");
+	provenanceFoundPlaceholder.setAttribute("id", "provenance-found-group");
+	historyBoxesElement.appendChild(provenanceFoundPlaceholder);
 
-	fieldsetElement.appendChild(legendElement);
+	var provenanceObservedPlaceholder = document.createElement("div");
+	provenanceObservedPlaceholder.setAttribute("id", "provenance-observed-group");
+	historyBoxesElement.appendChild(provenanceObservedPlaceholder);
+
 	fieldsetElement.appendChild(historyBoxesElement);
 
 	document.getElementById(placeholderId).appendChild(fieldsetElement);
@@ -340,69 +271,4 @@ function clearElementGroup(partialId){
 		var buttonToEnable = document.getElementById(partialId + "-button");
 		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
 	}
-
-	return false;
-}
-
-
-function removeElement(elementId) {
-	var elementToRemove = document.getElementById(elementId);
-	var textEntered = false;
-	var textFields = new Array();
-	textFields = elementToRemove.getElementsByTagName('textarea');
-
-	for (i = 0; i < textFields.length; i++) { 
-		if (textFields[i].value.length > 0) {
-			textEntered = true;
-		}
-	}
-
-	if (textEntered == true) {
-		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
-			"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
-			elementToRemove.parentNode.removeChild(elementToRemove);
-		}
-	}
-
-	if (textEntered == false) {
-		elementToRemove.parentNode.removeChild(elementToRemove);
-
-		var buttonToEnable = document.getElementById(partialId + "-button");
-		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
-	}
-
-	return false;
-}
-
-
-function removeUniqueElement(partialId) {
-	var elementToRemove = document.getElementById(partialId + "-group");
-	var textEntered = false;
-	var textFields = new Array();
-	textFields = elementToRemove.getElementsByTagName('textarea');
-
-	for (i = 0; i < textFields.length; i++) { 
-		if (textFields[i].value.length > 0) {
-			textEntered = true;
-		}
-	}
-
-	if (textEntered == true) {
-		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
-			"Сигурни ли сте, че искате да премахнете избрания елемент?")) {
-			elementToRemove.parentNode.removeChild(elementToRemove);
-
-			var buttonToEnable = document.getElementById(partialId + "-button");
-			buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
-		}
-	}
-
-	if (textEntered == false) {
-		elementToRemove.parentNode.removeChild(elementToRemove);
-
-		var buttonToEnable = document.getElementById(partialId + "-button");
-		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
-	}
-
-	return false;
 }

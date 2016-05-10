@@ -24,7 +24,7 @@
 		<script type="text/javascript" src="peb/peb.js"></script>
 
 		<script type="text/javascript">
-			// Necessary to avoid conflicts between jQuery and other JavaScript libraries :
+			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
 			var $jQuery = jQuery.noConflict();
 		</script>
 	</head>
@@ -38,11 +38,13 @@
 
 				<fieldset>
 						<legend>
-							<div id="description-buttons-group">
 								&nbsp;
 								Описание на надписа
 								&nbsp;
+						</legend>
 
+						<div id="description-buttons-group" class="buttons-group">
+							<div class="row">
 								<input type="button" id="repository-button" value="Музей"
 									onClick="javascript:addTextAreaElement('repository', 'Музей', 'tiny', null, null, null);" class="btn btn-info btn-xs">
 
@@ -61,7 +63,7 @@
 								<input type="button" id="history-button" value="История"
 									onClick="javascript:addHistoryGroup('history-group');" class="btn btn-info btn-xs">
 							</div>
-						</legend>
+						</div>
 
 					<div class="row">
 						<div class="form-group col-xs-4 col-xs-offset-4">
@@ -88,17 +90,19 @@
 
 					<div id="history-group">
 					</div>
-
 				</fieldset>
 
-				<br>
+		<br>
 
 				<fieldset>
 					<legend>
-						<div id="text-buttons-group">
-							&nbsp;
-							Текст на надписа
-							&nbsp;
+						&nbsp;
+						Текст на надписа
+						&nbsp;
+					</legend>
+
+					<div id="text-buttons-group" class="buttons-group">
+						<div class="row">
 							<input type="button" id="apparatus-criticus-button" value="Критичен апарат"
 								onClick="javascript:addTextAreaElement('apparatus-criticus', 'Критичен апарат', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
@@ -111,7 +115,7 @@
 							<input type="button" id="bibliography-button" value="Библиография"
 								onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 						</div>
-					</legend>
+					</div>
 
 					<div id="original-text-group">
 						<div class="row">
@@ -168,14 +172,13 @@
 					<div id="bibliography-group"></div>
 				</fieldset>
 
-				<br>
-
-				<div id="keyboard-shortcuts-help">
+				<div id="keyboard-shortcuts-help" class="row buttons-group">
 					<input type="button" value="Копиране на текст" onClick="javascript:displayKeyboardShortcutsHelp();" class="btn btn-primary">
 				</div>
 
-				<br>
-				<input type="button" value="Запиши" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
+				<div class="row buttons-group">
+					<input type="button" value="Запиши" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
+				</div>
 			</form>
 
 		</div>

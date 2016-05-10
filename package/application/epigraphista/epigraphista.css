@@ -1,6 +1,4 @@
 
-/*@import url(https://fonts.googleapis.com/css?family=Open+Sans&subset=greek-ext,latin,greek,latin-ext,cyrillic-ext,cyrillic);*/
-
 html * {
 	font-family: "Open Sans", "FreeSans", "Arial Unicode MS";
 }
@@ -10,35 +8,29 @@ body {
 }
 
 fieldset {
-	border: 2px solid green;
-	border-radius: 8px;
-	padding-top: 10px;
+	border: 1px solid green;
+	border-radius: 4px;
+	padding-top: 0px;
 	padding-bottom: 0px;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin: 10px;
+	margin-top: 0px;
+	margin-bottom: 10px;
 }
 
 legend {
-	border: 2px solid green;
-	border-radius: 8px;
-	padding: 2px 2px;
-	margin-top: 0px;
-	margin-bottom: 0px;
+	border: 1px solid green;
+	border-radius: 4px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	margin: 0px;
 	font-size: 100%;
-	text-align: left;
 }
 
 pre {
 	margin-bottom: 0px;
-}
-
-.element-fieldset {
-	display: inline-block;
-}
-
-.element-legend {
-	text-align: center;
 }
 
 .input-text {
@@ -57,6 +49,7 @@ pre {
 	padding: 2px 2px;
 	display: inline-block;
 }
+
 .letter-box-p {
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -64,6 +57,11 @@ pre {
 
 .xml {
 	text-align: left;
+}
+
+.buttons-group {
+	padding-top: 6px;
+	padding-bottom: 6px;
 }
 
 .btn {
