@@ -95,6 +95,42 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 	if (mandatory == null) {
 		var buttonToDisable = document.getElementById(label + "-button");
 		buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+		buttonToDisable.disabled = true;
+	}
+}
+
+
+function clearElementGroup(partialId){
+	var placeholderElement = document.getElementById(partialId + "-group");
+	var textEntered = false;
+	var textFields = new Array();
+	textFields = placeholderElement.getElementsByTagName('textarea');
+
+	for (i = 0; i < textFields.length; i++) { 
+		if (textFields[i].value.length > 0) {
+			textEntered = true;
+		}
+	}
+
+	if (textEntered == true) {
+		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
+			"Сигурни ли сте, че искате да премахнете избрания елемент?",
+			"Epigraphista")) {
+			while (placeholderElement.hasChildNodes()) {
+				placeholderElement.removeChild(placeholderElement.firstChild);
+			}
+			var buttonToEnable = document.getElementById(partialId + "-button");
+			buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+		}
+	}
+
+	if (textEntered == false) {
+		while (placeholderElement.hasChildNodes()) {
+			placeholderElement.removeChild(placeholderElement.firstChild);
+		}
+		var buttonToEnable = document.getElementById(partialId + "-button");
+		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+		buttonToEnable.disabled = false;
 	}
 }
 
@@ -105,23 +141,23 @@ function addSupportGroup(placeholderId){
 
 	var legendElement = document.createElement("legend");
 	legendElement.innerHTML = "" +
-		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"&nbsp;" +
 		"Описание на паметника" +
-		"&nbsp;" +
-		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>";
+		"&nbsp;";
 	fieldsetElement.appendChild(legendElement);
 
 	var supportButtonsElement = document.createElement("div");
 	supportButtonsElement.setAttribute("id", "support-buttons");
 	supportButtonsElement.setAttribute("class", "buttons-group");
 	supportButtonsElement.innerHTML = "" +
+		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"<input type='button' id='material-button' value='Материал'" +
 			"onClick=\"addTextAreaElement('material', 'Материал', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
 		"<input type='button' id='object-type-button' value='Категория'" +
-			"onClick=\"addTextAreaElement('object-type', 'Категория', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>";
+			"onClick=\"addTextAreaElement('object-type', 'Категория', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
+		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>";
 	fieldsetElement.appendChild(supportButtonsElement);
 
 	var supportBoxesElement = document.createElement("div");
@@ -146,6 +182,7 @@ function addSupportGroup(placeholderId){
 
 	var buttonToDisable = document.getElementById("support-button");
 	buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+	buttonToDisable.disabled = true;
 
 	addTextAreaElement("support-root", "Описание на паметника", "large", "greek", "additional-keyboard", "mandatory");
 }
@@ -157,23 +194,23 @@ function addHistoryGroup(placeholderId){
 
 	var legendElement = document.createElement("legend");
 	legendElement.innerHTML = "" +
-		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"&nbsp;" +
 		"История на паметника" +
-		"&nbsp;" +
-		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>";
+		"&nbsp;";
 	fieldsetElement.appendChild(legendElement);
 
 	var historyButtonsElement = document.createElement("div");
 	historyButtonsElement.setAttribute("id", "history-buttons");
 	historyButtonsElement.setAttribute("class", "buttons-group");
 	historyButtonsElement.innerHTML = "" +
+		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"<input type='button' id='provenance-found-button' value='Контекст'" +
 			"onClick=\"addTextAreaElement('provenance-found', 'Контекст', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
 		"<input type='button' id='provenance-observed-button' value='Съвременно място'" +
-			"onClick=\"addTextAreaElement('provenance-observed', 'Съвременно място', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>";
+			"onClick=\"addTextAreaElement('provenance-observed', 'Съвременно място', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
+		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
+			"<span class='glyphicon glyphicon-remove'></span></a>";
 	fieldsetElement.appendChild(historyButtonsElement);
 
 	var historyBoxesElement = document.createElement("div");
@@ -202,6 +239,7 @@ function addHistoryGroup(placeholderId){
 
 	var buttonToDisable = document.getElementById("history-button");
 	buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+	buttonToDisable.disabled = true;
 
 	addTextAreaElement("orig-place", "Място на намиране", "large", "greek", "additional-keyboard", "mandatory");
 	addTextAreaElement("orig-date", "Време на намиране", "large", null, "additional-keyboard", "mandatory");
@@ -237,38 +275,4 @@ function displayKeyboardShortcutsButton() {
 			"onClick=\"javascript:displayKeyboardShortcutsHelp();\" class='btn btn-primary'>";
 
 	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsButton;
-}
-
-
-function clearElementGroup(partialId){
-	var placeholderElement = document.getElementById(partialId + "-group");
-	var textEntered = false;
-	var textFields = new Array();
-	textFields = placeholderElement.getElementsByTagName('textarea');
-
-	for (i = 0; i < textFields.length; i++) { 
-		if (textFields[i].value.length > 0) {
-			textEntered = true;
-		}
-	}
-
-	if (textEntered == true) {
-		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
-			"Сигурни ли сте, че искате да премахнете избрания елемент?",
-			"Epigraphista")) {
-			while (placeholderElement.hasChildNodes()) {
-				placeholderElement.removeChild(placeholderElement.firstChild);
-			}
-			var buttonToEnable = document.getElementById(partialId + "-button");
-			buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
-		}
-	}
-
-	if (textEntered == false) {
-		while (placeholderElement.hasChildNodes()) {
-			placeholderElement.removeChild(placeholderElement.firstChild);
-		}
-		var buttonToEnable = document.getElementById(partialId + "-button");
-		buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
-	}
 }
