@@ -1,3 +1,4 @@
+/* @import url(https://fonts.googleapis.com/css?family=Open+Sans&subset=greek-ext,latin,greek,latin-ext,cyrillic-ext,cyrillic); */
 
 html * {
 	font-family: "Open Sans", "FreeSans", "Arial Unicode MS";
@@ -21,8 +22,8 @@ fieldset {
 legend {
 	border: 1px solid green;
 	border-radius: 4px;
-	padding-top: 0px;
-	padding-bottom: 0px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 	padding-left: 2px;
 	padding-right: 2px;
 	margin: 0px;
@@ -42,17 +43,24 @@ pre {
 }
 
 .greek-help {
-	font-size: 24px;
+	font-size: 22px;
 }
 
 .letter-box {
-	padding: 2px 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 1px;
+	padding-right: 1px;
+	margin-left: 4px;
+	margin-right: 4px;
 	display: inline-block;
 }
 
 .letter-box-p {
-	margin-top: 0px;
-	margin-bottom: 0px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	margin-left: 1px;
+	margin-right: 1px;
 }
 
 .xml {

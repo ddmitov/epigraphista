@@ -121,6 +121,7 @@ function clearElementGroup(partialId){
 			}
 			var buttonToEnable = document.getElementById(partialId + "-button");
 			buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+			buttonToEnable.disabled = false;
 		}
 	}
 
@@ -142,7 +143,8 @@ function addSupportGroup(placeholderId){
 	var legendElement = document.createElement("legend");
 	legendElement.innerHTML = "" +
 		"&nbsp;" +
-		"Описание на паметника" +
+		"<input type='button' value='Описание на паметника'" +
+			"onClick=\"clearElementGroup('support');\" class='btn btn-info btn-xs'>" +
 		"&nbsp;";
 	fieldsetElement.appendChild(legendElement);
 
@@ -150,14 +152,10 @@ function addSupportGroup(placeholderId){
 	supportButtonsElement.setAttribute("id", "support-buttons");
 	supportButtonsElement.setAttribute("class", "buttons-group");
 	supportButtonsElement.innerHTML = "" +
-		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"<input type='button' id='material-button' value='Материал'" +
 			"onClick=\"addTextAreaElement('material', 'Материал', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
 		"<input type='button' id='object-type-button' value='Категория'" +
-			"onClick=\"addTextAreaElement('object-type', 'Категория', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
-		"<a href=\"javascript:clearElementGroup('support');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>";
+			"onClick=\"addTextAreaElement('object-type', 'Категория', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>";
 	fieldsetElement.appendChild(supportButtonsElement);
 
 	var supportBoxesElement = document.createElement("div");
@@ -195,7 +193,8 @@ function addHistoryGroup(placeholderId){
 	var legendElement = document.createElement("legend");
 	legendElement.innerHTML = "" +
 		"&nbsp;" +
-		"История на паметника" +
+		"<input type='button' value='История на паметника'" +
+			"onClick=\"clearElementGroup('history');\" class='btn btn-info btn-xs'>" +
 		"&nbsp;";
 	fieldsetElement.appendChild(legendElement);
 
@@ -203,14 +202,10 @@ function addHistoryGroup(placeholderId){
 	historyButtonsElement.setAttribute("id", "history-buttons");
 	historyButtonsElement.setAttribute("class", "buttons-group");
 	historyButtonsElement.innerHTML = "" +
-		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"<input type='button' id='provenance-found-button' value='Контекст'" +
 			"onClick=\"addTextAreaElement('provenance-found', 'Контекст', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
 		"<input type='button' id='provenance-observed-button' value='Съвременно място'" +
-			"onClick=\"addTextAreaElement('provenance-observed', 'Съвременно място', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>" +
-		"<a href=\"javascript:clearElementGroup('history');\" class='btn btn-danger-outline btn-xs'>" +
-			"<span class='glyphicon glyphicon-remove'></span></a>";
+			"onClick=\"addTextAreaElement('provenance-observed', 'Съвременно място', 'large', 'greek', 'additional-keyboard', null);\" class='btn btn-info btn-xs'>";
 	fieldsetElement.appendChild(historyButtonsElement);
 
 	var historyBoxesElement = document.createElement("div");
@@ -250,7 +245,7 @@ function displayKeyboardShortcutsHelp() {
 	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
 
 	var keyboardShortcutsHelp = "" +
-		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-primary btn-xs'>" +
+		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-info btn-xs'>" +
 			"<span class='glyphicon glyphicon-remove'></span></a>" +
 		"&nbsp;&nbsp;" +
 		"<b>" +
@@ -260,7 +255,7 @@ function displayKeyboardShortcutsHelp() {
 			"Ctrl+V = Paste" +
 		"</b>" +
 		"&nbsp;&nbsp;" +
-		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-primary btn-xs'>" +
+		"<a href=\"javascript:displayKeyboardShortcutsButton();\" class='btn btn-info btn-xs'>" +
 			"<span class='glyphicon glyphicon-remove'></span></a>";
 
 	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsHelp;
@@ -272,7 +267,7 @@ function displayKeyboardShortcutsButton() {
 
 	var keyboardShortcutsButton = "" +
 		"<input type='button' value='Копиране на текст'" +
-			"onClick=\"javascript:displayKeyboardShortcutsHelp();\" class='btn btn-primary'>";
+			"onClick=\"javascript:displayKeyboardShortcutsHelp();\" class='btn btn-info'>";
 
 	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsButton;
 }
