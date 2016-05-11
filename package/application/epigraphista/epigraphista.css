@@ -83,6 +83,12 @@ pre {
 	font-size: 18px;
 }
 
+.btn-group-removal:hover{
+	background-color: #d9534f;
+	border-color: #d43f3a;
+	border: 1px solid transparent;
+}
+
 .input-group-addon {
 	border: 0px solid transparent;
 }
