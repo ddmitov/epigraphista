@@ -37,147 +37,166 @@
 
 			<form id="epigraphista-form" name="epigraphista_form" action="perl/epigraphista.pl" method="post">
 
-				<fieldset>
-						<legend>
-								&nbsp;
-								Описание на надписа
-								&nbsp;
-						</legend>
+				<div class="row section-title">
+					Описание на надписа
+				</div>
 
-						<div id="description-buttons-group" class="buttons-group">
-							<div class="row">
-								<input type="button" id="repository-button" value="Музей"
-									onClick="javascript:addTextAreaElement('repository', 'Музей', 'tiny', null, null, null);" class="btn btn-info btn-xs">
+				<div class="row buttons-row">
+					<input type="button" id="repository-button" value="Музей"
+						onClick="javascript:addTextAreaElement('repository', 'Музей', 'full', null, null, null);" class="btn btn-info btn-xs">
 
-								<input type="button" id="idno-button" value="Инвентарен номер"
-									onClick="javascript:addTextAreaElement('idno', 'Инвентарен номер', 'tiny', null, null, null);" class="btn btn-info btn-xs">
+					<input type="button" id="idno-button" value="Инвентарен номер"
+						onClick="javascript:addTextAreaElement('idno', 'Инвентарен номер', 'full', null, null, null);" class="btn btn-info btn-xs">
 
-								<input type="button" id="support-button" value="Описание на паметника"
-									onClick="javascript:addSupportGroup('support-group');" class="btn btn-info btn-xs">
+					<input type="button" id="support-root-button" value="Описание на паметника"
+						onClick="javascript:addTextAreaElement('support-root', 'Описание на паметника', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
-								<input type="button" id="layout-button" value="Описание на текстовото поле"
-									onClick="javascript:addTextAreaElement('layout', 'Описание на текстовото поле', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+					<input type="button" id="material-button" value="Материал"
+						onClick="javascript:addTextAreaElement('material', 'Материал', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
-								<input type="button" id="hand-note-button" value="Описание на шрифта"
-									onClick="javascript:addTextAreaElement('hand-note', 'Описание на шрифта', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+					<input type="button" id="object-type-button" value="Категория"
+						onClick="javascript:addTextAreaElement('object-type', 'Категория', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
 
-								<input type="button" id="history-button" value="История"
-									onClick="javascript:addHistoryGroup('history-group');" class="btn btn-info btn-xs">
-							</div>
+					<input type="button" id="layout-button" value="Описание на текстовото поле"
+						onClick="javascript:addTextAreaElement('layout', 'Описание на текстовото поле', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type="button" id="hand-note-button" value="Описание на шрифта"
+						onClick="javascript:addTextAreaElement('hand-note', 'Описание на шрифта', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type="button" id="orig-place-button" value="Време на намиране"
+						onClick="javascript:addTextAreaElement('orig-place', 'Време на намиране', 'full', null, 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type="button" id="orig-date-button" value="Място на намиране"
+						onClick="javascript:addTextAreaElement('orig-date', 'Място на намиране', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type="button" id="provenance-found-button" value="Контекст"
+						onClick="javascript:addTextAreaElement('provenance-found', 'Контекст', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type='button' id="provenance-observed-button" value="Съвременно място"
+						onClick="addTextAreaElement('provenance-observed', 'Съвременно място', 'full', 'greek', 'additional-keyboard', null);" class='btn btn-info btn-xs'>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<div class="input-prepend">
+							<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="Заглавие" title="Заглавие" ></textarea>
 						</div>
+					</div>
+				</div>
 
+				<div id="repository-group">
+				</div>
+
+				<div id="idno-group">
+				</div>
+
+				<div id="support-root-group">
+				</div>
+
+				<div id="support-root-group">
+				</div>
+
+				<div id="material-group">
+				</div>
+
+				<div id="object-type-group">
+				</div>
+
+				<div id="layout-group">
+				</div>
+
+				<div id="hand-note-group">
+				</div>
+
+				<div id="orig-place-group">
+				</div>
+
+				<div id="orig-date-group">
+				</div>
+
+				<div id="provenance-found-group">
+				</div>
+
+				<div id="provenance-observed-group">
+				</div>
+
+				<div class="row section-title">
+					Текст на надписа
+				</div>
+
+				<div class="row buttons-row">
+					<input type="button" id="apparatus-criticus-button" value="Критичен апарат"
+						onClick="javascript:addTextAreaElement('apparatus-criticus', 'Критичен апарат', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type="button" id="translation-button" value="Превод"
+						onClick="javascript:addTextAreaElement('translation', 'Превод', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type="button" id="commentary-button" value="Коментар"
+						onClick="javascript:addTextAreaElement('commentary', 'Коментар', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+
+					<input type="button" id="bibliography-button" value="Библиография"
+						onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+				</div>
+
+				<div id="original-text-group">
 					<div class="row">
-						<div class="form-group col-xs-4 col-xs-offset-4">
-							<div class="input-prepend">
-								<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="Заглавие" title="Заглавие" ></textarea>
+						<div class="form-group col-xs-12">
+							<div class="input-group">
+								<textarea id="original-text" class="form-control greek input-text" spellcheck="false"
+									title="Оригинален текст" placeholder="Оригинален текст"
+									onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.original_text_switch_greek.checked, event);"
+									onkeyup="javascript:return convertStr(this, event);"
+									onfocus="javascript:setCurrentTextArea('original-text');"
+									oninput="javascript:convertEpigraphicText('original-text');"></textarea>
+								<span class="input-group-addon btn btn-info"
+									onclick="javascript:convertEpigraphicText('original-text');" title="Превръщане на оригиналния текст в Epidoc XML фрагмент">
+									<b>XML</b>
+								</span>
+								<span class="input-group-addon">
+									<input type="checkbox" id="original-text-switch-greek" name="original_text_switch_greek"
+										onclick="switchGreek('original-text');" title="Въвеждане на политоничен гръцки текст"/>&nbsp;
+									<a href="javascript:toggleGreekKeyboardHelp('original-text');"
+										title="Помощ за въвеждането на политоничен гръцки текст">Ἐλληνική</a>
+								</span>
+								<span class="input-group-addon btn btn-info"
+									onclick="javascript:toggleAdditionalKeyboard('original-text-additional-keyboard');" title="Допълнителна клавиатура">
+									<span class="glyphicon glyphicon-font"></span>
+								</span>
 							</div>
 						</div>
 					</div>
 
-					<div id="repository-group">
-					</div>
+					<div id="original-text-greek-keyboard-help" class="greek greek-help"></div>
 
-					<div id="idno-group">
-					</div>
+					<div id="original-text-additional-keyboard"></div>
 
-					<div id="support-group">
-					</div>
-
-					<div id="layout-group">
-					</div>
-
-					<div id="hand-note-group">
-					</div>
-
-					<div id="history-group">
-					</div>
-				</fieldset>
-
-		<br>
-
-				<fieldset>
-					<legend>
-						&nbsp;
-						Текст на надписа
-						&nbsp;
-					</legend>
-
-					<div id="text-buttons-group" class="buttons-group">
-						<div class="row">
-							<input type="button" id="apparatus-criticus-button" value="Критичен апарат"
-								onClick="javascript:addTextAreaElement('apparatus-criticus', 'Критичен апарат', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
-
-							<input type="button" id="translation-button" value="Превод"
-								onClick="javascript:addTextAreaElement('translation', 'Превод', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
-
-							<input type="button" id="commentary-button" value="Коментар"
-								onClick="javascript:addTextAreaElement('commentary', 'Коментар', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
-
-							<input type="button" id="bibliography-button" value="Библиография"
-								onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
-						</div>
-					</div>
-
-					<div id="original-text-group">
+					<div id="original-text-formatted">
 						<div class="row">
 							<div class="form-group col-xs-12">
-								<div class="input-group">
-									<textarea id="original-text" class="form-control greek input-text" spellcheck="false"
-										title="Оригинален текст" placeholder="Оригинален текст"
-										onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.original_text_switch_greek.checked, event);"
-										onkeyup="javascript:return convertStr(this, event);"
-										onfocus="javascript:setCurrentTextArea('original-text');"
-										oninput="javascript:convertEpigraphicText('original-text');"></textarea>
-									<span class="input-group-addon btn btn-info"
-										onclick="javascript:convertEpigraphicText('original-text');" title="Превръщане на оригиналния текст в Epidoc XML фрагмент">
-										<b>XML</b>
-									</span>
-									<span class="input-group-addon">
-										<input type="checkbox" id="original-text-switch-greek" name="original_text_switch_greek"
-											onclick="switchGreek('original-text');" title="Въвеждане на политоничен гръцки текст"/>&nbsp;
-										<a href="javascript:toggleGreekKeyboardHelp('original-text');"
-											title="Помощ за въвеждането на политоничен гръцки текст">Ἐλληνική</a>
-									</span>
-									<span class="input-group-addon btn btn-info"
-										onclick="javascript:toggleAdditionalKeyboard('original-text-additional-keyboard');" title="Допълнителна клавиатура">
-										<span class="glyphicon glyphicon-font"></span>
-									</span>
-								</div>
-							</div>
-						</div>
-
-						<div id="original-text-greek-keyboard-help" class="greek greek-help"></div>
-
-						<div id="original-text-additional-keyboard"></div>
-
-						<div id="original-text-formatted">
-							<div class="row">
-								<div class="form-group col-xs-12">
 <pre id="original-text-html" title="Epidoc XML фрагмент с оригиналния текст" class="greek input-text xml">
 &lt;ab&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;lb n=&quot;1&quot;/&gt;
 &lt;/ab&gt;
 </pre>
-								</div>
 							</div>
-							<input type="hidden" id="original-text-xml" name="original_text_xml" value="">
 						</div>
+						<input type="hidden" id="original-text-xml" name="original_text_xml" value="">
 					</div>
+				</div>
 
-					<div id="apparatus-criticus-group"></div>
+				<div id="apparatus-criticus-group"></div>
 
-					<div id="translation-group"></div>
+				<div id="translation-group"></div>
 
-					<div id="commentary-group"></div>
+				<div id="commentary-group"></div>
 
-					<div id="bibliography-group"></div>
-				</fieldset>
+				<div id="bibliography-group"></div>
 
-				<div id="keyboard-shortcuts-help" class="row buttons-group">
+				<div id="keyboard-shortcuts-help" class="row buttons-row">
 					<input type="button" value="Копиране на текст" onClick="javascript:displayKeyboardShortcutsHelp();" class="btn btn-info">
 				</div>
 
-				<div class="row buttons-group">
+				<div class="row buttons-row">
 					<input type="button" value="Запиши" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
 				</div>
 			</form>
