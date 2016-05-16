@@ -9,25 +9,21 @@
 
 		<script type="text/javascript" src="jquery/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js"></script>
+		<script type="text/javascript" src="jquery/jquery.selection.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all"/>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all"/>
-		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js"></script>
-		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-form-support.js"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-greek-support.js"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-text-converter.js"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js"></script>
 
 		<script type="text/javascript" src="typegreek/typegreek.js"></script>
 
 		<script type="text/javascript" src="peb/peb.js"></script>
-
-		<script type="text/javascript">
-			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
-			var $jQuery = jQuery.noConflict();
-		</script>
 	</head>
 
 	<body>
@@ -43,41 +39,35 @@
 
 				<div class="row buttons-row">
 					<input type="button" id="repository-button" value="Музей"
-						onClick="javascript:addTextAreaElement('repository', 'Музей', 'full', null, null, null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('repository', 'Музей', 'full', null, null);" class="btn btn-info btn-xs">
 
 					<input type="button" id="idno-button" value="Инвентарен номер"
-						onClick="javascript:addTextAreaElement('idno', 'Инвентарен номер', 'full', null, null, null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('idno', 'Инвентарен номер', 'full', null, null);" class="btn btn-info btn-xs">
 
-					<input type="button" id="support-root-button" value="Описание на паметника"
-						onClick="javascript:addTextAreaElement('support-root', 'Описание на паметника', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
-
-					<input type="button" id="material-button" value="Материал"
-						onClick="javascript:addTextAreaElement('material', 'Материал', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
-
-					<input type="button" id="object-type-button" value="Категория"
-						onClick="javascript:addTextAreaElement('object-type', 'Категория', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+					<input type="button" id="support-button" value="Описание на паметника"
+						onClick="javascript:addSupportGroup();" class="btn btn-info btn-xs">
 
 					<input type="button" id="layout-button" value="Описание на текстовото поле"
-						onClick="javascript:addTextAreaElement('layout', 'Описание на текстовото поле', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('layout', 'Описание на текстовото поле', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type="button" id="hand-note-button" value="Описание на шрифта"
-						onClick="javascript:addTextAreaElement('hand-note', 'Описание на шрифта', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('hand-note', 'Описание на шрифта', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type="button" id="orig-place-button" value="Време на намиране"
-						onClick="javascript:addTextAreaElement('orig-place', 'Време на намиране', 'full', null, 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('orig-place', 'Време на намиране', 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type="button" id="orig-date-button" value="Място на намиране"
-						onClick="javascript:addTextAreaElement('orig-date', 'Място на намиране', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('orig-date', 'Място на намиране', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type="button" id="provenance-found-button" value="Контекст"
-						onClick="javascript:addTextAreaElement('provenance-found', 'Контекст', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('provenance-found', 'Контекст', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type='button' id="provenance-observed-button" value="Съвременно място"
-						onClick="addTextAreaElement('provenance-observed', 'Съвременно място', 'full', 'greek', 'additional-keyboard', null);" class='btn btn-info btn-xs'>
+						onClick="addTextAreaElement('provenance-observed', 'Съвременно място', 'full', 'greek', 'additional-keyboard');" class='btn btn-info btn-xs'>
 				</div>
 
 				<div class="row">
-					<div class="form-group col-xs-12">
+					<div id="title-group" class="form-group col-xs-12">
 						<div class="input-prepend">
 							<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="Заглавие" title="Заглавие" ></textarea>
 						</div>
@@ -90,16 +80,7 @@
 				<div id="idno-group">
 				</div>
 
-				<div id="support-root-group">
-				</div>
-
-				<div id="support-root-group">
-				</div>
-
-				<div id="material-group">
-				</div>
-
-				<div id="object-type-group">
+				<div id="support-group">
 				</div>
 
 				<div id="layout-group">
@@ -126,21 +107,21 @@
 
 				<div class="row buttons-row">
 					<input type="button" id="apparatus-criticus-button" value="Критичен апарат"
-						onClick="javascript:addTextAreaElement('apparatus-criticus', 'Критичен апарат', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('apparatus-criticus', 'Критичен апарат', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type="button" id="translation-button" value="Превод"
-						onClick="javascript:addTextAreaElement('translation', 'Превод', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('translation', 'Превод', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type="button" id="commentary-button" value="Коментар"
-						onClick="javascript:addTextAreaElement('commentary', 'Коментар', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('commentary', 'Коментар', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
 					<input type="button" id="bibliography-button" value="Библиография"
-						onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard', null);" class="btn btn-info btn-xs">
+						onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 				</div>
 
 				<div id="original-text-group">
 					<div class="row">
-						<div class="form-group col-xs-12">
+						<div id="original-text-input-group" class="form-group col-xs-12">
 							<div class="input-group">
 								<textarea id="original-text" class="form-control greek input-text" spellcheck="false"
 									title="Оригинален текст" placeholder="Оригинален текст"
@@ -192,10 +173,6 @@
 
 				<div id="bibliography-group"></div>
 
-				<div id="keyboard-shortcuts-help" class="row buttons-row">
-					<input type="button" value="Копиране на текст" onClick="javascript:displayKeyboardShortcutsHelp();" class="btn btn-info">
-				</div>
-
 				<div class="row buttons-row">
 					<input type="button" value="Запиши" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
 				</div>
@@ -204,8 +181,10 @@
 		</div>
 
 		<script type="text/javascript">
-			$jQuery(document).ready(function() {
+			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
+			var $jQuery = jQuery.noConflict();
 
+			$jQuery(document).ready(function() {
 				if (!navigator.userAgent.match(/WebKit/i)) {
 					var mobilis = isMobile();
 					if (mobilis == true) {

@@ -37,9 +37,7 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 						<objectDesc>
 							<supportDesc>
 								<support>
-									{SUPPORT_ROOT}
-									<material>{MATERIAL}</material>
-									<objectType>{OBJECT_TYPE}</objectType>
+									{SUPPORT}
 								</support>
 							</supportDesc>
 							<layoutDesc>

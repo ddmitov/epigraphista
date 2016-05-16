@@ -2,7 +2,7 @@
 // UTF-8 encoded file!
 
 
-function addTextAreaElement(label, placeholderText, size, greekSupport, additionalKeyboard, mandatory) {
+function addTextAreaElement(label, placeholderText, size, greekSupport, additionalKeyboard) {
 	var name = label.replace(/-/g, "_");
 
 	var greekSupportCode01 = "" +
@@ -33,9 +33,6 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 	if (additionalKeyboard == null) {
 		additionalKeyboardSupportCode01 = "";
 		additionalKeyboardSupportCode02 = "";
-	}
-	if (mandatory == "mandatory") {
-		elementRemovalCode = "";
 	}
 
 	var textElementContents = "" +
@@ -92,11 +89,9 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 
 	$jQuery("#" + label).autoResize();
 
-	if (mandatory == null) {
-		var buttonToDisable = document.getElementById(label + "-button");
-		buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
-		buttonToDisable.disabled = true;
-	}
+	var buttonToDisable = document.getElementById(label + "-button");
+	buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
+	buttonToDisable.disabled = true;
 }
 
 

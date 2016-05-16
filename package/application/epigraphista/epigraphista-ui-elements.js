@@ -2,29 +2,29 @@
 // UTF-8 encoded file!
 
 
-function displayKeyboardShortcutsHelp() {
-	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
+function addSupportGroup() {
+	var buttonsRowElement = document.createElement("div");
+	buttonsRowElement.setAttribute("class", "row");
 
-	var keyboardShortcutsHelp = "" +
-		"<input type='button' value='Ctrl+A = Select All'" +
-			"onClick=\"displayKeyboardShortcutsButton();\" class='btn btn-info'>" +
-		"<input type='button' value='Ctrl+X = Cut'" +
-			"onClick=\"displayKeyboardShortcutsButton();\" class='btn btn-info'>" +
-		"<input type='button' value='Ctrl+C = Copy'" +
-			"onClick=\"displayKeyboardShortcutsButton();\" class='btn btn-info'>" +
-		"<input type='button' value='Ctrl+V = Paste'" +
-			"onClick=\"displayKeyboardShortcutsButton();\" class='btn btn-info'>";
+	var buttonsCode = "" +
+		"<input type='button' id='material-button' value='Материал' class='btn btn-info btn-xs'>" +
+		"<input type='button' id='object-type-button' value='Категория' class='btn btn-info btn-xs'>";
+	buttonsRowElement.innerHTML = buttonsCode;
 
-	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsHelp;
-}
+	var placeholderElement = document.getElementById("support-group");
+	placeholderElement.appendChild(buttonsRowElement);
 
+	$jQuery('#material-button').click(function() {
+		$jQuery('#support')
+		.selection('insert', {text: '<material>', mode: 'before'})
+		.selection('insert', {text: '</material>', mode: 'after'});
+	});
 
-function displayKeyboardShortcutsButton() {
-	var keyboardShortcutsHelpPlaceholder = document.getElementById("keyboard-shortcuts-help");
+	$jQuery('#object-type-button').click(function() {
+		$jQuery('#support')
+		.selection('insert', {text: '<objectType>', mode: 'before'})
+		.selection('insert', {text: '</objectType>', mode: 'after'});
+	});
 
-	var keyboardShortcutsButton = "" +
-		"<input type='button' value='Копиране на текст'" +
-			"onClick=\"javascript:displayKeyboardShortcutsHelp();\" class='btn btn-info'>";
-
-	keyboardShortcutsHelpPlaceholder.innerHTML = keyboardShortcutsButton;
+	addTextAreaElement('support', 'Описание на паметника', 'full', 'greek', 'additional-keyboard');
 }

@@ -1,31 +1,64 @@
 
 // UTF-8 encoded file!
 
-// The following six functions are only usefull inside Perl Executing Browser.
+// The following functions are only usefull inside Perl Executing Browser.
 
 
-// Perl Executing Browser custom title for the Alert dialog box:
+// Print Preview label for the context menu:
+function pebPrintPreviewLabel() {
+	return "Преглед за печат";
+}
+
+
+// Print label for the context menu:
+function pebPrintLabel() {
+	return "Печат";
+}
+
+
+// Cut label for the context menu:
+function pebCutLabel() {
+	return "Изрязване";
+}
+
+
+// Copy label for the context menu:
+function pebCopyLabel() {
+	return "Копиране";
+}
+
+
+// Paste label for the context menu:
+function pebPasteLabel() {
+	return "Поставяне";
+}
+
+
+// Select All label for the context menu:
+function pebSelectAllLabel() {
+	return "Избери всичко";
+}
+
+
+// Alert dialog box title:
 function pebAlertTitle() {
-	var alertTitle = "Внимание";
-	return alertTitle;
+	return "Внимание";
 }
 
 
-// Perl Executing Browser OK button label:
+// OK button label:
 function pebOkLabel() {
-	var okLabel = "Разбрах";
-	return okLabel;
+	return "Разбрах";
 }
 
 
-// Perl Executing Browser custom title for the Confirm dialog box:
+// Confirm dialog box title:
 function pebConfirmTitle() {
-	var confirmTitle = "Потвърждение";
-	return confirmTitle;
+	return "Потвърждение";
 }
 
 
-// Perl Executing Browser close confirmation:
+// Close confirmation:
 function pebCloseConfirmation() {
 	var confirmation = confirm("На тази страница е попълнен текст и той ще бъде загубен!\n" +
 							"Сигурни ли сте, че искате да изключите програмата?");
@@ -39,15 +72,13 @@ function pebCloseConfirmation() {
 }
 
 
-// Perl Executing Browser Yes button label:
+// Yes button label:
 function pebYesLabel() {
-	var yesLabel = "Да";
-	return yesLabel;
+	return "Да";
 }
 
 
-// Perl Executing Browser No button label:
+// No button label:
 function pebNoLabel() {
-	var noLabel = "Не";
-	return noLabel;
+	return "Не";
 }

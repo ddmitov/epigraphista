@@ -21,9 +21,7 @@
 						<objectDesc>
 							<supportDesc>
 								<support>
-									{SUPPORT_ROOT}
-									<material>{MATERIAL}</material>
-									<objectType>{OBJECT_TYPE}</objectType>
+									{SUPPORT}
 								</support>
 							</supportDesc>
 							<layoutDesc>
