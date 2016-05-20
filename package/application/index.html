@@ -7,23 +7,23 @@
 
 		<title>Epigraphista</title>
 
-		<script type="text/javascript" src="jquery/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js"></script>
-		<script type="text/javascript" src="jquery/jquery.selection.js"></script>
+		<script type="text/javascript" src="jquery/jquery-1.11.1.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
+		<script type="text/javascript" src="jquery/jquery.selection.js" charset="utf-8"></script>
 
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all"/>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
 
 		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all"/>
-		<script type="text/javascript" src="epigraphista/epigraphista-form-support.js"></script>
-		<script type="text/javascript" src="epigraphista/epigraphista-greek-support.js"></script>
-		<script type="text/javascript" src="epigraphista/epigraphista-text-converter.js"></script>
-		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js"></script>
-		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-form-support.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-text-converter.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
 
-		<script type="text/javascript" src="typegreek/typegreek.js"></script>
+		<script type="text/javascript" src="typegreek/typegreek.js" charset="utf-8"></script>
 
-		<script type="text/javascript" src="peb/peb.js"></script>
+		<script type="text/javascript" src="peb/peb.js" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -119,49 +119,47 @@
 						onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 				</div>
 
-				<div id="original-text-group">
+				<div id="inscription-group">
+					<div id="inscription-greek-keyboard-help" class="greek greek-help"></div>
+					<div id="inscription-additional-keyboard"></div>
 					<div class="row">
-						<div id="original-text-input-group" class="form-group col-xs-12">
+						<div id="inscription-input-group" class="form-group col-xs-12">
 							<div class="input-group">
-								<textarea id="original-text" class="form-control greek input-text" spellcheck="false"
-									title="Оригинален текст" placeholder="Оригинален текст"
-									onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.original_text_switch_greek.checked, event);"
+								<textarea id="inscription" class="form-control greek input-text" spellcheck="false"
+									title="Текст на надписа" placeholder="Текст на надписа"
+									onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
 									onkeyup="javascript:return convertStr(this, event);"
-									onfocus="javascript:setCurrentTextArea('original-text');"
-									oninput="javascript:convertEpigraphicText('original-text');"></textarea>
+									onfocus="javascript:setCurrentTextArea('inscription');"
+									oninput="javascript:convertEpigraphicText('inscription');"></textarea>
 								<span class="input-group-addon btn btn-info"
-									onclick="javascript:convertEpigraphicText('original-text');" title="Превръщане на оригиналния текст в Epidoc XML фрагмент">
+									onclick="javascript:convertEpigraphicText('inscription');" title="Превръщане на текста на надписа в Epidoc XML фрагмент">
 									<b>XML</b>
 								</span>
 								<span class="input-group-addon">
-									<input type="checkbox" id="original-text-switch-greek" name="original_text_switch_greek"
-										onclick="switchGreek('original-text');" title="Въвеждане на политоничен гръцки текст"/>&nbsp;
-									<a href="javascript:toggleGreekKeyboardHelp('original-text');"
+									<input type="checkbox" id="inscription-switch-greek" name="inscription_switch_greek"
+										onclick="switchGreek('inscription');" title="Въвеждане на политоничен гръцки текст"/>&nbsp;
+									<a href="javascript:toggleGreekKeyboardHelp('inscription');"
 										title="Помощ за въвеждането на политоничен гръцки текст">Ἐλληνική</a>
 								</span>
 								<span class="input-group-addon btn btn-info"
-									onclick="javascript:toggleAdditionalKeyboard('original-text-additional-keyboard');" title="Допълнителна клавиатура">
+									onclick="javascript:toggleAdditionalKeyboard('inscription-additional-keyboard');" title="Допълнителна клавиатура">
 									<span class="glyphicon glyphicon-font"></span>
 								</span>
 							</div>
 						</div>
 					</div>
 
-					<div id="original-text-greek-keyboard-help" class="greek greek-help"></div>
-
-					<div id="original-text-additional-keyboard"></div>
-
-					<div id="original-text-formatted">
+				<div id="inscription-formatted">
 						<div class="row">
 							<div class="form-group col-xs-12">
-<pre id="original-text-html" title="Epidoc XML фрагмент с оригиналния текст" class="greek input-text xml">
-&lt;ab&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb n=&quot;1&quot;/&gt;
-&lt;/ab&gt;
+<pre id="inscription-html" title="Текст на надписа като Epidoc XML фрагмент" class="greek input-text xml">
+<font color='#000080'>&lt;ab&gt;</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color='#000080'>&lt;lb <font color='#008080'>n=</font><font color='7F007F'>&quot;1&quot;</font>/&gt;</font>
+<font color='#000080'>&lt;/ab&gt;</font>
 </pre>
 							</div>
 						</div>
-						<input type="hidden" id="original-text-xml" name="original_text_xml" value="">
+						<input type="hidden" id="inscription-xml" name="inscription_xml" value="">
 					</div>
 				</div>
 
@@ -217,7 +215,20 @@
 
 				$jQuery("#title").autoResize();
 
-				$jQuery("#original-text").autoResize();
+				$jQuery("#title").on('paste', function(e){
+					setTimeout(function () {
+						jQuery("#title").trigger('keyup');
+					}, 150);
+				});
+
+				$jQuery("#inscription").autoResize();
+
+				$jQuery("#inscription").on('paste', function(e){
+					setTimeout(function () {
+						jQuery("#inscription").trigger('keyup');
+					}, 150);
+				});
+
 			});
 		</script>
 

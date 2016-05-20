@@ -1,25 +1,6 @@
-/* =============================================================
-
-   ============================================================= */
 
 
-
-
-
-
-
-
-
-
-/* ********************************************************************************************
-   * Global Variables
-   *
-   *
-   * 
-   * 
-   *
-   * ******************************************************************************************** */
-
+// Global Variables
 var startString = "";
 var workingString = "";
 var finishString = "";
@@ -28,22 +9,7 @@ var finishCursorEnd = 0;
 var currentCursor = 0;
 
 
-
-
-
-
-/* ********************************************************************************************
-   * insertAtCursor (object)
-   *
-   *
-   * 
-   * 
-   * Much thanks to ???? (http://www.????) for getting me started on this function.
-   *
-   * ******************************************************************************************** */
-
 function convertStr(control, event) {
-
     var key;
     if (window.event) {
     // for IE
@@ -52,7 +18,7 @@ function convertStr(control, event) {
     // for Mozilla
         key = event.which; 
     }
-    
+
     if ( (key != 37) && (key != 38) && (key != 39) && (key != 40)  ) {
         // --------------- get cursor info and starting value
         startString = control.value;
@@ -61,7 +27,7 @@ function convertStr(control, event) {
         }
         finishString = "";
         var scrollTop = control.scrollTop;  
-    
+
         //IE support
         if (document.selection) {
             sel = document.selection.createRange();
@@ -76,18 +42,18 @@ function convertStr(control, event) {
             finishCursorStart = control.selectionStart;
             finishCursorEnd = control.selectionEnd;
         }
-    
+
         // --------------- break apart the greek characters in the starting value
         breakApartGreekCharacters(control);
         // --------------- combine the greek characters in the starting value
         combineGreekCharacters(control);
 
-        // --------------- insert finishing value 
+        // --------------- insert finishing value
         control.value = finishString;
         //IE support
         if (document.selection) {
             stringBeforeCursor = (finishString.substring(0, finishCursorStart));
-            numberOfHardReturnsBefore = 0     
+            numberOfHardReturnsBefore = 0
             while (stringBeforeCursor.indexOf("\r\n") > -1) {
                 numberOfHardReturnsBefore = numberOfHardReturnsBefore + 1;
                 stringBeforeCursor = stringBeforeCursor.replace("\r\n", "#");
@@ -102,9 +68,9 @@ function convertStr(control, event) {
             }
             //if (stringAfterCursor.indexOf("#") == 0 && finishCursorStart != finishCursorEnd) {numberOfHardReturnsAfter = numberOfHardReturnsAfter + 1;};
             sel.moveEnd("character", ( finishCursorEnd - (finishString.length) + numberOfHardReturnsAfter) );
-    
+
             sel.select();
-        
+
         //MOZILLA/NETSCAPE support
         } else if (control.selectionStart || control.selectionStart == '0') {
             control.selectionStart = finishCursorStart;
@@ -116,23 +82,8 @@ return;
 }
 
 
-
-
-
-
-
-
-/* ********************************************************************************************
-   * convertCharToggle (object, boolean, event)
-   *
-   * 
-   * 
-   * 
-   * 
-   * ******************************************************************************************** */
-   
+// convertCharToggle (object, boolean, event)
 function convertCharToggle(control, toggle, event) {
-
     if (toggle == true) {
         var key;
         if (window.event) {
@@ -145,7 +96,7 @@ function convertCharToggle(control, toggle, event) {
         typeLetter = true;
 
         if ( event.ctrlKey || event.metaKey ) {
-        	return;
+            return;
         } else {
             if ( key == 38 ) { insertAtCursor(control, '`'); typeLetter = false; } // & -> \
             if ( key == 33 ) { insertAtCursor(control, 'ͺ'); typeLetter = false; } // ! -> |
@@ -220,14 +171,7 @@ function convertCharToggle(control, toggle, event) {
 }
 
 
-
-
-
-
-/* ********************************************************************************************
-   * insertAtCursor (object)
-   * ******************************************************************************************** */
-   
+// insertAtCursor (object)
 function insertAtCursor(myField, myValue) {
   //IE support
   if (document.selection) {
@@ -257,27 +201,15 @@ function insertAtCursor(myField, myValue) {
 }
 
 
-
-
-
-/* ********************************************************************************************
-   * combineGreekCharacters (object)
-   *
-   *
-   * 
-   * 
-   * 
-   * ******************************************************************************************** */
-   
+// combineGreekCharacters (object)
 function breakApartGreekCharacters(control) {
-
     currentCursor = 0;
     startString = startString.replace(/`/,"`");
     while (startString != "") {
 
         workingString = "";
         removeOne();
-        
+
         if ( workingString == "ς" ) { workingString = "σ"; }
         if ( workingString == "ά" ) { workingString = "α´"; }
         if ( workingString == "ἁ" ) { workingString = "α῾"; }
@@ -321,7 +253,7 @@ function breakApartGreekCharacters(control) {
         if ( workingString == "ᾍ" ) { workingString = "Α῾´ͺ"; }
         if ( workingString == "Ἄ" ) { workingString = "Α᾿´"; }
         if ( workingString == "ᾌ" ) { workingString = "Α᾿´ͺ"; }   
-        
+
         if ( workingString == "ή" ) { workingString = "η´"; }
         if ( workingString == "ἡ" ) { workingString = "η῾"; }
         if ( workingString == "ἠ" ) { workingString = "η᾿"; }
@@ -364,7 +296,7 @@ function breakApartGreekCharacters(control) {
         if ( workingString == "ᾝ" ) { workingString = "Η῾´ͺ"; }
         if ( workingString == "Ἤ" ) { workingString = "Η᾿´"; }
         if ( workingString == "ᾜ" ) { workingString = "Η᾿´ͺ"; } 
-        
+
         if ( workingString == "ώ" ) { workingString = "ω´"; }
         if ( workingString == "ὡ" ) { workingString = "ω῾"; }
         if ( workingString == "ὠ" ) { workingString = "ω᾿"; }
@@ -420,7 +352,7 @@ function breakApartGreekCharacters(control) {
         if ( workingString == "Ἑ" ) { workingString = "Ε῾"; }        
         if ( workingString == "Ἔ" ) { workingString = "Ε᾿´"; }        
         if ( workingString == "Ἕ" ) { workingString = "Ε῾´"; }  
-        
+
         if ( workingString == "ί" ) { workingString = "ι´"; }
         if ( workingString == "ἰ" ) { workingString = "ι᾿"; }
         if ( workingString == "ῖ" ) { workingString = "ι῀"; }
@@ -497,21 +429,8 @@ function breakApartGreekCharacters(control) {
 }
 
 
-
-
-
-
-/* ********************************************************************************************
-   * combineGreekCharacters (object)
-   *
-   *
-   * 
-   * 
-   * 
-   * ******************************************************************************************** */
-
+   // combineGreekCharacters (object)
 function combineGreekCharacters(control) {
-
     var COMBINABLE = "ΑαΗηΩωΕεΙιΟοΡρΥυ";
     var VOWELS = "ΑαΗηΩωΕεΙιΟοΥυ";
     var CAPITALS = "ΑΗΩΕΙΟΡΥ";
@@ -521,14 +440,13 @@ function combineGreekCharacters(control) {
     var IOTA = "ΑαΗηΩω";
     var DIERESIS = "ΥυΙι";
     var TERMINAL = "\n\r,;. :·;"
-    
+
     startString = finishString;
     finishString = "";
     currentCursor = 0;
     var keepGoing = true;
 
     while (startString != "") {
-
         keepGoing = true;
         workingString = "";
         removeOne();
@@ -552,29 +470,29 @@ function combineGreekCharacters(control) {
 
                                 if ( (DIERESIS.indexOf(workingString.charAt(0)) > -1) ) {
                                 // the current string starts with a letter that receives a dieresis
-	  
-	      if (workingString.indexOf('¨') > -1) {
+
+          if (workingString.indexOf('¨') > -1) {
                                     // the current string contains a dieresis
-	          keepGoing = false;
-	      } else {
+              keepGoing = false;
+          } else {
                                     // the current string does not contain a dieresis
-	          removeOne();
-	      }
-	  } else {
+              removeOne();
+          }
+      } else {
                                     if (IOTA.indexOf(workingString.charAt(0)) > -1) {
                                     // the current string starts with a letter that receives an iota
-	      
-	          if (  (workingString.indexOf('ͺ') > -1) && (workingString.indexOf('᾿') == -1)  && (workingString.indexOf('῾') == -1)  ) {
-	          // the current string contains an iota and no breathing
-	              keepGoing = false;
-	          } else {
-	              removeOne();     
-	          }
-	      } else {
-                                    // the current string starts with a letter that does not receive a dieresis or an iota		      
-                                        removeOne();	      
-	      }
-	  }
+          
+              if (  (workingString.indexOf('ͺ') > -1) && (workingString.indexOf('᾿') == -1)  && (workingString.indexOf('῾') == -1)  ) {
+              // the current string contains an iota and no breathing
+                  keepGoing = false;
+              } else {
+                  removeOne();     
+              }
+          } else {
+                                    // the current string starts with a letter that does not receive a dieresis or an iota            
+                                        removeOne();          
+          }
+      }
                             } else {
                             // the current string does NOT start with a capital letter
                                 removeOne();
@@ -591,45 +509,44 @@ function combineGreekCharacters(control) {
                             
                                 if ( (CAPITALS.indexOf(workingString.charAt(0)) > -1) ) {
                                 // the current string starts with a capital letter
-	  
+      
                                      if (  (DIERESIS.indexOf(workingString.charAt(0)) > -1)  ) {
                                      // the current string starts with a letter that receives a dieresis
 
-	           if (  (  (workingString.indexOf('᾿') > -1)  || (workingString.indexOf('῾') > -1) || (startString.charAt(1) == '᾿') || (startString.charAt(1) == '῾') )  && (workingString.indexOf('¨') == -1)  ) {
+               if (  (  (workingString.indexOf('᾿') > -1)  || (workingString.indexOf('῾') > -1) || (startString.charAt(1) == '᾿') || (startString.charAt(1) == '῾') )  && (workingString.indexOf('¨') == -1)  ) {
                                          // the current string contains a breathing mark (already or coming up next) and no dieresis
 
-	               if (  (SMOOTH_BREATHING.indexOf(workingString.charAt(0)) == -1) ) {
-	               // the current string starts with a letter that does not receive a smooth breathing		               
-	               
-	                   if (  ( (workingString.indexOf('῾') > -1) || (startString.charAt(1) == '῾') )  ) {
-    	                       removeOne();
-	                   } else {
-	                       keepGoing = false;	                                  
-	                   }
-	               } else {
-	                   removeOne();		               
-	               }
-	           } else {
-	               keepGoing = false;		           
-	           }       
-	       } else {
-                                        if (  (IOTA.indexOf(workingString.charAt(0)) > -1)  ) {
+                   if (  (SMOOTH_BREATHING.indexOf(workingString.charAt(0)) == -1) ) {
+                   // the current string starts with a letter that does not receive a smooth breathing                     
 
-                                            if (      (((workingString.indexOf('᾿') > -1)  || (workingString.indexOf('῾') > -1) || (startString.charAt(1) == '᾿') || (startString.charAt(1) == '῾')))     || ((( (workingString.indexOf('᾿') == -1)  && (workingString.indexOf('῾') == -1) && (startString.charAt(1) == 'ͺ') && (workingString.indexOf('ͺ') == -1) && (  (startString.charAt(2) == '᾿') || (startString.charAt(2) == '῾') ))))    ) {
+                       if (  ( (workingString.indexOf('῾') > -1) || (startString.charAt(1) == '῾') )  ) {
+                               removeOne();
+                       } else {
+                           keepGoing = false;                                     
+                       }
+                   } else {
+                       removeOne();                    
+                   }
+               } else {
+                   keepGoing = false;                  
+               }       
+           } else {
+                                        if ( (IOTA.indexOf(workingString.charAt(0)) > -1) ) {
+                                            if ( (((workingString.indexOf('᾿') > -1)  || (workingString.indexOf('῾') > -1) || (startString.charAt(1) == '᾿') || (startString.charAt(1) == '῾')))     || ((( (workingString.indexOf('᾿') == -1)  && (workingString.indexOf('῾') == -1) && (startString.charAt(1) == 'ͺ') && (workingString.indexOf('ͺ') == -1) && (  (startString.charAt(2) == '᾿') || (startString.charAt(2) == '῾') ))))    ) {
                                             // the current string contains a breathing mark (already or coming up next) 
-                                                removeOne();  	              
-	              } else {
-	                  keepGoing = false;		              
-	              }
-	          } else {
+                                                removeOne();                  
+                  } else {
+                      keepGoing = false;                      
+                  }
+              } else {
                                             keepGoing = false;
-	          }
-	       }
-	  } else {
+              }
+           }
+      } else {
                                     removeOne();  
-	  }
+      }
                             } else {
-                                keepGoing = false;	                            
+                                keepGoing = false;                              
                             }
                         } else {
                         // the next character is not an accent mark
@@ -642,14 +559,14 @@ function combineGreekCharacters(control) {
                                     if ( startString.charAt(0) == "῾" ) {
                                     // the next character is (
                                         removeOne();
-	      } else {
+          } else {
                                     // the next character is )
                                         if (  (SMOOTH_BREATHING.indexOf(workingString.charAt(0)) > -1)   ) {
                                         // the current string starts with a letter that receives a smooth breathing (same except for capital upsilon and capital rho)
                                             removeOne();                                        
-	          } else {
+              } else {
                                             keepGoing = false;
-	          }
+              }
                                     }
                                 } else { 
                                     keepGoing = false;                    
@@ -659,62 +576,62 @@ function combineGreekCharacters(control) {
 
                                 if ( (startString.charAt(0) == "ͺ") || (startString.charAt(0) == "¨") ) {
                                 // the next character is | or +
-	  
+      
                                     if ( startString.charAt(0) == "ͺ" ) {
                                     // the next character is |
-	      
-	          if ( (IOTA.indexOf(workingString.charAt(0)) > -1) && (workingString.indexOf('ͺ') == -1)  ) {
-	          // the current string starts with a letter that receives an iota and has no iota
-	          
+
+              if ( (IOTA.indexOf(workingString.charAt(0)) > -1) && (workingString.indexOf('ͺ') == -1)  ) {
+              // the current string starts with a letter that receives an iota and has no iota
+              
                                             if (CAPITALS.indexOf(workingString.charAt(0)) > -1)  {
                                             // the current string starts with a capital letter
-	              
-	                  if (  ( (workingString.indexOf('´') == -1)  && (workingString.indexOf('`') == -1) && (workingString.indexOf('῀') == -1) )   ||  ( (workingString.indexOf('᾿') > -1)  || (workingString.indexOf('῾') > -1) || startString.charAt(1) == '᾿' || startString.charAt(1) == '῾' )     ) {    
-	                  // the current string either has no accent mark or it has a breathing mark (already or coming up)
-	                  
-	                      removeOne();
-	                  } else {
-	                  // the current string contains an accent mark without a breathing mark (already or coming up next)
-	                  
-	                      keepGoing = false;	                      
-	                  }
-	              } else {
-	              // the current string starts with a non-capital letter
-	                  removeOne();
-	              }   
-	          } else {
-                                            keepGoing = false;  
-	          }
-	      } else  {
-                                    // the next character is +
-	      
-	          if ( (DIERESIS.indexOf(workingString.charAt(0)) > -1) && (workingString.indexOf('¨') == -1) && (workingString.indexOf('᾿') == -1)  && (workingString.indexOf('῾') == -1)  ) {
-	          // the current strings starts with a letter that receives a dieresis and has no dieresis and has no breathing mark
-	          
-                                            if (CAPITALS.indexOf(workingString.charAt(0)) > -1) {
-	              // the current string starts with a capital letter
+                  
+                      if (  ( (workingString.indexOf('´') == -1)  && (workingString.indexOf('`') == -1) && (workingString.indexOf('῀') == -1) )   ||  ( (workingString.indexOf('᾿') > -1)  || (workingString.indexOf('῾') > -1) || startString.charAt(1) == '᾿' || startString.charAt(1) == '῾' )     ) {    
+                      // the current string either has no accent mark or it has a breathing mark (already or coming up)
 
-  	                  if (  (workingString.indexOf('´') == -1)  && (workingString.indexOf('`') == -1) && (workingString.indexOf('῀') == -1)  ) {
+                          removeOne();
+                      } else {
+                      // the current string contains an accent mark without a breathing mark (already or coming up next)
+                      
+                          keepGoing = false;                          
+                      }
+                  } else {
+                  // the current string starts with a non-capital letter
+                      removeOne();
+                  }   
+              } else {
+                                            keepGoing = false;  
+              }
+          } else  {
+                                    // the next character is +
+          
+              if ( (DIERESIS.indexOf(workingString.charAt(0)) > -1) && (workingString.indexOf('¨') == -1) && (workingString.indexOf('᾿') == -1)  && (workingString.indexOf('῾') == -1)  ) {
+              // the current strings starts with a letter that receives a dieresis and has no dieresis and has no breathing mark
+
+                                            if (CAPITALS.indexOf(workingString.charAt(0)) > -1) {
+                  // the current string starts with a capital letter
+
+                      if (  (workingString.indexOf('´') == -1)  && (workingString.indexOf('`') == -1) && (workingString.indexOf('῀') == -1)  ) {
                                                 // the current string does not have any of the three accents (/, \, or =)
-	                      removeOne();
-	                  } else {
-	                      keepGoing = false;
-	                  }
-	              } else {
-	                  removeOne();
-	              }
-	          } else {
-	              keepGoing = false;
-	          }
-	      }
-	  } else {
-	      keepGoing = false;
-	  }
+                          removeOne();
+                      } else {
+                          keepGoing = false;
+                      }
+                  } else {
+                      removeOne();
+                  }
+              } else {
+                  keepGoing = false;
+              }
+          }
+      } else {
+          keepGoing = false;
+      }
                             }
                         }
                     }     
                 } // keep checking the next characters
-       
+
                 if (workingString.length > 1) { combineSingleCharacter(control); }
 
             } else {
@@ -722,14 +639,14 @@ function combineGreekCharacters(control) {
 
                 if (workingString == 'σ' && TERMINAL.indexOf(startString.charAt(0)) > -1) {
                 // this character is lowercase sigma and the next character 
-                
+
                     workingString = 'ς'; 
                 } else {
-	                if (workingString == 'σ' && startString.charAt(0) == "̣" && TERMINAL.indexOf(startString.charAt(1)) > -1) {
-	                // this character is lowercase sigma and the next character 
-	                	                workingString = 'ς'; 
-	                }
-				}
+                    if (workingString == 'σ' && startString.charAt(0) == "̣" && TERMINAL.indexOf(startString.charAt(1)) > -1) {
+                    // this character is lowercase sigma and the next character 
+                                        workingString = 'ς'; 
+                    }
+                }
             }
         } // don't do anything if this character was the end of the string
             
@@ -739,22 +656,12 @@ function combineGreekCharacters(control) {
 }
 
 
+// combineSingleCharacter (object)
 
-
-
-
-
-
-
-/* ********************************************************************************************
-   * combineSingleCharacter (object)
-   *
-   * This method receives a group of Latin characters in
-   * beta code that BetaToUnicode has determined constitute
-   * a single legitimate Unicode character; it returns the
-   * Unicode character represented by that string of characters.
-   * ******************************************************************************************** */
-
+// This method receives a group of Latin characters in
+// beta code that BetaToUnicode has determined constitute
+// a single legitimate Unicode character; it returns the
+// Unicode character represented by that string of characters.
 function combineSingleCharacter(control) {
     if (  (currentCursor - (workingString.length - 1) <= finishCursorStart) && (currentCursor >= finishCursorStart) ) {
     // the finish cursor is located at the end of any of the characters in the working string
@@ -765,7 +672,7 @@ function combineSingleCharacter(control) {
             finishCursorStart = finishCursorStart - (workingString.length - 1);
         }
     }
-    
+
     if (  (currentCursor - (workingString.length - 1) <= finishCursorEnd) && (currentCursor >= finishCursorEnd) ) {
     // the finish cursor is located at the end of any of the characters in the working string
         finishCursorEnd = currentCursor - (workingString.length - 1);
@@ -775,7 +682,7 @@ function combineSingleCharacter(control) {
             finishCursorEnd = finishCursorEnd - (workingString.length - 1);
         }
     }
-	
+
     currentCursor = currentCursor - (workingString.length - 1);
 
     if (workingString.indexOf('´') != -1) {
@@ -783,7 +690,7 @@ function combineSingleCharacter(control) {
     
         if (workingString.indexOf('᾿') != -1) {
         // if the string contains )
-                            
+
             if (workingString.indexOf('ͺ') != -1) {
             // if the string contains |
                 if (workingString.charAt(0) == "α") { workingString = "ᾄ"; }            
@@ -834,7 +741,7 @@ function combineSingleCharacter(control) {
                     if (workingString.charAt(0) == "Ο") { workingString = "Ὅ"; }                                    
                     if (workingString.charAt(0) == "υ") { workingString = "ὕ"; }                    
                     if (workingString.charAt(0) == "Υ") { workingString = "Ὕ"; }                    
-                }           
+                }
             } else {
             // if the string contains no breathing mark
 
@@ -864,36 +771,36 @@ function combineSingleCharacter(control) {
                         if (workingString.charAt(0) == "Ο") { workingString = "Ό"; }                         
                         if (workingString.charAt(0) == "υ") { workingString = "ύ"; }                        
                         if (workingString.charAt(0) == "Υ") { workingString = "Ύ"; }                                                
-                    }                
-                }                
+                    }
+                }
             }
         }
-	    
+
     } else {
     
         if (workingString.indexOf('`') != -1) {
         // if the string contains a \
-        
+
             if (workingString.indexOf('᾿') != -1) {
             // if the string contains a )
-            
+
                 if (workingString.indexOf('ͺ') != -1) {
                 // if the string contains a |
-                
+
                     if (workingString.charAt(0) == "α") { workingString = "ᾂ"; }
                     if (workingString.charAt(0) == "Α") { workingString = "ᾊ"; }    
                     if (workingString.charAt(0) == "η") { workingString = "ᾒ"; }            
                     if (workingString.charAt(0) == "Η") { workingString = "ᾚ"; } 
                     if (workingString.charAt(0) == "ω") { workingString = "ᾢ"; }            
-                    if (workingString.charAt(0) == "Ω") { workingString = "ᾪ"; }                      	                
+                    if (workingString.charAt(0) == "Ω") { workingString = "ᾪ"; }                                        
                 } else {
-	                
+
                     if (workingString.charAt(0) == "α") { workingString = "ἂ"; }
                     if (workingString.charAt(0) == "Α") { workingString = "Ἂ"; }    
                     if (workingString.charAt(0) == "η") { workingString = "ἢ"; }            
                     if (workingString.charAt(0) == "Η") { workingString = "Ἢ"; } 
                     if (workingString.charAt(0) == "ω") { workingString = "ὢ"; }            
-                    if (workingString.charAt(0) == "Ω") { workingString = "Ὢ"; }                      	                                    
+                    if (workingString.charAt(0) == "Ω") { workingString = "Ὢ"; }                                                            
                     if (workingString.charAt(0) == "ε") { workingString = "ἒ"; }
                     if (workingString.charAt(0) == "Ε") { workingString = "Ἒ"; }   
                     if (workingString.charAt(0) == "ι") { workingString = "ἲ"; }
@@ -902,15 +809,15 @@ function combineSingleCharacter(control) {
                     if (workingString.charAt(0) == "Ο") { workingString = "Ὂ"; }                      
                     if (workingString.charAt(0) == "υ") { workingString = "ὒ"; }
                 }
-            
+
             } else {
-	            
+
                 if (workingString.indexOf('῾') != -1) {
                 // if the string contains a (
-	               
+
                     if (workingString.indexOf('ͺ') != -1) {
                     // if the string contains a |                      
-                    
+
                         if (workingString.charAt(0) == "α") { workingString = "ᾃ"; }
                         if (workingString.charAt(0) == "Α") { workingString = "ᾋ"; }
                         if (workingString.charAt(0) == "η") { workingString = "ᾓ"; }            
@@ -919,7 +826,7 @@ function combineSingleCharacter(control) {
                         if (workingString.charAt(0) == "Ω") { workingString = "ᾫ"; }                           
                     } else {
                     // if the strings contains no iota
-	                    
+
                         if (workingString.charAt(0) == "α") { workingString = "ἃ"; }
                         if (workingString.charAt(0) == "Α") { workingString = "Ἃ"; }
                         if (workingString.charAt(0) == "η") { workingString = "ἣ"; }            
@@ -940,21 +847,21 @@ function combineSingleCharacter(control) {
 
                     if (workingString.indexOf('ͺ') != -1) {
                     // if the string contains |
-                    
+
                         if (workingString.charAt(0) == "α") { workingString = "ᾲ"; }
                         if (workingString.charAt(0) == "η") { workingString = "ῂ"; }            
                         if (workingString.charAt(0) == "ω") { workingString = "ῲ"; }            
                     } else {
-                    
+
                         if (workingString.indexOf('¨') != -1) {
                         // if the string contains + 
-                        
+
                             if (workingString.charAt(0) == "ι") { workingString = "ῒ"; }   
                             if (workingString.charAt(0) == "υ") { workingString = "ῢ"; }
 
                         } else {
                         // if the string contains no | or + 
-                        
+
                             if (workingString.charAt(0) == "α") { workingString = "ὰ"; }
                             if (workingString.charAt(0) == "Α") { workingString = "Ὰ"; }  
                             if (workingString.charAt(0) == "η") { workingString = "ὴ"; }            
@@ -969,10 +876,10 @@ function combineSingleCharacter(control) {
                             if (workingString.charAt(0) == "Ο") { workingString = "Ὸ"; }                                                          
                             if (workingString.charAt(0) == "υ") { workingString = "ὺ"; }
                             if (workingString.charAt(0) == "Υ") { workingString = "Ὺ"; }                            
-                        }                    
-                    }           
+                        }
+                    }
                 }
-            }  
+            }
         } else {
     
             if (workingString.indexOf('῀') != -1) {
@@ -982,7 +889,7 @@ function combineSingleCharacter(control) {
                 // if the string contains a )
                 
                     if (workingString.indexOf('ͺ') != -1) {
-                    // if the string contains a |                      
+                    // if the string contains a |
                         if (workingString.charAt(0) == "α") { workingString = "ᾆ"; }                
                         if (workingString.charAt(0) == "Α") { workingString = "ᾎ"; } 
                         if (workingString.charAt(0) == "η") { workingString = "ᾖ"; }            
@@ -1001,10 +908,10 @@ function combineSingleCharacter(control) {
                         if (workingString.charAt(0) == "υ") { workingString = "ὖ"; }
                     }
                 } else {
-	                
+
                     if (workingString.indexOf('῾') != -1) {
                     // if the string contains a (                  
-	                
+
                         if (workingString.indexOf('ͺ') != -1) {
                         // if the string contains a |                      
 
@@ -1028,14 +935,14 @@ function combineSingleCharacter(control) {
                         } 
                     } else {
                     // if the string contains no breathing marks
-                    
+
                         if (workingString.indexOf('ͺ') != -1) {
                         // if the string contains a |                      
                             if (workingString.charAt(0) == "α") { workingString = "ᾷ"; }
                             if (workingString.charAt(0) == "η") { workingString = "ῇ"; }            
                             if (workingString.charAt(0) == "ω") { workingString = "ῷ"; }                              
                         } else {
-	                        
+
                             if (workingString.indexOf('¨') != -1) {
                             // if the string contains + 
 
@@ -1045,22 +952,22 @@ function combineSingleCharacter(control) {
                             // if the string contains no | or +                         
                                 if (workingString.charAt(0) == "α") { workingString = "ᾶ"; }
                                 if (workingString.charAt(0) == "η") { workingString = "ῆ"; }            
-                                if (workingString.charAt(0) == "ω") { workingString = "ῶ"; }  	  
-                                if (workingString.charAt(0) == "ι") { workingString = "ῖ"; }	  
+                                if (workingString.charAt(0) == "ω") { workingString = "ῶ"; }      
+                                if (workingString.charAt(0) == "ι") { workingString = "ῖ"; }      
                                 if (workingString.charAt(0) == "υ") { workingString = "ῦ"; }                
                             }
-                        }                     
-                    }                
+                        }
+                    }
                 }
             } else {
             // if the string contains no accent marks
-            
+
                 if (workingString.indexOf('᾿') != -1) {
                 // if the string contains )
-            
+
                     if (workingString.indexOf('ͺ') != -1) {
                     // if the string contains a |
-                    
+
                         if (workingString.charAt(0) == "α") { workingString = "ᾀ"; }
                         if (workingString.charAt(0) == "Α") { workingString = "ᾈ"; }
                         if (workingString.charAt(0) == "η") { workingString = "ᾐ"; }            
@@ -1069,7 +976,7 @@ function combineSingleCharacter(control) {
                         if (workingString.charAt(0) == "Ω") { workingString = "ᾨ"; }                          
                     } else {
                     // if the string contains no | and no +
-                    
+
                         if (workingString.charAt(0) == "α") { workingString = "ἀ"; }
                         if (workingString.charAt(0) == "Α") { workingString = "Ἀ"; }
                         if (workingString.charAt(0) == "η") { workingString = "ἠ"; }            
@@ -1083,52 +990,52 @@ function combineSingleCharacter(control) {
                         if (workingString.charAt(0) == "ο") { workingString = "ὀ"; }
                         if (workingString.charAt(0) == "Ο") { workingString = "Ὀ"; }                          
                         if (workingString.charAt(0) == "υ") { workingString = "ὐ"; }
-                    }        
+                    }
                 } else {
                     if (workingString.indexOf('῾') != -1) {
                     // if the string contains (
      
                         if (workingString.indexOf('ͺ') != -1) {
-                        // if the string contains a |                      
-                        
+                        // if the string contains a |
+
                             if (workingString.charAt(0) == "α") { workingString = "ᾁ"; }
-                            if (workingString.charAt(0) == "Α") { workingString = "ᾉ"; }   
-                            if (workingString.charAt(0) == "η") { workingString = "ᾑ"; }            
+                            if (workingString.charAt(0) == "Α") { workingString = "ᾉ"; }
+                            if (workingString.charAt(0) == "η") { workingString = "ᾑ"; }
                             if (workingString.charAt(0) == "Η") { workingString = "ᾙ"; } 
-                            if (workingString.charAt(0) == "ω") { workingString = "ᾡ"; }            
-                            if (workingString.charAt(0) == "Ω") { workingString = "ᾩ"; }                             
+                            if (workingString.charAt(0) == "ω") { workingString = "ᾡ"; }
+                            if (workingString.charAt(0) == "Ω") { workingString = "ᾩ"; }
                         } else {
                         // if the string contains no iota                      
-                        
+
                             if (workingString.charAt(0) == "α") { workingString = "ἁ"; }
                             if (workingString.charAt(0) == "Α") { workingString = "Ἁ"; }
-                            if (workingString.charAt(0) == "η") { workingString = "ἡ"; }            
-                            if (workingString.charAt(0) == "Η") { workingString = "Ἡ"; } 
-                            if (workingString.charAt(0) == "ω") { workingString = "ὡ"; }            
-                            if (workingString.charAt(0) == "Ω") { workingString = "Ὡ"; }                              
+                            if (workingString.charAt(0) == "η") { workingString = "ἡ"; }
+                            if (workingString.charAt(0) == "Η") { workingString = "Ἡ"; }
+                            if (workingString.charAt(0) == "ω") { workingString = "ὡ"; }
+                            if (workingString.charAt(0) == "Ω") { workingString = "Ὡ"; }
                             if (workingString.charAt(0) == "ε") { workingString = "ἑ"; }
                             if (workingString.charAt(0) == "Ε") { workingString = "Ἑ"; } 
                             if (workingString.charAt(0) == "ι") { workingString = "ἱ"; }
-                            if (workingString.charAt(0) == "Ι") { workingString = "Ἱ"; }                            
+                            if (workingString.charAt(0) == "Ι") { workingString = "Ἱ"; }
                             if (workingString.charAt(0) == "ο") { workingString = "ὁ"; }
-                            if (workingString.charAt(0) == "Ο") { workingString = "Ὁ"; }               
-                            if (workingString.charAt(0) == "Ρ") { workingString = "Ῥ"; }                                                        
-                            if (workingString.charAt(0) == "ρ") { workingString = "ῥ"; }                
-                            if (workingString.charAt(0) == "υ") { workingString = "ὑ"; }                
+                            if (workingString.charAt(0) == "Ο") { workingString = "Ὁ"; }
+                            if (workingString.charAt(0) == "Ρ") { workingString = "Ῥ"; }
+                            if (workingString.charAt(0) == "ρ") { workingString = "ῥ"; }
+                            if (workingString.charAt(0) == "υ") { workingString = "ὑ"; }
                             if (workingString.charAt(0) == "Υ") { workingString = "Ὑ"; }
-                        }         
+                        }
                     } else {
                     // if the string contains no breathing marks
-                    
+
                         if (workingString.indexOf('ͺ') != -1) {
                         // if the string contains an iota
-                        
+
                             if (workingString.charAt(0) == "α") { workingString = "ᾳ"; }
-                            if (workingString.charAt(0) == "Α") { workingString = "ᾼ"; }  
-                            if (workingString.charAt(0) == "η") { workingString = "ῃ"; }            
+                            if (workingString.charAt(0) == "Α") { workingString = "ᾼ"; }
+                            if (workingString.charAt(0) == "η") { workingString = "ῃ"; }
                             if (workingString.charAt(0) == "Η") { workingString = "ῌ"; } 
-                            if (workingString.charAt(0) == "ω") { workingString = "ῳ"; }            
-                            if (workingString.charAt(0) == "Ω") { workingString = "ῼ"; }                            
+                            if (workingString.charAt(0) == "ω") { workingString = "ῳ"; }
+                            if (workingString.charAt(0) == "Ω") { workingString = "ῼ"; }
                         } else {
                             if (workingString.indexOf('¨') != -1) {
                             // if the string contains a dieresis
@@ -1136,8 +1043,8 @@ function combineSingleCharacter(control) {
                                 if (workingString.charAt(0) == "ι") { workingString = "ϊ"; }
                                 if (workingString.charAt(0) == "Ι") { workingString = "Ϊ"; } 
                                 if (workingString.charAt(0) == "υ") { workingString = "ϋ"; }
-                                if (workingString.charAt(0) == "Υ") { workingString = "Ϋ"; }	  
-	  
+                                if (workingString.charAt(0) == "Υ") { workingString = "Ϋ"; }      
+
                             } // if there are no marks at all, then do nothing
                         }
                     }
@@ -1149,22 +1056,7 @@ function combineSingleCharacter(control) {
 }
 
 
-
-
-
-
-
-
-
-/* ********************************************************************************************
-   * removeOne ()
-   *
-   *
-   * 
-   * 
-   * 
-   * ******************************************************************************************** */
-
+   // removeOne ()
 function removeOne() {
     workingString = workingString + startString.substr(0,1);
     startString = startString.substr(1, startString.length - 1);

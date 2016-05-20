@@ -18,19 +18,19 @@ function pebPrintLabel() {
 
 // Cut label for the context menu:
 function pebCutLabel() {
-	return "Изрязване";
+	return "Изрежи";
 }
 
 
 // Copy label for the context menu:
 function pebCopyLabel() {
-	return "Копиране";
+	return "Копирай";
 }
 
 
 // Paste label for the context menu:
 function pebPasteLabel() {
-	return "Поставяне";
+	return "Постави";
 }
 
 

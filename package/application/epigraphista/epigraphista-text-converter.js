@@ -214,18 +214,32 @@ function convertEpigraphicText(elementId) {
 
 	epigraphicText = "<lb n=\"1\"/>" + epigraphicText;
 
-	// XML TO HTML CONVERSION
+	// XML TO HTML CONVERSION WITH SYNTAX HIGHLIGHTING
 	var epigraphicTextHtml = epigraphicText;
-	epigraphicTextHtml = "<ab>" + epigraphicTextHtml + "</ab>";
-	epigraphicTextHtml = epigraphicTextHtml.replace(/\</g, "&lt;");
-	epigraphicTextHtml = epigraphicTextHtml.replace(/\>/g, "&gt;");
+
+	// Prepending opening <ab> tag:
+	epigraphicTextHtml = "<ab>" + epigraphicTextHtml;
+
+	// Escaping opening angle bracket - '<' and highlighting XML tags:
+	epigraphicTextHtml = epigraphicTextHtml.replace(/\</g, "<font color='#000080'>&lt;");
+
+	// Escaping closing angle bracket - '>' and highlighting XML tags:
+	epigraphicTextHtml = epigraphicTextHtml.replace(/\>/g, "&gt;</font>");
+
+	// Highlighting line numbers:
+	epigraphicTextHtml = epigraphicTextHtml.replace(/(n)=(\"[0-9]{1,4}\")/g, "<font color='#008080'>n=</font><font color='7F007F'>$2</font>");
+
+	// Highlighting XML tag attributes:
+	epigraphicTextHtml = epigraphicTextHtml.replace(/([a-z,A-Z]{1,})=(\"[a-z,A-Z]{1,}\")/g, "<font color='#008080'>$1=</font><font color='7F007F'>$2</font>");
+
+	// Escaping quotes:
 	epigraphicTextHtml = epigraphicTextHtml.replace(/\"/g, "&quot;");
-	// Insertion of <br> before every new line:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/(&lt;lb[^\/]*\/&gt;)/g, "<br>$1");
-	// Insertion of <br> before closing </ab> tag:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/&lt;\/ab&gt;/g, "<br>&lt;\/ab&gt;");
-	// Indentation for the HTML result:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/&lt;lb/g, "&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb");
+
+	// Indentation and line breaks:
+	epigraphicTextHtml = epigraphicTextHtml.replace(/&lt;lb/g, "<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb");
+
+	// Appending <br> and closing </ab> tag:
+	epigraphicTextHtml = epigraphicTextHtml + "<br><font color='#000080'>&lt;/ab&gt;</font>";
 
 	// PLACING RESULTS IN THE HTML DOM TREE
 	document.getElementById(elementId + "-html").innerHTML = epigraphicTextHtml;

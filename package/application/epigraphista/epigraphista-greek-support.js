@@ -19,8 +19,6 @@ function toggleGreekKeyboardHelp(partialDivName) {
 		"<fieldset class='letter-box'><p class='letter-box-p'>Q&nbsp;<font color='red'>Θ</font></p></fieldset>" +
 		"<fieldset class='letter-box'><p class='letter-box-p'>W&nbsp;<font color='red'>Ω</font></p></fieldset>" +
 		"<fieldset class='letter-box'><p class='letter-box-p'>E&nbsp;<font color='red'>Ε</font></p></fieldset>" +
-		
-		
 		"<fieldset class='letter-box'><p class='letter-box-p'>R&nbsp;<font color='red'>Ρ</font></p></fieldset>" +
 		"<fieldset class='letter-box'><p class='letter-box-p'>T&nbsp;<font color='red'>Τ</font></p></fieldset>" +
 		"<fieldset class='letter-box'><p class='letter-box-p'>Y&nbsp;<font color='red'>Ψ</font></p></fieldset>" +
@@ -73,81 +71,73 @@ function toggleGreekKeyboardHelp(partialDivName) {
 
 // Additional keyboard code:
 function toggleAdditionalKeyboard(elementId) {
-	var additionalKeyboardFirstRowContents = "" +
-		"<input type='button' value='ϐ' onClick=\"javascript:insertTags('ϐ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ϲ' onClick=\"javascript:insertTags('ϲ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ϛ' onClick=\"javascript:insertTags('Ϛ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ϛ' onClick=\"javascript:insertTags('ϛ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ϟ' onClick=\"javascript:insertTags('Ϟ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ϟ' onClick=\"javascript:insertTags('ϟ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ϡ' onClick=\"javascript:insertTags('Ϡ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ϡ' onClick=\"javascript:insertTags('ϡ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"&nbsp;&nbsp;&nbsp;" +
-		"<input type='button' value='Ё' onClick=\"javascript:insertTags('Ё', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ё' onClick=\"javascript:insertTags('ё', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ы' onClick=\"javascript:insertTags('Ы', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ы' onClick=\"javascript:insertTags('ы', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Э' onClick=\"javascript:insertTags('Э', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='э' onClick=\"javascript:insertTags('э', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ѝ' onClick=\"javascript:insertTags('ѝ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"&nbsp;&nbsp;&nbsp;" +
-		"<input type='button' value='Ä' onClick=\"javascript:insertTags('Ä', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ä' onClick=\"javascript:insertTags('ä', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ö' onClick=\"javascript:insertTags('Ö', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ö' onClick=\"javascript:insertTags('ö', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ü' onClick=\"javascript:insertTags('Ü', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ü' onClick=\"javascript:insertTags('ü', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ß' onClick=\"javascript:insertTags('ß', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;";
+	var additionalKeyboardRowContents = "" +
+		"<input type='button' value='ϐ' onClick=\"javascript:insertTags('ϐ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ϲ' onClick=\"javascript:insertTags('ϲ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ϛ' onClick=\"javascript:insertTags('Ϛ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϛ' onClick=\"javascript:insertTags('ϛ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ϟ' onClick=\"javascript:insertTags('Ϟ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϟ' onClick=\"javascript:insertTags('ϟ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ϡ' onClick=\"javascript:insertTags('Ϡ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϡ' onClick=\"javascript:insertTags('ϡ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"&nbsp;&nbsp;&nbsp;" +
+		"<input type='button' value='Ё' onClick=\"javascript:insertTags('Ё', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ё' onClick=\"javascript:insertTags('ё', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ы' onClick=\"javascript:insertTags('Ы', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ы' onClick=\"javascript:insertTags('ы', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Э' onClick=\"javascript:insertTags('Э', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='э' onClick=\"javascript:insertTags('э', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ѝ' onClick=\"javascript:insertTags('ѝ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"&nbsp;&nbsp;&nbsp;" +
+		"<input type='button' value='Ä' onClick=\"javascript:insertTags('Ä', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ä' onClick=\"javascript:insertTags('ä', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ö' onClick=\"javascript:insertTags('Ö', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ö' onClick=\"javascript:insertTags('ö', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ü' onClick=\"javascript:insertTags('Ü', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ü' onClick=\"javascript:insertTags('ü', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ß' onClick=\"javascript:insertTags('ß', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
 
-	var firstRowBox = document.createElement("div");
-	firstRowBox.setAttribute("class", "form-group col-xs-12");
-	firstRowBox.innerHTML = additionalKeyboardFirstRowContents;
+		"<br>" +
 
-	var firstRow = document.createElement("div");
-	firstRow.setAttribute("class", "row");
-	firstRow.appendChild(firstRowBox);
+		"<input type='button' value='É' onClick=\"javascript:insertTags('É', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='é' onClick=\"javascript:insertTags('é', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='À' onClick=\"javascript:insertTags('À', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='à' onClick=\"javascript:insertTags('à', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='È' onClick=\"javascript:insertTags('È', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='è' onClick=\"javascript:insertTags('è', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ù' onClick=\"javascript:insertTags('Ù', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ù' onClick=\"javascript:insertTags('ù', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Â' onClick=\"javascript:insertTags('Â', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='â' onClick=\"javascript:insertTags('â', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ê' onClick=\"javascript:insertTags('Ê', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ê' onClick=\"javascript:insertTags('ê', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Î' onClick=\"javascript:insertTags('Î', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='î' onClick=\"javascript:insertTags('î', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ô' onClick=\"javascript:insertTags('Ô', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ô' onClick=\"javascript:insertTags('ô', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Û' onClick=\"javascript:insertTags('Û', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='û' onClick=\"javascript:insertTags('û', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ë' onClick=\"javascript:insertTags('Ë', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ë' onClick=\"javascript:insertTags('ë', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ï' onClick=\"javascript:insertTags('Ï', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ï' onClick=\"javascript:insertTags('ï', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ÿ' onClick=\"javascript:insertTags('Ÿ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ÿ' onClick=\"javascript:insertTags('ÿ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ç' onClick=\"javascript:insertTags('Ç', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ç' onClick=\"javascript:insertTags('ç', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;";
 
-	var additionalKeyboardSecondRowContents = "" +
-		"<input type='button' value='É' onClick=\"javascript:insertTags('É', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='é' onClick=\"javascript:insertTags('é', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='À' onClick=\"javascript:insertTags('À', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='à' onClick=\"javascript:insertTags('à', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='È' onClick=\"javascript:insertTags('È', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='è' onClick=\"javascript:insertTags('è', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ù' onClick=\"javascript:insertTags('Ù', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ù' onClick=\"javascript:insertTags('ù', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Â' onClick=\"javascript:insertTags('Â', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='â' onClick=\"javascript:insertTags('â', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ê' onClick=\"javascript:insertTags('Ê', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ê' onClick=\"javascript:insertTags('ê', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Î' onClick=\"javascript:insertTags('Î', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='î' onClick=\"javascript:insertTags('î', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ô' onClick=\"javascript:insertTags('Ô', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ô' onClick=\"javascript:insertTags('ô', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Û' onClick=\"javascript:insertTags('Û', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='û' onClick=\"javascript:insertTags('û', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ë' onClick=\"javascript:insertTags('Ë', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ë' onClick=\"javascript:insertTags('ë', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ï' onClick=\"javascript:insertTags('Ï', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ï' onClick=\"javascript:insertTags('ï', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ÿ' onClick=\"javascript:insertTags('Ÿ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ÿ' onClick=\"javascript:insertTags('ÿ', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ç' onClick=\"javascript:insertTags('Ç', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ç' onClick=\"javascript:insertTags('ç', '', '')\" class='btn btn-info btn-xs btn-letters'>&nbsp;";
+	var rowBox = document.createElement("div");
+	rowBox.setAttribute("class", "form-group col-xs-12");
+	rowBox.innerHTML = additionalKeyboardRowContents;
 
-	var secondRowBox = document.createElement("div");
-	secondRowBox.setAttribute("class", "form-group col-xs-12");
-	secondRowBox.innerHTML = additionalKeyboardSecondRowContents;
-
-	var secondRow = document.createElement("div");
-	secondRow.setAttribute("class", "row");
-	secondRow.appendChild(secondRowBox);
+	var row = document.createElement("div");
+	row.setAttribute("class", "row");
+	row.appendChild(rowBox);
 
 	var placeholderElement = document.getElementById(elementId);
 
 	if (!placeholderElement.hasChildNodes()) {
-		placeholderElement.appendChild(firstRow);
-		placeholderElement.appendChild(secondRow);
+		placeholderElement.appendChild(row);
 	} else {
 		while (placeholderElement.hasChildNodes()) {
 			placeholderElement.removeChild(placeholderElement.firstChild);

@@ -56,7 +56,7 @@
 		<body>
 			<div type="edition">
 				<ab>
-					{ORIGINAL_TEXT_XML}
+					{INSCRIPTION}
 				</ab>
 			</div>
 			<div type="apparatus">

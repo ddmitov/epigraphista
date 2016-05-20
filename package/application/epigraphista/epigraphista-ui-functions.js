@@ -72,7 +72,6 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 	textElementRow.appendChild(textElementBox);
 
 	var placeholderElement = document.getElementById(label + "-group");
-	placeholderElement.appendChild(textElementRow);
 
 	if (greekSupport == "greek") {
 		var textElementGreekKeyboardHelpPlaceholder = document.createElement("div");
@@ -87,7 +86,15 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 		placeholderElement.appendChild(textElementAdditionalKeyboardPlaceholder);
 	}
 
+	placeholderElement.appendChild(textElementRow);
+
 	$jQuery("#" + label).autoResize();
+
+	$jQuery("#" + label).on('paste', function(e){
+		setTimeout(function () {
+			jQuery("#" + label).trigger('keyup');
+		}, 150);
+	});
 
 	var buttonToDisable = document.getElementById(label + "-button");
 	buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");

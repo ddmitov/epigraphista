@@ -72,7 +72,7 @@ my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 		<body>
 			<div type='edition'>
 				<ab>
-					{ORIGINAL_TEXT_XML}
+					{INSCRIPTION}
 				</ab>
 			</div>
 			<div type='apparatus'>
@@ -143,12 +143,21 @@ $inscription_filename =~ s/\s|,|;/_/g;
 $xml =~ s/FILENAME/$inscription_filename/;
 delete($FORM{"title"});
 
+# Inscription description:
+if ($FORM{"support"}) {
+	my $support_indent = "\t" x 9;
+	my $support_formatted_value = $FORM{"support"};
+	$support_formatted_value =~ s/\<lb/\n$support_indent\<lb/g;
+	$xml =~ s/SUPPORT/$support_formatted_value/;
+	delete($FORM{"support"});
+}
+
 # Inscription text - mandatory element:
-my $inscription_contents_indent = "\t" x 5;
-my $inscription_formatted_value = $FORM{"original_text_xml"};
-$inscription_formatted_value =~ s/\<lb/\n$inscription_contents_indent\<lb/g;
-$xml =~ s/ORIGINAL_TEXT_XML/$inscription_formatted_value/;
-delete($FORM{"original_text_xml"});
+my $inscription_indent = "\t" x 5;
+my $inscription_formatted_value = $FORM{"inscription_xml"};
+$inscription_formatted_value =~ s/\<lb/\n$inscription_indent\<lb/g;
+$xml =~ s/INSCRIPTION/$inscription_formatted_value/;
+delete($FORM{"inscription_xml"});
 
 # Save all other nodes:
 foreach my $placeholder_name (@placeholder_names) {

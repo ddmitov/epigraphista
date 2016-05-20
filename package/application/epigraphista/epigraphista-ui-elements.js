@@ -4,11 +4,11 @@
 
 function addSupportGroup() {
 	var buttonsRowElement = document.createElement("div");
-	buttonsRowElement.setAttribute("class", "row");
+	buttonsRowElement.setAttribute("class", "row buttons-row");
 
 	var buttonsCode = "" +
-		"<input type='button' id='material-button' value='Материал' class='btn btn-info btn-xs'>" +
-		"<input type='button' id='object-type-button' value='Категория' class='btn btn-info btn-xs'>";
+		"<input type='button' id='material-button' value='Материал' class='btn btn-success btn-xs'>" +
+		"<input type='button' id='object-type-button' value='Категория' class='btn btn-success btn-xs'>";
 	buttonsRowElement.innerHTML = buttonsCode;
 
 	var placeholderElement = document.getElementById("support-group");
