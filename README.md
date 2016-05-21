@@ -4,22 +4,24 @@ Epigraphista
 
 Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a desktop GUI framework, HTML 5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for file-writing backend. It's language is currently Bulgarian because it is intended for, but not limited to, Bulgarian users. Epigraphista could also be used as a server-side application without Perl Executing Browser.
   
-## Runtime Requirements
+## Desktop Runtime Requirements
   
 * Any Linux, Mac or Windows Perl 5 distribution,
-* Compiled version of [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser) -  
-only if you want to run Epigraphista as a desktop application.
+* Compiled version of [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser).
+  
+## Server Runtime Requirements
+  
+* Any CGI-enabled HTTP server,
+* Any Linux, Mac or Windows Perl 5 distribution,
+* Any graphical JavaScript-enabled browser.
   
 ## Frameworks, Libraries & Code Fragments Used
 * [jQuery](https://jquery.com/)
 * [jQuery autoResize](http://amaury.carrade.eu/projects/jquery/autoResize.html) by Amaury Carrade
+* [jQuery.selection](http://madapaja.github.io/jquery.selection/) by Koji Iwasaki (@madapaja)
 * [Bootstrap](http://getbootstrap.com/)
 * [TypeGreek](http://www.typegreek.com/) by Randy Hoyt
 * regular expressions and code fragments from [Chapel Hill Electronic Text Converter (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
-* code fragments from Steev's JavaScript keyboard  
-http://www.bluedust.com/pub/web/sjk.htm - defunct
-* code fragments from a deprecated version of wikibits.js:  
-MediaWiki JavaScript support functions
   
 ## License
   

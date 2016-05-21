@@ -15,10 +15,9 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 			"<a href=\"javascript:toggleGreekKeyboardHelp('" + label + "');\"" +
 				"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>" +
 		"</span>";
-	var additionalKeyboardSupportCode01 = "onfocus=\"setCurrentTextArea('" + label + "')\"";
-	var additionalKeyboardSupportCode02 = "" +
+	var additionalKeyboardSupportCode = "" +
 		"<span class='input-group-addon btn btn-info'" +
-			"onclick=\"javascript:toggleAdditionalKeyboard('" + label + "-additional-keyboard')\" title='Допълнителна клавиатура'>" +
+			"onclick=\"javascript:toggleAdditionalKeyboard('" + label + "-additional-keyboard', '" + label + "')\" title='Допълнителна клавиатура'>" +
 			"<span class='glyphicon glyphicon-font'></span>" +
 		"</span>";
 	var elementRemovalCode = "" +
@@ -31,18 +30,16 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 		greekSupportCode02 = "";
 	}
 	if (additionalKeyboard == null) {
-		additionalKeyboardSupportCode01 = "";
-		additionalKeyboardSupportCode02 = "";
+		additionalKeyboardSupportCode = "";
 	}
 
 	var textElementContents = "" +
 		"<textarea rows='1' id='" + label + "' name='" + name + "' class='form-control greek input-text' spellcheck='false'" +
 			"title='" + placeholderText + "' placeholder='" + placeholderText + "'" +
-			greekSupportCode01 +
-			additionalKeyboardSupportCode01 + ">" +
+			greekSupportCode01 + ">" +
 		"</textarea>" +
 		greekSupportCode02 +
-		additionalKeyboardSupportCode02 +
+		additionalKeyboardSupportCode +
 		elementRemovalCode;
 
 	var textElementInputGroup = document.createElement("div");

@@ -2,18 +2,7 @@
 // UTF-8 encoded file!
 
 
-// Global variables:
-var currentTextAreaForAdditionalKeyboard;
-var clientBrowser = navigator.userAgent.toLowerCase();
-var isGeckoBrowser = ((clientBrowser.indexOf('gecko')!=-1) && (clientBrowser.indexOf('khtml') == -1));
-
-
-// TypeGreek code:
-function switchGreek(textAreaId) {
-	document.getElementById(textAreaId).focus();
-}
-
-
+// Polytonic Greek typesetting help:
 function toggleGreekKeyboardHelp(partialDivName) {
 	var greekKeyboardHelpContents = "" +
 		"<fieldset class='letter-box'><p class='letter-box-p'>Q&nbsp;<font color='red'>Θ</font></p></fieldset>" +
@@ -69,62 +58,60 @@ function toggleGreekKeyboardHelp(partialDivName) {
 }
 
 
-// Additional keyboard code:
-function toggleAdditionalKeyboard(elementId) {
+// Additional keyboard buttons:
+function toggleAdditionalKeyboard(placeholderId, target) {
 	var additionalKeyboardRowContents = "" +
-		"<input type='button' value='ϐ' onClick=\"javascript:insertTags('ϐ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ϲ' onClick=\"javascript:insertTags('ϲ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ϛ' onClick=\"javascript:insertTags('Ϛ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ϛ' onClick=\"javascript:insertTags('ϛ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ϟ' onClick=\"javascript:insertTags('Ϟ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ϟ' onClick=\"javascript:insertTags('ϟ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ϡ' onClick=\"javascript:insertTags('Ϡ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ϡ' onClick=\"javascript:insertTags('ϡ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ϐ' onClick=\"javascript:insertLetter('" + target + "', 'ϐ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ϲ' onClick=\"javascript:insertLetter('" + target + "', 'ϲ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ϛ' onClick=\"javascript:insertLetter('" + target + "', 'Ϛ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϛ' onClick=\"javascript:insertLetter('" + target + "', 'ϛ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ϟ' onClick=\"javascript:insertLetter('" + target + "', 'Ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϟ' onClick=\"javascript:insertLetter('" + target + "', 'ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ϡ' onClick=\"javascript:insertLetter('" + target + "', 'Ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
 		//"&nbsp;&nbsp;&nbsp;" +
-		"<input type='button' value='Ё' onClick=\"javascript:insertTags('Ё', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ё' onClick=\"javascript:insertTags('ё', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ы' onClick=\"javascript:insertTags('Ы', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ы' onClick=\"javascript:insertTags('ы', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Э' onClick=\"javascript:insertTags('Э', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='э' onClick=\"javascript:insertTags('э', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		//"<input type='button' value='ѝ' onClick=\"javascript:insertTags('ѝ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ё' onClick=\"javascript:insertLetter('" + target + "', 'Ё')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ё' onClick=\"javascript:insertLetter('" + target + "', 'ё')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ы' onClick=\"javascript:insertLetter('" + target + "', 'Ы')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ы' onClick=\"javascript:insertLetter('" + target + "', 'ы')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Э' onClick=\"javascript:insertLetter('" + target + "', 'Э')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='э' onClick=\"javascript:insertLetter('" + target + "', 'э')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		//"<input type='button' value='ѝ' onClick=\"javascript:insertLetter('" + target + "', 'ѝ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
 		//"&nbsp;&nbsp;&nbsp;" +
-		"<input type='button' value='Ä' onClick=\"javascript:insertTags('Ä', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ä' onClick=\"javascript:insertTags('ä', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ö' onClick=\"javascript:insertTags('Ö', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ö' onClick=\"javascript:insertTags('ö', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ü' onClick=\"javascript:insertTags('Ü', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ü' onClick=\"javascript:insertTags('ü', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ß' onClick=\"javascript:insertTags('ß', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-
+		"<input type='button' value='Ä' onClick=\"javascript:insertLetter('" + target + "', 'Ä')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ä' onClick=\"javascript:insertLetter('" + target + "', 'ä')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ö' onClick=\"javascript:insertLetter('" + target + "', 'Ö')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ö' onClick=\"javascript:insertLetter('" + target + "', 'ö')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ü' onClick=\"javascript:insertLetter('" + target + "', 'Ü')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ü' onClick=\"javascript:insertLetter('" + target + "', 'ü')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ß' onClick=\"javascript:insertLetter('" + target + "', 'ß')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
 		"<br>" +
-
-		"<input type='button' value='É' onClick=\"javascript:insertTags('É', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='é' onClick=\"javascript:insertTags('é', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='À' onClick=\"javascript:insertTags('À', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='à' onClick=\"javascript:insertTags('à', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='È' onClick=\"javascript:insertTags('È', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='è' onClick=\"javascript:insertTags('è', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ù' onClick=\"javascript:insertTags('Ù', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ù' onClick=\"javascript:insertTags('ù', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Â' onClick=\"javascript:insertTags('Â', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='â' onClick=\"javascript:insertTags('â', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ê' onClick=\"javascript:insertTags('Ê', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ê' onClick=\"javascript:insertTags('ê', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Î' onClick=\"javascript:insertTags('Î', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='î' onClick=\"javascript:insertTags('î', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ô' onClick=\"javascript:insertTags('Ô', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ô' onClick=\"javascript:insertTags('ô', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Û' onClick=\"javascript:insertTags('Û', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='û' onClick=\"javascript:insertTags('û', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ë' onClick=\"javascript:insertTags('Ë', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ë' onClick=\"javascript:insertTags('ë', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ï' onClick=\"javascript:insertTags('Ï', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ï' onClick=\"javascript:insertTags('ï', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ÿ' onClick=\"javascript:insertTags('Ÿ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ÿ' onClick=\"javascript:insertTags('ÿ', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='Ç' onClick=\"javascript:insertTags('Ç', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-		"<input type='button' value='ç' onClick=\"javascript:insertTags('ç', '', '')\" class='btn btn-success btn-xs btn-letters'>&nbsp;";
+		"<input type='button' value='É' onClick=\"javascript:insertLetter('" + target + "', 'É')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='é' onClick=\"javascript:insertLetter('" + target + "', 'é')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='À' onClick=\"javascript:insertLetter('" + target + "', 'À')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='à' onClick=\"javascript:insertLetter('" + target + "', 'à')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='È' onClick=\"javascript:insertLetter('" + target + "', 'È')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='è' onClick=\"javascript:insertLetter('" + target + "', 'è')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ù' onClick=\"javascript:insertLetter('" + target + "', 'Ù')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ù' onClick=\"javascript:insertLetter('" + target + "', 'ù')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Â' onClick=\"javascript:insertLetter('" + target + "', 'Â')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='â' onClick=\"javascript:insertLetter('" + target + "', 'â')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ê' onClick=\"javascript:insertLetter('" + target + "', 'Ê')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ê' onClick=\"javascript:insertLetter('" + target + "', 'ê')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Î' onClick=\"javascript:insertLetter('" + target + "', 'Î')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='î' onClick=\"javascript:insertLetter('" + target + "', 'î')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ô' onClick=\"javascript:insertLetter('" + target + "', 'Ô')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ô' onClick=\"javascript:insertLetter('" + target + "', 'ô')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Û' onClick=\"javascript:insertLetter('" + target + "', 'Û')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='û' onClick=\"javascript:insertLetter('" + target + "', 'û')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ë' onClick=\"javascript:insertLetter('" + target + "', 'Ë')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ë' onClick=\"javascript:insertLetter('" + target + "', 'ë')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ï' onClick=\"javascript:insertLetter('" + target + "', 'Ï')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ï' onClick=\"javascript:insertLetter('" + target + "', 'ï')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ÿ' onClick=\"javascript:insertLetter('" + target + "', 'Ÿ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ÿ' onClick=\"javascript:insertLetter('" + target + "', 'ÿ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='Ç' onClick=\"javascript:insertLetter('" + target + "', 'Ç')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+		"<input type='button' value='ç' onClick=\"javascript:insertLetter('" + target + "', 'ç')\" class='btn btn-success btn-xs btn-letters'>&nbsp;";
 
 	var rowBox = document.createElement("div");
 	rowBox.setAttribute("class", "form-group col-xs-12");
@@ -134,7 +121,7 @@ function toggleAdditionalKeyboard(elementId) {
 	row.setAttribute("class", "row");
 	row.appendChild(rowBox);
 
-	var placeholderElement = document.getElementById(elementId);
+	var placeholderElement = document.getElementById(placeholderId);
 
 	if (!placeholderElement.hasChildNodes()) {
 		placeholderElement.appendChild(row);
@@ -143,67 +130,16 @@ function toggleAdditionalKeyboard(elementId) {
 			placeholderElement.removeChild(placeholderElement.firstChild);
 		}
 	}
-} 
-
-
-// Additional keyboard code:
-// The following code is adapted from Steev's JavaScript keyboard (GPL).
-// http://www.bluedust.com/pub/web/sjk.htm
-function setCurrentTextArea(textAreaId) {
-	currentTextAreaForAdditionalKeyboard = document.getElementById(textAreaId);
 }
 
 
 // Additional keyboard code:
-// The following code is adapted from wikibits.js - MediaWiki JavaScript support functions and phpBB (both GPL).
-// http://www.mediawiki.org/wiki/MediaWiki
-// http://www.phpbb.com/support/license.php
-function insertTags(tagOpen, tagClose, sampleText) {
-	// IE:
-	if (document.selection && !isGeckoBrowser) {
-		var theSelection = document.selection.createRange().text;
-		if (!theSelection)
-			theSelection=sampleText;
-		currentTextAreaForAdditionalKeyboard.focus();
-		// Exclude ending space char, if any:
-		if (theSelection.charAt(theSelection.length - 1) == " ") {
-			theSelection = theSelection.substring(0, theSelection.length - 1);
-			document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
-		} else {
-			document.selection.createRange().text = tagOpen + theSelection + tagClose;
-		}
-	// Mozilla:
-	} else if(currentTextAreaForAdditionalKeyboard.selectionStart || currentTextAreaForAdditionalKeyboard.selectionStart == '0') {
-		var replaced = false;
-		var startPos = currentTextAreaForAdditionalKeyboard.selectionStart;
-		var endPos = currentTextAreaForAdditionalKeyboard.selectionEnd;
-		if (endPos-startPos)
-			replaced = true;
-		var scrollTop = currentTextAreaForAdditionalKeyboard.scrollTop;
-		var myText = (currentTextAreaForAdditionalKeyboard.value).substring(startPos, endPos);
-		if (!myText)
-			myText=sampleText;
-		// Exclude ending space char, if any:
-		if (myText.charAt(myText.length - 1) == " ") {
-			subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " ";
-		} else {
-			subst = tagOpen + myText + tagClose;
-		}
-		currentTextAreaForAdditionalKeyboard.value = currentTextAreaForAdditionalKeyboard.value.substring(0, startPos) + subst +
-			currentTextAreaForAdditionalKeyboard.value.substring(endPos, currentTextAreaForAdditionalKeyboard.value.length);
-		currentTextAreaForAdditionalKeyboard.focus();
-		// Set new selection:
-		if (replaced) {
-			var cPos = startPos+(tagOpen.length+myText.length+tagClose.length);
-			currentTextAreaForAdditionalKeyboard.selectionStart = cPos;
-			currentTextAreaForAdditionalKeyboard.selectionEnd = cPos;
-		} else {
-			currentTextAreaForAdditionalKeyboard.selectionStart = startPos+tagOpen.length;
-			currentTextAreaForAdditionalKeyboard.selectionEnd = startPos+tagOpen.length+myText.length;
-		}
-		currentTextAreaForAdditionalKeyboard.scrollTop = scrollTop;
-	}
-	// Reposition cursor, if possible:
-	if (currentTextAreaForAdditionalKeyboard.createTextRange)
-		currentTextAreaForAdditionalKeyboard.caretPos = document.selection.createRange().duplicate();
+function insertLetter(targetId, letter) {
+	var cursorPosition = $jQuery('#' + targetId).prop('selectionStart');
+	var value = $jQuery('#' + targetId).val();
+	var textBefore = value.substring(0, cursorPosition);
+	var textAfter  = value.substring(cursorPosition, value.length);
+
+	$jQuery('#' + targetId).val(textBefore + letter + textAfter);
+	$jQuery('#' + targetId).prop("selectionStart", cursorPosition + 1);
 }

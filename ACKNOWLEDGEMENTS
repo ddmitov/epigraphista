@@ -9,6 +9,7 @@ JAVASCRIPT LIBRARIES
 ====================
 https://jquery.com/
 http://amaury.carrade.eu/projects/jquery/autoResize.html
+http://madapaja.github.io/jquery.selection/
 http://getbootstrap.com/
 http://www.typegreek.com/
 http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
@@ -58,6 +59,8 @@ http://stackoverflow.com/questions/2302495/is-there-any-way-to-have-a-fieldset-w
 http://stackoverflow.com/questions/17114825/how-to-disable-button-after-one-click-with-validation-using-javascript
 http://stackoverflow.com/questions/3898781/how-can-i-change-a-buttons-color-on-hover
 http://stackoverflow.com/questions/26227462/bootstrap-how-to-use-validation-states-on-a-textarea
+http://stackoverflow.com/questions/11076975/insert-text-into-textarea-at-cursor-position-javascript
+http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area
 
 https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
 https://learn.jquery.com/using-jquery-core/document-ready/

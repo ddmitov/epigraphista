@@ -129,7 +129,6 @@
 									title="Текст на надписа" placeholder="Текст на надписа"
 									onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
 									onkeyup="javascript:return convertStr(this, event);"
-									onfocus="javascript:setCurrentTextArea('inscription');"
 									oninput="javascript:convertEpigraphicText('inscription');"></textarea>
 								<span class="input-group-addon btn btn-info"
 									onclick="javascript:convertEpigraphicText('inscription');" title="Превръщане на текста на надписа в Epidoc XML фрагмент">
@@ -142,7 +141,7 @@
 										title="Помощ за въвеждането на политоничен гръцки текст">Ἐλληνική</a>
 								</span>
 								<span class="input-group-addon btn btn-info"
-									onclick="javascript:toggleAdditionalKeyboard('inscription-additional-keyboard');" title="Допълнителна клавиатура">
+									onclick="javascript:toggleAdditionalKeyboard('inscription-additional-keyboard', 'inscription');" title="Допълнителна клавиатура">
 									<span class="glyphicon glyphicon-font"></span>
 								</span>
 							</div>
