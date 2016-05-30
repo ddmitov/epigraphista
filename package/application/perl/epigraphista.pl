@@ -13,6 +13,9 @@ my $index_page_link = "http://perl-executing-browser-pseudodomain/index.html";
 my $inscriptions_directory = "$cwd/package/data/inscriptions";
 ########## SETTINGS END HERE ##########
 
+# Create inscriptions directory if it does not exist:
+mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
+
 # Embedded template:
 my $xml = "<?xml version='1.0' encoding='UTF-8'?>
 <?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://relaxng.org/ns/structure/1.0'?>

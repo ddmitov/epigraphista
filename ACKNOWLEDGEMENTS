@@ -61,6 +61,7 @@ http://stackoverflow.com/questions/3898781/how-can-i-change-a-buttons-color-on-h
 http://stackoverflow.com/questions/26227462/bootstrap-how-to-use-validation-states-on-a-textarea
 http://stackoverflow.com/questions/11076975/insert-text-into-textarea-at-cursor-position-javascript
 http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area
+http://stackoverflow.com/questions/5050884/textarea-auto-resize-on-paste
 
 https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
 https://learn.jquery.com/using-jquery-core/document-ready/
@@ -82,3 +83,5 @@ http://www.tutorialspoint.com/perl/perl_subroutines.htm
 http://www.tutorialspoint.com/perl/perl_regular_expressions.htm
 
 http://stackoverflow.com/questions/1003632/how-can-i-see-if-a-perl-hash-already-has-a-certain-key
+http://stackoverflow.com/questions/1849329/is-there-a-perl-shortcut-to-count-the-number-of-matches-in-a-string
+http://stackoverflow.com/questions/701458/how-can-i-create-a-directory-if-one-doesnt-exist-using-perl

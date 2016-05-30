@@ -11,7 +11,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 	var greekSupportCode02 = "" +
 		"<span class='input-group-addon'>" +
 			"<input type='checkbox' id='" + label + "-switch-greek' name='" + name + "_switch_greek'" +
-				"onclick=\"switchGreek('" + label + "');\" title='Въвеждане на политоничен гръцки текст'/>&nbsp;" +
+				"title='Въвеждане на политоничен гръцки текст'/>&nbsp;" +
 			"<a href=\"javascript:toggleGreekKeyboardHelp('" + label + "');\"" +
 				"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>" +
 		"</span>";
