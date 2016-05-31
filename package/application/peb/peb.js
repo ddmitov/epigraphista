@@ -5,28 +5,32 @@
 
 
 function pebContextMenu() {
-	var contextMenu = '{' +
-						' "printPreview" : "Преглед за печат", ' +
-						' "print" : "Печат", ' +
-						' "cut" : "Изрежи", ' +
-						' "copy" : "Копирай", ' +
-						' "paste" : "Постави", ' +
-						' "selectAll" : "Избери всичко" ' +
-					'}';
-	return contextMenu;
+	var contextMenuObject = new Object();
+
+	contextMenuObject.printPreview = "Преглед за печат";
+	contextMenuObject.print = "Печат";
+
+	contextMenuObject.cut = "Изрежи";
+	contextMenuObject.copy = "Копирай";
+	contextMenuObject.paste = "Постави";
+	contextMenuObject.selectAll = "Избери всичко";
+
+	return JSON.stringify(contextMenuObject);
 }
 
 
 function pebMessageBoxElements() {
-	var messageBoxElements = '{' +
-						' "alertTitle" : "Внимание", ' +
-						' "okLabel" : "Разбрах", ' +
-						' "confirmTitle" : "Потвърждение", ' +
-						' "yesLabel" : "Да", ' +
-						' "noLabel" : "Не", ' +
-						' "promptTitle" : "" ' +
-					'}';
-	return messageBoxElements;
+	var messageBoxElementsObject = new Object();
+
+	messageBoxElementsObject.alertTitle = "Внимание";
+	messageBoxElementsObject.confirmTitle = "Потвърждение";
+	messageBoxElementsObject.promptTitle = "Въвеждане на данни";
+
+	messageBoxElementsObject.okLabel = "Разбрах";
+	messageBoxElementsObject.yesLabel = "Да";
+	messageBoxElementsObject.noLabel = "Не";
+
+	return  JSON.stringify(messageBoxElementsObject);
 }
 
 
