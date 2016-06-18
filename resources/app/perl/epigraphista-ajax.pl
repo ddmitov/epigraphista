@@ -7,11 +7,9 @@ use Cwd;
 my $cwd = cwd();
 
 ########## SETTINGS START HERE ##########
-my $stylesheet_link = "http://perl-executing-browser-pseudodomain/bootstrap/css/bootstrap.css";
-my $index_page_link = "http://perl-executing-browser-pseudodomain/index.html";
-#~ my $template_filepath = "$cwd/package/data/template/telamon-template.xml";
-my $inscriptions_directory = "$cwd/package/data/inscriptions";
-########## SETTINGS END HERE ##########
+#~ my $template_filepath = "$cwd/resources/data/template/telamon-template.xml";
+my $inscriptions_directory = "$cwd/resources/data/inscriptions";
+########## SETTINGS END HERE ###########
 
 # Create inscriptions directory if it does not exist:
 mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
@@ -193,42 +191,7 @@ open my $output_filehandle, ">", $inscription_filepath or die "Can not open file
 print $output_filehandle $xml;
 close $output_filehandle;
 
-print <<HTML
-<!DOCTYPE html>
-<html lang="bg">
-
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta charset="utf-8">
-
-		<title>Epigraphista</title>
-
-		<link rel="stylesheet" type="text/css" href="$stylesheet_link" media="all"/>
-
-		<style type='text/css'>
-			body {
-				text-align: center;
-			}
-		</style>
-	</head>
-
-	<body>
-		<div class="container-fluid">
-
-		<br>
-		<h3>Файлът е записан успешно!</h3>
-		<br>
-
-		<div class="form-group">
-			<a href='$index_page_link' target='_self' class="btn btn-primary">Запиши нов файл</a>
-		</div>
-
-		</div>
-	</body>
-
-</html>
-HTML
-;
+print "File saved.";
 
 # Convert path separators to native path separators depending on the operating system:
 sub to_native_separators {

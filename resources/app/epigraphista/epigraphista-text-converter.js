@@ -6,7 +6,7 @@
 // http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
 // http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
 // Epigraphista Text Converter (ETC) is licensed under the terms of GNU GPL version 3.
-// Dimitar D. Mitov, 2015.
+// Dimitar D. Mitov, 2015 - 2016.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

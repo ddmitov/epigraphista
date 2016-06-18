@@ -5,7 +5,7 @@ EPIGRAPHISTA
 Amata mea Argeia - gratiam magnam tibi ago!
 Patientia tua in studiis meis computatoriis auxilium meum maximum!
 
-JAVASCRIPT LIBRARIES
+JAVASCRIPT LIBRARIES & FRAMEWORKS
 ====================
 https://jquery.com/
 http://amaury.carrade.eu/projects/jquery/autoResize.html
@@ -16,6 +16,7 @@ http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
 http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
 
 HTML, CSS & JAVASCRIPT REFERENCE
+(including Electron and NW.js)
 ====================
 http://www.w3schools.com/jsref/dom_obj_all.asp
 http://www.w3schools.com/jsref/met_node_appendchild.asp
@@ -35,6 +36,7 @@ http://www.w3schools.com/jsref/event_onpaste.asp
 http://www.w3schools.com/jsref/met_html_focus.asp
 http://www.w3schools.com/jsref/met_element_getelementsbytagname.asp
 http://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
+http://www.w3schools.com/jquery/ajax_getscript.asp
 
 http://stackoverflow.com/questions/22888298/bootstrap-3-how-to-get-two-form-inputs-on-one-line-and-other-inputs-on-individu
 http://stackoverflow.com/questions/18036315/centering-bootstrap-input-fields
@@ -62,19 +64,36 @@ http://stackoverflow.com/questions/26227462/bootstrap-how-to-use-validation-stat
 http://stackoverflow.com/questions/11076975/insert-text-into-textarea-at-cursor-position-javascript
 http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area
 http://stackoverflow.com/questions/5050884/textarea-auto-resize-on-paste
+http://stackoverflow.com/questions/5113374/javascript-check-if-variable-exists-is-defined-initialized
+http://stackoverflow.com/questions/15521343/conditionally-load-javascript-file
+http://stackoverflow.com/questions/13230370/nodejs-child-process-write-to-stdin-from-an-already-initialised-process
+http://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
+http://stackoverflow.com/questions/31529772/setting-app-icon-for-electron-atom-shell-app
+http://stackoverflow.com/questions/30681639/how-to-access-browserwindow-javascript-global-from-main-process-in-electron
+http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
 
 https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
 https://learn.jquery.com/using-jquery-core/document-ready/
+
+https://github.com/nwjs/nw.js/wiki/Changes-related-to-node
+https://github.com/nwjs/nw.js/issues/4911
+https://github.com/b1rdex/nw-contextmenu
+https://github.com/electron/electron/blob/master/docs/api/menu.md
+https://github.com/electron/electron/blob/master/docs/api/ipc-main.md
+https://github.com/electron/electron/blob/master/docs/api/web-contents.md
+
+https://gist.github.com/jnormore/7418776
+https://gist.github.com/leommoore/4484379
 
 http://www.randomsnippets.com/2008/02/21/how-to-dynamically-add-form-elements-via-javascript/
 http://www.coderanch.com/t/112558/HTML-CSS-JavaScript/Adding-alerts-Reset-button
 http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/
 http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm
 http://fettblog.eu/style-select-elements/
-http://www.javascript-coder.com/javascript-form/javascript-form-submit.phtml
 https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx (RegExp Object (JavaScript))
-https://gist.github.com/jnormore/7418776
 http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
+http://www.tutorialspoint.com/jquery/ajax-serialize.htm
+http://unixpapa.com/js/dyna.html
 
 PERL REFERENCE
 ====================

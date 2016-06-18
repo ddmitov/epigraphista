@@ -1,0 +1,10 @@
+{
+  "name": "Epigraphista-NW.js",
+  "main": "resources/app/index.html",
+  "window": {
+    "title": "Epigraphista",
+    "icon": "resources/app.png",
+    "min_width": 800,
+    "min_height": 600
+  }
+}

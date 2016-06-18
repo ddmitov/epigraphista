@@ -1,6 +1,4 @@
 
-// UTF-8 encoded file!
-
 
 function addTextAreaElement(label, placeholderText, size, greekSupport, additionalKeyboard) {
 	var name = label.replace(/-/g, "_");
@@ -11,17 +9,17 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 	var greekSupportCode02 = "" +
 		"<span class='input-group-addon'>" +
 			"<input type='checkbox' id='" + label + "-switch-greek' name='" + name + "_switch_greek'" +
-				"title='Въвеждане на политоничен гръцки текст'/>&nbsp;" +
+				"title='" + TS.greekPolytonicInputTitle + "'/>&nbsp;" +
 			"<a href=\"javascript:toggleGreekKeyboardHelp('" + label + "');\"" +
-				"title='Помощ за въвеждането на политоничен гръцки текст'>Ἐλληνική</a>" +
+				"title='" + TS.greekPolytonicInputHelpTitle + "'>" + TS.greekPolytonicInputLabel + "</a>" +
 		"</span>";
 	var additionalKeyboardSupportCode = "" +
 		"<span class='input-group-addon btn btn-info'" +
-			"onclick=\"javascript:toggleAdditionalKeyboard('" + label + "-additional-keyboard', '" + label + "')\" title='Допълнителна клавиатура'>" +
+			"onclick=\"javascript:toggleAdditionalKeyboard('" + label + "-additional-keyboard', '" + label + "')\" title='" + TS.additionalKeyboardTitle + "'>" +
 			"<span class='glyphicon glyphicon-font'></span>" +
 		"</span>";
 	var elementRemovalCode = "" +
-		"<span class='input-group-addon btn btn-danger' onclick=\"javascript:clearElementGroup('" + label + "');\" title='Премахване на елемента'>" +
+		"<span class='input-group-addon btn btn-danger' onclick=\"javascript:clearElementGroup('" + label + "');\" title='" + TS.elementRemovalTitle + "'>" +
 			"<span class='glyphicon glyphicon-remove'></span>" +
 		"</span>";
 
@@ -112,16 +110,18 @@ function clearElementGroup(partialId){
 	}
 
 	if (textEntered == true) {
-		if (confirm("В този елемент е попълнен текст и той ще бъде загубен!\n" +
-			"Сигурни ли сте, че искате да премахнете избрания елемент?",
-			"Epigraphista")) {
-			while (placeholderElement.hasChildNodes()) {
-				placeholderElement.removeChild(placeholderElement.firstChild);
+		alertify.set({labels: {ok : "Да", cancel : "Не"}});
+		alertify.set({buttonFocus: "cancel"});
+		alertify.confirm(TS.elementRemovalConfirmMessage, function (confirmation) {
+			if (confirmation) {
+				while (placeholderElement.hasChildNodes()) {
+					placeholderElement.removeChild(placeholderElement.firstChild);
+				}
+				var buttonToEnable = document.getElementById(partialId + "-button");
+				buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
+				buttonToEnable.disabled = false;
 			}
-			var buttonToEnable = document.getElementById(partialId + "-button");
-			buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
-			buttonToEnable.disabled = false;
-		}
+		});
 	}
 
 	if (textEntered == false) {

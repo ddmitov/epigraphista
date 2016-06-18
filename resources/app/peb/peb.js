@@ -34,8 +34,16 @@ function pebMessageBoxElements() {
 }
 
 
-function pebCloseConfirmation() {
-	var confirmation = confirm("На тази страница е попълнен текст и той ще бъде загубен!\n" +
-							"Сигурни ли сте, че искате да изключите програмата?");
-	return confirmation;
+function pebCloseConfirmationAsync() {
+	alertify.set({labels: {ok : "Да", cancel : "Не"}});
+	alertify.set({buttonFocus: "cancel"});
+	alertify.confirm("Попълненият текст не е записан и ще бъде загубен!<br>" +
+					"Сигурни ли сте, че искате да изключите програмата?", function (confirmation) {
+		if (confirmation) {
+			$jQuery.ajax({
+				url: 'http://perl-executing-browser-pseudodomain/close.function',
+				method: 'GET'
+			});
+		}
+	});
 }

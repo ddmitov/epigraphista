@@ -7,6 +7,16 @@
 
 		<title>Epigraphista</title>
 
+		<script>
+		// Electron compatible code:
+		if (navigator.userAgent.match(/Electron/)) {
+			if (typeof module === 'object') {
+				window.module = module;
+				module = undefined;
+			}
+		}
+		</script>
+
 		<script type="text/javascript" src="jquery/jquery-1.11.1.min.js" charset="utf-8"></script>
 		<script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
 		<script type="text/javascript" src="jquery/jquery.selection.js" charset="utf-8"></script>
@@ -14,24 +24,70 @@
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all"/>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
 
+		<script type="text/javascript" src="alertify/lib/alertify.min.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.core.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.default.css" media="all"/>
+
 		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all"/>
-		<script type="text/javascript" src="epigraphista/epigraphista-form-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-gui-initialization.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-perl-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-text-converter.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
 
 		<script type="text/javascript" src="typegreek/typegreek.js" charset="utf-8"></script>
 
-		<script type="text/javascript" src="peb/peb.js" charset="utf-8"></script>
+		<script type="text/javascript" src="translations/bulgarian.js" charset="utf-8"></script>
+
+		<script>
+			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
+			var $jQuery = jQuery.noConflict();
+
+			// PEB compatible code:
+			if (navigator.userAgent.match(/Perl Executing Browser/)) {
+				$jQuery.getScript("peb/peb.js");
+				
+			}
+
+			// Electron compatible code:
+			if (navigator.userAgent.match(/Electron/)) {
+				if (window.module) {
+					module = window.module;
+				}
+
+				var script = document.createElement('script');
+				script.type='text/javascript';
+				script.src = 'electron-nwjs/electron.js';
+				script.charset = 'utf-8';
+				document.getElementsByTagName('head')[0].appendChild(script);
+
+				script.onload= function () {
+					electronContextMenu();
+
+					// Wait for close event message from the main process and react accordingly:
+					require('electron').ipcRenderer.on('checkUserInputBeforeClose', function() {
+						electronCheckUserInputBeforeClose();
+					});
+				}
+			}
+
+			// NW.js compatible code:
+			if (typeof(nw) !== 'undefined') {
+				var win = nw.Window.get();
+				win.maximize();
+
+				$jQuery.getScript("electron-nwjs/nw.js");
+			}
+		</script>
 	</head>
 
 	<body>
-		<div class="container-fluid">
+		<div class="container-fluid" id="container">
 
 		<br>
 
-			<form id="epigraphista-form" name="epigraphista_form" action="perl/epigraphista.pl" method="post">
+			<form id="epigraphista-form" name="epigraphista_form">
 
 				<div class="row section-title">
 					Описание на надписа
@@ -178,56 +234,12 @@
 		</div>
 
 		<script type="text/javascript">
-			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
-			var $jQuery = jQuery.noConflict();
+			var originalContainerContents;
 
 			$jQuery(document).ready(function() {
-				if (!navigator.userAgent.match(/WebKit/i)) {
-					var mobilis = isMobile();
-					if (mobilis == true) {
-						document.getElementsByClassName("container-fluid")[0].innerHTML =
-							"<h2>Epigraphista does not support<br>touchscreen devices!</h2>";
-					}
-					function isMobile() {
-						try {
-							document.createEvent("TouchEvent");
-							return true;
-						}
-						catch(exception) {
-							return false;
-						}
-					}
-				}
-
-				if (navigator.userAgent.match(/WebKit/i)) {
-					var mobilis;
-					window.addEventListener('touchstart', function setHasTouch () {
-						mobilis = true;
-						// Remove event listener once fired, otherwise it'll kill scrolling performance
-						window.removeEventListener('touchstart', setHasTouch);
-					}, false);
-					if (mobilis == true) {
-						document.getElementsByClassName("container-fluid")[0].innerHTML =
-							"<h2>Epigraphista does not support<br>touchscreen devices!</h2>";
-					}
-				}
-
-				$jQuery("#title").autoResize();
-
-				$jQuery("#title").on('paste', function(e){
-					setTimeout(function () {
-						jQuery("#title").trigger('keyup');
-					}, 150);
-				});
-
-				$jQuery("#inscription").autoResize();
-
-				$jQuery("#inscription").on('paste', function(e){
-					setTimeout(function () {
-						jQuery("#inscription").trigger('keyup');
-					}, 150);
-				});
-
+				detectTouchScreen();
+				guiInitialization();
+				originalContainerContents = document.getElementsByClassName("container-fluid")[0].innerHTML;
 			});
 		</script>
 

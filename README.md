@@ -2,12 +2,14 @@
 Epigraphista
 ==================================
 
-Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a desktop GUI framework, HTML 5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for file-writing backend. It's language is currently Bulgarian because it is intended for, but not limited to, Bulgarian users. Epigraphista could also be used as a server-side application without Perl Executing Browser.
+Epigraphista is an EpiDoc XML file creator using Perl Executing Browser, Electron or NW.js as a desktop GUI framework, HTML 5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for file-writing backend. It's language is currently Bulgarian because it is intended for, but not limited to, Bulgarian users. Epigraphista could also be used as a server-side application.
   
 ## Desktop Runtime Requirements
   
 * Any Linux, Mac or Windows Perl 5 distribution,
-* Compiled version of [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser).
+* [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser) or
+[Electron] (http://electron.atom.io/) or
+[NW.js] (http://nwjs.io/).
   
 ## Server Runtime Requirements
   
@@ -20,6 +22,7 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser as a des
 * [jQuery autoResize](http://amaury.carrade.eu/projects/jquery/autoResize.html) by Amaury Carrade
 * [jQuery.selection](http://madapaja.github.io/jquery.selection/) by Koji Iwasaki (@madapaja)
 * [Bootstrap](http://getbootstrap.com/)
+* [Alertify.js] (https://alertifyjs.org/) by Fabien Doiron
 * [TypeGreek](http://www.typegreek.com/) by Randy Hoyt
 * regular expressions and code fragments from [Chapel Hill Electronic Text Converter (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
   
