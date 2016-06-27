@@ -7,9 +7,7 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser, Electro
 ## Desktop Runtime Requirements
   
 * Any Linux, Mac or Windows Perl 5 distribution,
-* [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser) or
-[Electron] (http://electron.atom.io/) or
-[NW.js] (http://nwjs.io/).
+* [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser) or [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
   
 ## Server Runtime Requirements
   

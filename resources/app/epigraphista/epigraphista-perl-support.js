@@ -8,6 +8,7 @@ function finalCheckAndSubmit() {
 		titleGroup.setAttribute("class", "form-group has-error col-xs-12");
 
 		alertify.set({labels: {ok : TS.okLabel}});
+		alertify.set({buttonFocus: "ok"});
 		alertify.alert(TS.noTitleAlertMessage, function () {
 			titleGroup.setAttribute("class", "form-group col-xs-12");
 		});
@@ -25,6 +26,7 @@ function finalCheckAndSubmit() {
 			supportGroup.setAttribute("class", "form-group stop-shrinking has-error col-xs-12");
 
 			alertify.set({labels: {ok : TS.okLabel}});
+			alertify.set({buttonFocus: "ok"});
 			alertify.alert(TS.invalidXMLTagAlertMessage, function () {
 				supportGroup.setAttribute("class", "form-group stop-shrinking col-xs-12");
 			});
@@ -40,6 +42,7 @@ function finalCheckAndSubmit() {
 		inscriptionInputGroup.setAttribute("class", "form-group has-error col-xs-12");
 
 		alertify.set({labels: {ok : TS.okLabel}});
+		alertify.set({buttonFocus: "ok"});
 		alertify.alert(TS.noInscriptionAlertMessage, function () {
 			inscriptionInputGroup.setAttribute("class", "form-group col-xs-12");
 		});
@@ -55,6 +58,7 @@ function finalCheckAndSubmit() {
 		inscriptionInputGroup.setAttribute("class", "form-group has-error col-xs-12");
 
 		alertify.set({labels: {ok : TS.okLabel}});
+		alertify.set({buttonFocus: "ok"});
 		alertify.alert(TS.singleSquareBracketAlertMessage, function () {
 			inscriptionInputGroup.setAttribute("class", "form-group col-xs-12");
 		});
