@@ -41,7 +41,7 @@ function pebCloseConfirmationAsync() {
 					"Сигурни ли сте, че искате да изключите програмата?", function (confirmation) {
 		if (confirmation) {
 			$jQuery.ajax({
-				url: 'http://perl-executing-browser-pseudodomain/close.function',
+				url: 'http://perl-executing-browser-pseudodomain/close-window.function',
 				method: 'GET'
 			});
 		}
