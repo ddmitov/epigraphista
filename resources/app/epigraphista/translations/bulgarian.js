@@ -29,6 +29,9 @@ TS.fileSavedMessage = "Файлът е записан успешно!";
 TS.closeConfirmation = "Попълненият текст не е записан и ще бъде загубен!<br>" +
 						"Сигурни ли сте, че искате да изключите програмата?";
 
+TS.loadAnotherPageConfirmation = "Попълненият текст не е записан и ще бъде загубен!<br>" +
+								"Сигурни ли сте, че искате да продължите?";
+
 TS.okLabel = "Разбрах";
 TS.yesLabel = "Да";
 TS.noLabel = "Не";
@@ -38,3 +41,5 @@ TS.contextMenuCopyLabel = "Копирай";
 TS.contextMenuPasteLabel = "Постави";
 TS.contextMenuSelectAllLabel = "Избери всичко";
 TS.contextMenuPrint = "Печат";
+
+TS.pebContextMenuPrintPreview = "Преглед за печат";

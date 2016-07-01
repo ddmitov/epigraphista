@@ -2,7 +2,7 @@
 Epigraphista
 ==================================
 
-Epigraphista is an EpiDoc XML file creator using Perl Executing Browser, Electron or NW.js as a desktop GUI framework, HTML 5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for file-writing backend. It's language is currently Bulgarian because it is intended for, but not limited to, Bulgarian users. Epigraphista could also be used as a server-side application.
+Epigraphista is an EpiDoc XML file creator using Perl Executing Browser, Electron or NW.js as a desktop GUI framework, HTML 5 and Bootstrap for a themable user interface, JavaScript for on-screen text conversion and Perl 5 for file-writing backend. Bulgarian and English versions are available and other translations can be added easily. Epigraphista could also be used as a server-side application.
   
 ## Desktop Runtime Requirements
   

@@ -18,25 +18,30 @@ http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
 HTML, CSS & JAVASCRIPT REFERENCE
 (including Electron and NW.js)
 ====================
+http://www.w3schools.com/tags/att_textarea_readonly.asp
+
 http://www.w3schools.com/jsref/dom_obj_all.asp
 http://www.w3schools.com/jsref/met_node_appendchild.asp
 http://www.w3schools.com/jsref/met_element_setattribute.asp
-http://www.w3schools.com/js/js_popup.asp
-http://www.w3schools.com/tags/att_textarea_readonly.asp
 http://www.w3schools.com/jsref/prop_style_marginbottom.asp
-http://www.w3schools.com/js/js_htmldom_css.asp
 http://www.w3schools.com/jsref/met_node_removechild.asp
 http://www.w3schools.com/jsref/prop_textarea_value.asp
 http://www.w3schools.com/jsref/jsref_length_string.asp
 http://www.w3schools.com/jsref/event_oninput.asp
-http://www.w3schools.com/bootstrap/bootstrap_case_container.asp
-http://www.w3schools.com/js/js_loop_while.asp
 http://www.w3schools.com/jsref/prop_style_cursor.asp
 http://www.w3schools.com/jsref/event_onpaste.asp
 http://www.w3schools.com/jsref/met_html_focus.asp
 http://www.w3schools.com/jsref/met_element_getelementsbytagname.asp
 http://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
+http://www.w3schools.com/jsref/event_onbeforeunload.asp
+
+http://www.w3schools.com/js/js_popup.asp
+http://www.w3schools.com/js/js_htmldom_css.asp
+http://www.w3schools.com/js/js_loop_while.asp
+
 http://www.w3schools.com/jquery/ajax_getscript.asp
+
+http://www.w3schools.com/bootstrap/bootstrap_case_container.asp
 
 http://stackoverflow.com/questions/22888298/bootstrap-3-how-to-get-two-form-inputs-on-one-line-and-other-inputs-on-individu
 http://stackoverflow.com/questions/18036315/centering-bootstrap-input-fields
@@ -71,6 +76,10 @@ http://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
 http://stackoverflow.com/questions/31529772/setting-app-icon-for-electron-atom-shell-app
 http://stackoverflow.com/questions/30681639/how-to-access-browserwindow-javascript-global-from-main-process-in-electron
 http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
+http://stackoverflow.com/questions/18777235/center-content-in-responsive-bootstrap-navbar
+http://stackoverflow.com/questions/926916/how-to-get-the-bodys-content-of-an-iframe-in-javascript
+http://stackoverflow.com/questions/5142825/how-to-load-page-dynamically-in-iframe
+http://stackoverflow.com/questions/3142837/capture-iframe-load-complete-event
 
 https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
 https://learn.jquery.com/using-jquery-core/document-ready/

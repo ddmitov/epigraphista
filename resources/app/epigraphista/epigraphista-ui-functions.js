@@ -110,7 +110,7 @@ function clearElementGroup(partialId){
 	}
 
 	if (textEntered == true) {
-		alertify.set({labels: {ok : "Да", cancel : "Не"}});
+		alertify.set({labels: {ok : TS.yesLabel, cancel : TS.noLabel}});
 		alertify.set({buttonFocus: "cancel"});
 		alertify.confirm(TS.elementRemovalConfirmMessage, function (confirmation) {
 			if (confirmation) {

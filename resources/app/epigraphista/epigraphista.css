@@ -23,6 +23,18 @@ pre {
 	margin-bottom: 0px;
 }
 
+.navbar {
+	display: inline-block;
+	float: center;
+	text-align: center;
+	vertical-align: top;
+	margin-top: 15px;
+	margin-bottom: 0px;
+	min-height: 40px;
+	border-color: transparent;
+	background-color: transparent;
+}
+
 .section-title {
 	padding-top: 4px;
 	padding-bottom: 4px;
