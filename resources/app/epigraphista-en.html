@@ -46,7 +46,6 @@
 			// PEB compatible code:
 			if (navigator.userAgent.match(/Perl Executing Browser/)) {
 				$jQuery.getScript("peb/peb.js");
-				
 			}
 
 			// Electron compatible code:
@@ -64,7 +63,7 @@
 				script.onload= function () {
 					electronContextMenu();
 
-					// Wait for close event message from the main process and react accordingly:
+					//~ // Wait for close event message from the main process and react accordingly:
 					require('electron').ipcRenderer.on('checkUserInputBeforeClose', function() {
 						electronCheckUserInputBeforeClose();
 					});
