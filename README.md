@@ -24,6 +24,10 @@ Epigraphista is an EpiDoc XML file creator using Perl Executing Browser, Electro
 * [TypeGreek](http://www.typegreek.com/) by Randy Hoyt
 * regular expressions and code fragments from [Chapel Hill Electronic Text Converter (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
   
+## Translations
+  
+Bulgarian version is currently the default one. To use the English version simply rename ```resources/app/epigraphista-en.html``` to ```resources/app/index.html```.
+  
 ## License
   
 This program is free software;  
