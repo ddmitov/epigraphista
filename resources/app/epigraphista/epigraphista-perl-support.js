@@ -1,5 +1,28 @@
 
 
+var perlInterpreterFullPath;
+if (typeof(nw) !== 'undefined' || navigator.userAgent.match(/Electron/)) {
+	var dirname = require('./electron-nwjs/dirname').dirname;
+	var portablePerlInterpreterFullPath = dirname + "/perl/bin/perl";
+
+	var fs = require('fs');
+	fs.access(portablePerlInterpreterFullPath, function(error) {
+		if (error && error.code === 'ENOENT') {
+			var perlFullPathTester = "perl -e 'print $^X;'";
+			var exec = require('child_process').exec;
+
+			exec(perlFullPathTester, function (error, stdout, stderr) {
+				if (error == null && stdout.length > 0) {
+					perlInterpreterFullPath = stdout;
+				}
+			});
+		} else {
+			perlInterpreterFullPath = portablePerlInterpreterFullPath;
+		}
+	});
+}
+
+
 function finalCheckAndSubmit() {
 	// Check for title:
 	var title = document.getElementById("title").value;
@@ -81,7 +104,7 @@ function finalCheckAndSubmit() {
 			var interval = " ";
 			var censorScript = dirname + "/perl/censor.pl";
 			var script = dirname + "/perl/epigraphista-ajax.pl";
-			var commandLine = "perl" + interval + censorScript + interval + script;
+			var commandLine = perlInterpreterFullPath + interval + censorScript + interval + script;
 
 			var env = cleanEnvironment = {};
 
@@ -95,7 +118,10 @@ function finalCheckAndSubmit() {
 					console.log('Perl script error code: '+ error.code); 
 					console.log('Perl script signal received: '+ error.signal);
 				}
-				console.log('Perl script stderr:\n'+ stderr);
+
+				if (stderr) {
+					console.log('Perl script stderr:\n'+ stderr);
+				}
 
 				if (stdout == "File saved.") {
 					alertify.set({labels: {ok : TS.okLabel}});
