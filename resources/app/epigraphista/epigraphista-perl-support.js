@@ -1,12 +1,35 @@
 
 
+// Determine the operating system and
+// set operating-system-specific variables:
+var path;
+var perlInterpreterFileName;
+
+var os = require('os');
+var platform = os.platform();
+
+if (platform != "win32") {
+	perlInterpreterFileName = "perl";
+	path = require("path").posix;
+} else {
+	perlInterpreterFileName = "perl.exe";
+	path = require("path").win32;
+}
+
+
+// Determine where is the Perl interpreter:
 var perlInterpreterFullPath;
 if (typeof(nw) !== 'undefined' || navigator.userAgent.match(/Electron/)) {
-	var dirname = require('./electron-nwjs/dirname').dirname;
-	var portablePerlInterpreterFullPath = dirname + "/perl/bin/perl";
+	// Get the full path of directory where Electron or NW.js binary is located:
+	var binaryRoot = require('./electron-nwjs/dirname').dirname.replace(/(\/|\\)resources(\/|\\)app/, "");
+
+	// Compose the full path to the portable Perl interpreter (if any):
+	var portablePerlInterpreterFullPath = path.join(binaryRoot, "perl/bin", perlInterpreterFileName);
 
 	var fs = require('fs');
 	fs.access(portablePerlInterpreterFullPath, function(error) {
+		// If portable Perl interpreter is not found,
+		// determine the full path of the first Perl interpreter on PATH:
 		if (error && error.code === 'ENOENT') {
 			var perlFullPathTester = "perl -e 'print $^X;'";
 			var exec = require('child_process').exec;
@@ -95,23 +118,25 @@ function finalCheckAndSubmit() {
 	if (typeof(nw) !== 'undefined' || navigator.userAgent.match(/Electron/)) {
 		// Wait 150 ms. for EpiDoc XML conversion to take place before file save:
 		setTimeout(function () {
+			// Get the form data:
 			var formData = $jQuery("#epigraphista-form").serialize();
 			var formDataLength = formData.length;
 
+			// Get the application directory full path:
 			var dirname = require('./electron-nwjs/dirname').dirname;
-			var exec = require ('child_process').exec, child;
 
-			var interval = " ";
-			var censorScript = dirname + "/perl/censor.pl";
-			var script = dirname + "/perl/epigraphista-ajax.pl";
-			var commandLine = perlInterpreterFullPath + interval + censorScript + interval + script;
+			// Compose the command line that has to be executed:
+			var scriptFullPath = path.join(dirname, "perl/epigraphista-ajax.pl");
+			var safetyArguments = " -M-ops=:dangerous -M-ops=fork ";
+			var commandLine = perlInterpreterFullPath + safetyArguments + scriptFullPath;
 
+			// Assign environment variables in a clean environment:
 			var env = cleanEnvironment = {};
-
-			// Assign environment variables:
 			cleanEnvironment['REQUEST_METHOD'] = 'POST';
 			cleanEnvironment['CONTENT_LENGTH'] = formDataLength;
 
+			// Run the Perl script:
+			var exec = require ('child_process').exec, child;
 			child = exec(commandLine, {env: cleanEnvironment}, function (error, stdout, stderr) {
 				if (error) {
 					console.log(error.stack); 
@@ -132,6 +157,7 @@ function finalCheckAndSubmit() {
 				}
 			});
 
+			// Send POST data to the Perl script:
 			child.stdin.write(formData);
 
 			child.on('exit', function (code) { 
