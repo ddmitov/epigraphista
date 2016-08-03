@@ -17,9 +17,11 @@ const ipcMain = require('electron').ipcMain;
 let mainWindow;
 
 function createWindow () {
+	// Set the icon path:
+	var iconFullPath = __dirname + ".png";
+
 	// Create the browser window:
-	var iconDir = __dirname.replace("/app", "");
-	mainWindow = new BrowserWindow({icon: iconDir + '/app.png'});
+	mainWindow = new BrowserWindow({icon: iconFullPath});
 
 	// Maximize the browser window:
 	mainWindow.maximize();

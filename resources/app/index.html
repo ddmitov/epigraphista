@@ -54,13 +54,13 @@
 					module = window.module;
 				}
 
-				var script = document.createElement('script');
-				script.type='text/javascript';
-				script.src = 'electron-nwjs/electron.js';
-				script.charset = 'utf-8';
-				document.getElementsByTagName('head')[0].appendChild(script);
+				var electronScript = document.createElement('script');
+				electronScript.type='text/javascript';
+				electronScript.src = 'electron-nwjs/electron.js';
+				electronScript.charset = 'utf-8';
+				document.getElementsByTagName('head')[0].appendChild(electronScript);
 
-				script.onload= function () {
+				electronScript.onload= function () {
 					electronContextMenu();
 
 					//~ // Wait for close event message from the main process and react accordingly:
@@ -68,6 +68,13 @@
 						electronCheckUserInputBeforeClose();
 					});
 				}
+
+				var camelHarnessScript = document.createElement('script');
+				camelHarnessScript.type='text/javascript';
+				camelHarnessScript.src = 'electron-nwjs/camel-harness.js';
+				camelHarnessScript.charset = 'utf-8';
+				document.getElementsByTagName('head')[0].appendChild(camelHarnessScript);
+
 			}
 
 			// NW.js compatible code:
@@ -76,6 +83,7 @@
 				win.maximize();
 
 				$jQuery.getScript("electron-nwjs/nw.js");
+				$jQuery.getScript("electron-nwjs/camel-harness.js");
 			}
 		</script>
 	</head>

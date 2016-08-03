@@ -18,8 +18,17 @@ http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
 HTML, CSS & JAVASCRIPT REFERENCE
 (including Electron and NW.js)
 ====================
-http://www.w3schools.com/tags/att_textarea_readonly.asp
+https://github.com/nwjs/nw.js/wiki/Changes-related-to-node
+https://github.com/nwjs/nw.js/issues/4911
+https://github.com/nwjs/nw.js/issues/1197
+https://github.com/b1rdex/nw-contextmenu
+https://github.com/electron/electron/blob/master/docs/api/menu.md
+https://github.com/electron/electron/blob/master/docs/api/ipc-main.md
 
+https://gist.github.com/jnormore/7418776
+https://gist.github.com/leommoore/4484379
+
+http://www.w3schools.com/tags/att_textarea_readonly.asp
 http://www.w3schools.com/jsref/dom_obj_all.asp
 http://www.w3schools.com/jsref/met_node_appendchild.asp
 http://www.w3schools.com/jsref/met_element_setattribute.asp
@@ -33,14 +42,10 @@ http://www.w3schools.com/jsref/event_onpaste.asp
 http://www.w3schools.com/jsref/met_html_focus.asp
 http://www.w3schools.com/jsref/met_element_getelementsbytagname.asp
 http://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
-http://www.w3schools.com/jsref/event_onbeforeunload.asp
-
 http://www.w3schools.com/js/js_popup.asp
 http://www.w3schools.com/js/js_htmldom_css.asp
 http://www.w3schools.com/js/js_loop_while.asp
-
 http://www.w3schools.com/jquery/ajax_getscript.asp
-
 http://www.w3schools.com/bootstrap/bootstrap_case_container.asp
 
 http://stackoverflow.com/questions/22888298/bootstrap-3-how-to-get-two-form-inputs-on-one-line-and-other-inputs-on-individu
@@ -77,19 +82,13 @@ http://stackoverflow.com/questions/31529772/setting-app-icon-for-electron-atom-s
 http://stackoverflow.com/questions/30681639/how-to-access-browserwindow-javascript-global-from-main-process-in-electron
 http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
 http://stackoverflow.com/questions/14989081/node-js-to-get-determine-os-version
+http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string
 
 https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
 https://learn.jquery.com/using-jquery-core/document-ready/
 
-https://github.com/nwjs/nw.js/wiki/Changes-related-to-node
-https://github.com/nwjs/nw.js/issues/4911
-https://github.com/b1rdex/nw-contextmenu
-https://github.com/electron/electron/blob/master/docs/api/menu.md
-https://github.com/electron/electron/blob/master/docs/api/ipc-main.md
-https://github.com/electron/electron/blob/master/docs/api/web-contents.md
-
-https://gist.github.com/jnormore/7418776
-https://gist.github.com/leommoore/4484379
+http://www.tutorialspoint.com/jquery/ajax-serialize.htm
+http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm
 
 http://www.randomsnippets.com/2008/02/21/how-to-dynamically-add-form-elements-via-javascript/
 http://www.coderanch.com/t/112558/HTML-CSS-JavaScript/Adding-alerts-Reset-button
@@ -98,8 +97,8 @@ http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm
 http://fettblog.eu/style-select-elements/
 https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx (RegExp Object (JavaScript))
 http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
-http://www.tutorialspoint.com/jquery/ajax-serialize.htm
 http://unixpapa.com/js/dyna.html
+http://blog.katworksgames.com/2012/12/23/translated-strings-and-foreign-language-support/
 https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/
 
 PERL REFERENCE
