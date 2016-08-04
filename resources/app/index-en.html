@@ -45,7 +45,7 @@
 
 			// PEB compatible code:
 			if (navigator.userAgent.match(/Perl Executing Browser/)) {
-				$jQuery.getScript("peb/peb.js");
+				$jQuery.getScript("desktop/peb.js");
 			}
 
 			// Electron compatible code:
@@ -56,7 +56,7 @@
 
 				var electronScript = document.createElement('script');
 				electronScript.type='text/javascript';
-				electronScript.src = 'electron-nwjs/electron.js';
+				electronScript.src = 'desktop/electron.js';
 				electronScript.charset = 'utf-8';
 				document.getElementsByTagName('head')[0].appendChild(electronScript);
 
@@ -71,7 +71,7 @@
 
 				var camelHarnessScript = document.createElement('script');
 				camelHarnessScript.type='text/javascript';
-				camelHarnessScript.src = 'electron-nwjs/camel-harness.js';
+				camelHarnessScript.src = 'desktop/camel-harness.js';
 				camelHarnessScript.charset = 'utf-8';
 				document.getElementsByTagName('head')[0].appendChild(camelHarnessScript);
 
@@ -82,8 +82,8 @@
 				var win = nw.Window.get();
 				win.maximize();
 
-				$jQuery.getScript("electron-nwjs/nw.js");
-				$jQuery.getScript("electron-nwjs/camel-harness.js");
+				$jQuery.getScript("desktop/nw.js");
+				$jQuery.getScript("desktop/camel-harness.js");
 			}
 		</script>
 	</head>
