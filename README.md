@@ -27,7 +27,7 @@ Epigraphista is an [EpiDoc] (https://sourceforge.net/p/epidoc/wiki/Home/) XML fi
 ## Translations
   
 Bulgarian version is currently the default one.  
-To use the English version simply rename ```resources/app/epigraphista-en.html``` to ```resources/app/index.html```.
+To use the English version simply rename ```resources/app/index-en.html``` to ```resources/app/index.html```.
   
 ## License
   
