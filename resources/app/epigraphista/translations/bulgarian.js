@@ -4,6 +4,35 @@
 
 var TS = new Object();
 
+TS.descriptionSectionTitle = "Описание на надписа";
+
+TS.repository = "Музей";
+TS.idno = "Инвентарен номер";
+TS.support = "Описание на паметника";
+TS.layout = "Описание на текстовото поле";
+TS.handNote = "Описание на шрифта";
+TS.origPlace = "Място на намиране";
+TS.origDate = "Време на намиране";
+TS.provenanceFound = "Контекст";
+TS.provenanceObserved = "Съвременно място";
+
+TS.title = "Заглавие";
+
+TS.textSectionTitle = "Текст на надписа";
+
+TS.apparatusCriticus = "Критичен апарат";
+TS.translation = "Превод";
+TS.commentary = "Коментар";
+TS.bibliography = "Библиография";
+
+TS.inscription = "Текст на надписа";
+TS.inscriptionSwitchGreek = "Въвеждане на политоничен гръцки текст";
+TS.inscriptionGreekKeyboardHelpLink = "Помощ за въвеждането на политоничен гръцки текст";
+TS.inscriptionAdditionalKeyboardButton = "Допълнителна клавиатура";
+TS.inscriptionHtml = "Текст на надписа като Epidoc XML фрагмент";
+
+TS.submitButton = "Запиши";
+
 TS.noTitleAlertMessage = "Моля, попълнете заглавие на надписа!";
 TS.invalidXMLTagAlertMessage = "Намерен е непълен или неправилно поставен XML таг в полето<br>" +
 						"<b>Описание на паметника</b>.<br>" +

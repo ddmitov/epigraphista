@@ -24,5 +24,5 @@ function addSupportGroup() {
 		.selection('insert', {text: '</objectType>', mode: 'after'});
 	});
 
-	addTextAreaElement('support', TS.supportGroupSupportPlaceholder, 'full', 'greek', 'additional-keyboard');
+	addTextAreaElement('support', TS.supportGroupSupportPlaceholder, 'full', 'greek', 'additional-keyboard', 'optional');
 }

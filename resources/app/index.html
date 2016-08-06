@@ -21,23 +21,24 @@
 		<script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
 		<script type="text/javascript" src="jquery/jquery.selection.js" charset="utf-8"></script>
 
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
 
 		<script type="text/javascript" src="alertify/lib/alertify.min.js" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.core.css" media="all"/>
-		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.default.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.core.css" media="all">
+		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.default.css" media="all">
 
 		<script type="text/javascript" src="typegreek/typegreek.js" charset="utf-8"></script>
 
-		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all"/>
-		<script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all">
 		<script type="text/javascript" src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-gui-initialization.js" charset="utf-8"></script>
-		<script type="text/javascript" src="epigraphista/epigraphista-perl-support.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-submit-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-text-converter.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
+
+		<script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 
 		<script>
 			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
@@ -63,7 +64,7 @@
 				electronScript.onload= function () {
 					electronContextMenu();
 
-					//~ // Wait for close event message from the main process and react accordingly:
+					// Wait for close event message from the main process and react accordingly:
 					require('electron').ipcRenderer.on('checkUserInputBeforeClose', function() {
 						electronCheckUserInputBeforeClose();
 					});
@@ -95,43 +96,42 @@
 
 			<form id="epigraphista-form" name="epigraphista_form">
 
-				<div class="row section-title">
-					Описание на надписа
+				<div class="row section-title" id="description-section-title">
 				</div>
 
-				<div class="row buttons-row">
-					<input type="button" id="repository-button" value="Музей"
-						onClick="javascript:addTextAreaElement('repository', 'Музей', 'full', null, null);" class="btn btn-info btn-xs">
+				<div class="row buttons-row" id="description-section-buttons-row">
+					<input type="button" id="repository-button" value=""
+						onClick="javascript:addTextAreaElement('repository', TS.repository, 'full', null, null);" class="btn btn-info btn-xs">
 
-					<input type="button" id="idno-button" value="Инвентарен номер"
-						onClick="javascript:addTextAreaElement('idno', 'Инвентарен номер', 'full', null, null);" class="btn btn-info btn-xs">
+					<input type="button" id="idno-button" value=""
+						onClick="javascript:addTextAreaElement('idno', TS.idno, 'full', null, null);" class="btn btn-info btn-xs">
 
-					<input type="button" id="support-button" value="Описание на паметника"
+					<input type="button" id="support-button" value=""
 						onClick="javascript:addSupportGroup();" class="btn btn-info btn-xs">
 
-					<input type="button" id="layout-button" value="Описание на текстовото поле"
-						onClick="javascript:addTextAreaElement('layout', 'Описание на текстовото поле', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="layout-button" value=""
+						onClick="javascript:addTextAreaElement('layout', TS.layout, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type="button" id="hand-note-button" value="Описание на шрифта"
-						onClick="javascript:addTextAreaElement('hand-note', 'Описание на шрифта', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="hand-note-button" value=""
+						onClick="javascript:addTextAreaElement('hand-note', TS.handNote, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type="button" id="orig-place-button" value="Място на намиране"
-						onClick="javascript:addTextAreaElement('orig-place', 'Място на намиране', 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="orig-place-button" value=""
+						onClick="javascript:addTextAreaElement('orig-place', TS.origPlace, 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type="button" id="orig-date-button" value="Време на намиране"
-						onClick="javascript:addTextAreaElement('orig-date', 'Време на намиране', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="orig-date-button" value=""
+						onClick="javascript:addTextAreaElement('orig-date', TS.origDate, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type="button" id="provenance-found-button" value="Контекст"
-						onClick="javascript:addTextAreaElement('provenance-found', 'Контекст', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="provenance-found-button" value=""
+						onClick="javascript:addTextAreaElement('provenance-found', TS.provenanceFound, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type='button' id="provenance-observed-button" value="Съвременно място"
-						onClick="addTextAreaElement('provenance-observed', 'Съвременно място', 'full', 'greek', 'additional-keyboard');" class='btn btn-info btn-xs'>
+					<input type='button' id="provenance-observed-button" value=""
+						onClick="addTextAreaElement('provenance-observed', TS.provenanceObserved, 'full', 'greek', 'additional-keyboard');" class='btn btn-info btn-xs'>
 				</div>
 
 				<div class="row">
 					<div id="title-group" class="form-group col-xs-12">
 						<div class="input-prepend">
-							<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="Заглавие" title="Заглавие" ></textarea>
+							<textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="" title="" ></textarea>
 						</div>
 					</div>
 				</div>
@@ -163,22 +163,21 @@
 				<div id="provenance-observed-group">
 				</div>
 
-				<div class="row section-title">
-					Текст на надписа
+				<div class="row section-title" id="text-section-title">
 				</div>
 
-				<div class="row buttons-row">
-					<input type="button" id="apparatus-criticus-button" value="Критичен апарат"
-						onClick="javascript:addTextAreaElement('apparatus-criticus', 'Критичен апарат', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+				<div class="row buttons-row" id="text-section-buttons-row">
+					<input type="button" id="apparatus-criticus-button" value=""
+						onClick="javascript:addTextAreaElement('apparatus-criticus', TS.apparatusCriticus, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type="button" id="translation-button" value="Превод"
-						onClick="javascript:addTextAreaElement('translation', 'Превод', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="translation-button" value=""
+						onClick="javascript:addTextAreaElement('translation', TS.translation, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type="button" id="commentary-button" value="Коментар"
-						onClick="javascript:addTextAreaElement('commentary', 'Коментар', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="commentary-button" value=""
+						onClick="javascript:addTextAreaElement('commentary', TS.commentary, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
-					<input type="button" id="bibliography-button" value="Библиография"
-						onClick="javascript:addTextAreaElement('bibliography', 'Библиография', 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+					<input type="button" id="bibliography-button" value=""
+						onClick="javascript:addTextAreaElement('bibliography', TS.bibliography, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 				</div>
 
 				<div id="inscription-group">
@@ -188,22 +187,16 @@
 						<div id="inscription-input-group" class="form-group col-xs-12">
 							<div class="input-group">
 								<textarea id="inscription" class="form-control greek input-text" spellcheck="false"
-									title="Текст на надписа" placeholder="Текст на надписа"
+									title="" placeholder=""
 									onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
 									onkeyup="javascript:return convertStr(this, event);"
 									oninput="javascript:convertEpigraphicText('inscription');"></textarea>
-								<span class="input-group-addon btn btn-info"
-									onclick="javascript:convertEpigraphicText('inscription');" title="Превръщане на текста на надписа в Epidoc XML фрагмент">
-									<b>XML</b>
-								</span>
 								<span class="input-group-addon">
-									<input type="checkbox" id="inscription-switch-greek" name="inscription_switch_greek"
-										title="Въвеждане на политоничен гръцки текст"/>&nbsp;
-									<a href="javascript:toggleGreekKeyboardHelp('inscription');"
-										title="Помощ за въвеждането на политоничен гръцки текст">Ἐλληνική</a>
+									<input type="checkbox" id="inscription-switch-greek" name="inscription_switch_greek" title="">&nbsp;
+									<a href="javascript:toggleGreekKeyboardHelp('inscription');" id="inscription-greek-keyboard-help-link" title="">Ἐλληνική</a>
 								</span>
-								<span class="input-group-addon btn btn-info"
-									onclick="javascript:toggleAdditionalKeyboard('inscription-additional-keyboard', 'inscription');" title="Допълнителна клавиатура">
+								<span class="input-group-addon btn btn-info" id="inscription-additional-keyboard-button"
+									onclick="javascript:toggleAdditionalKeyboard('inscription-additional-keyboard', 'inscription');" title="">
 									<span class="glyphicon glyphicon-font"></span>
 								</span>
 							</div>
@@ -213,7 +206,7 @@
 				<div id="inscription-formatted">
 						<div class="row">
 							<div class="form-group col-xs-12">
-<pre id="inscription-html" title="Текст на надписа като Epidoc XML фрагмент" class="greek input-text xml">
+<pre id="inscription-html" title="" class="greek input-text xml">
 <font color='#000080'>&lt;ab&gt;</font>
 &nbsp;&nbsp;&nbsp;&nbsp;<font color='#000080'>&lt;lb <font color='#008080'>n=</font><font color='7F007F'>&quot;1&quot;</font>/&gt;</font>
 <font color='#000080'>&lt;/ab&gt;</font>
@@ -233,19 +226,16 @@
 				<div id="bibliography-group"></div>
 
 				<div class="row buttons-row">
-					<input type="button" value="Запиши" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
+					<input type="button" id="submit-button" value="" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
 				</div>
 			</form>
 
 		</div>
 
 		<script type="text/javascript">
-			var originalContainerContents;
-
 			$jQuery(document).ready(function() {
 				detectTouchScreen();
-				guiInitialization();
-				originalContainerContents = document.getElementsByClassName("container-fluid")[0].innerHTML;
+				initializeGui();
 			});
 		</script>
 

@@ -27,7 +27,9 @@ Epigraphista is an [EpiDoc] (https://sourceforge.net/p/epidoc/wiki/Home/) XML fi
 ## Translations
   
 Bulgarian version is currently the default one.  
-To use the English version simply rename ```resources/app/index-en.html``` to ```resources/app/index.html```.
+To use the English version open ```resources/app/index.html```, than  
+find ``<script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>``` and  
+replace it with ```<script type="text/javascript" src="epigraphista/translations/english.js" charset="utf-8"></script>```.
   
 ## License
   

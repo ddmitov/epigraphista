@@ -1,6 +1,35 @@
 
 var TS = new Object();
 
+TS.descriptionSectionTitle = "Inscription description";
+
+TS.repository = "Repository";
+TS.idno = "ID number";
+TS.support = "Monument description";
+TS.layout = "Layout description";
+TS.handNote = "Hand note";
+TS.origPlace = "Place of origin";
+TS.origDate = "Date of origin";
+TS.provenanceFound = "Context";
+TS.provenanceObserved = "Provenance observed";
+
+TS.title = "Title";
+
+TS.textSectionTitle = "Inscription text";
+
+TS.apparatusCriticus = "Apparatus criticus";
+TS.translation = "Translation";
+TS.commentary = "Commentary";
+TS.bibliography = "Bibliography";
+
+TS.inscription = "Inscription text";
+TS.inscriptionSwitchGreek = "Greek polythonic text input";
+TS.inscriptionGreekKeyboardHelpLink = "Greek polythonic text input help";
+TS.inscriptionAdditionalKeyboardButton = "Additional keyboard";
+TS.inscriptionHtml = "Inscription text as Epidoc XML fragment";
+
+TS.submitButton = "Save";
+
 TS.noTitleAlertMessage = "Please, enter the title of the inscription!";
 TS.invalidXMLTagAlertMessage = "XML tag is misplaced or not closed within the field<br>" +
 							"<b>Monument description</b>.<br>" +
