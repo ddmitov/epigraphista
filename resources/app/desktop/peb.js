@@ -23,7 +23,7 @@ function pebCloseConfirmationAsync() {
 	alertify.confirm(TS.closeConfirmation, function (confirmation) {
 		if (confirmation) {
 			$jQuery.ajax({
-				url: 'http://perl-executing-browser-pseudodomain/close-window.function',
+				url: 'http://local-pseudodomain/close-window.function',
 				method: 'GET'
 			});
 		}
