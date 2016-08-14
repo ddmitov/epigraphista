@@ -76,6 +76,12 @@
 				camelHarnessScript.charset = 'utf-8';
 				document.getElementsByTagName('head')[0].appendChild(camelHarnessScript);
 
+				var camelHarnessSupportScript = document.createElement('script');
+				camelHarnessSupportScript.type='text/javascript';
+				camelHarnessSupportScript.src = 'desktop/camel-harness-support.js';
+				camelHarnessSupportScript.charset = 'utf-8';
+				document.getElementsByTagName('head')[0].appendChild(camelHarnessSupportScript);
+
 			}
 
 			// NW.js compatible code:
@@ -85,6 +91,7 @@
 
 				$jQuery.getScript("desktop/nw.js");
 				$jQuery.getScript("desktop/camel-harness.js");
+				$jQuery.getScript("desktop/camel-harness-support.js");
 			}
 		</script>
 	</head>

@@ -1,4 +1,6 @@
 
+// These functions are usefull only inside NW.js:
+
 
 var gui = require("nw.gui");
 

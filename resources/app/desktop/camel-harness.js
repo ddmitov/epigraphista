@@ -1,6 +1,6 @@
 
 // CamelHarness.js
-// Electron and NW.js adapter for Perl scripts
+// Electron and NW.js adapter for Perl 5 scripts
 // CamelHarness.js is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2016.
 
@@ -16,6 +16,14 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+// Node.js Module Dependencies
+// (available in both Electron and NW.js):
+// os
+// path
+// fs
+// child_process
 
 
 // Global variables for CamelHarness.js:
@@ -60,10 +68,14 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
 			exec(perlFullPathTester, function (error, stdout, stderr) {
 				if (error == null && stdout.length > 0) {
 					perlInterpreterFullPath = stdout;
+					console.log('CamelHarness.js Perl interpreter: ' + perlInterpreterFullPath);
+				} else {
+					console.log('CamelHarness.js did not find any Perl interpreter.');
 				}
 			});
 		} else {
 			perlInterpreterFullPath = portablePerlInterpreterFullPath;
+			console.log('CamelHarness.js Perl interpreter: ' + perlInterpreterFullPath);
 		}
 	});
 } else {
@@ -73,53 +85,53 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
 
 function camelHarness(scriptFullPath, method, formData, errorFunction, stdoutFunction, stderrFunction, exitFunction) {
 	if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
-		// Get the full path of the application root directory:
-		var applicationRootDirectory = require('./dirname').dirname;
+		if (perlInterpreterFullPath.length > 0) {
+			// Compose the command line that has to be executed:
+			var safetyArguments = " -M-ops=:dangerous -M-ops=fork ";
+			var commandLine = perlInterpreterFullPath + safetyArguments + scriptFullPath;
 
-		// Compose the command line that has to be executed:
-		var scriptFullPath = pathObject.join(applicationRootDirectory, "perl/epigraphista-ajax.pl");
-		var safetyArguments = " -M-ops=:dangerous -M-ops=fork ";
-		var commandLine = perlInterpreterFullPath + safetyArguments + scriptFullPath;
+			// Assign environment variables in a clean environment:
+			var env = cleanEnvironment = {};
 
-		// Assign environment variables in a clean environment:
-		var env = cleanEnvironment = {};
-
-		// Handle POST requests:
-		if (method == "POST") {
-			cleanEnvironment['REQUEST_METHOD'] = 'POST';
-			cleanEnvironment['CONTENT_LENGTH'] = formData.length;
-		}
-
-		// Handle GET requests:
-		if (method == "GET") {
-			cleanEnvironment['REQUEST_METHOD'] = 'GET';
-			cleanEnvironment['QUERY_STRING'] = formData;
-		}
-
-		// Run the Perl script:
-		var exec = require ('child_process').exec, child;
-		child = exec(commandLine, {env: cleanEnvironment}, function (error, stdout, stderr) {
-			if (error) {
-				window[errorFunction](error);
+			// Handle POST requests:
+			if (method == "POST") {
+				cleanEnvironment['REQUEST_METHOD'] = 'POST';
+				cleanEnvironment['CONTENT_LENGTH'] = formData.length;
 			}
 
-			if (stderr) {
-				window[stderrFunction](stderr);
+			// Handle GET requests:
+			if (method == "GET") {
+				cleanEnvironment['REQUEST_METHOD'] = 'GET';
+				cleanEnvironment['QUERY_STRING'] = formData;
 			}
 
-			if (stdout) {
-				window[stdoutFunction](stdout);
-			}
-		});
+			// Run the Perl script:
+			var exec = require ('child_process').exec, child;
+			child = exec(commandLine, {env: cleanEnvironment}, function (errorCode, stdout, stderr) {
+				if (errorCode) {
+					window[errorFunction](errorCode);
+				}
 
-		// Send POST data to the Perl script:
-		if (method == "POST") {
-			child.stdin.write(formData);
+				if (stdout) {
+					window[stdoutFunction](stdout);
+				}
+
+				if (stderr) {
+					window[stderrFunction](stderr);
+				}
+			});
+
+			// Send POST data to the Perl script:
+			if (method == "POST") {
+				child.stdin.write(formData);
+			}
+
+			child.on('exit', function (code) {
+				window[exitFunction](code);
+			});
+		} else {
+			console.log('CamelHarness.js is not usefull without a Perl interpreter.');
 		}
-
-		child.on('exit', function (code) {
-			window[exitFunction](code);
-		});
 	} else {
 		console.log('CamelHarness.js is not usefull outside of  Electron or NW.js.');
 	}

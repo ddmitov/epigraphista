@@ -1,4 +1,6 @@
 
+// These functions are usefull only inside Electron:
+
 
 function electronContextMenu() {
 	const {remote} = require('electron');

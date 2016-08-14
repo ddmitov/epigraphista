@@ -1,5 +1,8 @@
 
 
+var epigraphistaPerlScriptRelativePath = "perl/epigraphista-ajax.pl"
+
+
 function finalCheckAndSubmit() {
 	// Check for title:
 	var title = document.getElementById("title").value;
@@ -71,21 +74,29 @@ function finalCheckAndSubmit() {
 
 	// Start Epigraphista Perl script.
 	if (typeof(nw) !== 'undefined' || navigator.userAgent.match(/Electron/)) {
+		// Call Epigraphista Perl script from Electron or NW.js.
 		// Wait 150 ms. for EpiDoc XML conversion to take place before getting the form data:
 		setTimeout(function () {
+			// Get forma data:
 			var formData = $jQuery("#epigraphista-form").serialize();
+
+			// Get the full path of the application root directory:
+			var applicationRootDirectory = require('./dirname').dirname;
+
+			// Compose the full path of the Epigraphista Perl script:
+			var scriptFullPath = pathObject.join(applicationRootDirectory, epigraphistaPerlScriptRelativePath);
 
 			// Start Epigraphista Perl script from NW.js or Electron:
-			camelHarness("perl/epigraphista-ajax.pl", "POST", formData, "camelHarnessError", "camelHarnessStdout", "camelHarnessStderr", "camelHarnessExit");
+			camelHarness(scriptFullPath, "POST", formData, "camelHarnessError", "camelHarnessStdout", "camelHarnessStderr", "camelHarnessExit");
 		}, 150);
 	} else {
+		// Call Epigraphista Perl script from Perl Executing Browser or from a web server.
 		// Wait 150 ms. for EpiDoc XML conversion to take place before getting the form data:
 		setTimeout(function () {
 			var formData = $jQuery("#epigraphista-form").serialize();
 
-			// Start Epigraphista Perl script from Perl Executing Browser:
 			$jQuery.ajax({
-				url: 'http://perl-executing-browser-pseudodomain/perl/epigraphista-ajax.pl',
+				url: epigraphistaPerlScriptRelativePath,
 				data: formData,
 				method: 'POST',
 				dataType: 'text',
@@ -94,39 +105,11 @@ function finalCheckAndSubmit() {
 						alertify.set({labels: {ok : TS.okLabel}});
 						alertify.alert(TS.fileSavedMessage, function () {
 							$jQuery('#container').html(originalContainerContents);
-							guiInitialization();
+							initializeGui();
 						});
 					}
 				}
 			});
 		}, 150);
 	}
-}
-
-
-function camelHarnessError(error) {
-	console.log(error.stack); 
-	console.log('Perl script error code: '+ error.code); 
-	console.log('Perl script signal received: '+ error.signal);
-}
-
-
-function camelHarnessStdout(stdout) {
-	if (stdout == "File saved.") {
-		alertify.set({labels: {ok : TS.okLabel}});
-		alertify.alert(TS.fileSavedMessage, function () {
-			$jQuery('#container').html(originalContainerContents);
-			guiInitialization();
-		});
-	}
-}
-
-
-function camelHarnessStderr(stderr) {
-	console.log('Perl script stderr:\n'+ stderr);
-}
-
-
-function camelHarnessExit(code) {
-	console.log('Perl script exited with exit code ' + code);
 }
