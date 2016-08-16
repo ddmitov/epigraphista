@@ -11,6 +11,11 @@ my $cwd = cwd();
 my $inscriptions_directory = "$cwd/resources/data/inscriptions";
 ########## SETTINGS END HERE ###########
 
+# HTTP header if the script is going to be executed as a CGI script on an HTTP web server:
+if ($ENV{'SERVER_PROTOCOL'}) {
+	print "Content-type: text/plain", "\n\n";
+}
+
 # Create inscriptions directory if it does not exist:
 mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
 

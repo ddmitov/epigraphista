@@ -2,14 +2,7 @@
 // These functions are usefull only inside Electron or NW.js:
 
 
-function camelHarnessError(error) {
-	console.log(error.stack); 
-	console.log('Perl script error code: '+ error.code); 
-	console.log('Perl script signal received: '+ error.signal);
-}
-
-
-function camelHarnessStdout(stdout) {
+function epigraphistaStdout(stdout) {
 	if (stdout == "File saved.") {
 		alertify.set({labels: {ok : TS.okLabel}});
 		alertify.alert(TS.fileSavedMessage, function () {
@@ -20,11 +13,18 @@ function camelHarnessStdout(stdout) {
 }
 
 
-function camelHarnessStderr(stderr) {
-	console.log('Perl script STDERR:\n'+ stderr);
+function epigraphistaStderr(stderr) {
+	console.log('Epigraphista Perl script STDERR:\n'+ stderr);
 }
 
 
-function camelHarnessExit(exitCode) {
-	console.log('Perl script exited with exit code ' + exitCode);
+function epigraphistaError(error) {
+	console.log(error.stack); 
+	console.log('Epigraphista Perl script error code: '+ error.code); 
+	console.log('Epigraphista Perl script received signal: '+ error.signal);
+}
+
+
+function epigraphistaExit(exitCode) {
+	console.log('Epigraphista Perl script exited with exit code ' + exitCode);
 }

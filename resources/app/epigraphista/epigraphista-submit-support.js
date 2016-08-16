@@ -10,6 +10,7 @@ function finalCheckAndSubmit() {
 		var titleGroup = document.getElementById("title-group");
 		titleGroup.setAttribute("class", "form-group has-error col-xs-12");
 
+		// Display warning message:
 		alertify.set({labels: {ok : TS.okLabel}});
 		alertify.set({buttonFocus: "ok"});
 		alertify.alert(TS.noTitleAlertMessage, function () {
@@ -28,6 +29,7 @@ function finalCheckAndSubmit() {
 			var supportGroup = document.getElementById("support-group");
 			supportGroup.setAttribute("class", "form-group stop-shrinking has-error col-xs-12");
 
+			// Display warning message:
 			alertify.set({labels: {ok : TS.okLabel}});
 			alertify.set({buttonFocus: "ok"});
 			alertify.alert(TS.invalidXMLTagAlertMessage, function () {
@@ -44,6 +46,7 @@ function finalCheckAndSubmit() {
 		var inscriptionInputGroup = document.getElementById("inscription-input-group");
 		inscriptionInputGroup.setAttribute("class", "form-group has-error col-xs-12");
 
+		// Display warning message:
 		alertify.set({labels: {ok : TS.okLabel}});
 		alertify.set({buttonFocus: "ok"});
 		alertify.alert(TS.noInscriptionAlertMessage, function () {
@@ -60,6 +63,7 @@ function finalCheckAndSubmit() {
 		var inscriptionInputGroup = document.getElementById("inscription-input-group");
 		inscriptionInputGroup.setAttribute("class", "form-group has-error col-xs-12");
 
+		// Display warning message:
 		alertify.set({labels: {ok : TS.okLabel}});
 		alertify.set({buttonFocus: "ok"});
 		alertify.alert(TS.singleSquareBracketAlertMessage, function () {
@@ -77,24 +81,42 @@ function finalCheckAndSubmit() {
 		// Call Epigraphista Perl script from Electron or NW.js.
 		// Wait 150 ms. for EpiDoc XML conversion to take place before getting the form data:
 		setTimeout(function () {
-			// Get forma data:
+			// Get form data:
 			var formData = $jQuery("#epigraphista-form").serialize();
 
+			// Determine the operating system:
+			var osObject = require('os');
+			var platform = osObject.platform();
+
+			// Initialize 'path' object:
+			var pathObject;
+			if (platform !== "win32") {
+				pathObject = require('path').posix;
+			} else {
+				pathObject = require('path').win32;
+			}
+
+			// Get the full path of directory where Electron or NW.js binary is located:
+			var binaryPath = process.execPath;
+			var binaryDir = pathObject.dirname(binaryPath);
+
 			// Get the full path of the application root directory:
-			var applicationRootDirectory = require('./dirname').dirname;
+			var applicationRootDirectory = pathObject.join(binaryDir, "resources/app");
 
 			// Compose the full path of the Epigraphista Perl script:
 			var scriptFullPath = pathObject.join(applicationRootDirectory, epigraphistaPerlScriptRelativePath);
 
 			// Start Epigraphista Perl script from NW.js or Electron:
-			camelHarness(scriptFullPath, "POST", formData, "camelHarnessError", "camelHarnessStdout", "camelHarnessStderr", "camelHarnessExit");
+			camelHarness(scriptFullPath, "epigraphistaStdout", "epigraphistaStderr", "epigraphistaError", "epigraphistaExit", "POST", formData);
 		}, 150);
 	} else {
 		// Call Epigraphista Perl script from Perl Executing Browser or from a web server.
 		// Wait 150 ms. for EpiDoc XML conversion to take place before getting the form data:
 		setTimeout(function () {
+			// Get form data:
 			var formData = $jQuery("#epigraphista-form").serialize();
 
+			// Make an AJAX POST request using jQuery:
 			$jQuery.ajax({
 				url: epigraphistaPerlScriptRelativePath,
 				data: formData,
@@ -102,8 +124,10 @@ function finalCheckAndSubmit() {
 				dataType: 'text',
 				success: function(data) {
 					if (data == "File saved.") {
+						// Display success message:
 						alertify.set({labels: {ok : TS.okLabel}});
 						alertify.alert(TS.fileSavedMessage, function () {
+							// Restore the user interface to its initial outlook:
 							$jQuery('#container').html(originalContainerContents);
 							initializeGui();
 						});

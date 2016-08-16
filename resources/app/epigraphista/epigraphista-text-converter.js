@@ -1,7 +1,7 @@
 
 // UTF-8 encoded file!
 
-// Epigraphista Text Converter (ETC)
+// Epigraphista Text Converter (ETC) version 0.1.0
 // Based on regular expressions and code fragments from Chapel Hill Electronic Text Convertor - JavaScript (CHETC-JS):
 // http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
 // http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/

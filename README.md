@@ -2,18 +2,18 @@
 Epigraphista
 ==================================
   
-Epigraphista is an [EpiDoc] (https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator using [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser), [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/) as a desktop GUI framework, HTML 5 and [Bootstrap] (http://getbootstrap.com/) for a themable user interface, JavaScript for on-screen text conversion and [Perl 5] (https://www.perl.org/) for a file-writing backend. Bulgarian and English versions are available and other translations can be added easily. Epigraphista could also be used as a server-side application.
+Epigraphista is an [EpiDoc] (https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator. It is implemented as a hybrid desktop and server application using [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser), [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/) as a desktop GUI framework, [Bootstrap] (http://getbootstrap.com/) for a themable HTML 5 user interface, JavaScript for on-screen text conversion and [Perl 5] (https://www.perl.org/) for a file-writing backend. Bulgarian and English versions are available and other translations can be added easily.
   
 ## Desktop Runtime Requirements
   
-* Any Linux, Mac or Windows Perl 5 distribution,
+* Linux, Mac or Windows Perl 5 distribution,
 * [Perl Executing Browser] (https://github.com/ddmitov/perl-executing-browser) or [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
   
 ## Server Runtime Requirements
   
-* Any CGI-enabled HTTP server,
-* Any Linux, Mac or Windows Perl 5 distribution,
-* Any graphical JavaScript-enabled browser.
+* CGI-enabled HTTP server,
+* Linux, Mac or Windows Perl 5 distribution,
+* Graphical JavaScript-enabled browser.
   
 ## Frameworks, Libraries & Code Fragments Used
 * [jQuery](https://jquery.com/)

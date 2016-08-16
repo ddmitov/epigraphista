@@ -19,14 +19,13 @@ HTML, CSS & JAVASCRIPT REFERENCE
 (including Electron and NW.js)
 ====================
 https://github.com/nwjs/nw.js/wiki/Changes-related-to-node
-https://github.com/nwjs/nw.js/issues/4911
-https://github.com/nwjs/nw.js/issues/1197
+https://github.com/nwjs/nw.js/issues/4911 (Custom printing API)
+https://github.com/nwjs/nw.js/issues/1197 (How to get the location of nw.exe?)
 https://github.com/b1rdex/nw-contextmenu
 https://github.com/electron/electron/blob/master/docs/api/menu.md
 https://github.com/electron/electron/blob/master/docs/api/ipc-main.md
 
-https://gist.github.com/jnormore/7418776
-https://gist.github.com/leommoore/4484379
+https://gist.github.com/leommoore/4484379 (Node - Processes)
 
 http://www.w3schools.com/tags/att_textarea_readonly.asp
 http://www.w3schools.com/jsref/dom_obj_all.asp
@@ -97,7 +96,7 @@ http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm
 http://fettblog.eu/style-select-elements/
 https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx (RegExp Object (JavaScript))
 http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
-http://unixpapa.com/js/dyna.html
+http://unixpapa.com/js/dyna.html (JavaScript Madness: Dynamic Script Loading)
 http://blog.katworksgames.com/2012/12/23/translated-strings-and-foreign-language-support/
 https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/
 
