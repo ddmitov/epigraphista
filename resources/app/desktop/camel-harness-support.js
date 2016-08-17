@@ -14,14 +14,14 @@ function epigraphistaStdout(stdout) {
 
 
 function epigraphistaStderr(stderr) {
-	console.log('Epigraphista Perl script STDERR:\n'+ stderr);
+	console.log('Epigraphista Perl script STDERR:\n' + stderr);
 }
 
 
 function epigraphistaError(error) {
-	console.log(error.stack); 
-	console.log('Epigraphista Perl script error code: '+ error.code); 
-	console.log('Epigraphista Perl script received signal: '+ error.signal);
+	console.log(error.stack);
+	console.log('Epigraphista Perl script error code: ' + error.code);
+	console.log('Epigraphista Perl script received signal: ' + error.signal);
 }
 
 
