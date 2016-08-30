@@ -73,8 +73,8 @@ function finalCheckAndSubmit() {
 		return false;
 	}
 
-	// Convert to EpiDoc XML if text is enetered at the last moment before file save:
-	convertEpigraphicText('inscription');
+	// Convert to EpiDoc XML again if text is enetered at the last moment before file save:
+	startLeidenToEpidocConversion('inscription')
 
 	// Start Epigraphista Perl script.
 	if (typeof(nw) !== 'undefined' || navigator.userAgent.match(/Electron/)) {

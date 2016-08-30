@@ -31,68 +31,26 @@
 		<script type="text/javascript" src="typegreek/typegreek.js" charset="utf-8"></script>
 
 		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all">
+		<script type="text/javascript" src="epigraphista/epidoc-highlighter.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-gui-initialization.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-submit-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-text-converter.js" charset="utf-8"></script>
+		<script type="text/javascript" src="epigraphista/epigraphista-text-converter-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
 
 		<script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 
+		<script type="text/javascript" src="epigraphista/index.js" charset="utf-8"></script>
+
 		<script>
-			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
-			var $jQuery = jQuery.noConflict();
-
-			// PEB compatible code:
-			if (navigator.userAgent.match(/Perl Executing Browser/)) {
-				$jQuery.getScript("desktop/peb.js");
+		// Electron compatible code:
+		if (navigator.userAgent.match(/Electron/)) {
+			if (window.module) {
+				module = window.module;
 			}
-
-			// Electron compatible code:
-			if (navigator.userAgent.match(/Electron/)) {
-				if (window.module) {
-					module = window.module;
-				}
-
-				var electronScript = document.createElement('script');
-				electronScript.type='text/javascript';
-				electronScript.src = 'desktop/electron.js';
-				electronScript.charset = 'utf-8';
-				document.getElementsByTagName('head')[0].appendChild(electronScript);
-
-				electronScript.onload= function () {
-					electronContextMenu();
-
-					// Wait for close event message from the main process and react accordingly:
-					require('electron').ipcRenderer.on('checkUserInputBeforeClose', function() {
-						electronCheckUserInputBeforeClose();
-					});
-				}
-
-				var camelHarnessScript = document.createElement('script');
-				camelHarnessScript.type='text/javascript';
-				camelHarnessScript.src = 'desktop/camel-harness.js';
-				camelHarnessScript.charset = 'utf-8';
-				document.getElementsByTagName('head')[0].appendChild(camelHarnessScript);
-
-				var camelHarnessSupportScript = document.createElement('script');
-				camelHarnessSupportScript.type='text/javascript';
-				camelHarnessSupportScript.src = 'desktop/camel-harness-support.js';
-				camelHarnessSupportScript.charset = 'utf-8';
-				document.getElementsByTagName('head')[0].appendChild(camelHarnessSupportScript);
-
-			}
-
-			// NW.js compatible code:
-			if (typeof(nw) !== 'undefined') {
-				var win = nw.Window.get();
-				win.maximize();
-
-				$jQuery.getScript("desktop/nw.js");
-				$jQuery.getScript("desktop/camel-harness.js");
-				$jQuery.getScript("desktop/camel-harness-support.js");
-			}
+		}
 		</script>
 	</head>
 
@@ -197,7 +155,7 @@
 									title="" placeholder=""
 									onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
 									onkeyup="javascript:return convertStr(this, event);"
-									oninput="javascript:convertEpigraphicText('inscription');"></textarea>
+									oninput="javascript:startLeidenToEpidocConversion('inscription');"></textarea>
 								<span class="input-group-addon">
 									<input type="checkbox" id="inscription-switch-greek" name="inscription_switch_greek" title="">&nbsp;
 									<a href="javascript:toggleGreekKeyboardHelp('inscription');" id="inscription-greek-keyboard-help-link" title="">Ἐλληνική</a>
@@ -236,7 +194,6 @@
 					<input type="button" id="submit-button" value="" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
 				</div>
 			</form>
-
 		</div>
 
 		<script type="text/javascript">
@@ -245,7 +202,6 @@
 				initializeGui();
 			});
 		</script>
-
 	</body>
 
 </html>

@@ -1,11 +1,11 @@
 
 // UTF-8 encoded file!
 
-// Epigraphista Text Converter (ETC) version 0.1.0
+// EpigraphistaTextConverter.js version 0.1.0
 // Based on regular expressions and code fragments from Chapel Hill Electronic Text Convertor - JavaScript (CHETC-JS):
 // http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
 // http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
-// Epigraphista Text Converter (ETC) is licensed under the terms of GNU GPL version 3.
+// EpigraphistaTextConverter.js is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2016.
 
 // This program is free software: you can redistribute it and/or modify
@@ -19,13 +19,10 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
-function convertEpigraphicText(elementId) {
-	var epigraphicText = document.getElementById(elementId).value;
-	document.getElementById(elementId).focus();
-
+function convertLeidenToEpidoc(epigraphicText) {
 	var unicodeBlocks = "\u0041-\u005a\u0061-\u007a\u00aa\u00b5\u00ba\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u01ba\u01bc-\u01bf " +
 		"\u01c4-\u02ad\u0386\u0388-\u0481\u048c-\u0556\u0561-\u0587\u10a0-\u10c5\u1e00-\u1fbc\u1fbe\u1fc2-\u1fcc " +
 		"\u1fd0-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ffc\u207f\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126 " +
@@ -211,37 +208,7 @@ function convertEpigraphicText(elementId) {
 	for (var lineNumber = 1; lineNumber < linesForNumbering.length; lineNumber++) {
 		epigraphicText = epigraphicText.replace(/\n/, "<lb n=\"" + (lineNumber + 1) + "\"/>");
 	}
-
 	epigraphicText = "<lb n=\"1\"/>" + epigraphicText;
 
-	// XML TO HTML CONVERSION WITH SYNTAX HIGHLIGHTING
-	var epigraphicTextHtml = epigraphicText;
-
-	// Prepending opening <ab> tag:
-	epigraphicTextHtml = "<ab>" + epigraphicTextHtml;
-
-	// Escaping opening angle bracket - '<' and highlighting XML tags:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/\</g, "<font color='#000080'>&lt;");
-
-	// Escaping closing angle bracket - '>' and highlighting XML tags:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/\>/g, "&gt;</font>");
-
-	// Highlighting line numbers:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/(n)=(\"[0-9]{1,4}\")/g, "<font color='#008080'>n=</font><font color='7F007F'>$2</font>");
-
-	// Highlighting XML tag attributes:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/([a-z,A-Z]{1,})=(\"[a-z,A-Z]{1,}\")/g, "<font color='#008080'>$1=</font><font color='7F007F'>$2</font>");
-
-	// Escaping quotes:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/\"/g, "&quot;");
-
-	// Indentation and line breaks:
-	epigraphicTextHtml = epigraphicTextHtml.replace(/&lt;lb/g, "<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb");
-
-	// Appending <br> and closing </ab> tag:
-	epigraphicTextHtml = epigraphicTextHtml + "<br><font color='#000080'>&lt;/ab&gt;</font>";
-
-	// PLACING RESULTS IN THE HTML DOM TREE
-	document.getElementById(elementId + "-html").innerHTML = epigraphicTextHtml;
-	document.getElementById(elementId + "-xml").setAttribute("value", epigraphicText);
+	return epigraphicText;
 }
