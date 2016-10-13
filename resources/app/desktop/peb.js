@@ -22,10 +22,7 @@ function pebCloseConfirmationAsync() {
 	alertify.set({buttonFocus: "cancel"});
 	alertify.confirm(TS.closeConfirmation, function (confirmation) {
 		if (confirmation) {
-			$jQuery.ajax({
-				url: 'http://local-pseudodomain/close-window.function',
-				method: 'GET'
-			});
+			window.location.href = "http://local-pseudodomain/close-window.function";
 		}
 	});
 }
