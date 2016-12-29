@@ -1,8 +1,4 @@
 
-
-var epigraphistaPerlScriptRelativePath = "perl/epigraphista-ajax.pl"
-
-
 function finalCheckAndSubmit() {
 	// Check for title:
 	var title = document.getElementById("title").value;
@@ -11,7 +7,7 @@ function finalCheckAndSubmit() {
 		titleGroup.setAttribute("class", "form-group has-error col-xs-12");
 
 		// Display warning message:
-		alertify.set({labels: {ok : TS.okLabel}});
+		alertify.set({labels: {ok: TS.okLabel}});
 		alertify.set({buttonFocus: "ok"});
 		alertify.alert(TS.noTitleAlertMessage, function () {
 			titleGroup.setAttribute("class", "form-group col-xs-12");
@@ -74,7 +70,7 @@ function finalCheckAndSubmit() {
 	}
 
 	// Convert to EpiDoc XML again if text is enetered at the last moment before file save:
-	startLeidenToEpidocConversion('inscription')
+	startLeidenToEpidocConversion('inscription');
 
 	// Start Epigraphista Perl script.
 	if (typeof(nw) !== 'undefined' || navigator.userAgent.match(/Electron/)) {
@@ -101,13 +97,51 @@ function finalCheckAndSubmit() {
 			var binaryDir = pathObject.dirname(binaryPath);
 
 			// Get the full path of the application root directory:
-			var applicationRootDirectory = pathObject.join(binaryDir, "resources/app");
+			var applicationRootDirectory =
+					pathObject.join(binaryDir, "resources", "app");
+
+			// Epigraphista Perl script reltive path:
+			var epigraphistaPerlScriptRelativePath =
+					pathObject.join("perl", "epigraphista.pl");
 
 			// Compose the full path of the Epigraphista Perl script:
-			var scriptFullPath = pathObject.join(applicationRootDirectory, epigraphistaPerlScriptRelativePath);
+			var epigraphistaPerlScriptFullPath =
+					pathObject.join(applicationRootDirectory,
+						epigraphistaPerlScriptRelativePath);
 
 			// Start Epigraphista Perl script from NW.js or Electron:
-			camelHarness(scriptFullPath, "epigraphistaStdout", "epigraphistaStderr", "epigraphistaError", "epigraphistaExit", "POST", formData);
+			var epigraphistaPerlScript = new Object();
+			epigraphistaPerlScript.interpreter = "perl";
+			epigraphistaPerlScript.scriptFullPath = epigraphistaPerlScriptFullPath;
+
+			epigraphistaPerlScript.stdoutFunction = function(stdout) {
+				if (stdout == "File saved.") {
+					alertify.set({labels: {ok : TS.okLabel}});
+					alertify.alert(TS.fileSavedMessage, function () {
+						$jQuery('#container').html(originalContainerContents);
+						initializeGui();
+					});
+				}
+			};
+
+			epigraphistaPerlScript.stderrFunction = function(stderr) {
+				console.log('Epigraphista Perl script STDERR:\n' + stderr);
+			};
+
+			epigraphistaPerlScript.errorFunction = function(error) {
+				console.log(error.stack);
+				console.log('Epigraphista Perl script error code: ' + error.code);
+				console.log('Epigraphista Perl script received signal: ' + error.signal);
+			};
+
+			epigraphistaPerlScript.exitFunction = function(exitCode) {
+				console.log('Epigraphista Perl script exited with exit code ' + exitCode);
+			}
+
+			epigraphistaPerlScript.method = "POST";
+			epigraphistaPerlScript.formData = formData;
+
+			camelHarness.startScript(epigraphistaPerlScript);
 		}, 150);
 	} else {
 		// Call Epigraphista Perl script from Perl Executing Browser or from a web server.
@@ -116,9 +150,19 @@ function finalCheckAndSubmit() {
 			// Get form data:
 			var formData = $jQuery("#epigraphista-form").serialize();
 
+			// Compose the URL of Epigraphista Perl script:
+			var epigraphistaPerlScriptUrl;
+			if (navigator.userAgent.match(/Perl Executing Browser/)) {
+				epigraphistaPerlScriptUrl =
+					"http://ajax@local-pseudodomain/perl/epigraphista.pl";
+			} else {
+				epigraphistaPerlScriptUrl =
+					"perl/epigraphista.pl";
+			}
+
 			// Make an AJAX POST request using jQuery:
 			$jQuery.ajax({
-				url: epigraphistaPerlScriptRelativePath,
+				url: epigraphistaPerlScriptUrl,
 				data: formData,
 				method: 'POST',
 				dataType: 'text',

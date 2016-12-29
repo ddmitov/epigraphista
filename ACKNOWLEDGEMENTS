@@ -75,9 +75,7 @@ http://stackoverflow.com/questions/5050884/textarea-auto-resize-on-paste
 http://stackoverflow.com/questions/5113374/javascript-check-if-variable-exists-is-defined-initialized
 http://stackoverflow.com/questions/15521343/conditionally-load-javascript-file
 http://stackoverflow.com/questions/13230370/nodejs-child-process-write-to-stdin-from-an-already-initialised-process
-http://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
 http://stackoverflow.com/questions/31529772/setting-app-icon-for-electron-atom-shell-app
-http://stackoverflow.com/questions/30681639/how-to-access-browserwindow-javascript-global-from-main-process-in-electron
 http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
 http://stackoverflow.com/questions/14989081/node-js-to-get-determine-os-version
 http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string
@@ -98,6 +96,7 @@ http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
 http://unixpapa.com/js/dyna.html (JavaScript Madness: Dynamic Script Loading)
 http://blog.katworksgames.com/2012/12/23/translated-strings-and-foreign-language-support/
 https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/
+http://ourcodeworld.com/articles/read/202/how-to-include-and-use-jquery-in-electron-framework
 
 PERL REFERENCE
 ====================

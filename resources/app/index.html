@@ -8,29 +8,27 @@
 		<title>Epigraphista</title>
 
 		<script>
-		// Electron compatible code:
-		if (navigator.userAgent.match(/Electron/)) {
-			if (typeof module === 'object') {
-				window.module = module;
-				module = undefined;
+			var camelHarness;
+
+			// Electron and NW.js compatible code:
+			if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
+				camelHarness = require('./desktop/camel-harness.js');
+				window.$ = window.jQuery = require('./jquery/jquery-3.1.1.min.js');
 			}
-		}
 		</script>
 
-		<script type="text/javascript" src="jquery/jquery-1.11.1.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="jquery/jquery-3.1.1.min.js" charset="utf-8"></script>
 		<script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
 		<script type="text/javascript" src="jquery/jquery.selection.js" charset="utf-8"></script>
-
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-
 		<script type="text/javascript" src="alertify/lib/alertify.min.js" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.core.css" media="all">
-		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.default.css" media="all">
-
 		<script type="text/javascript" src="typegreek/typegreek.js" charset="utf-8"></script>
 
-		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all">
+		<script>
+			// Necessary to avoid conflicts between jQuery and other JavaScript libraries:
+			var $jQuery = jQuery.noConflict();
+		</script>
+
 		<script type="text/javascript" src="epigraphista/epidoc-highlighter.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-gui-initialization.js" charset="utf-8"></script>
@@ -39,19 +37,13 @@
 		<script type="text/javascript" src="epigraphista/epigraphista-text-converter-support.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
 		<script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
-
 		<script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
-
 		<script type="text/javascript" src="epigraphista/index.js" charset="utf-8"></script>
 
-		<script>
-		// Electron compatible code:
-		if (navigator.userAgent.match(/Electron/)) {
-			if (window.module) {
-				module = window.module;
-			}
-		}
-		</script>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
+		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.core.css" media="all">
+		<link rel="stylesheet" type="text/css" href="alertify/themes/alertify.default.css" media="all">
+		<link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all">
 	</head>
 
 	<body>
