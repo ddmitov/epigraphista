@@ -1,5 +1,5 @@
 
-// camel-harness version 0.4.2
+// camel-harness version 0.4.5
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 Dimitar D. Mitov
@@ -18,37 +18,36 @@
 // child_process
 // fs
 
-exports.startScript = function(scriptObject) {
+module.exports.startScript = function(scriptObject) {
   // Interpreter, full path of the script and
   // name of the STDOUT handling function
   // are mandatory function parameter object properties.
-  if (scriptObject.interpreter !== null ||
-    scriptObject.scriptFullPath !== null ||
-    (scriptObject.stdoutFunction !== null &&
-    typeof scriptObject.stdoutFunction === 'function')) {
+  if (scriptObject.interpreter !== undefined ||
+    scriptObject.scriptFullPath !== undefined ||
+    typeof scriptObject.stdoutFunction === 'function') {
     // Check if the supplied Perl script exists:
     const filesystemObject = require('fs');
     filesystemObject.access(scriptObject.scriptFullPath, function(error) {
       if (error && error.code === 'ENOENT') {
         console.log(scriptObject.scriptFullPath + ' was not found.');
       } else {
-        // Set a clean environment for the supplied Perl script:
-        var cleanEnvironment = {};
+        var scriptEnvironment = process.env;
 
-        if (scriptObject.method !== null &&
+        if (scriptObject.method !== undefined &&
           (scriptObject.method === "GET" || scriptObject.method === "POST")) {
-          if (scriptObject.formData  !== undefined &&
+          if (scriptObject.formData !== undefined &&
             scriptObject.formData.length > 0) {
             // Handle GET requests:
             if (scriptObject.method === "GET") {
-              cleanEnvironment['REQUEST_METHOD'] = 'GET';
-              cleanEnvironment['QUERY_STRING'] = scriptObject.formData;
+              scriptEnvironment['REQUEST_METHOD'] = 'GET';
+              scriptEnvironment['QUERY_STRING'] = scriptObject.formData;
             }
 
             // Handle POST requests:
             if (scriptObject.method === "POST") {
-              cleanEnvironment['REQUEST_METHOD'] = 'POST';
-              cleanEnvironment['CONTENT_LENGTH'] = scriptObject.formData.length;
+              scriptEnvironment['REQUEST_METHOD'] = 'POST';
+              scriptEnvironment['CONTENT_LENGTH'] =
+                scriptObject.formData.length;
             }
           } else {
             console.log('Request method is ' + method + ', ' +
@@ -56,12 +55,20 @@ exports.startScript = function(scriptObject) {
           }
         }
 
+        if (scriptObject.method === undefined &&
+          (scriptObject.formData !== undefined &&
+          scriptObject.formData.length > 0)) {
+          console.log('Form data is supplied, ' +
+                      'but request method is not set.');
+        }
+
         // Run the supplied Perl script:
         const spawn = require('child_process').spawn;
-        const scriptHandler = spawn(scriptObject.interpreter,
-          ['-M-ops=fork', scriptObject.scriptFullPath],
-          {env: cleanEnvironment}
-        );
+        const scriptHandler =
+          spawn(scriptObject.interpreter,
+            ['-M-ops=fork', scriptObject.scriptFullPath],
+            {env: scriptEnvironment}
+          );
 
         // Send POST data to the Perl script:
         if (scriptObject.method !== undefined &&
