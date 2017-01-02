@@ -128,12 +128,6 @@ function finalCheckAndSubmit() {
         console.log('Epigraphista Perl script STDERR:\n' + stderr);
       };
 
-      epigraphistaPerlScript.errorFunction = function(error) {
-        console.log(error.stack);
-        console.log('Epigraphista Perl script error code: ' + error.code);
-        console.log('Epigraphista Perl script received signal: ' + error.signal);
-      };
-
       epigraphistaPerlScript.exitFunction = function(exitCode) {
         console.log('Epigraphista Perl script exited with exit code ' + exitCode);
       }
