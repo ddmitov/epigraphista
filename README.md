@@ -25,13 +25,10 @@ It is implemented as a hybrid desktop or server application using [Bootstrap](ht
 ## Translations
 Bulgarian version is currently the default one.  
 To use the English version open ```resources/app/index.html``` and change:
-
 ```html
 <script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 ```
-
 to:
-
 ```html
 <script type="text/javascript" src="epigraphista/translations/english.js" charset="utf-8"></script>
 ```
