@@ -3,18 +3,21 @@ Epigraphista
 
 Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator.  
 
-It is implemented as a hybrid desktop or server application using [Bootstrap](http://getbootstrap.com/), JavaScript text conversion and [Perl 5](https://www.perl.org/) file-writing backend. As a server application it uses any standard web browser for displaying the user interface. As a desktop application it uses [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser), [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) as a GUI framework. Bulgarian and English versions are available and other translations can be added easily.
+It is implemented as a hybrid desktop or server application using [Bootstrap](http://getbootstrap.com/), JavaScript text conversion and [Perl 5](https://www.perl.org/) file-writing backend.  
 
-## Desktop Runtime Requirements
+As a server application it is usable in any standard web browser. As a desktop application it uses [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser), [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) as a GUI framework.  
+
+Bulgarian and English versions are available and other translations can be added easily.
+
+## Desktop Version Runtime Requirements
 * Linux, Mac or Windows Perl 5 distribution
 * [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) or [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/)
 
-## Server Runtime Requirements
-* CGI-enabled HTTP server
-* Perl 5 distribution
+## Server Version Runtime Requirements
+* HTTP server supporting Perl 5 CGI scripts
 * Graphical JavaScript-enabled browser on the client side
 
-## Frameworks, Libraries & Code Fragments Used
+## Credits
 * [jQuery](https://jquery.com/)
 * [jQuery autoResize](http://amaury.carrade.eu/projects/jquery/autoResize.html) by Amaury Carrade
 * [jQuery.selection](http://madapaja.github.io/jquery.selection/) by Koji Iwasaki (@madapaja)
@@ -25,12 +28,14 @@ It is implemented as a hybrid desktop or server application using [Bootstrap](ht
 
 ## Translations
 Bulgarian version is currently the default one.  
-To use the English version open ```resources/app/index.html``` and  
-change:
+To use the English version open ```resources/app/index.html``` and change:
+
 ```html
 <script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
-```  
+```
+
 to:
+
 ```html
 <script type="text/javascript" src="epigraphista/translations/english.js" charset="utf-8"></script>
 ```
