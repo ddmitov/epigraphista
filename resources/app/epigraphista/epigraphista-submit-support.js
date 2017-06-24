@@ -126,8 +126,8 @@ function finalCheckAndSubmit() {
         console.log('Epigraphista Perl script exited with exit code ' + exitCode);
       }
 
-      epigraphistaPerlScript.method = "POST";
-      epigraphistaPerlScript.formData = formData;
+      epigraphistaPerlScript.requestMethod = "POST";
+      epigraphistaPerlScript.inputData = formData;
 
       camelHarness.startScript(epigraphistaPerlScript);
     }, 150);

@@ -12,7 +12,7 @@
 
       // Electron and NW.js compatible code:
       if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
-        camelHarness = require('./desktop/camel-harness.js');
+        camelHarness = require('./desktop/camel-harness/camel-harness.js');
         window.$ = window.jQuery = require('./jquery/jquery-3.1.1.min.js');
       }
     </script>
