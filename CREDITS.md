@@ -1,0 +1,103 @@
+Thanks and Credits
+--------------------------------------------------------------------------------
+Amata mea Argeia - gratiam magnam tibi ago!  
+Patientia tua in studiis meis computatoriis auxilium meum maximum!  
+
+## HTML, CSS & JavaScript
+https://jquery.com/  
+http://amaury.carrade.eu/projects/jquery/autoResize.html  
+http://madapaja.github.io/jquery.selection/  
+http://getbootstrap.com/  
+http://www.typegreek.com/  
+http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/  
+http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs  
+
+https://github.com/nwjs/nw.js/wiki/Changes-related-to-node  
+https://github.com/nwjs/nw.js/issues/4911 (Custom printing API)  
+https://github.com/nwjs/nw.js/issues/1197 (How to get the location of nw.exe?)  
+https://github.com/b1rdex/nw-contextmenu  
+https://github.com/electron/electron/blob/master/docs/api/menu.md  
+https://github.com/electron/electron/blob/master/docs/api/ipc-main.md  
+
+https://gist.github.com/leommoore/4484379 (Node - Processes)  
+
+http://www.w3schools.com/tags/att_textarea_readonly.asp  
+http://www.w3schools.com/jsref/dom_obj_all.asp  
+http://www.w3schools.com/jsref/met_node_appendchild.asp  
+http://www.w3schools.com/jsref/met_element_setattribute.asp  
+http://www.w3schools.com/jsref/prop_style_marginbottom.asp  
+http://www.w3schools.com/jsref/met_node_removechild.asp  
+http://www.w3schools.com/jsref/prop_textarea_value.asp  
+http://www.w3schools.com/jsref/jsref_length_string.asp  
+http://www.w3schools.com/jsref/event_oninput.asp  
+http://www.w3schools.com/jsref/prop_style_cursor.asp  
+http://www.w3schools.com/jsref/event_onpaste.asp  
+http://www.w3schools.com/jsref/met_html_focus.asp  
+http://www.w3schools.com/jsref/met_element_getelementsbytagname.asp  
+http://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp  
+http://www.w3schools.com/js/js_popup.asp  
+http://www.w3schools.com/js/js_htmldom_css.asp  
+http://www.w3schools.com/js/js_loop_while.asp  
+http://www.w3schools.com/jquery/ajax_getscript.asp  
+http://www.w3schools.com/bootstrap/bootstrap_case_container.asp  
+
+http://stackoverflow.com/questions/22888298/bootstrap-3-how-to-get-two-form-inputs-on-one-line-and-other-inputs-on-individu  
+http://stackoverflow.com/questions/18036315/centering-bootstrap-input-fields  
+http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3  
+http://stackoverflow.com/questions/11080620/how-to-remove-div-elements-in-javascript-using-their-id  
+http://stackoverflow.com/questions/9196954/how-to-read-line-by-line-of-a-text-area  
+http://stackoverflow.com/questions/24557828/bootstrap-input-group-text-area-with-button  
+http://stackoverflow.com/questions/3676927/why-if-element-innerhtml-is-not-working-in-firefox  
+http://stackoverflow.com/questions/2363022/toggle-checkbox  
+http://stackoverflow.com/questions/24557828/bootstrap-input-group-text-area-with-button  
+http://stackoverflow.com/questions/769135/run-javascript-when-an-element-loses-focus  
+http://stackoverflow.com/questions/9855656/how-to-submit-a-form-using-javascript  
+http://stackoverflow.com/questions/670693/how-do-i-repeat-a-character-n-times-in-a-string  
+http://stackoverflow.com/questions/6715025/regexp-match-length-returns-null-if-not-found  
+http://stackoverflow.com/questions/494035/how-do-you-pass-a-variable-to-a-regular-expression-javascript  
+http://stackoverflow.com/questions/4029109/javascript-regex-how-to-put-a-variable-inside-a-regular-expression  
+http://stackoverflow.com/questions/2520650/how-do-you-clear-the-focus-in-javascript  
+http://stackoverflow.com/questions/15885348/get-textbox-elements-in-javascript  
+http://stackoverflow.com/questions/2002095/how-to-find-detect-any-textarea-in-page-in-javascript  
+http://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device-in-jquery  
+http://stackoverflow.com/questions/17114825/how-to-disable-button-after-one-click-with-validation-using-javascript  
+http://stackoverflow.com/questions/3898781/how-can-i-change-a-buttons-color-on-hover  
+http://stackoverflow.com/questions/26227462/bootstrap-how-to-use-validation-states-on-a-textarea  
+http://stackoverflow.com/questions/11076975/insert-text-into-textarea-at-cursor-position-javascript  
+http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area  
+http://stackoverflow.com/questions/5050884/textarea-auto-resize-on-paste  
+http://stackoverflow.com/questions/5113374/javascript-check-if-variable-exists-is-defined-initialized  
+http://stackoverflow.com/questions/15521343/conditionally-load-javascript-file  
+http://stackoverflow.com/questions/13230370/nodejs-child-process-write-to-stdin-from-an-already-initialised-process  
+http://stackoverflow.com/questions/31529772/setting-app-icon-for-electron-atom-shell-app  
+http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file  
+http://stackoverflow.com/questions/14989081/node-js-to-get-determine-os-version  
+http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string  
+https://stackoverflow.com/questions/1152692/jquery-ajax-get-responsetext-from-http-url  
+
+https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/  
+https://learn.jquery.com/using-jquery-core/document-ready/  
+
+http://www.tutorialspoint.com/jquery/ajax-serialize.htm  
+http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm  
+
+http://www.randomsnippets.com/2008/02/21/how-to-dynamically-add-form-elements-via-javascript/  
+http://www.coderanch.com/t/112558/HTML-CSS-JavaScript/Adding-alerts-Reset-button  
+http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/  
+http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm  
+http://fettblog.eu/style-select-elements/  
+https://msdn.microsoft.com/library/9dthzd08%28v=vs.94%29.aspx (RegExp Object (JavaScript))  
+http://www.stucox.com/blog/you-cant-detect-a-touchscreen/  
+http://unixpapa.com/js/dyna.html (JavaScript Madness: Dynamic Script Loading)  
+http://blog.katworksgames.com/2012/12/23/translated-strings-and-foreign-language-support/  
+https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/  
+http://ourcodeworld.com/articles/read/202/how-to-include-and-use-jquery-in-electron-framework  
+
+## Perl 5
+http://www.tutorialspoint.com/perl/perl_cgi.htm  
+http://www.tutorialspoint.com/perl/perl_subroutines.htm  
+http://www.tutorialspoint.com/perl/perl_regular_expressions.htm  
+
+http://stackoverflow.com/questions/1003632/how-can-i-see-if-a-perl-hash-already-has-a-certain-key  
+http://stackoverflow.com/questions/1849329/is-there-a-perl-shortcut-to-count-the-number-of-matches-in-a-string  
+http://stackoverflow.com/questions/701458/how-can-i-create-a-directory-if-one-doesnt-exist-using-perl  
