@@ -196,7 +196,7 @@ open my $output_filehandle, ">", $inscription_filepath or die "Can not open file
 print $output_filehandle $xml;
 close $output_filehandle;
 
-print "File saved.";
+print "OK";
 
 # Convert path separators to native path separators depending on the operating system:
 sub to_native_separators {

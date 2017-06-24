@@ -115,13 +115,7 @@ function finalCheckAndSubmit() {
       epigraphistaPerlScript.scriptFullPath = epigraphistaPerlScriptFullPath;
 
       epigraphistaPerlScript.stdoutFunction = function(stdout) {
-        if (stdout == "File saved.") {
-          alertify.set({labels: {ok : TS.okLabel}});
-          alertify.alert(TS.fileSavedMessage, function () {
-            $('#container').html(originalContainerContents);
-            initializeGui();
-          });
-        }
+        scriptEndedMessage(stdout);
       };
 
       epigraphistaPerlScript.stderrFunction = function(stderr) {
@@ -148,30 +142,42 @@ function finalCheckAndSubmit() {
       var epigraphistaPerlScriptUrl;
       if (navigator.userAgent.match(/Perl Executing Browser/)) {
         epigraphistaPerlScriptUrl =
-          "http://ajax@local-pseudodomain/perl/epigraphista.pl";
-      } else {
-        epigraphistaPerlScriptUrl =
-          "perl/epigraphista.pl";
-      }
+          "perl/epigraphista.pl?stdout=scriptEndedMessage";
 
-      // Make an AJAX POST request using jQuery:
-      $.ajax({
-        url: epigraphistaPerlScriptUrl,
-        data: formData,
-        method: 'POST',
-        dataType: 'text',
-        success: function(data) {
-          if (data == "File saved.") {
-            // Display success message:
-            alertify.set({labels: {ok : TS.okLabel}});
-            alertify.alert(TS.fileSavedMessage, function () {
-              // Restore the user interface to its initial outlook:
-              $('#container').html(originalContainerContents);
-              initializeGui();
-            });
-          }
-        }
-      });
+        // Execute a POST request using jQuery:
+        $.ajax({
+          url: epigraphistaPerlScriptUrl,
+          data: formData,
+          method: 'POST',
+          dataType: 'text'
+        });
+      } else {
+        epigraphistaPerlScriptUrl = "perl/epigraphista.pl";
+
+        // Make an AJAX POST request using jQuery:
+        var responseText =
+          $.ajax({
+            url: epigraphistaPerlScriptUrl,
+            data: formData,
+            method: 'POST',
+            dataType: 'text',
+            async: false
+          }).responseText;
+
+        scriptEndedMessage(responseText);
+      }
     }, 150);
+  }
+}
+
+function scriptEndedMessage (stdout) {
+  if (stdout == "OK") {
+    // Display success message:
+    alertify.set({labels: {ok : TS.okLabel}});
+    alertify.alert(TS.fileSavedMessage, function () {
+      // Restore the user interface to its initial outlook:
+      $('#container').html(originalContainerContents);
+      initializeGui();
+    });
   }
 }
