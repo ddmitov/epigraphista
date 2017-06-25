@@ -109,8 +109,8 @@ function finalCheckAndSubmit() {
           pathObject.join(applicationRootDirectory,
             epigraphistaPerlScriptRelativePath);
 
-      // Start Epigraphista Perl script from NW.js or Electron:
-      var epigraphistaPerlScript = new Object();
+      // Epigraphista Perl script object:
+      var epigraphistaPerlScript = {};
       epigraphistaPerlScript.interpreter = "perl";
       epigraphistaPerlScript.scriptFullPath = epigraphistaPerlScriptFullPath;
 
@@ -129,6 +129,7 @@ function finalCheckAndSubmit() {
       epigraphistaPerlScript.requestMethod = "POST";
       epigraphistaPerlScript.inputData = formData;
 
+      // Start Epigraphista Perl script from NW.js or Electron:
       camelHarness.startScript(epigraphistaPerlScript);
     }, 150);
   } else {
@@ -142,15 +143,8 @@ function finalCheckAndSubmit() {
       var epigraphistaPerlScriptUrl;
       if (navigator.userAgent.match(/Perl Executing Browser/)) {
         epigraphistaPerlScriptUrl =
-          "perl/epigraphista.pl?stdout=scriptEndedMessage";
-
-        // Execute a POST request using jQuery:
-        $.ajax({
-          url: epigraphistaPerlScriptUrl,
-          data: formData,
-          method: 'POST',
-          dataType: 'text'
-        });
+          "http://local-pseudodomain/perl/epigraphista.pl?stdout=scriptEndedMessage&" + formData;
+        window.location.href = epigraphistaPerlScriptUrl;
       } else {
         epigraphistaPerlScriptUrl = "perl/epigraphista.pl";
 
