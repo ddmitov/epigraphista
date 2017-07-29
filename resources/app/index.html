@@ -7,49 +7,240 @@
 
     <title>Epigraphista</title>
 
-    <script>
-      var camelHarness;
+    <script src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 
-      // Electron and NW.js compatible code:
-      if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
+    <script>
+      // This code is usefull in Electron and NW.js:
+      var camelHarness;
+      if (typeof require !== 'undefined') {
         camelHarness = require('./desktop/camel-harness/camel-harness.js');
         window.$ = window.jQuery = require('./jquery/jquery-3.1.1.min.js');
       }
+
+      function closeConfirmation() {
+        var confirmation = confirm(TS.closeConfirmation);
+        return confirmation;
+      }
+
+      // This code is usefull only in Electron:
+      if (navigator.userAgent.match(/Electron/)) {
+        const {remote} = require('electron');
+        const {Menu, MenuItem} = remote;
+        const inputElementContextMenu = new Menu();
+
+        inputElementContextMenu.append(new MenuItem({
+          label: TS.contextMenuCutLabel,
+            click() {
+              document.execCommand('cut');
+            }
+        }));
+
+        inputElementContextMenu.append(new MenuItem({
+          label: TS.contextMenuCopyLabel,
+            click() {
+              document.execCommand('copy');
+            }
+        }));
+
+        inputElementContextMenu.append(new MenuItem({
+          label: TS.contextMenuPasteLabel,
+            click() {
+              document.execCommand('paste');
+            }
+        }));
+
+        inputElementContextMenu.append(new MenuItem({
+          label: TS.contextMenuSelectAllLabel,
+            click() {
+              document.execCommand('selectAll');
+            }
+        }));
+
+        const pageContextMenu = new Menu();
+
+        pageContextMenu.append(new MenuItem({
+          label: TS.contextMenuPrint,
+            click() {
+              document.execCommand('print');
+            }
+        }));
+
+        window.addEventListener('contextmenu', (contextMenu) => {
+          contextMenu.preventDefault();
+          if (contextMenu.target instanceof HTMLInputElement ||
+              contextMenu.target instanceof HTMLTextAreaElement ||
+              contextMenu.target.isContentEditable) {
+            inputElementContextMenu.popup(remote.getCurrentWindow());
+          } else {
+            pageContextMenu.popup(remote.getCurrentWindow());
+          }
+        }, false);
+
+        require('electron').ipcRenderer.on('checkUserInputBeforeClose', function() {
+          var textEntered = false;
+
+          var textFields = [];
+          textFields = document.getElementsByTagName('textarea');
+
+          for (i = 0; i < textFields.length; i++) {
+            if (textFields[i].value.length > 0) {
+              textEntered = true;
+            }
+          }
+
+          var inputBoxes = [];
+          inputBoxes = document.querySelectorAll('input[type=text]');
+
+          for (i = 0; i < inputBoxes.length; i++) {
+            if (inputBoxes[i].value.length > 0) {
+              textEntered = true;
+            }
+          }
+
+          if (textEntered == true) {
+            var confirmation = closeConfirmation();
+              if (confirmation == true) {
+                const {ipcRenderer} = require('electron');
+                ipcRenderer.send('asynchronous-message', 'close');
+              }
+          }
+
+          if (textEntered == false) {
+            const {ipcRenderer} = require('electron');
+            ipcRenderer.send('asynchronous-message', 'close');
+          }
+        });
+      }
+
+      // This code is usefull only in NW.js:
+      if (typeof(nw) !== 'undefined') {
+        var win = nw.Window.get();
+        win.maximize();
+
+        var gui = require("nw.gui");
+        var inputElementContextMenu = new gui.Menu;
+
+        inputElementContextMenu.append(new gui.MenuItem({
+          label: TS.contextMenuCutLabel,
+          click: function() {
+            document.execCommand("cut");
+          }
+        }));
+
+        inputElementContextMenu.append(new gui.MenuItem({
+          label: TS.contextMenuCopyLabel,
+          click: function() {
+            document.execCommand("copy");
+          }
+        }));
+
+        inputElementContextMenu.append(new gui.MenuItem({
+          label: TS.contextMenuPasteLabel,
+          click: function() {
+            document.execCommand("paste");
+          }
+        }));
+
+        inputElementContextMenu.append(new gui.MenuItem({
+          label: TS.contextMenuSelectAllLabel,
+          click: function() {
+            document.execCommand("selectAll");
+          }
+        }));
+
+        document.addEventListener("contextmenu", function(contextMenu) {
+          contextMenu.preventDefault();
+          if (contextMenu.target instanceof HTMLInputElement ||
+              contextMenu.target instanceof HTMLTextAreaElement ||
+              contextMenu.target.isContentEditable) {
+            inputElementContextMenu.popup(contextMenu.x, contextMenu.y);
+          }
+        });
+
+        win.on('close', function() {
+          var textEntered = false;
+
+          var textFields = [];
+          textFields = document.getElementsByTagName("textarea");
+
+          for (i = 0; i < textFields.length; i++) {
+            if (textFields[i].value.length > 0) {
+              textEntered = true;
+            }
+          }
+
+          var inputBoxes = [];
+          inputBoxes = document.querySelectorAll("input[type=text]");
+
+          for (i = 0; i < inputBoxes.length; i++) {
+            if (inputBoxes[i].value.length > 0) {
+              textEntered = true;
+            }
+          }
+
+          if (textEntered == true) {
+            var confirmation = closeConfirmation();
+            if (confirmation == true) {
+              win.close(true);
+            }
+          }
+
+          if (textEntered == false) {
+            win.close(true);
+          }
+        });
+      }
+
+      // This code is usefull only in Perl Executing Browser:
+      var pebSettings = {};
+      pebSettings.cut = TS.contextMenuCutLabel;
+      pebSettings.copy = TS.contextMenuCopyLabel;
+      pebSettings.paste = TS.contextMenuPasteLabel;
+      pebSettings.selectAll = TS.contextMenuSelectAllLabel;
+      pebSettings.yesLabel = TS.yesLabel;
+      pebSettings.noLabel = TS.noLabel;
+      pebSettings.okLabel = TS.okLabel;
+      pebSettings.closeConfirmation = TS.closeConfirmation;
+      
+      var epigraphista_perl = {};
+      epigraphista_perl.path = '{app}/perl/epigraphista.pl';
+      epigraphista_perl.stdout = 'scriptEnded';
+      epigraphista_perl.requestMethod = 'POST';
+      epigraphista_perl.inputDataHarvester = function() {
+        var formData = $('#epigraphista-form').serialize();
+        return formData;
+      }
+
+      function scriptEnded(data) {
+        if (data == 'OK') {
+          successMessage();
+        }
+      }
     </script>
 
-    <script type="text/javascript" src="jquery/jquery-3.1.1.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
-    <script type="text/javascript" src="jquery/jquery.selection.js" charset="utf-8"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="alertify/lib/alertify.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="typegreek/typegreek.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epidoc-highlighter.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epigraphista-gui-initialization.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epigraphista-submit-support.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epigraphista-text-converter.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epigraphista-text-converter-support.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
-    <script type="text/javascript" src="epigraphista/index.js" charset="utf-8"></script>
+    <script src="jquery/jquery-3.1.1.min.js" charset="utf-8"></script>
+    <script src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
+    <script src="jquery/jquery.selection.js" charset="utf-8"></script>
+    <script src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="typegreek/typegreek.js" charset="utf-8"></script>
+    <script src="epigraphista/epidoc-highlighter.js" charset="utf-8"></script>
+    <script src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
+    <script src="epigraphista/epigraphista-gui-initialization.js" charset="utf-8"></script>
+    <script src="epigraphista/epigraphista-submit-support.js" charset="utf-8"></script>
+    <script src="epigraphista/epigraphista-text-converter.js" charset="utf-8"></script>
+    <script src="epigraphista/epigraphista-text-converter-support.js" charset="utf-8"></script>
+    <script src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
+    <script src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
-    <link rel="stylesheet" type="text/css" href="alertify/themes/alertify.core.css" media="all">
-    <link rel="stylesheet" type="text/css" href="alertify/themes/alertify.default.css" media="all">
     <link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all">
   </head>
 
   <body>
     <div class="container-fluid" id="container">
-
     <br>
-
-      <form id="epigraphista-form" name="epigraphista_form">
-
-        <div class="row section-title" id="description-section-title">
-        </div>
-
+      <form id="epigraphista-form" name="epigraphista_form" action="epigraphista_perl.settings">
+        <div class="row section-title" id="description-section-title"></div>
         <div class="row buttons-row" id="description-section-buttons-row">
           <input type="button" id="repository-button" value=""
             onClick="javascript:addTextAreaElement('repository', TS.repository, 'full', null, null);" class="btn btn-info btn-xs">
@@ -87,35 +278,25 @@
           </div>
         </div>
 
-        <div id="repository-group">
-        </div>
+        <div id="repository-group"></div>
 
-        <div id="idno-group">
-        </div>
+        <div id="idno-group"></div>
 
-        <div id="support-group">
-        </div>
+        <div id="support-group"></div>
 
-        <div id="layout-group">
-        </div>
+        <div id="layout-group"></div>
 
-        <div id="hand-note-group">
-        </div>
+        <div id="hand-note-group"></div>
 
-        <div id="orig-place-group">
-        </div>
+        <div id="orig-place-group"></div>
 
-        <div id="orig-date-group">
-        </div>
+        <div id="orig-date-group"></div>
 
-        <div id="provenance-found-group">
-        </div>
+        <div id="provenance-found-group"></div>
 
-        <div id="provenance-observed-group">
-        </div>
+        <div id="provenance-observed-group"></div>
 
-        <div class="row section-title" id="text-section-title">
-        </div>
+        <div class="row section-title" id="text-section-title"></div>
 
         <div class="row buttons-row" id="text-section-buttons-row">
           <input type="button" id="apparatus-criticus-button" value=""
@@ -137,15 +318,17 @@
           <div class="row">
             <div id="inscription-input-group" class="form-group col-xs-12">
               <div class="input-group">
-                <textarea id="inscription" class="form-control greek input-text" spellcheck="false"
-                  title="" placeholder=""
+                <textarea id="inscription" class="form-control greek input-text"
+                  spellcheck="false" title="" placeholder=""
                   onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
                   onkeyup="javascript:return convertStr(this, event);"
                   oninput="javascript:startLeidenToEpidocConversion('inscription');"></textarea>
+
                 <span class="input-group-addon">
                   <input type="checkbox" id="inscription-switch-greek" name="inscription_switch_greek" title="">&nbsp;
                   <a href="javascript:toggleGreekKeyboardHelp('inscription');" id="inscription-greek-keyboard-help-link" title="">Ἐλληνική</a>
                 </span>
+
                 <span class="input-group-addon btn btn-info" id="inscription-additional-keyboard-button"
                   onclick="javascript:toggleAdditionalKeyboard('inscription-additional-keyboard', 'inscription');" title="">
                   <span class="glyphicon glyphicon-font"></span>
@@ -177,12 +360,14 @@
         <div id="bibliography-group"></div>
 
         <div class="row buttons-row">
-          <input type="button" id="submit-button" value="" onClick="javascript:finalCheckAndSubmit();" class="btn btn-primary">
+          <input type="button" id="submit-button"
+            value="" onClick="javascript:finalCheckAndSubmit();"
+            class="btn btn-primary">
         </div>
       </form>
     </div>
 
-    <script type="text/javascript">
+    <script>
       $(document).ready(function() {
         detectTouchScreen();
         initializeGui();

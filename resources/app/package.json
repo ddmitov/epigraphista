@@ -1,6 +1,6 @@
 {
   "name": "Epigraphista-Electron",
-  "version": "0.0.1",
+  "version": "0.1.3",
   "description": "Epigraphista",
   "main": "main.js",
   "scripts": {
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/ddmitov/epigraphista#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.37.0"
+    "electron-prebuilt": "^1.0.0"
   }
 }

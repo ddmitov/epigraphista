@@ -17,37 +17,37 @@ const ipcMain = require('electron').ipcMain;
 let mainWindow;
 
 function createWindow () {
-	// Set the icon path:
-	var iconFullPath = __dirname + ".png";
+  // Set the icon path:
+  var iconFullPath = __dirname + ".png";
 
-	// Create the browser window:
-	mainWindow = new BrowserWindow({icon: iconFullPath});
+  // Create the browser window:
+  mainWindow = new BrowserWindow({icon: iconFullPath});
 
-	// Maximize the browser window:
-	mainWindow.maximize();
+  // Maximize the browser window:
+  mainWindow.maximize();
 
-	// Load the index.html of the app:
-	mainWindow.loadURL('file://' + __dirname + '/index.html');
+  // Load the index.html of the app:
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-	// Open the DevTools:
-	// mainWindow.webContents.openDevTools();
+  // Open the DevTools:
+  // mainWindow.webContents.openDevTools();
 
-	var clearToClose = false;
-	const {ipcMain} = require('electron');
-	ipcMain.on('asynchronous-message', function(event, arg) {
-		if (arg == "close") {
-			clearToClose = true;
-			mainWindow.close();
-		}
-	});
+  var clearToClose = false;
+  const {ipcMain} = require('electron');
+  ipcMain.on('asynchronous-message', function(event, arg) {
+    if (arg == "close") {
+      clearToClose = true;
+      mainWindow.close();
+    }
+  });
 
-	// Emitted when the window is closed:
-	mainWindow.on('close', function(event) {
-		if (clearToClose == false) {
-			event.preventDefault();
-			mainWindow.webContents.send('checkUserInputBeforeClose');
-		}
-	});
+  // Emitted when the window is closed:
+  mainWindow.on('close', function(event) {
+    if (clearToClose == false) {
+      event.preventDefault();
+      mainWindow.webContents.send('checkUserInputBeforeClose');
+    }
+  });
 }
 
 // This method will be called when Electron has finished
@@ -56,17 +56,17 @@ app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-	// On OS X it is common for applications and their menu bar
-	// to stay active until the user quits explicitly with Cmd + Q
-	if (process.platform !== 'darwin') {
-		app.quit();
-	}
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 app.on('activate', function () {
-	// On OS X it's common to re-create a window in the app when the
-	// dock icon is clicked and there are no other windows open.
-	if (mainWindow === null) {
-		createWindow();
-	}
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow();
+  }
 });

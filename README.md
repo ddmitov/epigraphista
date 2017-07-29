@@ -3,7 +3,7 @@ Epigraphista
 
 Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator.  
 
-It is implemented as a hybrid desktop or server application using [Bootstrap](http://getbootstrap.com/), JavaScript text conversion and [Perl 5](https://www.perl.org/) file-writing backend. As a server application it is usable in any standard web browser. As a desktop application it uses [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser), [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) as a GUI framework. Bulgarian and English versions are available and other translations can be added easily.
+It is a hybrid desktop or server application using [Bootstrap](http://getbootstrap.com/), JavaScript text conversion and [Perl 5](https://www.perl.org/) file-writing backend. As a server application it is usable in any standard web browser. As a desktop application it uses [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser), [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) as a GUI framework. Bulgarian and English versions are available and other translations can be added easily.
 
 ## Desktop Use Requirements
 * Linux, Mac or Windows Perl 5 distribution
@@ -14,7 +14,6 @@ It is implemented as a hybrid desktop or server application using [Bootstrap](ht
 * Graphical JavaScript-enabled browser on the client side
 
 ## Credits
-* [Alertify.js](https://alertifyjs.org/) by Fabien Doiron
 * [Bootstrap](http://getbootstrap.com/)
 * [Chapel Hill Electronic Text Converter (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
 * [jQuery](https://jquery.com/)
@@ -27,13 +26,13 @@ Bulgarian version is currently the default one.
 To use the English version open ```resources/app/index.html``` and change:
 
 ```html
-<script type="text/javascript" src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
+<script src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 ```
 
 to:
 
 ```html
-<script type="text/javascript" src="epigraphista/translations/english.js" charset="utf-8"></script>
+<script src="epigraphista/translations/english.js" charset="utf-8"></script>
 ```
 
 ## License
