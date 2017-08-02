@@ -118,15 +118,13 @@
       pebSettings.closeConfirmation = TS.closeConfirmation;
 
       var epigraphista_perl = {};
-      epigraphista_perl.path = '{app}/perl/epigraphista.pl';
-      epigraphista_perl.stdout = 'scriptEnded';
+      epigraphista_perl.scriptFullPath = '{app}/perl/epigraphista.pl';
       epigraphista_perl.requestMethod = 'POST';
       epigraphista_perl.inputDataHarvester = function() {
         var formData = $('#epigraphista-form').serialize();
         return formData;
       }
-
-      function scriptEnded(data) {
+      epigraphista_perl.stdoutFunction = function (data) {
         if (data == 'OK') {
           successMessage();
         }
