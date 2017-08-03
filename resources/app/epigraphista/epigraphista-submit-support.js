@@ -40,9 +40,6 @@ function finalCheckAndSubmit() {
   // Convert to EpiDoc XML again if text is enetered at the last moment before file save:
   startLeidenToEpidocConversion('inscription');
 
-  // Get the form data:
-  var formData = $('#epigraphista-form').serialize();
-
   // Call Epigraphista Perl script from Electron or NW.js:
   if (typeof require !== 'undefined') {
     // Determine the operating system:
@@ -62,46 +59,22 @@ function finalCheckAndSubmit() {
     var binaryDir = pathObject.dirname(binaryPath);
 
     // Get the full path of the application root directory:
-    var applicationRootDirectory =
+    var applicationDirectory =
         pathObject.join(binaryDir, 'resources', 'app');
 
-    // Epigraphista Perl script reltive path:
-    var epigraphistaPerlScriptRelativePath =
-        pathObject.join('perl', 'epigraphista.pl');
-
-    // Compose the full path of the Epigraphista Perl script:
-    var epigraphistaPerlScriptFullPath =
-        pathObject.join(applicationRootDirectory,
-          epigraphistaPerlScriptRelativePath);
-
-    // Epigraphista Perl script object:
-    var epigraphistaPerlScript = {};
-    epigraphistaPerlScript.interpreter = 'perl';
-    epigraphistaPerlScript.scriptFullPath = epigraphistaPerlScriptFullPath;
-
-    epigraphistaPerlScript.stdoutFunction = function(stdout) {
-      scriptEnded(stdout);
-    };
-
-    epigraphistaPerlScript.stderrFunction = function(stderr) {
-      console.log('Epigraphista Perl script STDERR:\n' + stderr);
-    };
-
-    epigraphistaPerlScript.exitFunction = function(exitCode) {
-      console.log('Epigraphista Perl script exited with exit code ' + exitCode);
-    }
-
-    epigraphistaPerlScript.requestMethod = 'POST';
-    epigraphistaPerlScript.inputData = formData;
+    epigraphista_perl_script.scriptFullPath =
+      epigraphista_perl_script.scriptFullPath.replace(
+        /{app}/, applicationDirectory);
 
     // Start Epigraphista Perl script from NW.js or Electron:
-    camelHarness.startScript(epigraphistaPerlScript);
+    camelHarness.startScript(epigraphista_perl_script);
   } else {
     // Call Epigraphista Perl script from Perl Executing browser:
-    if (typeof peb !== null) {
+    if (typeof peb !== 'undefined') {
       $('#epigraphista-form').submit();
     } else {
       // Call Epigraphista Perl script from a web browser:
+      var formData = $('#epigraphista-form').serialize();
       $.ajax({
         url: "perl/epigraphista.pl",
         data: formData,

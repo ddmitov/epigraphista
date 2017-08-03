@@ -74,6 +74,7 @@ http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-j
 http://stackoverflow.com/questions/14989081/node-js-to-get-determine-os-version  
 http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string  
 https://stackoverflow.com/questions/1152692/jquery-ajax-get-responsetext-from-http-url  
+https://stackoverflow.com/questions/30429354/check-that-html-is-using-with-node-webkit-or-not  
 
 https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/  
 https://learn.jquery.com/using-jquery-core/document-ready/  

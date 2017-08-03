@@ -1,30 +1,30 @@
 // This code is usefull only in Electron:
 const {remote} = require('electron');
 const {Menu, MenuItem} = remote;
-const inputElementContextMenu = new Menu();
+const electronInputElementContextMenu = new Menu();
 
-inputElementContextMenu.append(new MenuItem({
+electronInputElementContextMenu.append(new MenuItem({
   label: TS.contextMenuCutLabel,
     click() {
       document.execCommand('cut');
     }
 }));
 
-inputElementContextMenu.append(new MenuItem({
+electronInputElementContextMenu.append(new MenuItem({
   label: TS.contextMenuCopyLabel,
     click() {
       document.execCommand('copy');
     }
 }));
 
-inputElementContextMenu.append(new MenuItem({
+electronInputElementContextMenu.append(new MenuItem({
   label: TS.contextMenuPasteLabel,
     click() {
       document.execCommand('paste');
     }
 }));
 
-inputElementContextMenu.append(new MenuItem({
+electronInputElementContextMenu.append(new MenuItem({
   label: TS.contextMenuSelectAllLabel,
     click() {
       document.execCommand('selectAll');
@@ -45,7 +45,7 @@ window.addEventListener('contextmenu', (contextMenu) => {
   if (contextMenu.target instanceof HTMLInputElement ||
       contextMenu.target instanceof HTMLTextAreaElement ||
       contextMenu.target.isContentEditable) {
-    inputElementContextMenu.popup(remote.getCurrentWindow());
+    electronInputElementContextMenu.popup(remote.getCurrentWindow());
   } else {
     pageContextMenu.popup(remote.getCurrentWindow());
   }

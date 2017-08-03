@@ -10,6 +10,27 @@
     <script src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 
     <script>
+      // This code is usefull in Electron, NW.js and Perl Executing Browser:
+      var epigraphista_perl_script = {};
+      epigraphista_perl_script.interpreter = 'perl';
+      epigraphista_perl_script.scriptFullPath = '{app}/perl/epigraphista.pl';
+      epigraphista_perl_script.requestMethod = 'POST';
+      epigraphista_perl_script.inputDataHarvester = function() {
+        var formData = $('#epigraphista-form').serialize();
+        return formData;
+      }
+      epigraphista_perl_script.stdoutFunction = function (data) {
+        if (data == 'OK') {
+          successMessage();
+        }
+      }
+      epigraphista_perl_script.stderrFunction = function(stderr) {
+        console.log('Epigraphista Perl script STDERR:\n' + stderr);
+      }
+      epigraphista_perl_script.exitFunction = function(exitCode) {
+        console.log('Epigraphista Perl script exited with exit code ' + exitCode);
+      }
+
       // This code is usefull in Electron and NW.js:
       var camelHarness;
       if (typeof require !== 'undefined') {
@@ -24,51 +45,51 @@
 
       // This code is usefull only in Electron:
       if (navigator.userAgent.match(/Electron/)) {
-        $.getScript("desktop/electron.js");
+        $.getScript('desktop/electron.js');
       }
 
       // This code is usefull only in NW.js:
-      if (typeof(nw) !== 'undefined') {
+      if (typeof process !== 'undefined' && process.versions['node-webkit']) {
         var win = nw.Window.get();
         win.maximize();
 
-        var gui = require("nw.gui");
-        var inputElementContextMenu = new gui.Menu;
+        var gui = require('nw.gui');
+        var nwjsInputElementContextMenu = new gui.Menu;
 
-        inputElementContextMenu.append(new gui.MenuItem({
+        nwjsInputElementContextMenu.append(new gui.MenuItem({
           label: TS.contextMenuCutLabel,
           click: function() {
-            document.execCommand("cut");
+            document.execCommand('cut');
           }
         }));
 
-        inputElementContextMenu.append(new gui.MenuItem({
+        nwjsInputElementContextMenu.append(new gui.MenuItem({
           label: TS.contextMenuCopyLabel,
           click: function() {
-            document.execCommand("copy");
+            document.execCommand('copy');
           }
         }));
 
-        inputElementContextMenu.append(new gui.MenuItem({
+        nwjsInputElementContextMenu.append(new gui.MenuItem({
           label: TS.contextMenuPasteLabel,
           click: function() {
-            document.execCommand("paste");
+            document.execCommand('paste');
           }
         }));
 
-        inputElementContextMenu.append(new gui.MenuItem({
+        nwjsInputElementContextMenu.append(new gui.MenuItem({
           label: TS.contextMenuSelectAllLabel,
           click: function() {
-            document.execCommand("selectAll");
+            document.execCommand('selectAll');
           }
         }));
 
-        document.addEventListener("contextmenu", function(contextMenu) {
+        document.addEventListener('contextmenu', function(contextMenu) {
           contextMenu.preventDefault();
           if (contextMenu.target instanceof HTMLInputElement ||
               contextMenu.target instanceof HTMLTextAreaElement ||
               contextMenu.target.isContentEditable) {
-            inputElementContextMenu.popup(contextMenu.x, contextMenu.y);
+            nwjsInputElementContextMenu.popup(contextMenu.x, contextMenu.y);
           }
         });
 
@@ -76,7 +97,7 @@
           var textEntered = false;
 
           var textFields = [];
-          textFields = document.getElementsByTagName("textarea");
+          textFields = document.getElementsByTagName('textarea');
 
           for (i = 0; i < textFields.length; i++) {
             if (textFields[i].value.length > 0) {
@@ -85,7 +106,7 @@
           }
 
           var inputBoxes = [];
-          inputBoxes = document.querySelectorAll("input[type=text]");
+          inputBoxes = document.querySelectorAll('input[type=text]');
 
           for (i = 0; i < inputBoxes.length; i++) {
             if (inputBoxes[i].value.length > 0) {
@@ -116,19 +137,6 @@
       pebSettings.noLabel = TS.noLabel;
       pebSettings.okLabel = TS.okLabel;
       pebSettings.closeConfirmation = TS.closeConfirmation;
-
-      var epigraphista_perl = {};
-      epigraphista_perl.scriptFullPath = '{app}/perl/epigraphista.pl';
-      epigraphista_perl.requestMethod = 'POST';
-      epigraphista_perl.inputDataHarvester = function() {
-        var formData = $('#epigraphista-form').serialize();
-        return formData;
-      }
-      epigraphista_perl.stdoutFunction = function (data) {
-        if (data == 'OK') {
-          successMessage();
-        }
-      }
     </script>
 
     <script src="jquery/jquery-3.1.1.min.js" charset="utf-8"></script>
@@ -152,7 +160,7 @@
   <body>
     <div class="container-fluid" id="container">
     <br>
-      <form id="epigraphista-form" name="epigraphista_form" action="epigraphista_perl.settings">
+      <form id="epigraphista-form" name="epigraphista_form" action="epigraphista_perl_script.settings">
         <div class="row section-title" id="description-section-title"></div>
         <div class="row buttons-row" id="description-section-buttons-row">
           <input type="button" id="repository-button" value=""
