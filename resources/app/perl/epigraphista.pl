@@ -16,6 +16,11 @@ if ($ENV{'SERVER_PROTOCOL'}) {
 	print "Content-type: text/plain", "\n\n";
 }
 
+# This setting is usefull only in Perl Executing Browser:
+if ($ENV{'PEB_DATA_DIR'}) {
+	$inscriptions_directory = "$ENV{'PEB_DATA_DIR'}/inscriptions";
+}
+
 # Create inscriptions directory if it does not exist:
 mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
 

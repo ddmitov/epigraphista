@@ -76,7 +76,6 @@ http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-w
 https://stackoverflow.com/questions/1152692/jquery-ajax-get-responsetext-from-http-url  
 https://stackoverflow.com/questions/30429354/check-that-html-is-using-with-node-webkit-or-not  
 
-https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/  
 https://learn.jquery.com/using-jquery-core/document-ready/  
 
 http://www.tutorialspoint.com/jquery/ajax-serialize.htm  
@@ -93,6 +92,7 @@ http://unixpapa.com/js/dyna.html (JavaScript Madness: Dynamic Script Loading)
 http://blog.katworksgames.com/2012/12/23/translated-strings-and-foreign-language-support/  
 https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/  
 http://ourcodeworld.com/articles/read/202/how-to-include-and-use-jquery-in-electron-framework  
+http://xahlee.info/js/js_default_charset_encoding.html  
 
 ## Perl 5
 http://www.tutorialspoint.com/perl/perl_cgi.htm  

@@ -1,5 +1,5 @@
 
-// UTF-8 encoded file!
+// -*- coding: utf-8 -*-
 
 // epigraphista-text-converter version 0.2.0
 // Leiden conventions to EpiDoc XML epigraphic text converter
