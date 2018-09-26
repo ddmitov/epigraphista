@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 // camel-harness
 // Node.js - Electron - NW.js controller for Perl scripts
 // camel-harness is licensed under the terms of the MIT license.
-// Copyright (c) 2016 - 2017 Dimitar D. Mitov
+// Copyright (c) 2016 - 2018 Dimitar D. Mitov
 
 // THE SOFTWARE IS PROVIDED "AS IS",
 // WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
@@ -15,18 +15,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-module.exports.setArguments = function(script) {
-  var interpreterArguments;
-
-  // Interpreter arguments, if any, go before the script full path:
-  if (script.interpreterSwitches !== undefined &&
-      Array.isArray(script.interpreterSwitches)) {
-    interpreterArguments = script.interpreterSwitches;
-  } else {
-    interpreterArguments = [];
+// Set script environment:
+function setEnvironment (settings) {
+  // Choose between inherited environment and new environment:
+  if (typeof settings.options.env !== "object") {
+    settings.options.env = process.env;
   }
 
-  // The full path of the script is the minimal interpreter argument:
-  interpreterArguments.push(script.scriptFullPath);
-  return interpreterArguments;
+  return settings.options.env;
+}
+
+module.exports.setOptions = function (settings) {
+  // Set default options if 'options' are empty:
+  if (typeof settings.options !== "object") {
+    settings.options = {
+      cwd: null,
+      env: process.env
+    };
+  }
+
+  settings.options.env = setEnvironment(settings);
+
+  return settings.options;
 };

@@ -37,7 +37,8 @@ function finalCheckAndSubmit() {
     return false;
   }
 
-  // Convert to EpiDoc XML again if text is enetered at the last moment before file save:
+  // Convert to EpiDoc XML again
+  // if text is enetered at the last moment before file save:
   startLeidenToEpidocConversion('inscription');
 
   // Call Epigraphista Perl script from Electron or NW.js:
@@ -62,9 +63,12 @@ function finalCheckAndSubmit() {
     var applicationDirectory =
         pathObject.join(binaryDir, 'resources', 'app');
 
-    epigraphista_perl_script.scriptFullPath =
-      epigraphista_perl_script.scriptFullPath.replace(
-        /{app}/, applicationDirectory);
+    epigraphista_perl_script.script =
+      pathObject.join(
+        applicationDirectory,
+        epigraphista_perl_script.scriptRelativePath);
+
+    epigraphista_perl_script.inputData = $('#epigraphista-form').serialize();
 
     // Start Epigraphista Perl script from NW.js or Electron:
     camelHarness.startScript(epigraphista_perl_script);

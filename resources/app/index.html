@@ -13,20 +13,23 @@
       // This code is usefull in Electron, NW.js and Perl Executing Browser:
       var epigraphista_perl_script = {};
       epigraphista_perl_script.interpreter = 'perl';
-      epigraphista_perl_script.scriptFullPath = '{app}/perl/epigraphista.pl';
-      epigraphista_perl_script.requestMethod = 'POST';
-      epigraphista_perl_script.inputDataHarvester = function() {
+      epigraphista_perl_script.scriptRelativePath = 'perl/epigraphista.pl';
+
+      epigraphista_perl_script.inputData = function() {
         var formData = $('#epigraphista-form').serialize();
         return formData;
       }
+
       epigraphista_perl_script.stdoutFunction = function (data) {
         if (data == 'OK') {
           successMessage();
         }
       }
+
       epigraphista_perl_script.stderrFunction = function(stderr) {
         console.log('Epigraphista Perl script STDERR:\n' + stderr);
       }
+
       epigraphista_perl_script.exitFunction = function(exitCode) {
         console.log('Epigraphista Perl script exited with exit code ' + exitCode);
       }

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 // camel-harness
 // Node.js - Electron - NW.js controller for Perl scripts
 // camel-harness is licensed under the terms of the MIT license.
-// Copyright (c) 2016 - 2017 Dimitar D. Mitov
+// Copyright (c) 2016 - 2018 Dimitar D. Mitov
 
 // THE SOFTWARE IS PROVIDED "AS IS",
 // WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
@@ -15,67 +15,78 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const spawnProcess = require('child_process').spawn;
+const perlProcess = require("child_process").spawn;
 
-const allArguments = require('./camel-harness-arguments.js');
-const scriptEnvironment = require('./camel-harness-environment.js');
-const scriptSettings = require('./camel-harness-settings.js');
+const commandLine = require("./camel-harness-command-line.js");
+const options = require("./camel-harness-options.js");
 
-module.exports.startScript = function(script) {
-  // Check script settings:
-  if (scriptSettings.checkSettings(script) === false) {
-    return;
+// Check mandatory script settings - 'scripr' and 'stdoutFunction':
+function checkSettings (settings) {
+  if (!settings.script) {
+    throw Error("camel-harness: No 'script' is defined!");
   }
+}
 
-  // If inputData is not defined and inputDataHarvester function is available,
-  // it is used as an alternative input data source:
-  if (script.inputData === undefined &&
-      typeof script.inputDataHarvester === 'function') {
-    script.inputData = script.inputDataHarvester();
+// Write data on script STDIN:
+// If any data is available when the script is started and
+// 'GET' request method is not set,
+// data is written on script STDIN.
+function stdinWrite (settings) {
+  if (settings.inputData) {
+    settings.scriptHandler.stdin.write(`${settings.inputData}\n`);
   }
+}
 
-  // Set script environment:
-  var environment = scriptEnvironment.setEnvironment(script);
+// Handle script STDOUT and STDERR:
+// If 'options.stdio = "ignore"' is set,
+// there are no script STDOUT or STDERR.
+function handleStdoutStderr(settings) {
+  if (settings.options.stdio !== "ignore") {
+    settings.scriptHandler.stdout.on("data", function (stdout) {
+      if (typeof settings.stdoutFunction === "function") {
+        settings.stdoutFunction(stdout.toString("utf8"));
+      }
+    });
 
-  // Set all interpreter arguments:
-  var interpreterArguments = allArguments.setArguments(script);
-
-  // Run the supplied script:
-  script.scriptHandler =
-    spawnProcess(script.interpreter, interpreterArguments, {env: environment});
-
-  // Send POST data to the script:
-  if (script.requestMethod === 'POST') {
-    script.scriptHandler.stdin.write(script.inputData + '\n');
+    if (typeof settings.stderrFunction === "function") {
+      settings.scriptHandler.stderr.on("data", function (stderr) {
+        settings.stderrFunction(stderr.toString("utf8"));
+      });
+    }
   }
+}
+
+// Start Perl script - the main function of 'camel-harness':
+// All Perl scripts are executed asynchronously.
+module.exports.startScript = function (settings) {
+  // Check mandatory script settings:
+  checkSettings(settings);
+
+  // Run script:
+  // If no interpreter is set,
+  // 'perl' interpreter on PATH is used.
+  settings.scriptHandler =
+    perlProcess((settings.interpreter || "perl"),
+                commandLine.setArguments(settings),
+                options.setOptions(settings));
+
+  // Write data on script STDIN, if any:
+  stdinWrite(settings);
+
+  // Handle script STDOUT and STDERR:
+  handleStdoutStderr(settings);
 
   // Handle script errors:
-  script.scriptHandler.on('error', function(error) {
-    if (typeof script.errorFunction === 'function') {
-      script.errorFunction(error);
-    } else {
-      console.log('camel-harness error stack: ' + error.stack);
-      console.log('camel-harness error code: ' + error.code);
-      console.log('camel-harness received signal: ' + error.signal);
-    }
-  });
-
-  // Handle STDOUT:
-  script.scriptHandler.stdout.on('data', function(data) {
-    script.stdoutFunction(data.toString('utf8'));
-  });
-
-  // Handle STDERR:
-  script.scriptHandler.stderr.on('data', function(data) {
-    if (typeof script.stderrFunction === 'function') {
-      script.stderrFunction(data.toString('utf8'));
-    }
-  });
+  if (typeof settings.errorFunction === "function") {
+    settings.scriptHandler.on("error", function (error) {
+      settings.errorFunction(error);
+    });
+  }
 
   // Handle script exit:
-  script.scriptHandler.on('exit', function(exitCode) {
-    if (typeof script.exitFunction === 'function') {
-      script.exitFunction(exitCode);
+  settings.scriptHandler.on("exit", function (exitCode) {
+    if (typeof settings.exitFunction === "function") {
+      settings.exitFunction(exitCode);
     }
   });
 };

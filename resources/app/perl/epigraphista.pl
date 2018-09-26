@@ -25,7 +25,8 @@ if ($ENV{'PEB_DATA_DIR'}) {
 mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
 
 # Embedded template:
-my $xml = "<?xml version='1.0' encoding='UTF-8'?>
+my $xml =
+"<?xml version='1.0' encoding='UTF-8'?>
 <?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://relaxng.org/ns/structure/1.0'?>
 <?xml-model href='http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng' schematypens='http://purl.oclc.org/dsdl/schematron'?>
 <TEI xmlns='http://www.tei-c.org/ns/1.0' xml:space='preserve' xml:lang='en'>
@@ -136,7 +137,16 @@ $xml =~ s/\}//g;
 
 # Read node values from POST data:
 my ($buffer, @pairs, $name, $value, %FORM);
-read (STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
+
+# Input data is read from a POST request
+# if the script is going to be executed as a CGI script on an HTTP web server:
+if ($ENV{'SERVER_PROTOCOL'}) {
+	read (STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
+} else {
+	$buffer = <STDIN>;
+	chomp $buffer;
+}
+
 @pairs = split (/&/, $buffer);
 
 foreach my $pair (@pairs) {
