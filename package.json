@@ -5,7 +5,9 @@
   "main": "resources/app/index.html",
   "scripts": {
     "nw-install": "nw install 0.32.4",
-    "start": "nw ."
+    "start": "nw .",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -24,12 +26,14 @@
   "homepage": "https://github.com/ddmitov/epigraphista#readme",
   "dependencies": {
     "camel-harness": "^1.0.0",
-    "nwjs": "^1.4.4"
+    "nwjs": "^1.4.4",
+    "snyk": "^1.99.1"
   },
   "window": {
     "title": "Epigraphista",
     "icon": "resources/app.png",
     "min_width": 800,
     "min_height": 600
-  }
+  },
+  "snyk": true
 }
