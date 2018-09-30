@@ -7,11 +7,19 @@ It is a hybrid desktop or server application using [Bootstrap](http://getbootstr
 
 ## Desktop Use Requirements
 * Linux, Mac or Windows Perl 5 distribution
-* [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) or [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/)
+* [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) or  
+  [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/)
 
 ## Network Use Requirements
 * HTTP server supporting Perl 5 CGI scripts
-* Graphical JavaScript-enabled browser on the client side
+* Graphical HTML5 and JavaScript-enabled browser on the client side
+
+## Quick Start
+``git clone git://github.com/ddmitov/epigraphista``  
+``cd epigraphista``  
+``npm install``  
+``npm run nw-install``  
+``npm start``
 
 ## Credits
 * [Bootstrap](http://getbootstrap.com/)
