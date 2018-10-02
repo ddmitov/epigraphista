@@ -10,35 +10,28 @@
     <script src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 
     <script>
-      // This code is usefull in Electron, NW.js and Perl Executing Browser:
-      var epigraphista_perl_script = {};
-      epigraphista_perl_script.interpreter = 'perl';
-      epigraphista_perl_script.scriptRelativePath = 'perl/epigraphista.pl';
+      // This code is usefull in Electron and Perl Executing Browser:
+      var epigraphista_perl = {};
+      epigraphista_perl.interpreter = 'perl';
+      epigraphista_perl.scriptRelativePath = 'epigraphista/epigraphista.pl';
 
-      epigraphista_perl_script.inputData = function() {
+      epigraphista_perl.inputData = function() {
         var formData = $('#epigraphista-form').serialize();
         return formData;
       }
 
-      epigraphista_perl_script.stdoutFunction = function (data) {
+      epigraphista_perl.stdoutFunction = function (data) {
         if (data == 'OK') {
           successMessage();
         }
       }
 
-      epigraphista_perl_script.stderrFunction = function(stderr) {
+      epigraphista_perl.stderrFunction = function(stderr) {
         console.log('Epigraphista Perl script STDERR:\n' + stderr);
       }
 
-      epigraphista_perl_script.exitFunction = function(exitCode) {
+      epigraphista_perl.exitFunction = function(exitCode) {
         console.log('Epigraphista Perl script exited with exit code ' + exitCode);
-      }
-
-      // This code is usefull in Electron and NW.js:
-      var camelHarness;
-      if (typeof require !== 'undefined') {
-        camelHarness = require('./desktop/camel-harness/camel-harness.js');
-        window.$ = window.jQuery = require('./jquery/jquery-3.1.1.min.js');
       }
 
       function closeConfirmation() {
@@ -47,87 +40,11 @@
       }
 
       // This code is usefull only in Electron:
-      if (navigator.userAgent.match(/Electron/)) {
-        $.getScript('desktop/electron.js');
-      }
-
-      // This code is usefull only in NW.js:
-      if (typeof process !== 'undefined' && process.versions['node-webkit']) {
-        var win = nw.Window.get();
-        win.maximize();
-
-        var gui = require('nw.gui');
-        var nwjsInputElementContextMenu = new gui.Menu;
-
-        nwjsInputElementContextMenu.append(new gui.MenuItem({
-          label: TS.contextMenuCutLabel,
-          click: function() {
-            document.execCommand('cut');
-          }
-        }));
-
-        nwjsInputElementContextMenu.append(new gui.MenuItem({
-          label: TS.contextMenuCopyLabel,
-          click: function() {
-            document.execCommand('copy');
-          }
-        }));
-
-        nwjsInputElementContextMenu.append(new gui.MenuItem({
-          label: TS.contextMenuPasteLabel,
-          click: function() {
-            document.execCommand('paste');
-          }
-        }));
-
-        nwjsInputElementContextMenu.append(new gui.MenuItem({
-          label: TS.contextMenuSelectAllLabel,
-          click: function() {
-            document.execCommand('selectAll');
-          }
-        }));
-
-        document.addEventListener('contextmenu', function(contextMenu) {
-          contextMenu.preventDefault();
-          if (contextMenu.target instanceof HTMLInputElement ||
-              contextMenu.target instanceof HTMLTextAreaElement ||
-              contextMenu.target.isContentEditable) {
-            nwjsInputElementContextMenu.popup(contextMenu.x, contextMenu.y);
-          }
-        });
-
-        win.on('close', function() {
-          var textEntered = false;
-
-          var textFields = [];
-          textFields = document.getElementsByTagName('textarea');
-
-          for (i = 0; i < textFields.length; i++) {
-            if (textFields[i].value.length > 0) {
-              textEntered = true;
-            }
-          }
-
-          var inputBoxes = [];
-          inputBoxes = document.querySelectorAll('input[type=text]');
-
-          for (i = 0; i < inputBoxes.length; i++) {
-            if (inputBoxes[i].value.length > 0) {
-              textEntered = true;
-            }
-          }
-
-          if (textEntered == true) {
-            var confirmation = closeConfirmation();
-            if (confirmation == true) {
-              win.close(true);
-            }
-          }
-
-          if (textEntered == false) {
-            win.close(true);
-          }
-        });
+      var camelHarness;
+      if (typeof require !== 'undefined') {
+        camelHarness = require('camel-harness');
+        window.$ = window.jQuery = require('./jquery/jquery-3.1.1.min.js');
+        $.getScript('epigraphista/electron.js');
       }
 
       // This code is usefull only in Perl Executing Browser:
@@ -146,15 +63,15 @@
     <script src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
     <script src="jquery/jquery.selection.js" charset="utf-8"></script>
     <script src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-    <script src="typegreek/typegreek.js" charset="utf-8"></script>
+    <script src="typegreek.js" charset="utf-8"></script>
     <script src="epigraphista/epidoc-highlighter.js" charset="utf-8"></script>
-    <script src="epigraphista/epigraphista-greek-support.js" charset="utf-8"></script>
-    <script src="epigraphista/epigraphista-gui-initialization.js" charset="utf-8"></script>
-    <script src="epigraphista/epigraphista-submit-support.js" charset="utf-8"></script>
-    <script src="epigraphista/epigraphista-text-converter.js" charset="utf-8"></script>
-    <script src="epigraphista/epigraphista-text-converter-support.js" charset="utf-8"></script>
-    <script src="epigraphista/epigraphista-ui-elements.js" charset="utf-8"></script>
-    <script src="epigraphista/epigraphista-ui-functions.js" charset="utf-8"></script>
+    <script src="epigraphista/greek-support.js" charset="utf-8"></script>
+    <script src="epigraphista/gui-initialization.js" charset="utf-8"></script>
+    <script src="epigraphista/submit-support.js" charset="utf-8"></script>
+    <script src="epigraphista/text-converter.js" charset="utf-8"></script>
+    <script src="epigraphista/text-converter-support.js" charset="utf-8"></script>
+    <script src="epigraphista/ui-elements.js" charset="utf-8"></script>
+    <script src="epigraphista/ui-functions.js" charset="utf-8"></script>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
     <link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all">
@@ -163,7 +80,7 @@
   <body>
     <div class="container-fluid" id="container">
     <br>
-      <form id="epigraphista-form" name="epigraphista_form" action="epigraphista_perl_script.settings">
+      <form id="epigraphista-form" name="epigraphista_form" action="epigraphista_perl.settings">
         <div class="row section-title" id="description-section-title"></div>
         <div class="row buttons-row" id="description-section-buttons-row">
           <input type="button" id="repository-button" value=""

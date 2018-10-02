@@ -3,22 +3,16 @@ Epigraphista
 
 Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator.  
 
-It is a hybrid desktop or server application using [Bootstrap](http://getbootstrap.com/), JavaScript text conversion and [Perl 5](https://www.perl.org/) file-writing back-end. As a server application it is usable in any standard web browser. As a desktop application it uses [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser), [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) as a GUI framework. Bulgarian and English versions are available and other translations can be added easily.
+It is a desktop application based on [Bootstrap](http://getbootstrap.com/), JavaScript text conversion and [Perl 5](https://www.perl.org/) file-writing back-end using [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) or [Electron](http://electron.atom.io/) as a GUI framework. Bulgarian and English versions are available and other translations can be added easily.
 
-## Desktop Use Requirements
+## Requirements
 * Linux, Mac or Windows Perl 5 distribution
-* [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) or  
-  [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/)
+* [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) or [Electron](http://electron.atom.io/)
 
-## Network Use Requirements
-* HTTP server supporting Perl 5 CGI scripts
-* Graphical HTML5 and JavaScript-enabled browser on the client side
-
-## Quick Start
+## Electron Quick Start
 ``git clone git://github.com/ddmitov/epigraphista``  
 ``cd epigraphista``  
 ``npm install``  
-``npm run nw-install``  
 ``npm start``
 
 ## Credits
@@ -52,4 +46,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT A NY
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
 
 ## Author
-Dimitar D. Mitov, 2015 - 2017.
+Dimitar D. Mitov, 2015 - 2018.

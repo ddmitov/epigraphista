@@ -11,8 +11,11 @@ function finalCheckAndSubmit() {
   // Check XML tags of inscription description:
   if (document.getElementById('support')) {
     var supportText = document.getElementById('support').value;
-    supportText = supportText.replace(/\<material\>([^\<|\>]*)\<\/material\>/g, '');
-    supportText = supportText.replace(/\<objectType\>([^\<|\>]*)\<\/objectType\>/g, '');
+    supportText =
+      supportText.replace(/\<material\>([^\<|\>]*)\<\/material\>/g, '');
+    supportText =
+      supportText.replace(/\<objectType\>([^\<|\>]*)\<\/objectType\>/g, '');
+
     if (supportText.match(/\<|\>/)) {
       // Display warning message:
       alert(TS.invalidXMLTagAlertMessage);
@@ -28,7 +31,8 @@ function finalCheckAndSubmit() {
     return false;
   }
 
-  // Check for any square bracket, that was opened, but was not closed or vice versa:
+  // Check for any square bracket,
+  // that was opened, but was not closed or vice versa:
   epigraphicText = epigraphicText.replace(/\[((.)*)\]/g, '');
   epigraphicText = epigraphicText.replace(/\[((.)*)\n((.)*)\]/g, '\n');
   if (epigraphicText.match(/\[|\]/)) {
@@ -41,7 +45,7 @@ function finalCheckAndSubmit() {
   // if text is enetered at the last moment before file save:
   startLeidenToEpidocConversion('inscription');
 
-  // Call Epigraphista Perl script from Electron or NW.js:
+  // Call Epigraphista Perl script from Electron:
   if (typeof require !== 'undefined') {
     // Determine the operating system:
     var osObject = require('os');
@@ -55,41 +59,21 @@ function finalCheckAndSubmit() {
       pathObject = require('path').win32;
     }
 
-    // Get the full path of directory where Electron or NW.js binary is located:
-    var binaryPath = process.execPath;
-    var binaryDir = pathObject.dirname(binaryPath);
+    // Get the full path of the Epigraphista Perl script:
+    var appDirectory =
+      pathObject.join(process.cwd(), 'resources', 'app');
 
-    // Get the full path of the application root directory:
-    var applicationDirectory =
-        pathObject.join(binaryDir, 'resources', 'app');
+    epigraphista_perl.script =
+      pathObject.join(appDirectory, epigraphista_perl.scriptRelativePath);
 
-    epigraphista_perl_script.script =
-      pathObject.join(
-        applicationDirectory,
-        epigraphista_perl_script.scriptRelativePath);
+    epigraphista_perl.inputData = $('#epigraphista-form').serialize();
 
-    epigraphista_perl_script.inputData = $('#epigraphista-form').serialize();
-
-    // Start Epigraphista Perl script from NW.js or Electron:
-    camelHarness.startScript(epigraphista_perl_script);
+    // Start Epigraphista Perl script from Electron:
+    camelHarness.startScript(epigraphista_perl);
   } else {
     // Call Epigraphista Perl script from Perl Executing browser:
     if (typeof peb !== 'undefined') {
       $('#epigraphista-form').submit();
-    } else {
-      // Call Epigraphista Perl script from a web browser:
-      var formData = $('#epigraphista-form').serialize();
-      $.ajax({
-        url: "perl/epigraphista.pl",
-        data: formData,
-        method: 'POST',
-        dataType: 'text',
-        success: function(data) {
-          if (data == 'OK') {
-            successMessage();
-          }
-        }
-      });
     }
   }
 }
