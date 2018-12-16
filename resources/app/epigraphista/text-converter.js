@@ -1,14 +1,9 @@
-
 // -*- coding: utf-8 -*-
 
-// epigraphista-text-converter version 0.2.0
-// Leiden conventions to EpiDoc XML epigraphic text converter
-// Based on regular expressions and code fragments from
-// Chapel Hill Electronic Text Convertor - JavaScript (CHETC-JS):
-// http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs
-// http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/
-// epigraphista-text-converter is licensed under the terms of GNU GPL version 3.
-// Dimitar D. Mitov, 2015 - 2017.
+// Epigraphista version 0.2.0
+// EpiDoc XML file creator
+// Epigraphista is licensed under the terms of GNU GPL version 3.
+// Dimitar D. Mitov, 2015 - 2018.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
