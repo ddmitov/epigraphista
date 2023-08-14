@@ -74,7 +74,6 @@ https://learn.jquery.com/using-jquery-core/document-ready/
 http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/  
 http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm  
 http://fettblog.eu/style-select-elements/  
-http://www.stucox.com/blog/you-cant-detect-a-touchscreen/  
 http://ourcodeworld.com/articles/read/202/how-to-include-and-use-jquery-in-electron-framework  
 http://xahlee.info/js/js_default_charset_encoding.html  
 
