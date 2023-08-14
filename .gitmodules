@@ -1,3 +1,0 @@
-[submodule "resources/node_modules/camel-harness"]
-	path = resources/node_modules/camel-harness
-	url = https://github.com/ddmitov/camel-harness
