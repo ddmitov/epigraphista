@@ -1,5 +1,5 @@
 {
-  "name": "Epigraphista",
+  "name": "epigraphista",
   "version": "0.2.0",
   "description": "EpiDoc XML file creator",
   "main": "resources/app/main.js",
@@ -23,6 +23,6 @@
   "homepage": "https://github.com/ddmitov/epigraphista#readme",
   "dependencies": {
     "camel-harness": "^1.0.0",
-    "electron": "^1.0.0"
+    "electron": "^25.5.0"
   }
 }
