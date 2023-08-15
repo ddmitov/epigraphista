@@ -1,5 +1,5 @@
 {
-  "name": "Epigraphista",
+  "name": "epigraphista",
   "version": "0.2.0",
   "description": "EpiDoc XML file creator",
   "main": "main.js",

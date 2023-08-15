@@ -6,7 +6,7 @@ It is a desktop application based on [Bootstrap](http://getbootstrap.com/), Java
 
 ## Requirements
 
-* Linux, Mac or Windows Perl 5 distribution
+* Linux or Windows Perl 5 distribution
 * [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) or [Electron](http://electron.atom.io/)
 
 ## Electron Quick Start
