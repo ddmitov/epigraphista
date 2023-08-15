@@ -13,9 +13,6 @@ http://www.typegreek.com/
 http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/  
 http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs  
 
-https://github.com/electron/electron/blob/master/docs/api/menu.md  
-https://github.com/electron/electron/blob/master/docs/api/ipc-main.md  
-
 https://www.w3schools.com/tags/att_textarea_readonly.asp  
 https://www.w3schools.com/jsref/dom_obj_all.asp  
 https://www.w3schools.com/jsref/met_node_appendchild.asp  
@@ -61,20 +58,14 @@ https://stackoverflow.com/questions/11076975/insert-text-into-textarea-at-cursor
 https://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area  
 https://stackoverflow.com/questions/5050884/textarea-auto-resize-on-paste  
 https://stackoverflow.com/questions/5113374/javascript-check-if-variable-exists-is-defined-initialized  
-https://stackoverflow.com/questions/15521343/conditionally-load-javascript-file  
-https://stackoverflow.com/questions/13230370/nodejs-child-process-write-to-stdin-from-an-already-initialised-process  
-https://stackoverflow.com/questions/31529772/setting-app-icon-for-electron-atom-shell-app  
-https://stackoverflow.com/questions/14989081/node-js-to-get-determine-os-version  
 https://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string  
 https://stackoverflow.com/questions/1152692/jquery-ajax-get-responsetext-from-http-url  
-https://stackoverflow.com/questions/30664111/how-to-use-node-modules-within-electron  
 
 https://learn.jquery.com/using-jquery-core/document-ready/  
 
 http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/  
 http://java2s.com/Code/HTMLCSS/Form/setfontsizeweightfamilyfortextarea.htm  
 http://fettblog.eu/style-select-elements/  
-http://ourcodeworld.com/articles/read/202/how-to-include-and-use-jquery-in-electron-framework  
 http://xahlee.info/js/js_default_charset_encoding.html  
 
 ## Perl 5

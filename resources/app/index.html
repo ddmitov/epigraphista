@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     <script src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
 
     <script>
-      // This code is usefull in both Electron and Perl Executing Browser:
+      // Perl Executing Browser code:
       var epigraphista_perl = {};
       epigraphista_perl.interpreter = 'perl';
       epigraphista_perl.scriptRelativePath = 'epigraphista/epigraphista.pl';
@@ -59,15 +59,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         return confirmation;
       }
 
-      // This code is usefull only in Electron:
-      var camelHarness;
-      if (typeof require !== 'undefined') {
-        camelHarness = require('camel-harness');
-        window.$ = window.jQuery = require('./jquery/jquery-3.1.1.min.js');
-        $.getScript('epigraphista/electron.js');
-      }
-
-      // This code is usefull only in Perl Executing Browser:
       var pebSettings = {};
       pebSettings.cutLabel = TS.contextMenuCutLabel;
       pebSettings.copyLabel = TS.contextMenuCopyLabel;

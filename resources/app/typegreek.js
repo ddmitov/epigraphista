@@ -1,5 +1,4 @@
 
-
 // Global Variables
 var startString = "";
 var workingString = "";
@@ -645,7 +644,8 @@ function combineGreekCharacters(control) {
                     // this character is lowercase sigma and the next character
                                         workingString = 'ς';
                     }
-                }
+                }
+
             }
         } // don't do anything if this character was the end of the string
 
