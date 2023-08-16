@@ -1,8 +1,7 @@
 # Epigraphista
 
 Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator.  
-
-It is a JavaScript and [Perl 5](https://www.perl.org/) desktop application using [Bootstrap](http://getbootstrap.com/) and [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) for its graphical interface.
+It is a JavaScript and [Perl 5](https://www.perl.org/) desktop application using [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) for its graphical interface.
 
 ## Requirements
 
@@ -13,8 +12,8 @@ It is a JavaScript and [Perl 5](https://www.perl.org/) desktop application using
 
 ## Translations
 
-Bulgarian and English translations are available.  
-Bulgarian translation is currently the default one.  
+Bulgarian and English translations are available. Bulgarian translation is the default one.  
+
 To use the English translation open ```resources/app/index.html``` and change:
 
 ```html
