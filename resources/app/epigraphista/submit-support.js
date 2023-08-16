@@ -52,6 +52,7 @@ function finalCheckAndSubmit() {
   // that was opened, but was not closed or vice versa:
   epigraphicText = epigraphicText.replace(/\[((.)*)\]/g, '');
   epigraphicText = epigraphicText.replace(/\[((.)*)\n((.)*)\]/g, '\n');
+
   if (epigraphicText.match(/\[|\]/)) {
     // Display warning message:
     alert(TS.singleSquareBracketAlertMessage);
@@ -62,37 +63,8 @@ function finalCheckAndSubmit() {
   // if text is enetered at the last moment before file save:
   startLeidenToEpidocConversion('inscription');
 
-  // Call Epigraphista Perl script from Electron:
-  if (typeof require !== 'undefined') {
-    // Determine the operating system:
-    var osObject = require('os');
-    var platform = osObject.platform();
-
-    // Initialize 'path' object:
-    var pathObject;
-    if (platform !== 'win32') {
-      pathObject = require('path').posix;
-    } else {
-      pathObject = require('path').win32;
-    }
-
-    // Get the full path of the Epigraphista Perl script:
-    var appDirectory =
-      pathObject.join(process.cwd(), 'resources', 'app');
-
-    epigraphista_perl.script =
-      pathObject.join(appDirectory, epigraphista_perl.scriptRelativePath);
-
-    epigraphista_perl.inputData = $('#epigraphista-form').serialize();
-
-    // Start Epigraphista Perl script from Electron:
-    camelHarness.startScript(epigraphista_perl);
-  } else {
-    // Call Epigraphista Perl script from Perl Executing browser:
-    if (typeof peb !== 'undefined') {
-      $('#epigraphista-form').submit();
-    }
-  }
+  // Call Epigraphista Perl script:
+  $('#epigraphista-form').submit();
 }
 
 function successMessage() {

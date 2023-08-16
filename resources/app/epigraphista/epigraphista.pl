@@ -38,16 +38,9 @@ foreach my $pair (@pairs) {
   $FORM{$name} = $value;
 }
 
-# Paths of the XML template and the inscriptions directory
-# Electron:
-my $template_filepath = "$cwd/resources/data/telamon-template.xml";
-my $inscriptions_directory = "$cwd/resources/data/inscriptions";
-
-# Perl Executing Browser:
-if ($ENV{'PEB_DATA_DIR'}) {
-  $template_filepath = "$ENV{'PEB_DATA_DIR'}/telamon-template.xml";
-  $inscriptions_directory = "$ENV{'PEB_DATA_DIR'}/inscriptions";
-}
+# Compose the paths of the XML template and the inscriptions directory:
+my $template_filepath = "$cwd/data/telamon-template.xml";
+my $inscriptions_directory = "$cwd/data/inscriptions";
 
 # Create inscriptions directory if it does not exist:
 mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
@@ -59,7 +52,7 @@ my $xml;
 # Read the XML template:
 {
   open my $template_filehandle, "<", $template_filepath or
-    die "Can not open template!";
+    die "Can not open template: $template_filepath";
   $/ = undef;
   $xml = <$template_filehandle>;
   close $template_filehandle;

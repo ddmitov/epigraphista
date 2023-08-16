@@ -79,20 +79,20 @@ function toggleAdditionalKeyboard(placeholderId, target) {
     "<input type='button' value='ϐ' onClick=\"javascript:insertLetter('" + target + "', 'ϐ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='ϲ' onClick=\"javascript:insertLetter('" + target + "', 'ϲ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Ϛ' onClick=\"javascript:insertLetter('" + target + "', 'Ϛ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    //"<input type='button' value='ϛ' onClick=\"javascript:insertLetter('" + target + "', 'ϛ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+    "<input type='button' value='ϛ' onClick=\"javascript:insertLetter('" + target + "', 'ϛ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Ϟ' onClick=\"javascript:insertLetter('" + target + "', 'Ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    //"<input type='button' value='ϟ' onClick=\"javascript:insertLetter('" + target + "', 'ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+    "<input type='button' value='ϟ' onClick=\"javascript:insertLetter('" + target + "', 'ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Ϡ' onClick=\"javascript:insertLetter('" + target + "', 'Ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    //"<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    //"&nbsp;&nbsp;&nbsp;" +
+    "<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+    "&nbsp;&nbsp;&nbsp;" +
     "<input type='button' value='Ё' onClick=\"javascript:insertLetter('" + target + "', 'Ё')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='ё' onClick=\"javascript:insertLetter('" + target + "', 'ё')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Ы' onClick=\"javascript:insertLetter('" + target + "', 'Ы')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='ы' onClick=\"javascript:insertLetter('" + target + "', 'ы')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Э' onClick=\"javascript:insertLetter('" + target + "', 'Э')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='э' onClick=\"javascript:insertLetter('" + target + "', 'э')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    //"<input type='button' value='ѝ' onClick=\"javascript:insertLetter('" + target + "', 'ѝ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    //"&nbsp;&nbsp;&nbsp;" +
+    "<input type='button' value='ѝ' onClick=\"javascript:insertLetter('" + target + "', 'ѝ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
+    "&nbsp;&nbsp;&nbsp;" +
     "<input type='button' value='Ä' onClick=\"javascript:insertLetter('" + target + "', 'Ä')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='ä' onClick=\"javascript:insertLetter('" + target + "', 'ä')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Ö' onClick=\"javascript:insertLetter('" + target + "', 'Ö')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +

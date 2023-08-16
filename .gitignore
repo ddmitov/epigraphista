@@ -1,4 +1,7 @@
+resources/app/data/inscriptions/*.xml
+
 epigraphista
+epigraphista.exe
 
 backup
 upgit
