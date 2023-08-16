@@ -2,24 +2,18 @@
 
 Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator.  
 
-It is a JavaScript and [Perl 5](https://www.perl.org/) desktop application based on [Bootstrap](http://getbootstrap.com/) and [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) for its graphical interface. Bulgarian and English translations are available.
+It is a JavaScript and [Perl 5](https://www.perl.org/) desktop application using [Bootstrap](http://getbootstrap.com/) and [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) for its graphical interface.
 
 ## Requirements
 
 * Linux or Windows Perl 5 distribution
-* [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser)
+* Linux or Windows [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser)
 
-## Credits
-
-* [Bootstrap](http://getbootstrap.com/)
-* [Chapel Hill Electronic Text Converter (CHETC-JS)](http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/)
-* [jQuery](https://jquery.com/)
-* [jQuery autoResize](http://amaury.carrade.eu/projects/jquery/autoResize.html) by Amaury Carrade
-* [jQuery.selection](http://madapaja.github.io/jquery.selection/) by Koji Iwasaki (@madapaja)
-* [TypeGreek](http://www.typegreek.com/) by Randy Hoyt
+## [Thanks and Credits](CREDITS.md)
 
 ## Translations
 
+Bulgarian and English translations are available.  
 Bulgarian translation is currently the default one.  
 To use the English translation open ```resources/app/index.html``` and change:
 
