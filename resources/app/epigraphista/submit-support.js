@@ -7,31 +7,31 @@
 function finalCheckAndSubmit() {
   // Check for title:
   var title = document.getElementById('title').value;
+
   if (title.length < 3) {
-    // Display warning message:
     alert(TS.noTitleAlertMessage);
     return false;
   }
 
-  // Check XML tags of inscription description:
+  // Check the XML tags of inscription description:
   if (document.getElementById('support')) {
     var supportText = document.getElementById('support').value;
+  
     supportText =
       supportText.replace(/\<material\>([^\<|\>]*)\<\/material\>/g, '');
     supportText =
       supportText.replace(/\<objectType\>([^\<|\>]*)\<\/objectType\>/g, '');
 
     if (supportText.match(/\<|\>/)) {
-      // Display warning message:
       alert(TS.invalidXMLTagAlertMessage);
       return false;
     }
   }
 
-  // Check for epigraphic text:
+  // Check the epigraphic text:
   var epigraphicText = document.getElementById('inscription').value;
+
   if (epigraphicText.length < 3) {
-    // Display warning message:
     alert(TS.noInscriptionAlertMessage);
     return false;
   }
@@ -42,7 +42,6 @@ function finalCheckAndSubmit() {
   epigraphicText = epigraphicText.replace(/\[((.)*)\n((.)*)\]/g, '\n');
 
   if (epigraphicText.match(/\[|\]/)) {
-    // Display warning message:
     alert(TS.singleSquareBracketAlertMessage);
     return false;
   }
@@ -56,7 +55,6 @@ function finalCheckAndSubmit() {
 }
 
 function successMessage() {
-  // Display success message:
   alert(TS.fileSavedMessage);
 
   // Restore the user interface to its initial outlook:
