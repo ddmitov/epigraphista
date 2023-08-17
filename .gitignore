@@ -1,4 +1,4 @@
-resources/app/data/inscriptions/*.xml
+resources/data/inscriptions/*.xml
 
 epigraphista
 epigraphista.exe

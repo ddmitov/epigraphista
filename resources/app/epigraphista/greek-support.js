@@ -69,50 +69,9 @@ function toggleAdditionalKeyboard(placeholderId, target) {
     "<input type='button' value='Ϟ' onClick=\"javascript:insertLetter('" + target + "', 'Ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='ϟ' onClick=\"javascript:insertLetter('" + target + "', 'ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Ϡ' onClick=\"javascript:insertLetter('" + target + "', 'Ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "&nbsp;&nbsp;&nbsp;" +
-    "<input type='button' value='Ё' onClick=\"javascript:insertLetter('" + target + "', 'Ё')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ё' onClick=\"javascript:insertLetter('" + target + "', 'ё')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ы' onClick=\"javascript:insertLetter('" + target + "', 'Ы')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ы' onClick=\"javascript:insertLetter('" + target + "', 'ы')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Э' onClick=\"javascript:insertLetter('" + target + "', 'Э')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='э' onClick=\"javascript:insertLetter('" + target + "', 'э')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ѝ' onClick=\"javascript:insertLetter('" + target + "', 'ѝ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "&nbsp;&nbsp;&nbsp;" +
-    "<input type='button' value='Ä' onClick=\"javascript:insertLetter('" + target + "', 'Ä')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ä' onClick=\"javascript:insertLetter('" + target + "', 'ä')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ö' onClick=\"javascript:insertLetter('" + target + "', 'Ö')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ö' onClick=\"javascript:insertLetter('" + target + "', 'ö')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ü' onClick=\"javascript:insertLetter('" + target + "', 'Ü')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ü' onClick=\"javascript:insertLetter('" + target + "', 'ü')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ß' onClick=\"javascript:insertLetter('" + target + "', 'ß')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<br>" +
-    "<input type='button' value='É' onClick=\"javascript:insertLetter('" + target + "', 'É')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='é' onClick=\"javascript:insertLetter('" + target + "', 'é')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='À' onClick=\"javascript:insertLetter('" + target + "', 'À')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='à' onClick=\"javascript:insertLetter('" + target + "', 'à')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='È' onClick=\"javascript:insertLetter('" + target + "', 'È')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='è' onClick=\"javascript:insertLetter('" + target + "', 'è')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ù' onClick=\"javascript:insertLetter('" + target + "', 'Ù')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ù' onClick=\"javascript:insertLetter('" + target + "', 'ù')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Â' onClick=\"javascript:insertLetter('" + target + "', 'Â')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='â' onClick=\"javascript:insertLetter('" + target + "', 'â')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ê' onClick=\"javascript:insertLetter('" + target + "', 'Ê')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ê' onClick=\"javascript:insertLetter('" + target + "', 'ê')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Î' onClick=\"javascript:insertLetter('" + target + "', 'Î')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='î' onClick=\"javascript:insertLetter('" + target + "', 'î')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ô' onClick=\"javascript:insertLetter('" + target + "', 'Ô')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ô' onClick=\"javascript:insertLetter('" + target + "', 'ô')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Û' onClick=\"javascript:insertLetter('" + target + "', 'Û')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='û' onClick=\"javascript:insertLetter('" + target + "', 'û')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ë' onClick=\"javascript:insertLetter('" + target + "', 'Ë')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ë' onClick=\"javascript:insertLetter('" + target + "', 'ë')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ï' onClick=\"javascript:insertLetter('" + target + "', 'Ï')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ï' onClick=\"javascript:insertLetter('" + target + "', 'ï')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ÿ' onClick=\"javascript:insertLetter('" + target + "', 'Ÿ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ÿ' onClick=\"javascript:insertLetter('" + target + "', 'ÿ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ç' onClick=\"javascript:insertLetter('" + target + "', 'Ç')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ç' onClick=\"javascript:insertLetter('" + target + "', 'ç')\" class='btn btn-success btn-xs btn-letters'>&nbsp;";
+    "<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;";
+    // "&nbsp;&nbsp;&nbsp;" +
+    // "<br>" +
 
   var rowBox = document.createElement("div");
   rowBox.setAttribute("class", "form-group col-xs-12");

@@ -14,8 +14,10 @@ function startLeidenToEpidocConversion(elementId) {
 
   // Get the inner XML of the EpiDoc fragment:
   var epidocXmlFragment = epidocXml;
+
   // Add opening and closing tags:
   epidocXmlFragment = "<ab>" + epidocXmlFragment + "\n</ab>";
+
   // Syntax highlight EpiDoc text:
   var epidocHtml = syntaxHighlightEpidocText(epidocXmlFragment);
 

@@ -25,8 +25,8 @@ foreach my $pair (@pairs) {
 }
 
 # Compose the paths of the XML template and the inscriptions directory:
-my $template_filepath = "$cwd/data/telamon-template.xml";
-my $inscriptions_directory = "$cwd/data/inscriptions";
+my $template_filepath = "$cwd/../data/telamon-template.xml";
+my $inscriptions_directory = "$cwd/../data/inscriptions";
 
 # Create inscriptions directory if it does not exist:
 mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
