@@ -16,13 +16,13 @@ Bulgarian and English translations are available. Bulgarian translation is the d
 To use the English translation open ```resources/app/index.html``` and change:
 
 ```html
-<script src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
+<script src="epigraphista/javascript/translations/bulgarian.js" charset="utf-8"></script>
 ```
 
 to:
 
 ```html
-<script src="epigraphista/translations/english.js" charset="utf-8"></script>
+<script src="epigraphista/javascript/translations/english.js" charset="utf-8"></script>
 ```
 
 ## License

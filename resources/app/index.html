@@ -13,38 +13,61 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
     <title>Epigraphista</title>
 
-    <script src="epigraphista/translations/bulgarian.js" charset="utf-8"></script>
-
     <script>
-      // Perl Executing Browser code:
-      var epigraphista_perl = {};
-      epigraphista_perl.interpreter = 'perl';
-      epigraphista_perl.scriptRelativePath = 'epigraphista/epigraphista.pl';
+      // Perl script settings for the Perl Executing Browser:
+      var xml_writer = {};
+      xml_writer.interpreter = 'perl';
+      xml_writer.scriptRelativePath = 'epigraphista/perl/xml_writer.pl';
 
-      epigraphista_perl.inputData = function() {
+      xml_writer.inputData = function() {
         var formData = $('#epigraphista-form').serialize();
         return formData;
       }
 
-      epigraphista_perl.stdoutFunction = function (data) {
+      xml_writer.stdoutFunction = function (data) {
         if (data == 'OK') {
           successMessage();
         }
       }
 
-      epigraphista_perl.stderrFunction = function(stderr) {
-        console.log('Epigraphista Perl script STDERR:\n' + stderr);
+      xml_writer.stderrFunction = function(stderr) {
+        console.log('xml_writer.pl STDERR:\n' + stderr);
       }
 
-      epigraphista_perl.exitFunction = function(exitCode) {
-        console.log('Epigraphista Perl script exited with exit code ' + exitCode);
+      xml_writer.exitFunction = function(exitCode) {
+        console.log('xml_writer.pl exited with exit code ' + exitCode);
       }
 
       function closeConfirmation() {
         var confirmation = confirm(TS.closeConfirmation);
         return confirmation;
       }
+    </script>
 
+    <script src="jquery/jquery_3_1_1.min.js" charset="utf-8"></script>
+    <script src="jquery/jquery_textarea_auto_resize.js" charset="utf-8"></script>
+    <script src="jquery/jquery_selection.js" charset="utf-8"></script>
+
+    <script src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+
+    <script src="typegreek/typegreek.js" charset="utf-8"></script>
+
+    <script src="epigraphista/javascript/translations/bulgarian.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/gui_initialization.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/submit_support.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/text_converter.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/text_converter_support.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/ui_elements.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/ui_functions.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
+
+    <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
+
+    <script>
+      // Global settings for the Perl Executing Browser:
       var pebSettings = {};
       pebSettings.cutLabel = TS.contextMenuCutLabel;
       pebSettings.copyLabel = TS.contextMenuCopyLabel;
@@ -55,29 +78,12 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
       pebSettings.okLabel = TS.okLabel;
       pebSettings.closeConfirmation = TS.closeConfirmation;
     </script>
-
-    <script src="jquery/jquery-3.1.1.min.js" charset="utf-8"></script>
-    <script src="jquery/jquery-textarea-auto-resize.js" charset="utf-8"></script>
-    <script src="jquery/jquery.selection.js" charset="utf-8"></script>
-    <script src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-    <script src="typegreek.js" charset="utf-8"></script>
-    <script src="epigraphista/epidoc-highlighter.js" charset="utf-8"></script>
-    <script src="epigraphista/greek-support.js" charset="utf-8"></script>
-    <script src="epigraphista/gui-initialization.js" charset="utf-8"></script>
-    <script src="epigraphista/submit-support.js" charset="utf-8"></script>
-    <script src="epigraphista/text-converter.js" charset="utf-8"></script>
-    <script src="epigraphista/text-converter-support.js" charset="utf-8"></script>
-    <script src="epigraphista/ui-elements.js" charset="utf-8"></script>
-    <script src="epigraphista/ui-functions.js" charset="utf-8"></script>
-
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
-    <link rel="stylesheet" type="text/css" href="epigraphista/epigraphista.css" media="all">
   </head>
 
   <body>
     <div class="container-fluid" id="container">
     <br>
-      <form id="epigraphista-form" name="epigraphista_form" action="epigraphista_perl.script">
+      <form id="epigraphista-form" name="epigraphista_form" action="xml_writer.script">
         <div class="row section-title" id="description-section-title"></div>
         <div class="row buttons-row" id="description-section-buttons-row">
           <input type="button" id="repository-button" value=""
