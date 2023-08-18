@@ -1,4 +1,4 @@
 resources/app/bootstrap/* linguist-vendored
 resources/app/jquery/* linguist-vendored
-resources/app/typegreek.js linguist-vendored
+resources/app/typegreek/* linguist-vendored
 resources/app.png linguist-vendored
