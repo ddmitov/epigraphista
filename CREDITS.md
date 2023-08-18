@@ -3,12 +3,12 @@
 Amata mea Argeia - gratiam magnam tibi ago!  
 Patientia tua in studiis meis computatoriis auxilium meum maximum!  
 
-# EpiDoc
+## EpiDoc
 
 http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/  
 http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs  
 
-# Greek
+## Greek
 
 http://www.typegreek.com/  
 
