@@ -6,14 +6,14 @@
 
 // English translation of Epigraphista:
 var TS = {};
+
 TS.title = 'Title';
 TS.descriptionSectionTitle = 'Inscription description';
 TS.repository = 'Repository';
 TS.idno = 'ID number';
 TS.support = 'Monument description';
-TS.supportGroupMaterialButtonLabel = 'Material';
-TS.supportGroupCategoryButtonLabel = 'Category';
-TS.supportGroupSupportPlaceholder = 'Monument description';
+TS.material = 'Material';
+TS.type = 'Category';
 TS.layout = 'Layout description';
 TS.handNote = 'Hand note';
 TS.origPlace = 'Place of origin';
@@ -30,16 +30,11 @@ TS.apparatusCriticus = 'Apparatus criticus';
 TS.translation = 'Translation';
 TS.commentary = 'Commentary';
 TS.bibliography = 'Bibliography';
+
 TS.submitButton = 'Save';
 
 TS.noTitleAlertMessage = 'Please, enter the title of the inscription!';
-TS.invalidXMLTagAlertMessage =
-  'XML tag is not closed within the field "Monument description".<br>' +
-  'Please, correct the text!';
 TS.noInscriptionAlertMessage = 'Please, enter the text of the inscription!';
-TS.singleSquareBracketAlertMessage =
-  'Single square bracket is found within the text of the inscription!<br>' +
-  'Please, correct the text!';
 TS.fileSavedMessage = 'A new EpiDoc XML file is successfully saved.';
 TS.closeConfirmation =
   'Inscription data is not saved and will be lost!<br>' +

@@ -6,14 +6,14 @@
 
 // Bulgarian translation of Epigraphista:
 var TS = {};
+
 TS.title = 'Заглавие';
 TS.descriptionSectionTitle = 'Описание на надписа';
 TS.repository = 'Музей';
 TS.idno = 'Инвентарен номер';
 TS.support = 'Описание на паметника';
-TS.supportGroupMaterialButtonLabel = 'Материал';
-TS.supportGroupCategoryButtonLabel = 'Категория';
-TS.supportGroupSupportPlaceholder = 'Описание на паметника';
+TS.material = 'Материал';
+TS.type = 'Категория';
 TS.layout = 'Описание на текстовото поле';
 TS.handNote = 'Описание на шрифта';
 TS.origPlace = 'Място на намиране';
@@ -31,16 +31,11 @@ TS.apparatusCriticus = 'Критичен апарат';
 TS.translation = 'Превод';
 TS.commentary = 'Коментар';
 TS.bibliography = 'Библиография';
+
 TS.submitButton = 'Запиши';
 
 TS.noTitleAlertMessage = 'Моля, попълнете заглавие на надписа!';
-TS.invalidXMLTagAlertMessage =
-  'Намерен е непълен XML таг в полето "Описание на паметника".<br>' +
-  'Моля, поправете въведения текст!';
 TS.noInscriptionAlertMessage = 'Моля, попълнете текста на надписа!';
-TS.singleSquareBracketAlertMessage =
-  'Намерена е единична квадратна скоба в текста на надписа!<br>' +
-  'Моля, поправете въведения текст!';
 TS.fileSavedMessage = 'Успешно е записан нов EpiDoc XML файл.';
 TS.closeConfirmation =
   'Въведеният текст не е записан и ще бъде загубен!<br>' +

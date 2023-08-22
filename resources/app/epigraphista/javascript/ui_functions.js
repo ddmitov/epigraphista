@@ -10,6 +10,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
   var greekSupportCode01 = "" +
     "onkeypress=\"return convertCharToggle(this, document.epigraphista_form." + name + "_switch_greek.checked, event);\"" +
     "onkeyup=\"return convertStr(this, event);\"";
+
   var greekSupportCode02 = "" +
     "<span class='input-group-addon'>" +
       "<input type='checkbox' id='" + label + "-switch-greek' name='" + name + "_switch_greek'" +
@@ -17,11 +18,13 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
       "<a href=\"javascript:toggleGreekKeyboardHelp('" + label + "');\"" +
         "title='" + TS.greekPolytonicInputHelpTitle + "'>" + TS.greekPolytonicInputLabel + "</a>" +
     "</span>";
+
   var additionalKeyboardSupportCode = "" +
     "<span class='input-group-addon btn btn-info'" +
       "onclick=\"javascript:toggleAdditionalKeyboard('" + label + "-additional-keyboard', '" + label + "')\" title='" + TS.additionalKeyboardTitle + "'>" +
       "<span class='glyphicon glyphicon-font'></span>" +
     "</span>";
+
   var elementRemovalCode = "" +
     "<span class='input-group-addon btn btn-danger' onclick=\"javascript:clearElementGroup('" + label + "');\" title='" + TS.elementRemovalTitle + "'>" +
       "<span class='glyphicon glyphicon-remove'></span>" +
@@ -31,6 +34,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
     greekSupportCode01 = "";
     greekSupportCode02 = "";
   }
+
   if (additionalKeyboard == null) {
     additionalKeyboardSupportCode = "";
   }
@@ -49,21 +53,27 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
   textElementInputGroup.innerHTML = textElementContents;
 
   var textElementBox = document.createElement("div");
+
   if (size == "full") {
     textElementBox.setAttribute("class", "form-group col-xs-12");
   }
+
   if (size == "large") {
     textElementBox.setAttribute("class", "form-group col-xs-10 col-xs-offset-1");
   }
+
   if (size == "medium") {
     textElementBox.setAttribute("class", "form-group col-xs-8 col-xs-offset-2");
   }
+
   if (size == "small") {
     textElementBox.setAttribute("class", "form-group col-xs-6 col-xs-offset-3");
   }
+
   if (size == "tiny") {
     textElementBox.setAttribute("class", "form-group col-xs-4 col-xs-offset-4");
   }
+
   textElementBox.appendChild(textElementInputGroup);
 
   var textElementRow = document.createElement("div");
@@ -76,12 +86,14 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
     var textElementGreekKeyboardHelpPlaceholder = document.createElement("div");
     textElementGreekKeyboardHelpPlaceholder.setAttribute("id", label + "-greek-keyboard-help");
     textElementGreekKeyboardHelpPlaceholder.setAttribute("class", "greek greek-help");
+
     placeholderElement.appendChild(textElementGreekKeyboardHelpPlaceholder);
   }
 
   if (additionalKeyboard == "additional-keyboard") {
     var textElementAdditionalKeyboardPlaceholder = document.createElement("div");
     textElementAdditionalKeyboardPlaceholder.setAttribute("id", label + "-additional-keyboard");
+
     placeholderElement.appendChild(textElementAdditionalKeyboardPlaceholder);
   }
 
@@ -104,10 +116,11 @@ function clearElementGroup(partialId){
   var placeholderElement = document.getElementById(partialId + "-group");
   var textEntered = false;
   var textFields = new Array();
+
   textFields = placeholderElement.getElementsByTagName('textarea');
 
-  for (i = 0; i < textFields.length; i++) {
-    if (textFields[i].value.length > 0) {
+  for (index = 0; index < textFields.length; index++) {
+    if (textFields[index].value.length > 0) {
       textEntered = true;
     }
   }
@@ -120,6 +133,7 @@ function clearElementGroup(partialId){
     while (placeholderElement.hasChildNodes()) {
       placeholderElement.removeChild(placeholderElement.firstChild);
     }
+
     var buttonToEnable = document.getElementById(partialId + "-button");
     buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
     buttonToEnable.disabled = false;

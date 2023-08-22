@@ -70,8 +70,6 @@ function toggleAdditionalKeyboard(placeholderId, target) {
     "<input type='button' value='ϟ' onClick=\"javascript:insertLetter('" + target + "', 'ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='Ϡ' onClick=\"javascript:insertLetter('" + target + "', 'Ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
     "<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;";
-    // "&nbsp;&nbsp;&nbsp;" +
-    // "<br>" +
 
   var rowBox = document.createElement("div");
   rowBox.setAttribute("class", "form-group col-xs-12");

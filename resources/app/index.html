@@ -13,34 +13,14 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
     <title>Epigraphista</title>
 
-    <script src="jquery/jquery_3_1_1.min.js" charset="utf-8"></script>
-    <script src="jquery/jquery_textarea_auto_resize.js" charset="utf-8"></script>
-    <script src="jquery/jquery_selection.js" charset="utf-8"></script>
-
-    <script src="typegreek/typegreek.js" charset="utf-8"></script>
-
     <script src="epigraphista/javascript/translations/bulgarian.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/gui_initialization.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/submit_support.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/text_converter.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/text_converter_support.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/ui_elements.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/ui_functions.js" charset="utf-8"></script>
-
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
-
-    <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
 
     <!-- Perl Executing Browser settings: -->
     <script>
       var pebSettings = {};
 
-      if (navigator.userAgent.indexOf('Linux') != -1) {
-        pebSettings.perlInterpreter = 'perl';
-      }
-
+      // Use the first Perl on PATH on Linux or
+      // a portable Perl on Windows:
       if (navigator.userAgent.indexOf('Win') != -1) {
         pebSettings.perlInterpreter = 'perl/perl/bin/wperl.exe';
       }
@@ -72,6 +52,23 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
         console.log('xml_writer.pl STDERR:\n' + stderr);
       }
     </script>
+
+    <script src="jquery/jquery_3_1_1.min.js" charset="utf-8"></script>
+    <script src="jquery/jquery_textarea_auto_resize.js" charset="utf-8"></script>
+    <script src="jquery/jquery_selection.js" charset="utf-8"></script>
+
+    <script src="typegreek/typegreek.js" charset="utf-8"></script>
+
+    <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/gui_initialization.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/submit_support.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/text_converter.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/text_converter_support.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/ui_functions.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
   </head>
 
   <body>
@@ -87,7 +84,13 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
             onClick="javascript:addTextAreaElement('idno', TS.idno, 'full', null, null);" class="btn btn-info btn-xs">
 
           <input type="button" id="support-button" value=""
-            onClick="javascript:addSupportGroup();" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('support', TS.support, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+
+          <input type="button" id="material-button" value=""
+            onClick="javascript:addTextAreaElement('material', TS.material, 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
+
+          <input type="button" id="type-button" value=""
+            onClick="javascript:addTextAreaElement('type', TS.type, 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
 
           <input type="button" id="layout-button" value=""
             onClick="javascript:addTextAreaElement('layout', TS.layout, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
@@ -99,13 +102,13 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
             onClick="javascript:addTextAreaElement('orig-place', TS.origPlace, 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
 
           <input type="button" id="orig-date-button" value=""
-            onClick="javascript:addTextAreaElement('orig-date', TS.origDate, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('orig-date', TS.origDate, 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
 
           <input type="button" id="provenance-found-button" value=""
             onClick="javascript:addTextAreaElement('provenance-found', TS.provenanceFound, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
           <input type='button' id="provenance-observed-button" value=""
-            onClick="addTextAreaElement('provenance-observed', TS.provenanceObserved, 'full', 'greek', 'additional-keyboard');" class='btn btn-info btn-xs'>
+            onClick="addTextAreaElement('provenance-observed', TS.provenanceObserved, 'full', null, 'additional-keyboard');" class='btn btn-info btn-xs'>
         </div>
 
         <div class="row">
@@ -121,6 +124,10 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
         <div id="idno-group"></div>
 
         <div id="support-group"></div>
+
+        <div id="material-group"></div>
+
+        <div id="type-group"></div>
 
         <div id="layout-group"></div>
 
@@ -141,7 +148,7 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
             onClick="javascript:addTextAreaElement('apparatus-criticus', TS.apparatusCriticus, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
 
           <input type="button" id="translation-button" value=""
-            onClick="javascript:addTextAreaElement('translation', TS.translation, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('translation', TS.translation, 'full', null, 'additional-keyboard');" class="btn btn-info btn-xs">
 
           <input type="button" id="commentary-button" value=""
             onClick="javascript:addTextAreaElement('commentary', TS.commentary, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">

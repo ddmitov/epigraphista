@@ -8,17 +8,10 @@ var originalContainerContents;
 
 function initializeGui() {
   // Set autoresizing for the mandatory textarea elements:
-  $("#title").autoResize();
   $("#inscription").autoResize();
 
   // Trigger 'keyup' event on every 'paste' event
   // to start on-screen text conversion:
-  $("#title").on('paste', function(e){
-    setTimeout(function () {
-      jQuery("#title").trigger('keyup');
-    }, 150);
-  });
-
   $("#inscription").on('paste', function(e){
     setTimeout(function () {
       jQuery("#inscription").trigger('keyup');
@@ -31,6 +24,8 @@ function initializeGui() {
   document.getElementById("repository-button").setAttribute("value", TS.repository);
   document.getElementById("idno-button").setAttribute("value", TS.idno);
   document.getElementById("support-button").setAttribute("value", TS.support);
+  document.getElementById("material-button").setAttribute("value", TS.material);
+  document.getElementById("type-button").setAttribute("value", TS.type);
   document.getElementById("layout-button").setAttribute("value", TS.layout);
   document.getElementById("hand-note-button").setAttribute("value", TS.handNote);
   document.getElementById("orig-place-button").setAttribute("value", TS.origPlace);

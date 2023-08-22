@@ -316,10 +316,12 @@ function convertLeidenToEpidoc(text) {
 
   // LINE NUMBERING
   var lines = text.split('\n');
+
   for (var lineNumber = 1; lineNumber < lines.length; lineNumber++) {
     text = text.replace(/\n/, '<lb n="' + (lineNumber + 1) + '"/>');
   }
-  text = '<lb n="1"/>' + text;
+
+  text = '<ab><lb n="1"/>' + text + '\n</ab>';
 
   return text;
 }

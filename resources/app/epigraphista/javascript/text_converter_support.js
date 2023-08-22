@@ -12,14 +12,8 @@ function startLeidenToEpidocConversion(elementId) {
   var leidenText = document.getElementById(elementId).value;
   var epidocXml = convertLeidenToEpidoc(leidenText);
 
-  // Get the inner XML of the EpiDoc fragment:
-  var epidocXmlFragment = epidocXml;
-
-  // Add opening and closing tags:
-  epidocXmlFragment = "<ab>" + epidocXmlFragment + "\n</ab>";
-
   // Syntax highlight EpiDoc text:
-  var epidocHtml = syntaxHighlightEpidocText(epidocXmlFragment);
+  var epidocHtml = syntaxHighlightEpidocText(epidocXml);
 
   // Place all results in the HTML DOM tree:
   document.getElementById(elementId + "-xml").setAttribute("value", epidocXml);

@@ -14,19 +14,19 @@ function finalCheckAndSubmit() {
   }
 
   // Check the XML tags of inscription description:
-  if (document.getElementById('support')) {
-    var supportText = document.getElementById('support').value;
+  // if (document.getElementById('support')) {
+  //   var supportText = document.getElementById('support').value;
   
-    supportText =
-      supportText.replace(/\<material\>([^\<|\>]*)\<\/material\>/g, '');
-    supportText =
-      supportText.replace(/\<objectType\>([^\<|\>]*)\<\/objectType\>/g, '');
+  //   supportText =
+  //     supportText.replace(/\<material\>([^\<|\>]*)\<\/material\>/g, '');
+  //   supportText =
+  //     supportText.replace(/\<objectType\>([^\<|\>]*)\<\/objectType\>/g, '');
 
-    if (supportText.match(/\<|\>/)) {
-      alert(TS.invalidXMLTagAlertMessage);
-      return false;
-    }
-  }
+  //   if (supportText.match(/\<|\>/)) {
+  //     alert(TS.invalidXMLTagAlertMessage);
+  //     return false;
+  //   }
+  // }
 
   // Check the epigraphic text:
   var epigraphicText = document.getElementById('inscription').value;
@@ -38,13 +38,13 @@ function finalCheckAndSubmit() {
 
   // Check for any square bracket,
   // that was opened, but was not closed or vice versa:
-  epigraphicText = epigraphicText.replace(/\[((.)*)\]/g, '');
-  epigraphicText = epigraphicText.replace(/\[((.)*)\n((.)*)\]/g, '\n');
+  // epigraphicText = epigraphicText.replace(/\[((.)*)\]/g, '');
+  // epigraphicText = epigraphicText.replace(/\[((.)*)\n((.)*)\]/g, '\n');
 
-  if (epigraphicText.match(/\[|\]/)) {
-    alert(TS.singleSquareBracketAlertMessage);
-    return false;
-  }
+  // if (epigraphicText.match(/\[|\]/)) {
+  //   alert(TS.singleSquareBracketAlertMessage);
+  //   return false;
+  // }
 
   // Convert to EpiDoc XML again
   // if text is enetered at the last moment before file save:
