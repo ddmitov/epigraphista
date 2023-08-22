@@ -36,7 +36,15 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
     <!-- Perl Executing Browser settings: -->
     <script>
       var pebSettings = {};
-      pebSettings.perl_interpreter = 'perl';
+
+      if (navigator.userAgent.indexOf('Linux') != -1) {
+        pebSettings.perlInterpreter = 'perl';
+      }
+
+      if (navigator.userAgent.indexOf('Win') != -1) {
+        pebSettings.perlInterpreter = 'perl/perl/bin/wperl.exe';
+      }
+
       pebSettings.cutLabel = TS.contextMenuCutLabel;
       pebSettings.copyLabel = TS.contextMenuCopyLabel;
       pebSettings.pasteLabel = TS.contextMenuPasteLabel;
