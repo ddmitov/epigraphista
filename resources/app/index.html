@@ -13,42 +13,9 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
     <title>Epigraphista</title>
 
-    <script>
-      // Perl script settings for the Perl Executing Browser:
-      var xml_writer = {};
-      xml_writer.interpreter = 'perl';
-      xml_writer.scriptRelativePath = 'epigraphista/perl/xml_writer.pl';
-
-      xml_writer.inputData = function() {
-        var formData = $('#epigraphista-form').serialize();
-        return formData;
-      }
-
-      xml_writer.stdoutFunction = function (data) {
-        if (data == 'OK') {
-          successMessage();
-        }
-      }
-
-      xml_writer.stderrFunction = function(stderr) {
-        console.log('xml_writer.pl STDERR:\n' + stderr);
-      }
-
-      xml_writer.exitFunction = function(exitCode) {
-        console.log('xml_writer.pl exited with exit code ' + exitCode);
-      }
-
-      function closeConfirmation() {
-        var confirmation = confirm(TS.closeConfirmation);
-        return confirmation;
-      }
-    </script>
-
     <script src="jquery/jquery_3_1_1.min.js" charset="utf-8"></script>
     <script src="jquery/jquery_textarea_auto_resize.js" charset="utf-8"></script>
     <script src="jquery/jquery_selection.js" charset="utf-8"></script>
-
-    <script src="bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
 
     <script src="typegreek/typegreek.js" charset="utf-8"></script>
 
@@ -66,9 +33,10 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
     <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
 
+    <!-- Perl Executing Browser settings: -->
     <script>
-      // Global settings for the Perl Executing Browser:
       var pebSettings = {};
+      pebSettings.perl_interpreter = 'perl';
       pebSettings.cutLabel = TS.contextMenuCutLabel;
       pebSettings.copyLabel = TS.contextMenuCopyLabel;
       pebSettings.pasteLabel = TS.contextMenuPasteLabel;
@@ -77,6 +45,24 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
       pebSettings.noLabel = TS.noLabel;
       pebSettings.okLabel = TS.okLabel;
       pebSettings.closeConfirmation = TS.closeConfirmation;
+
+      var xml_writer = {};
+      xml_writer.scriptRelativePath = 'epigraphista/perl/xml_writer.pl';
+
+      xml_writer.inputData = function() {
+        var formData = $('#epigraphista-form').serialize();
+        return formData;
+      }
+
+      xml_writer.stdoutFunction = function (data) {
+        if (data == 'OK') {
+          successMessage();
+        }
+      }
+
+      xml_writer.stderrFunction = function(stderr) {
+        console.log('xml_writer.pl STDERR:\n' + stderr);
+      }
     </script>
   </head>
 
