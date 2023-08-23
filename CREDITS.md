@@ -15,10 +15,7 @@ http://www.typegreek.com/
 ## HTML, CSS & JavaScript
 
 http://getbootstrap.com/  
-
 https://jquery.com/  
-http://amaury.carrade.eu/projects/jquery/autoResize.html  
-http://madapaja.github.io/jquery.selection/  
 
 https://www.w3schools.com/jsref/met_node_appendchild.asp  
 https://www.w3schools.com/jsref/met_element_setattribute.asp  
@@ -34,15 +31,15 @@ https://www.w3schools.com/jsref/met_element_getelementsbytagname.asp
 https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp  
 https://www.w3schools.com/js/js_htmldom_css.asp  
 https://www.w3schools.com/js/js_loop_while.asp  
+https://www.w3schools.com/tags/tag_textarea.asp  
 
 https://stackoverflow.com/questions/18036315/centering-bootstrap-input-fields  
 https://stackoverflow.com/questions/11080620/how-to-remove-div-elements-in-javascript-using-their-id  
 https://stackoverflow.com/questions/24557828/bootstrap-input-group-text-area-with-button  
 https://stackoverflow.com/questions/2363022/toggle-checkbox  
-https://stackoverflow.com/questions/24557828/bootstrap-input-group-text-area-with-button  
-https://stackoverflow.com/questions/769135/run-javascript-when-an-element-loses-focus  
-https://stackoverflow.com/questions/2002095/how-to-find-detect-any-textarea-in-page-in-javascript  
-https://stackoverflow.com/questions/26227462/bootstrap-how-to-use-validation-states-on-a-textarea  
+https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize  
+
+https://javascript.plainenglish.io/how-to-insert-text-into-the-text-area-at-the-current-cursor-position-23a0baf0ddd9
 
 ## Perl 5
 

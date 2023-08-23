@@ -19,7 +19,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
         "title='" + TS.greekPolytonicInputHelpTitle + "'>" + TS.greekPolytonicInputLabel + "</a>" +
     "</span>";
 
-  var additionalKeyboardSupportCode = "" +
+  var additionalKeyboardCode = "" +
     "<span class='input-group-addon btn btn-info'" +
       "onclick=\"javascript:toggleAdditionalKeyboard('" + label + "-additional-keyboard', '" + label + "')\" title='" + TS.additionalKeyboardTitle + "'>" +
       "<span class='glyphicon glyphicon-font'></span>" +
@@ -36,7 +36,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
   }
 
   if (additionalKeyboard == null) {
-    additionalKeyboardSupportCode = "";
+    additionalKeyboardCode = "";
   }
 
   var textElementContents = "" +
@@ -45,7 +45,7 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
       greekSupportCode01 + ">" +
     "</textarea>" +
     greekSupportCode02 +
-    additionalKeyboardSupportCode +
+    additionalKeyboardCode +
     elementRemovalCode;
 
   var textElementInputGroup = document.createElement("div");
@@ -98,8 +98,6 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
   }
 
   placeholderElement.appendChild(textElementRow);
-
-  $("#" + label).autoResize();
 
   $("#" + label).on('paste', function(e){
     setTimeout(function () {

@@ -49,23 +49,19 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
       }
 
       xml_writer.stderrFunction = function(stderr) {
-        console.log('xml_writer.pl STDERR:\n' + stderr);
+        console.error('xml_writer.pl STDERR:\n' + stderr);
       }
     </script>
 
     <script src="jquery/jquery_3_1_1.min.js" charset="utf-8"></script>
-    <script src="jquery/jquery_textarea_auto_resize.js" charset="utf-8"></script>
-    <script src="jquery/jquery_selection.js" charset="utf-8"></script>
-
     <script src="typegreek/typegreek.js" charset="utf-8"></script>
 
     <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/gui_initialization.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/submit_support.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/text_converter.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/text_converter_support.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/ui_functions.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/ui_initialization.js" charset="utf-8"></script>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
     <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
@@ -163,7 +159,7 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
           <div class="row">
             <div id="inscription-input-group" class="form-group col-xs-12">
               <div class="input-group">
-                <textarea id="inscription" class="form-control greek input-text"
+                <textarea rows="1" id="inscription" class="form-control greek input-text"
                   spellcheck="false" title="" placeholder=""
                   onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
                   onkeyup="javascript:return convertStr(this, event);"
@@ -212,7 +208,7 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
     <script>
       $(document).ready(function() {
-        initializeGui();
+        initializeUi();
       });
     </script>
   </body>

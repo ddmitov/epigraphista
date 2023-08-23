@@ -4,7 +4,7 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
-// Polytonic Greek letters visual help:
+// Visual help for the polytonic Greek letters:
 function toggleGreekKeyboardHelp(partialDivName) {
   var greekKeyboardHelpContents = "" +
     "<fieldset class='letter-box'><p class='letter-box-p'>Q&nbsp;<font color='red'>Θ</font></p></fieldset>" +
@@ -59,7 +59,7 @@ function toggleGreekKeyboardHelp(partialDivName) {
   }
 }
 
-// Buttons for some additional greek letters:
+// Buttons for additional greek letters:
 function toggleAdditionalKeyboard(placeholderId, target) {
   var additionalKeyboardRowContents = "" +
     "<input type='button' value='ϐ' onClick=\"javascript:insertLetter('" + target + "', 'ϐ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
@@ -90,13 +90,10 @@ function toggleAdditionalKeyboard(placeholderId, target) {
   }
 }
 
-// Additional keyboard code:
-function insertLetter(targetId, letter) {
-  var cursorPosition = $('#' + targetId).prop('selectionStart');
-  var value = $('#' + targetId).val();
-  var textBefore = value.substring(0, cursorPosition);
-  var textAfter  = value.substring(cursorPosition, value.length);
+// Insert additional greek letters:
+function insertLetter (targetId, letter) {
+  var targetElement = document.getElementById(targetId);
+  const [start, end] = [targetElement.selectionStart, targetElement.selectionEnd];
 
-  $('#' + targetId).val(textBefore + letter + textAfter);
-  $('#' + targetId).prop("selectionStart", cursorPosition + 1);
+  targetElement.setRangeText(letter, start, end, 'select');
 }
