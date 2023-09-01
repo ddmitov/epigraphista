@@ -4,6 +4,7 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
+
 function addTextAreaElement(label, placeholderText, size, greekSupport, additionalKeyboard) {
   var name = label.replace(/-/g, "_");
 
@@ -99,16 +100,17 @@ function addTextAreaElement(label, placeholderText, size, greekSupport, addition
 
   placeholderElement.appendChild(textElementRow);
 
-  $("#" + label).on('paste', function(e){
+  document.getElementById(label).addEventListener('paste',  function(event){
     setTimeout(function () {
-      jQuery("#" + label).trigger('keyup');
+      triggerEvent(document.getElementById(label), 'keyup');
     }, 150);
-  });
+  })
 
   var buttonToDisable = document.getElementById(label + "-button");
   buttonToDisable.setAttribute("class", "btn btn-info btn-xs disabled");
   buttonToDisable.disabled = true;
 }
+
 
 function clearElementGroup(partialId){
   var placeholderElement = document.getElementById(partialId + "-group");
@@ -136,4 +138,56 @@ function clearElementGroup(partialId){
     buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
     buttonToEnable.disabled = false;
   }
+}
+
+
+function startLeidenToEpidocConversion(elementId) {
+  //Get focus:
+  document.getElementById(elementId).focus();
+
+  // Get the Leiden text and convert it to EpiDoc text:
+  var leidenText = document.getElementById(elementId).value;
+  var epidocXml = convertLeidenToEpidoc(leidenText);
+
+  // Syntax highlight EpiDoc text:
+  var epidocHtml = syntaxHighlightEpidocText(epidocXml);
+
+  // Place all results in the HTML DOM tree:
+  document.getElementById(elementId + "-xml").value = epidocXml;
+  document.getElementById(elementId + "-html").innerHTML = epidocHtml;
+}
+
+
+function finalCheckAndSubmit() {
+  // Check for title:
+  var title = document.getElementById('title').value;
+
+  if (title.length < 3) {
+    alert(TS.noTitleAlertMessage);
+    return false;
+  }
+
+  // Check the epigraphic text:
+  var epigraphicText = document.getElementById('inscription').value;
+
+  if (epigraphicText.length < 3) {
+    alert(TS.noInscriptionAlertMessage);
+    return false;
+  }
+
+  // Convert to EpiDoc XML again
+  // if text is enetered at the last moment before file save:
+  startLeidenToEpidocConversion('inscription');
+
+  // Call Epigraphista Perl script:
+  document.getElementById('epigraphista-form').submit();
+}
+
+
+function successMessage() {
+  alert(TS.fileSavedMessage);
+
+  // Restore the user interface to its initial outlook:
+  document.getElementById('container').innerHTML = originalContainerContents;
+  initializeUi();
 }

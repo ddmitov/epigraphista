@@ -6,12 +6,14 @@ var finishCursorStart = 0;
 var finishCursorEnd = 0;
 var currentCursor = 0;
 
+
 function convertStr(control, event) {
     var key = event.which;
 
     if ((key != 37) && (key != 38) && (key != 39) && (key != 40)) {
         // get cursor info and starting value
         startString = control.value;
+
         while (startString.indexOf("(#$-undo-not-available-$#)", "") > -1) {
             startString = startString.replace("(#$-undo-not-available-$#)", "");
         }
@@ -34,10 +36,11 @@ function convertStr(control, event) {
         control.selectionEnd = finishCursorEnd;
         control.scrollTop = scrollTop;
     }
+
     return;
 }
 
-// convertCharToggle (object, boolean, event)
+
 function convertCharToggle(control, toggle, event) {
     if (toggle === true) {
         var key = event.which;
@@ -951,7 +954,7 @@ function breakApartGreekCharacters(control) {
     return;
 }
 
-// combineGreekCharacters (object)
+
 function combineGreekCharacters(control) {
     var COMBINABLE = "ΑαΗηΩωΕεΙιΟοΡρΥυ";
     var VOWELS = "ΑαΗηΩωΕεΙιΟοΥυ";
@@ -1949,7 +1952,7 @@ function combineSingleCharacter(control) {
     return;
 }
 
-// removeOne ()
+
 function removeOne() {
     workingString = workingString + startString.substr(0, 1);
     startString = startString.substr(1, startString.length - 1);

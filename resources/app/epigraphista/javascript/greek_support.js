@@ -95,5 +95,9 @@ function insertLetter (targetId, letter) {
   var targetElement = document.getElementById(targetId);
   const [start, end] = [targetElement.selectionStart, targetElement.selectionEnd];
 
-  targetElement.setRangeText(letter, start, end, 'select');
+  targetElement.setRangeText(letter, start, end, 'end');
+
+  if (targetId == 'inscription') {
+    startLeidenToEpidocConversion('inscription');
+  }
 }

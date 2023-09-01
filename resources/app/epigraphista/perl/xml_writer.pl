@@ -6,25 +6,19 @@
 
 use strict;
 use warnings;
-use Cwd;
 
-my $cwd = cwd();
+use Cwd;
+use JSON::PP;
 
 # Input data is read from STDIN:
-my ($buffer, @pairs, $name, $value, %FORM);
-$buffer = <STDIN>;
+my $buffer = <STDIN>;
 chomp $buffer;
 
-@pairs = split (/&/, $buffer);
-
-foreach my $pair (@pairs) {
-  ($name, $value) = split (/=/, $pair);
-  $value =~ tr/+/ /;
-  $value =~ s/%(..)/pack("C", hex($1))/eg;
-  $FORM{$name} = $value;
-}
+my $json_object = new JSON::PP;
+my $form = $json_object->decode($buffer);
 
 # Compose the paths of the XML template and the inscriptions directory:
+my $cwd = cwd();
 my $template_filepath = "$cwd/../data/telamon-template.xml";
 my $inscriptions_directory = "$cwd/../data/inscriptions";
 
@@ -33,6 +27,7 @@ mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
 
 # Convert template filepath to native separators:
 $template_filepath = to_native_separators($template_filepath);
+
 my $xml;
 
 # Read the XML template:
@@ -47,11 +42,13 @@ my $xml;
 # Get all placeholder names:
 my @placeholder_names;
 my @xml = split (/\n/, $xml);
+
 foreach my $line (@xml) {
   if ($line =~ m/(\{.*\})/) {
     my $placeholder_name = $1;
     $placeholder_name =~ s/\{//;
     $placeholder_name =~ s/\}//;
+
     push @placeholder_names, $placeholder_name;
   }
 }
@@ -59,42 +56,50 @@ $xml =~ s/\{//g;
 $xml =~ s/\}//g;
 
 # Title - mandatory element:
-$xml =~ s/TITLE/$FORM{"title"}/;
+$xml =~ s/TITLE/$form->{"title"}/;
 
 # Filename is produced from title:
-my $inscription_filename = $FORM{"title"};
+my $inscription_filename = $form->{"title"};
 $inscription_filename =~ s/\s|,|;/_/g;
+
 $xml =~ s/FILENAME/$inscription_filename/;
-delete($FORM{"title"});
+
+delete($form->{"title"});
 
 # Inscription description:
-if ($FORM{"support"}) {
+if ($form->{"support"}) {
   my $support_indent = "\t" x 9;
-  my $support_formatted_value = $FORM{"support"};
+  my $support_formatted_value = $form->{"support"};
+
   $support_formatted_value =~ s/\<lb/\n$support_indent\<lb/g;
   $xml =~ s/SUPPORT/$support_formatted_value/;
-  delete($FORM{"support"});
+
+  delete($form->{"support"});
 }
 
 # Inscription text - mandatory element:
 my $inscription_indent = "\t" x 5;
-my $inscription_formatted_value = $FORM{"inscription_xml"};
+my $inscription_formatted_value = $form->{"inscription_xml"};
 $inscription_formatted_value =~ s/\<lb/\n$inscription_indent\<lb/g;
+
 $xml =~ s/INSCRIPTION/$inscription_formatted_value/;
-delete($FORM{"inscription_xml"});
+
+delete($form->{"inscription_xml"});
 
 # Save all other nodes:
 foreach my $placeholder_name (@placeholder_names) {
   my $form_name = lc $placeholder_name;
-  if ($FORM{$form_name}) {
+
+  if ($form->{$form_name}) {
     if ($xml =~ m/(\t{1,}.{0,}$placeholder_name)/) {
       my $xml_matrix_placeholder_line = $1;
       my ($tabcount) = $xml_matrix_placeholder_line =~ s/\t/ /g;
       my $indent = "\t" x $tabcount;
 
-      my $node_value = $FORM{$form_name};
+      my $node_value = $form->{$form_name};
       $node_value =~ s/\n/\n$indent/g;
       $node_value = escape_xml_special_characters($node_value);
+
       $xml =~ s/$placeholder_name/$node_value/;
     }
   } else {

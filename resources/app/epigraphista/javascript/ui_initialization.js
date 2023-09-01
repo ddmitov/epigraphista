@@ -6,19 +6,17 @@
 
 var originalContainerContents;
 
-function initializeUi() {
-  // Set autoresizing for the mandatory textarea elements:
-  // $("#inscription").autoResize();
 
+function initializeUi() {
   // Trigger 'keyup' event on every 'paste' event
   // to start on-screen text conversion:
-  $("#inscription").on('paste', function(e){
+  document.getElementById("inscription").addEventListener('paste',  function(event){
     setTimeout(function () {
-      jQuery("#inscription").trigger('keyup');
+      triggerEvent(document.getElementById("inscription"), 'keyup');
     }, 150);
-  });
+  })
 
-  // Translate the initial user interface:
+  // Translate the user interface:
   document.getElementById("description-section-title").innerHTML = TS.descriptionSectionTitle;
 
   document.getElementById("repository-button").setAttribute("value", TS.repository);
@@ -55,7 +53,7 @@ function initializeUi() {
   // Set autoresize for all textarrea elements:
   const textArreas = document.getElementsByTagName("textarea");
 
-  for (let index = 0; index < textArreas.length; index++) {
+  for (var index = 0; index < textArreas.length; index++) {
     textArreas[index].setAttribute(
       "style", "height:" + (textArreas[index].scrollHeight) + "px;overflow-y:hidden;"
     );
@@ -66,6 +64,7 @@ function initializeUi() {
   // It will be restored without reload after inscription text is successfully saved.
   originalContainerContents = document.getElementsByClassName("container-fluid")[0].innerHTML;
 }
+
 
 function autoResizeTextArrea() {
   this.style.height = 0;

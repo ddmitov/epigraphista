@@ -15,7 +15,7 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
     <script src="epigraphista/javascript/translations/bulgarian.js" charset="utf-8"></script>
 
-    <!-- Perl Executing Browser settings: -->
+    <!-- Perl Executing Browser settings start -->
     <script>
       var pebSettings = {};
 
@@ -38,8 +38,21 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
       xml_writer.scriptRelativePath = 'epigraphista/perl/xml_writer.pl';
 
       xml_writer.inputData = function() {
-        var formData = $('#epigraphista-form').serialize();
-        return formData;
+        var textFields = document.getElementsByTagName('textarea');
+
+        var formObject = {};
+
+        for (index = 0; index < textFields.length; index++) {
+            if (textFields[index].value.length > 0) {
+              formObject[textFields[index].name] = textFields[index].value;
+            }
+        }
+
+        var formJson = JSON.stringify(formObject);
+
+        console.log(formJson);
+
+        return formJson;
       }
 
       xml_writer.stdoutFunction = function (data) {
@@ -47,18 +60,13 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
           successMessage();
         }
       }
-
-      xml_writer.stderrFunction = function(stderr) {
-        console.error('xml_writer.pl STDERR:\n' + stderr);
-      }
     </script>
+    <!-- Perl Executing Browser settings end -->
 
-    <script src="jquery/jquery_3_1_1.min.js" charset="utf-8"></script>
     <script src="typegreek/typegreek.js" charset="utf-8"></script>
 
     <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/submit_support.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/text_converter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/ui_functions.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/ui_initialization.js" charset="utf-8"></script>
@@ -159,10 +167,10 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
           <div class="row">
             <div id="inscription-input-group" class="form-group col-xs-12">
               <div class="input-group">
-                <textarea rows="1" id="inscription" class="form-control greek input-text"
+                <textarea rows="1" id="inscription" name="inscription"
+                  class="form-control greek input-text"
                   spellcheck="false" title="" placeholder=""
-                  onkeypress="javascript:return convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
-                  onkeyup="javascript:return convertStr(this, event);"
+                  onkeypress="javascript:convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
                   oninput="javascript:startLeidenToEpidocConversion('inscription');"></textarea>
 
                 <span class="input-group-addon">
@@ -181,12 +189,11 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
         <div id="inscription-formatted">
             <div class="row">
               <div class="form-group col-xs-12">
-<pre id="inscription-html" title="" class="greek input-text xml">
-<a style="color:gray">EpiDoc XML</a>
-</pre>
+<pre id="inscription-html" title="" class="greek input-text xml">EpiDoc XML</pre>
               </div>
             </div>
-            <input type="hidden" id="inscription-xml" name="inscription_xml" value="">
+
+            <textarea id="inscription-xml" name="inscription_xml" hidden></textarea>
           </div>
         </div>
 
@@ -207,9 +214,7 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
     </div>
 
     <script>
-      $(document).ready(function() {
-        initializeUi();
-      });
+      document.addEventListener('DOMContentLoaded', initializeUi(), false);
     </script>
   </body>
 

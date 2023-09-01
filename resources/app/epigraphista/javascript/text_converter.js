@@ -314,7 +314,7 @@ function convertLeidenToEpidoc(text) {
   // remove any orphaned Unicode COMBINING DOT BELOW 0323:
   text = text.replace(/\u0323/g, '');
 
-  // LINE NUMBERING
+  // Line numbers:
   var lines = text.split('\n');
 
   for (var lineNumber = 1; lineNumber < lines.length; lineNumber++) {

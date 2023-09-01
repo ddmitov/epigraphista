@@ -15,7 +15,6 @@ http://www.typegreek.com/
 ## HTML, CSS & JavaScript
 
 http://getbootstrap.com/  
-https://jquery.com/  
 
 https://www.w3schools.com/jsref/met_node_appendchild.asp  
 https://www.w3schools.com/jsref/met_element_setattribute.asp  

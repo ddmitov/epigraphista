@@ -25,6 +25,7 @@ fieldset {
 
 pre {
   margin-bottom: 0px;
+  color: gray;
 }
 
 .section-title {
@@ -48,10 +49,6 @@ pre {
 
 .input-group-addon {
   border: 0px solid transparent;
-}
-
-.greek {
-  font-family: "Open Sans", "FreeSans", "Arial Unicode MS";
 }
 
 .greek-help {
