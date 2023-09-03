@@ -8,119 +8,117 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 -->
 
   <head>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
     <title>Epigraphista</title>
 
+    <!-- Translation must be loaded before the other JavaScript files: -->
     <script src="epigraphista/javascript/translations/bulgarian.js" charset="utf-8"></script>
-
-    <!-- Perl Executing Browser settings start -->
-    <script>
-      var pebSettings = {};
-
-      // Use the first Perl on PATH on Linux or
-      // a portable Perl on Windows:
-      if (navigator.userAgent.indexOf('Win') != -1) {
-        pebSettings.perlInterpreter = 'perl/perl/bin/wperl.exe';
-      }
-
-      pebSettings.cutLabel = TS.contextMenuCutLabel;
-      pebSettings.copyLabel = TS.contextMenuCopyLabel;
-      pebSettings.pasteLabel = TS.contextMenuPasteLabel;
-      pebSettings.selectAllLabel = TS.contextMenuSelectAllLabel;
-      pebSettings.yesLabel = TS.yesLabel;
-      pebSettings.noLabel = TS.noLabel;
-      pebSettings.okLabel = TS.okLabel;
-      pebSettings.closeConfirmation = TS.closeConfirmation;
-
-      var xml_writer = {};
-      xml_writer.scriptRelativePath = 'epigraphista/perl/xml_writer.pl';
-
-      xml_writer.inputData = function() {
-        var textFields = document.getElementsByTagName('textarea');
-
-        var formObject = {};
-
-        for (index = 0; index < textFields.length; index++) {
-            if (textFields[index].value.length > 0) {
-              formObject[textFields[index].name] = textFields[index].value;
-            }
-        }
-
-        var formJson = JSON.stringify(formObject);
-
-        console.log(formJson);
-
-        return formJson;
-      }
-
-      xml_writer.stdoutFunction = function (data) {
-        if (data == 'OK') {
-          successMessage();
-        }
-      }
-    </script>
-    <!-- Perl Executing Browser settings end -->
-
-    <script src="typegreek/typegreek.js" charset="utf-8"></script>
 
     <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/layout_functions.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/layout_initialization.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/peb.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/text_converter.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/ui_functions.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/ui_initialization.js" charset="utf-8"></script>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/darkly.css" media="all">
     <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
+
   </head>
 
   <body>
+  
     <div class="container-fluid" id="container">
-    <br>
-      <form id="epigraphista-form" name="epigraphista_form" action="xml_writer.script">
-        <div class="row section-title" id="description-section-title"></div>
-        <div class="row buttons-row" id="description-section-buttons-row">
+
+      <form id="epigraphista-form" action="xml_writer.script">
+
+        <div class="row button-buffer"></div>
+
+        <div class="row button-row">
+
           <input type="button" id="repository-button" value=""
-            onClick="javascript:addTextAreaElement('repository', TS.repository, 'full', null, null);" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('repository', TS.repository);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="idno-button" value=""
-            onClick="javascript:addTextAreaElement('idno', TS.idno, 'full', null, null);" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('idno', TS.idno);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="support-button" value=""
-            onClick="javascript:addTextAreaElement('support', TS.support, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('support', TS.support);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="material-button" value=""
-            onClick="javascript:addTextAreaElement('material', TS.material, 'full', null, null);" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('material', TS.material);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="type-button" value=""
-            onClick="javascript:addTextAreaElement('type', TS.type, 'full', null, null);" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('type', TS.type);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="layout-button" value=""
-            onClick="javascript:addTextAreaElement('layout', TS.layout, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('layout', TS.layout);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="hand-note-button" value=""
-            onClick="javascript:addTextAreaElement('hand-note', TS.handNote, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('hand-note', TS.handNote);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="orig-place-button" value=""
-            onClick="javascript:addTextAreaElement('orig-place', TS.origPlace, 'full', null, null);" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('orig-place', TS.origPlace);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="orig-date-button" value=""
-            onClick="javascript:addTextAreaElement('orig-date', TS.origDate, 'full', null, null);" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('orig-date', TS.origDate);"
+            class="btn btn-info btn-xs">
 
           <input type="button" id="provenance-found-button" value=""
-            onClick="javascript:addTextAreaElement('provenance-found', TS.provenanceFound, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
+            onClick="javascript:addTextAreaElement('provenance-found', TS.provenanceFound);"
+            class="btn btn-info btn-xs">
 
           <input type='button' id="provenance-observed-button" value=""
-            onClick="addTextAreaElement('provenance-observed', TS.provenanceObserved, 'full', null, null);" class='btn btn-info btn-xs'>
+            onClick="addTextAreaElement('provenance-observed', TS.provenanceObserved);"
+            class='btn btn-info btn-xs'>
+
         </div>
 
+        <div class="row button-row">
+
+          <input type="button" id="apparatus-criticus-button" value=""
+            onClick="javascript:addTextAreaElement('apparatus-criticus', TS.apparatusCriticus);"
+            class="btn btn-info btn-xs">
+
+          <input type="button" id="translation-button" value=""
+            onClick="javascript:addTextAreaElement('translation', TS.translation);"
+            class="btn btn-info btn-xs">
+
+          <input type="button" id="commentary-button" value=""
+            onClick="javascript:addTextAreaElement('commentary', TS.commentary);"
+            class="btn btn-info btn-xs">
+
+          <input type="button" id="bibliography-button" value=""
+            onClick="javascript:addTextAreaElement('bibliography', TS.bibliography);"
+            class="btn btn-info btn-xs">
+
+        </div>
+
+        <div class="row button-buffer"></div>
+
         <div class="row">
-          <div id="title-group" class="form-group col-xs-12">
-            <div class="input-prepend">
-              <textarea rows="1" id="title" name="title" class="form-control input-text" spellcheck="false" placeholder="" title="" ></textarea>
-            </div>
+
+          <div class="form-group col-xs-12">
+
+            <textarea
+              rows="1" id="title" name="title"
+              class="form-control input-text"
+              spellcheck="false" placeholder="" title="" ></textarea>
+
           </div>
+
         </div>
 
         <div id="repository-group"></div>
@@ -145,58 +143,6 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
         <div id="provenance-observed-group"></div>
 
-        <div class="row section-title" id="text-section-title"></div>
-
-        <div class="row buttons-row" id="text-section-buttons-row">
-          <input type="button" id="apparatus-criticus-button" value=""
-            onClick="javascript:addTextAreaElement('apparatus-criticus', TS.apparatusCriticus, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
-
-          <input type="button" id="translation-button" value=""
-            onClick="javascript:addTextAreaElement('translation', TS.translation, 'full', null, null);" class="btn btn-info btn-xs">
-
-          <input type="button" id="commentary-button" value=""
-            onClick="javascript:addTextAreaElement('commentary', TS.commentary, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
-
-          <input type="button" id="bibliography-button" value=""
-            onClick="javascript:addTextAreaElement('bibliography', TS.bibliography, 'full', 'greek', 'additional-keyboard');" class="btn btn-info btn-xs">
-        </div>
-
-        <div id="inscription-group">
-          <div id="inscription-greek-keyboard-help" class="greek greek-help"></div>
-          <div id="inscription-additional-keyboard"></div>
-          <div class="row">
-            <div id="inscription-input-group" class="form-group col-xs-12">
-              <div class="input-group">
-                <textarea rows="1" id="inscription" name="inscription"
-                  class="form-control greek input-text"
-                  spellcheck="false" title="" placeholder=""
-                  onkeypress="javascript:convertCharToggle(this, document.epigraphista_form.inscription_switch_greek.checked, event);"
-                  oninput="javascript:startLeidenToEpidocConversion('inscription');"></textarea>
-
-                <span class="input-group-addon">
-                  <input type="checkbox" id="inscription-switch-greek" name="inscription_switch_greek" title="">&nbsp;
-                  <a href="javascript:toggleGreekKeyboardHelp('inscription');" id="inscription-greek-keyboard-help-link" title="">Ἐλληνική</a>
-                </span>
-
-                <span class="input-group-addon btn btn-info" id="inscription-additional-keyboard-button"
-                  onclick="javascript:toggleAdditionalKeyboard('inscription-additional-keyboard', 'inscription');" title="">
-                  <span class="glyphicon glyphicon-font"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-        <div id="inscription-formatted">
-            <div class="row">
-              <div class="form-group col-xs-12">
-<pre id="inscription-html" title="" class="greek input-text xml">EpiDoc XML</pre>
-              </div>
-            </div>
-
-            <textarea id="inscription-xml" name="inscription_xml" hidden></textarea>
-          </div>
-        </div>
-
         <div id="apparatus-criticus-group"></div>
 
         <div id="translation-group"></div>
@@ -205,17 +151,56 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
         <div id="bibliography-group"></div>
 
-        <div class="row buttons-row">
-          <input type="button" id="submit-button"
-            value="" onClick="javascript:finalCheckAndSubmit();"
-            class="btn btn-primary">
+        <div id="inscription-additional-keyboard"></div>
+
+        <div class="row">
+
+          <div class="form-group col-xs-12">
+            <div class="input-group">
+
+              <textarea
+                rows="1"
+                id="inscription"
+                name="inscription"
+                placeholder=""
+                class="form-control input-text"
+                spellcheck="false"
+                oninput="javascript:startLeidenToEpidocConversion();"></textarea>
+
+              <span class="input-group-addon btn btn-info"
+                id="inscription-additional-keyboard-button"
+                title=""
+                onclick="javascript:toggleAdditionalKeyboard('inscription');">
+                <span class="glyphicon glyphicon-font"></span>
+              </span>
+
+            </div>
+          </div>
+
         </div>
+
+        <div id="inscription-html-group"></div>
+
+        <div class="row">
+
+          <input type="button"
+            id="submit-button"
+            value=""
+            onClick="javascript:finalCheckAndSubmit();"
+            class="btn btn-primary btn-submit">
+
+        </div>
+
+        <textarea id="inscription-xml" name="inscription_xml" hidden></textarea>
+
       </form>
+
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', initializeUi(), false);
+      document.addEventListener('DOMContentLoaded', initializeLayout(), false);
     </script>
+
   </body>
 
 </html>

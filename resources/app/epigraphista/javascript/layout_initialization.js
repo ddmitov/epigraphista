@@ -7,18 +7,8 @@
 var originalContainerContents;
 
 
-function initializeUi() {
-  // Trigger 'keyup' event on every 'paste' event
-  // to start on-screen text conversion:
-  document.getElementById("inscription").addEventListener('paste',  function(event){
-    setTimeout(function () {
-      triggerEvent(document.getElementById("inscription"), 'keyup');
-    }, 150);
-  })
-
+function initializeLayout() {
   // Translate the user interface:
-  document.getElementById("description-section-title").innerHTML = TS.descriptionSectionTitle;
-
   document.getElementById("repository-button").setAttribute("value", TS.repository);
   document.getElementById("idno-button").setAttribute("value", TS.idno);
   document.getElementById("support-button").setAttribute("value", TS.support);
@@ -31,31 +21,24 @@ function initializeUi() {
   document.getElementById("provenance-found-button").setAttribute("value", TS.provenanceFound);
   document.getElementById("provenance-observed-button").setAttribute("value", TS.provenanceObserved);
 
-  document.getElementById("title").setAttribute("placeholder", TS.title);
-  document.getElementById("title").setAttribute("title", TS.title);
-
-  document.getElementById("text-section-title").innerHTML = TS.textSectionTitle;
-
   document.getElementById("apparatus-criticus-button").setAttribute("value", TS.apparatusCriticus);
   document.getElementById("translation-button").setAttribute("value", TS.translation);
   document.getElementById("commentary-button").setAttribute("value", TS.commentary);
   document.getElementById("bibliography-button").setAttribute("value", TS.bibliography);
 
-  document.getElementById("inscription").setAttribute("placeholder", TS.inscription);
-  document.getElementById("inscription").setAttribute("title", TS.inscription);
-  document.getElementById("inscription-switch-greek").setAttribute("title", TS.inscriptionSwitchGreek);
-  document.getElementById("inscription-greek-keyboard-help-link").setAttribute("title", TS.inscriptionGreekKeyboardHelpLink);
-  document.getElementById("inscription-additional-keyboard-button").setAttribute("title", TS.inscriptionAdditionalKeyboardButton);
-  document.getElementById("inscription-html").setAttribute("title", TS.inscriptionHtml);
+  document.getElementById("title").setAttribute("placeholder", TS.title);
 
-  document.getElementById("submit-button").setAttribute("value", TS.submitButton);
+  document.getElementById("inscription").setAttribute("placeholder", TS.inscription);
+  document.getElementById("inscription-additional-keyboard-button").setAttribute("title", TS.additionalKeyboardLabel);
+
+  document.getElementById("submit-button").setAttribute("value", TS.submitButtonLabel);
 
   // Set autoresize for all textarrea elements:
   const textArreas = document.getElementsByTagName("textarea");
 
   for (var index = 0; index < textArreas.length; index++) {
     textArreas[index].setAttribute(
-      "style", "height:" + (textArreas[index].scrollHeight) + "px;overflow-y:hidden;"
+      "style", "height:" + (textArreas[index].scrollHeight) + "px; overflow-y: hidden;"
     );
     textArreas[index].addEventListener("input", autoResizeTextArrea, false);
   }

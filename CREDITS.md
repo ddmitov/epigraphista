@@ -8,10 +8,6 @@ Patientia tua in studiis meis computatoriis auxilium meum maximum!
 http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/  
 http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs  
 
-## Greek
-
-http://www.typegreek.com/  
-
 ## HTML, CSS & JavaScript
 
 http://getbootstrap.com/  

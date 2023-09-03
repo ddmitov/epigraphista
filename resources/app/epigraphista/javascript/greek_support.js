@@ -4,72 +4,87 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
-// Visual help for the polytonic Greek letters:
-function toggleGreekKeyboardHelp(partialDivName) {
-  var greekKeyboardHelpContents = "" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>Q&nbsp;<font color='red'>Θ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>W&nbsp;<font color='red'>Ω</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>E&nbsp;<font color='red'>Ε</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>R&nbsp;<font color='red'>Ρ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>T&nbsp;<font color='red'>Τ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>Y&nbsp;<font color='red'>Ψ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>U&nbsp;<font color='red'>Υ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>I&nbsp;<font color='red'>Ι</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>O&nbsp;<font color='red'>Ο</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>P&nbsp;<font color='red'>Π</font></p></fieldset>" +
-    "<br>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>A&nbsp;<font color='red'>Α</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>S&nbsp;<font color='red'>Σ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>D&nbsp;<font color='red'>Δ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>F&nbsp;<font color='red'>Φ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>G&nbsp;<font color='red'>Γ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>H&nbsp;<font color='red'>Η</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>J&nbsp;<font color='red'>Σ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>K&nbsp;<font color='red'>Κ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>L&nbsp;<font color='red'>Λ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>;&nbsp;<font color='red'>·</font></p></fieldset>" +
-    "<br>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>Z&nbsp;<font color='red'>Ζ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>X&nbsp;<font color='red'>Χ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>C&nbsp;<font color='red'>Ξ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>V&nbsp;<font color='red'>Ϝ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>B&nbsp;<font color='red'>Β</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>N&nbsp;<font color='red'>Ν</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>M&nbsp;<font color='red'>Μ</font></p></fieldset>" +
-    "<br>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>a/&nbsp;<font color='red'>ά</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>a\\&nbsp;<font color='red'>ὰ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>a=&nbsp;<font color='red'>ᾶ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>a)&nbsp;<font color='red'>ἀ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>a(&nbsp;<font color='red'>ἁ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>a|&nbsp;<font color='red'>ᾳ</font></p></fieldset>" +
-    "<fieldset class='letter-box'><p class='letter-box-p'>i+&nbsp;<font color='red'>ϊ</font></p></fieldset>" +
-    "<br>";
+// Buttons for additional letters:
+function toggleAdditionalKeyboard(target) {
+  placeholderId = target + "-additional-keyboard";
 
-  var placeholderElement = document.getElementById(partialDivName + "-greek-keyboard-help");
-  var checkboxElement = document.getElementById(partialDivName + "-switch-greek");
-
-  if (placeholderElement.innerHTML.length == 0) {
-    placeholderElement.innerHTML = greekKeyboardHelpContents;
-    placeholderElement.style.marginBottom = "10px";
-    checkboxElement.checked = true;
-  } else {
-    placeholderElement.innerHTML = "";
-    placeholderElement.style.marginBottom = "0px";
-  }
-}
-
-// Buttons for additional greek letters:
-function toggleAdditionalKeyboard(placeholderId, target) {
   var additionalKeyboardRowContents = "" +
-    "<input type='button' value='ϐ' onClick=\"javascript:insertLetter('" + target + "', 'ϐ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ϲ' onClick=\"javascript:insertLetter('" + target + "', 'ϲ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ϛ' onClick=\"javascript:insertLetter('" + target + "', 'Ϛ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ϛ' onClick=\"javascript:insertLetter('" + target + "', 'ϛ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ϟ' onClick=\"javascript:insertLetter('" + target + "', 'Ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ϟ' onClick=\"javascript:insertLetter('" + target + "', 'ϟ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='Ϡ' onClick=\"javascript:insertLetter('" + target + "', 'Ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;" +
-    "<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn btn-success btn-xs btn-letters'>&nbsp;";
+    "<div class='row'>" +
+      "<input type='button' value='Θ' onClick=\"javascript:insertLetter('" + target + "', 'Θ')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ω' onClick=\"javascript:insertLetter('" + target + "', 'Ω')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ε' onClick=\"javascript:insertLetter('" + target + "', 'Ε')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ρ' onClick=\"javascript:insertLetter('" + target + "', 'Ρ')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Τ' onClick=\"javascript:insertLetter('" + target + "', 'Τ')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ψ' onClick=\"javascript:insertLetter('" + target + "', 'Ψ')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Υ' onClick=\"javascript:insertLetter('" + target + "', 'Υ')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ι' onClick=\"javascript:insertLetter('" + target + "', 'Ι')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ο' onClick=\"javascript:insertLetter('" + target + "', 'Ο')\" class='btn btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Π' onClick=\"javascript:insertLetter('" + target + "', 'Π')\" class='btn btn-success btn-xs btn-letters'>" +
+    "</div>" +
+    "<div class='row'>" +
+      "<input type='button' value='θ' onClick=\"javascript:insertLetter('" + target + "', 'θ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ω' onClick=\"javascript:insertLetter('" + target + "', 'ω')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ε' onClick=\"javascript:insertLetter('" + target + "', 'ε')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ρ' onClick=\"javascript:insertLetter('" + target + "', 'ρ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='τ' onClick=\"javascript:insertLetter('" + target + "', 'τ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ψ' onClick=\"javascript:insertLetter('" + target + "', 'ψ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='υ' onClick=\"javascript:insertLetter('" + target + "', 'υ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ι' onClick=\"javascript:insertLetter('" + target + "', 'ι')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ο' onClick=\"javascript:insertLetter('" + target + "', 'ο')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='π' onClick=\"javascript:insertLetter('" + target + "', 'π')\" class='btn-success btn-xs btn-letters'>" +
+    "</div>" +
+    "<div class='row'>" +
+      "<input type='button' value='Α' onClick=\"javascript:insertLetter('" + target + "', 'Α')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Σ' onClick=\"javascript:insertLetter('" + target + "', 'Σ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Δ' onClick=\"javascript:insertLetter('" + target + "', 'Δ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Φ' onClick=\"javascript:insertLetter('" + target + "', 'Φ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Γ' onClick=\"javascript:insertLetter('" + target + "', 'Γ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Η' onClick=\"javascript:insertLetter('" + target + "', 'Η')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Σ' onClick=\"javascript:insertLetter('" + target + "', 'Σ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Κ' onClick=\"javascript:insertLetter('" + target + "', 'Κ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Λ' onClick=\"javascript:insertLetter('" + target + "', 'Λ')\" class='btn-success btn-xs btn-letters'>" +
+    "</div>" +
+    "<div class='row'>" +
+      "<input type='button' value='α' onClick=\"javascript:insertLetter('" + target + "', 'α')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='σ' onClick=\"javascript:insertLetter('" + target + "', 'σ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='δ' onClick=\"javascript:insertLetter('" + target + "', 'δ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='φ' onClick=\"javascript:insertLetter('" + target + "', 'φ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='γ' onClick=\"javascript:insertLetter('" + target + "', 'γ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='η' onClick=\"javascript:insertLetter('" + target + "', 'η')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='σ' onClick=\"javascript:insertLetter('" + target + "', 'σ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='κ' onClick=\"javascript:insertLetter('" + target + "', 'κ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='λ' onClick=\"javascript:insertLetter('" + target + "', 'λ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='·' onClick=\"javascript:insertLetter('" + target + "', '·')\" class='btn-success btn-xs btn-letters'>" +
+    "</div>" +
+    "<div class='row'>" +
+      
+      "<input type='button' value='Ζ' onClick=\"javascript:insertLetter('" + target + "', 'Ζ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Χ' onClick=\"javascript:insertLetter('" + target + "', 'Χ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ξ' onClick=\"javascript:insertLetter('" + target + "', 'Ξ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ϝ' onClick=\"javascript:insertLetter('" + target + "', 'Ϝ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Β' onClick=\"javascript:insertLetter('" + target + "', 'Β')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ν' onClick=\"javascript:insertLetter('" + target + "', 'Ν')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Μ' onClick=\"javascript:insertLetter('" + target + "', 'Μ')\" class='btn-success btn-xs btn-letters'>" +
+    "</div>" +
+    "<div class='row'>" +
+      "<input type='button' value='ζ' onClick=\"javascript:insertLetter('" + target + "', 'ζ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='χ' onClick=\"javascript:insertLetter('" + target + "', 'χ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ξ' onClick=\"javascript:insertLetter('" + target + "', 'ξ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ϝ' onClick=\"javascript:insertLetter('" + target + "', 'ϝ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='β' onClick=\"javascript:insertLetter('" + target + "', 'β')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ν' onClick=\"javascript:insertLetter('" + target + "', 'ν')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='μ' onClick=\"javascript:insertLetter('" + target + "', 'μ')\" class='btn-success btn-xs btn-letters'>" +
+    "</div>" +
+    "<div class='row'>" +
+      "<input type='button' value='ϐ' onClick=\"javascript:insertLetter('" + target + "', 'ϐ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ϲ' onClick=\"javascript:insertLetter('" + target + "', 'ϲ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ϛ' onClick=\"javascript:insertLetter('" + target + "', 'Ϛ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ϛ' onClick=\"javascript:insertLetter('" + target + "', 'ϛ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ϟ' onClick=\"javascript:insertLetter('" + target + "', 'Ϟ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ϟ' onClick=\"javascript:insertLetter('" + target + "', 'ϟ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='Ϡ' onClick=\"javascript:insertLetter('" + target + "', 'Ϡ')\" class='btn-success btn-xs btn-letters'>" +
+      "<input type='button' value='ϡ' onClick=\"javascript:insertLetter('" + target + "', 'ϡ')\" class='btn-success btn-xs btn-letters'>" +
+    "</div>";
 
   var rowBox = document.createElement("div");
   rowBox.setAttribute("class", "form-group col-xs-12");
@@ -90,14 +105,14 @@ function toggleAdditionalKeyboard(placeholderId, target) {
   }
 }
 
-// Insert additional greek letters:
-function insertLetter (targetId, letter) {
-  var targetElement = document.getElementById(targetId);
+// Insert letter in a textarea:
+function insertLetter (targetElementId, letter) {
+  var targetElement = document.getElementById(targetElementId);
   const [start, end] = [targetElement.selectionStart, targetElement.selectionEnd];
 
   targetElement.setRangeText(letter, start, end, 'end');
 
-  if (targetId == 'inscription') {
-    startLeidenToEpidocConversion('inscription');
+  if (targetElementId == 'inscription') {
+    startLeidenToEpidocConversion();
   }
 }
