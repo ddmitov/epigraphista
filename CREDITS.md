@@ -8,7 +8,7 @@ Patientia tua in studiis meis computatoriis auxilium meum maximum!
 http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/  
 http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs  
 
-## HTML, CSS & JavaScript
+## Frontend
 
 http://getbootstrap.com/  
 https://bootswatch.com/darkly/  
@@ -30,6 +30,9 @@ https://www.w3schools.com/js/js_loop_while.asp
 https://www.w3schools.com/tags/tag_textarea.asp  
 
 https://stackoverflow.com/questions/11080620/how-to-remove-div-elements-in-javascript-using-their-id  
+https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom  
+https://stackoverflow.com/questions/70233730/bootstrap-5-aligning-buttons-in-a-row  
+https://stackoverflow.com/questions/17109702/remove-all-stylings-border-glow-from-textarea  
 
 https://javascript.plainenglish.io/how-to-insert-text-into-the-text-area-at-the-current-cursor-position-23a0baf0ddd9
 
