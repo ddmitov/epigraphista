@@ -14,19 +14,20 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
     <title>Epigraphista</title>
 
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_darkly.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
+
+    <script src="bootstrap/javascript/bootstrap.bundle.min.js" charset="utf-8"></script>
+
     <!-- Translation must be loaded before the other JavaScript files: -->
     <script src="epigraphista/javascript/translations/bulgarian.js" charset="utf-8"></script>
 
     <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/epidoc_text_converter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/layout_functions.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/layout_initialization.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/peb.js" charset="utf-8"></script>
-    <script src="epigraphista/javascript/text_converter.js" charset="utf-8"></script>
-
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="all">
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/darkly.css" media="all">
-    <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
 
   </head>
 
@@ -34,92 +35,90 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
   
     <div class="container-fluid" id="container">
 
+      <div class="row buffer"></div>
+
       <form id="epigraphista-form" action="xml_writer.script">
 
-        <div class="row button-buffer"></div>
-
-        <div class="row button-row">
+        <div class="container text-center">
 
           <input type="button" id="repository-button" value=""
             onClick="javascript:addTextAreaElement('repository', TS.repository);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="idno-button" value=""
             onClick="javascript:addTextAreaElement('idno', TS.idno);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="support-button" value=""
             onClick="javascript:addTextAreaElement('support', TS.support);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="material-button" value=""
             onClick="javascript:addTextAreaElement('material', TS.material);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="type-button" value=""
             onClick="javascript:addTextAreaElement('type', TS.type);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="layout-button" value=""
             onClick="javascript:addTextAreaElement('layout', TS.layout);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="hand-note-button" value=""
             onClick="javascript:addTextAreaElement('hand-note', TS.handNote);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="orig-place-button" value=""
             onClick="javascript:addTextAreaElement('orig-place', TS.origPlace);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="orig-date-button" value=""
             onClick="javascript:addTextAreaElement('orig-date', TS.origDate);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="provenance-found-button" value=""
             onClick="javascript:addTextAreaElement('provenance-found', TS.provenanceFound);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type='button' id="provenance-observed-button" value=""
             onClick="addTextAreaElement('provenance-observed', TS.provenanceObserved);"
-            class='btn btn-info btn-xs'>
-
-        </div>
-
-        <div class="row button-row">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="apparatus-criticus-button" value=""
             onClick="javascript:addTextAreaElement('apparatus-criticus', TS.apparatusCriticus);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="translation-button" value=""
             onClick="javascript:addTextAreaElement('translation', TS.translation);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="commentary-button" value=""
             onClick="javascript:addTextAreaElement('commentary', TS.commentary);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
           <input type="button" id="bibliography-button" value=""
             onClick="javascript:addTextAreaElement('bibliography', TS.bibliography);"
-            class="btn btn-info btn-xs">
+            class="btn btn-info btn-xs btn-elements">
 
         </div>
 
-        <div class="row button-buffer"></div>
+        <div class="row buffer"></div>
 
-        <div class="row">
+        <div class="input-group flex-nowrap">
 
-          <div class="form-group col-xs-12">
-
-            <textarea
-              rows="1" id="title" name="title"
-              class="form-control input-text"
-              spellcheck="false" placeholder="" title="" ></textarea>
-
-          </div>
+          <textarea
+            rows="1"
+            id="title"
+            name="title"
+            title=""
+            placeholder="" 
+            spellcheck="false"
+            class="form-control"></textarea>
 
         </div>
+
+        <div class="row buffer"></div>
 
         <div id="repository-group"></div>
 
@@ -153,37 +152,35 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
         <div id="inscription-additional-keyboard"></div>
 
-        <div class="row">
+        <div class="row buffer"></div>
 
-          <div class="form-group col-xs-12">
-            <div class="input-group">
+        <div class="input-group">
 
-              <textarea
-                rows="1"
-                id="inscription"
-                name="inscription"
-                placeholder=""
-                class="form-control input-text"
-                spellcheck="false"
-                oninput="javascript:startLeidenToEpidocConversion();"></textarea>
+          <textarea
+            rows="1"
+            id="inscription"
+            name="inscription"
+            placeholder=""
+            spellcheck="false"
+            class="form-control"
+            oninput="javascript:startLeidenToEpidocConversion();"></textarea>
 
-              <span class="input-group-addon btn btn-info"
-                id="inscription-additional-keyboard-button"
-                title=""
-                onclick="javascript:toggleAdditionalKeyboard('inscription');">
-                <span class="glyphicon glyphicon-font"></span>
-              </span>
-
-            </div>
-          </div>
+          <input type="button"
+            value="E"
+            id="inscription-additional-keyboard-button"
+            class="btn btn-info btn-input-group"
+            onClick="javascript:toggleAdditionalKeyboard('inscription');">
 
         </div>
 
+        <div class="row buffer"></div>
+
         <div id="inscription-html-group"></div>
 
-        <div class="row">
+        <div class="container text-center">
 
-          <input type="button"
+          <input
+            type="button"
             id="submit-button"
             value=""
             onClick="javascript:finalCheckAndSubmit();"

@@ -9,21 +9,24 @@ function addTextAreaElement(id, placeholderText) {
   var name = id.replace(/-/g, "_");
 
   var textElementContents = "" +
-    "<textarea rows='1'" +
-    " id='" + id + "'" +
-    " name='" + name + "'" +
-    " class='form-control greek input-text' spellcheck='false'" +
-    " placeholder='" + placeholderText + "'></textarea>" +
-    "<span class='input-group-addon btn btn-info'" +
-      " onclick=\"javascript:toggleAdditionalKeyboard('" + id + "')\"" +
-      " title='" + TS.additionalKeyboardLabel + "'>" +
-      "<span class='glyphicon glyphicon-font'></span>" +
-    "</span>" +
-    "<span class='input-group-addon btn btn-danger'" +
-      " onclick=\"javascript:clearElementGroup('" + id + "');\"" +
-      " title='" + TS.elementRemovalLabel + "'>" +
-      "<span class='glyphicon glyphicon-remove'></span>" +
-    "</span>";
+    "<div class='input-group flex-nowrap'>" +
+      "<textarea rows='1'" +
+      " id='" + id + "'" +
+      " name='" + name + "'" +
+      " class='form-control'" +
+      " spellcheck='false'" +
+      " placeholder='" + placeholderText + "'></textarea>" +
+      "<input type='button'" +
+      " value='E'" +
+      " title='" + TS.additionalKeyboardLabel + "'" +
+      " class='btn btn-info btn-input-group'" +
+      " onclick=\"javascript:toggleAdditionalKeyboard('" + id + "')\">" +
+      "<input type='button'" +
+      " value='X'" +
+      " title='" + TS.elementRemovalLabel + "'" +
+      " class='btn btn-danger btn-input-group'" +
+      " onclick=\"javascript:clearElementGroup('" + id + "')\">" +
+    "</div>";
 
   var textElementInputGroup = document.createElement("div");
   textElementInputGroup.setAttribute("class", "input-group");
@@ -121,8 +124,7 @@ function startLeidenToEpidocConversion() {
     if (document.getElementById("inscription-html")) {
       document.getElementById("inscription-html").innerHTML = epidocHtml;
     } else {
-      var inscriptionHtmlContents = "" +
-        "<pre id='inscription-html' class='input-text xml'></pre>";
+      var inscriptionHtmlContents = "<pre id='inscription-html' style='form-control'></pre>";
 
       var textElementBox = document.createElement("div");
       textElementBox.setAttribute("class", "col-xs-12");

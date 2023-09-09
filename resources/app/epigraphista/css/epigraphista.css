@@ -8,45 +8,44 @@ html * {
   font-family: "Open Sans", "FreeSans", "Arial Unicode MS";
 }
 
-body {
-  text-align: center;
+textarea {
+  border:     1px;
+  outline:    none;
+  box-shadow: none;
+  resize:     none;
 }
 
-.stop-shrinking {
-  padding-top:    0px;
-  padding-left:   0px;
-  padding-right:  0px;
-  padding-bottom: 0px;
-  margin-top:     0px;
-  margin-bottom:  0px;
+pre {
+  margin-top:       0px;
+  margin-bottom:    6px;
+  border-radius:    4px;
+  font-size:        16px;
+  background-color: white;
 }
 
-.input-text {
-  font-size: 16px;
+.buffer {
+  margin-top:    8px;
+  margin-bottom: 8px;
 }
 
-.input-group-addon {
-  border: 0px solid transparent;
+.input-group {
+  margin-top:    2px;
+  margin-bottom: 2px;
 }
 
-.button-row {
-  padding-top:    0px;
-  padding-bottom: 0px;
-  padding-left:   4px;
-  padding-right:  4px;
-}
-
-.button-buffer {
+.btn, .btn:disabled {
   margin-top:    6px;
   margin-bottom: 6px;
-}
-
-.btn {
-  margin-top:    4px;
-  margin-bottom: 4px;
   margin-left:   2px;
   margin-right:  2px;
-  font-size:     16px;
+}
+
+.btn-input-group {
+  border:        1px;
+  margin-top:    0px;
+  margin-bottom: 0px;
+  margin-left:   0px;
+  margin-right:  0px;
 }
 
 .btn-letters {
@@ -54,13 +53,10 @@ body {
   margin-bottom: 4px;
   margin-left:   4px;
   margin-right:  4px;
-  font-size:     20px;
+  font-size:     16px;
 }
 
 .btn-submit {
-  margin-top: 0px;
-}
-
-.xml {
-  text-align: left;
+  margin-top:    4px;
+  margin-bottom: 4px;
 }

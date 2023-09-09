@@ -5,10 +5,10 @@
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
 function syntaxHighlightEpidocText(epidocText) {
-  // Escape opening angle bracket - '<':
+  // Escape opening angle bracket '<':
   epidocText = epidocText.replace(/\</g, "<font color='#000080'>&lt;");
 
-  // Escape closing angle bracket - '>':
+  // Escape closing angle bracket '>':
   epidocText = epidocText.replace(/\>/g, "&gt;</font>");
 
   // Highlight tag attributes:
