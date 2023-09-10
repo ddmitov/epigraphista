@@ -3,5 +3,7 @@ resources/data/inscriptions/*.xml
 epigraphista-bin
 epigraphista.exe
 
+static-web-server
+
 backup
 upgit
