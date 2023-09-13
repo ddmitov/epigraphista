@@ -19,8 +19,8 @@ my $form = $json_object->decode($buffer);
 
 # Compose the paths of the XML template and the inscriptions directory:
 my $cwd = cwd();
-my $template_filepath = "$cwd/../data/telamon-template.xml";
-my $inscriptions_directory = "$cwd/../data/inscriptions";
+my $template_filepath = "$cwd/template.xml";
+my $inscriptions_directory = "$cwd/../data";
 
 # Create inscriptions directory if it does not exist:
 mkdir ($inscriptions_directory) unless (-d $inscriptions_directory);
@@ -68,7 +68,7 @@ delete($form->{"title"});
 
 # Inscription description:
 if ($form->{"support"}) {
-  my $support_indent = "\t" x 9;
+  my $support_indent = " " x 9;
   my $support_formatted_value = $form->{"support"};
 
   $support_formatted_value =~ s/\<lb/\n$support_indent\<lb/g;
@@ -78,7 +78,7 @@ if ($form->{"support"}) {
 }
 
 # Inscription text - mandatory element:
-my $inscription_indent = "\t" x 5;
+my $inscription_indent = " " x 5;
 my $inscription_formatted_value = $form->{"inscription_xml"};
 $inscription_formatted_value =~ s/\<lb/\n$inscription_indent\<lb/g;
 
@@ -91,10 +91,10 @@ foreach my $placeholder_name (@placeholder_names) {
   my $form_name = lc $placeholder_name;
 
   if ($form->{$form_name}) {
-    if ($xml =~ m/(\t{1,}.{0,}$placeholder_name)/) {
+    if ($xml =~ m/(\s{1,}.{0,}$placeholder_name)/) {
       my $xml_matrix_placeholder_line = $1;
-      my ($tabcount) = $xml_matrix_placeholder_line =~ s/\t/ /g;
-      my $indent = "\t" x $tabcount;
+      my ($space_count) = $xml_matrix_placeholder_line =~ s/\s/ /g;
+      my $indent = " " x $space_count;
 
       my $node_value = $form->{$form_name};
       $node_value =~ s/\n/\n$indent/g;
