@@ -19,7 +19,7 @@ my $form = $json_object->decode($buffer);
 
 # Compose the paths of the XML template and the inscriptions directory:
 my $cwd = cwd();
-my $template_filepath = "$cwd/template.xml";
+my $template_filepath = "$cwd/epigraphista/xml/template.xml";
 my $inscriptions_directory = "$cwd/../data";
 
 # Create inscriptions directory if it does not exist:
