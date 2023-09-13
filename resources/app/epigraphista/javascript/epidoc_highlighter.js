@@ -19,9 +19,9 @@ function syntaxHighlightEpidocText(epidocText) {
   // Escape quotes:
   epidocText = epidocText.replace(/\"/g, "&quot;");
 
-  // Indentation and line breaks:
-  epidocText =
-    epidocText.replace(/&lt;lb/g, "<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;lb");
+  // Line breaks, but not on the first line:
+  epidocText = epidocText.replace(/&lt;lb/g, "<br>&lt;lb");
+  epidocText = epidocText.replace(/<br>/, "");
 
   return epidocText;
 }

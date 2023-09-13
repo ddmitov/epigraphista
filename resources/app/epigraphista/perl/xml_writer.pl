@@ -78,7 +78,7 @@ if ($form->{"support"}) {
 }
 
 # Inscription text - mandatory element:
-my $inscription_indent = " " x 5;
+my $inscription_indent = " " x 20;
 my $inscription_formatted_value = $form->{"inscription_xml"};
 $inscription_formatted_value =~ s/\<lb/\n$inscription_indent\<lb/g;
 

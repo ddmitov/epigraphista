@@ -321,7 +321,7 @@ function convertLeidenToEpidoc(text) {
     text = text.replace(/\n/, '<lb n="' + (lineNumber + 1) + '"/>');
   }
 
-  text = '<ab><lb n="1"/>' + text + '\n</ab>';
+  text = '<lb n="1"/>' + text;
 
   return text;
 }
