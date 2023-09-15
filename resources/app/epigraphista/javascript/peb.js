@@ -13,14 +13,9 @@ if (navigator.userAgent.indexOf('Win') != -1) {
   pebSettings.perlInterpreter = 'perl/perl/bin/wperl.exe';
 }
 
-pebSettings.cutLabel = TS.contextMenuCutLabel;
-pebSettings.copyLabel = TS.contextMenuCopyLabel;
-pebSettings.pasteLabel = TS.contextMenuPasteLabel;
-pebSettings.selectAllLabel = TS.contextMenuSelectAllLabel;
-pebSettings.yesLabel = TS.yesLabel;
-pebSettings.noLabel = TS.noLabel;
-pebSettings.okLabel = TS.okLabel;
-pebSettings.closeConfirmation = TS.closeConfirmation;
+pebSettings.closeConfirmation =
+  'Inscription data is not saved and will be lost!<br>' +
+  'Do you want to close the program?';
 
 var xml_writer = {};
 xml_writer.scriptRelativePath = 'epigraphista/perl/xml_writer.pl';

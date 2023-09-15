@@ -18,12 +18,12 @@ function addTextAreaElement(id, placeholderText) {
       " placeholder='" + placeholderText + "'></textarea>" +
       "<input type='button'" +
       " value='E'" +
-      " title='" + TS.additionalKeyboardLabel + "'" +
+      " title='Greek Keyboard'" +
       " class='btn btn-info btn-input-group'" +
       " onclick=\"javascript:toggleAdditionalKeyboard('" + id + "')\">" +
       "<input type='button'" +
       " value='X'" +
-      " title='" + TS.elementRemovalLabel + "'" +
+      " title='Remove'" +
       " class='btn btn-danger btn-input-group'" +
       " onclick=\"javascript:clearElementGroup('" + id + "')\">" +
     "</div>";
@@ -81,7 +81,10 @@ function clearElementGroup(partialId){
   }
 
   if (textEntered == true) {
-    clearElementConfirmation = confirm(TS.elementRemovalConfirmation);
+    clearElementConfirmation = confirm(
+      'This element contains text and it will be lost!<br>' +
+      'Are you sure you want to delete the selected element?'
+    );
 
     if (clearElementConfirmation == true) {
       clearElement = true;
@@ -148,7 +151,7 @@ function finalCheckAndSubmit() {
   var title = document.getElementById('title').value;
 
   if (title.length < 3) {
-    alert(TS.noTitleAlertMessage);
+    alert('Please, enter the title of the inscription!');
     return false;
   }
 
@@ -156,7 +159,7 @@ function finalCheckAndSubmit() {
   var epigraphicText = document.getElementById('inscription').value;
 
   if (epigraphicText.length < 3) {
-    alert(TS.noInscriptionAlertMessage);
+    alert('Please, enter the text of the inscription!');
     return false;
   }
 
@@ -170,7 +173,7 @@ function finalCheckAndSubmit() {
 
 
 function successMessage() {
-  alert(TS.fileSavedMessage);
+  alert('A new EpiDoc XML file is successfully saved.');
 
   // Restore the user interface to its initial outlook:
   document.getElementById('container').innerHTML = originalContainerContents;

@@ -8,31 +8,6 @@ var originalContainerContents;
 
 
 function initializeLayout() {
-  // Translate the user interface:
-  document.getElementById("repository-button").setAttribute("value", TS.repository);
-  document.getElementById("idno-button").setAttribute("value", TS.idno);
-  document.getElementById("support-button").setAttribute("value", TS.support);
-  document.getElementById("material-button").setAttribute("value", TS.material);
-  document.getElementById("type-button").setAttribute("value", TS.type);
-  document.getElementById("layout-button").setAttribute("value", TS.layout);
-  document.getElementById("hand-note-button").setAttribute("value", TS.handNote);
-  document.getElementById("orig-place-button").setAttribute("value", TS.origPlace);
-  document.getElementById("orig-date-button").setAttribute("value", TS.origDate);
-  document.getElementById("provenance-found-button").setAttribute("value", TS.provenanceFound);
-  document.getElementById("provenance-observed-button").setAttribute("value", TS.provenanceObserved);
-
-  document.getElementById("apparatus-criticus-button").setAttribute("value", TS.apparatusCriticus);
-  document.getElementById("translation-button").setAttribute("value", TS.translation);
-  document.getElementById("commentary-button").setAttribute("value", TS.commentary);
-  document.getElementById("bibliography-button").setAttribute("value", TS.bibliography);
-
-  document.getElementById("title").setAttribute("placeholder", TS.title);
-
-  document.getElementById("inscription").setAttribute("placeholder", TS.inscription);
-  document.getElementById("inscription-additional-keyboard-button").setAttribute("title", TS.additionalKeyboardLabel);
-
-  document.getElementById("submit-button").setAttribute("value", TS.submitButtonLabel);
-
   // Set autoresize for all textarrea elements:
   const textArreas = document.getElementsByTagName("textarea");
 

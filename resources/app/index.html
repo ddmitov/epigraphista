@@ -15,19 +15,15 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
     <title>Epigraphista</title>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" media="all">
+    <script src="bootstrap/javascript/bootstrap.bundle.min.js" charset="utf-8"></script>
+
     <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
-
-    <!-- Translation must be loaded before the other JavaScript files: -->
-    <script src="epigraphista/javascript/translations/bulgarian.js" charset="utf-8"></script>
-
     <script src="epigraphista/javascript/epidoc_highlighter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/epidoc_text_converter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/greek_support.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/layout_functions.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/layout_initialization.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/peb.js" charset="utf-8"></script>
-
-    <script src="bootstrap/javascript/bootstrap.bundle.min.js" charset="utf-8"></script>
 
   </head>
 
@@ -41,78 +37,77 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
         <div class="container text-center">
 
-          <input type="button" id="repository-button" value=""
-            onClick="javascript:addTextAreaElement('repository', TS.repository);"
+          <input type="button" id="repository-button" value="Repository"
+            onClick="javascript:addTextAreaElement('repository', 'Repository');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="idno-button" value=""
-            onClick="javascript:addTextAreaElement('idno', TS.idno);"
+          <input type="button" id="idno-button" value="ID Number"
+            onClick="javascript:addTextAreaElement('idno', 'ID Number');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="support-button" value=""
-            onClick="javascript:addTextAreaElement('support', TS.support);"
+          <input type="button" id="support-button" value="Monument Description"
+            onClick="javascript:addTextAreaElement('support', 'Monument Description');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="material-button" value=""
-            onClick="javascript:addTextAreaElement('material', TS.material);"
+          <input type="button" id="material-button" value="Material"
+            onClick="javascript:addTextAreaElement('material', 'Material');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="type-button" value=""
-            onClick="javascript:addTextAreaElement('type', TS.type);"
+          <input type="button" id="type-button" value="Category"
+            onClick="javascript:addTextAreaElement('type', 'Category');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="layout-button" value=""
-            onClick="javascript:addTextAreaElement('layout', TS.layout);"
+          <input type="button" id="layout-button" value="Layout Description"
+            onClick="javascript:addTextAreaElement('layout', 'Layout Description');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="hand-note-button" value=""
-            onClick="javascript:addTextAreaElement('hand-note', TS.handNote);"
+          <input type="button" id="hand-note-button" value="Hand Note"
+            onClick="javascript:addTextAreaElement('hand-note', 'Hand Note');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="orig-place-button" value=""
-            onClick="javascript:addTextAreaElement('orig-place', TS.origPlace);"
+          <input type="button" id="orig-place-button" value="Place of Origin"
+            onClick="javascript:addTextAreaElement('orig-place', 'Place of Origin');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="orig-date-button" value=""
-            onClick="javascript:addTextAreaElement('orig-date', TS.origDate);"
+          <input type="button" id="orig-date-button" value="Date of Origin"
+            onClick="javascript:addTextAreaElement('orig-date', 'Date of Origin');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="provenance-found-button" value=""
-            onClick="javascript:addTextAreaElement('provenance-found', TS.provenanceFound);"
+          <input type="button" id="provenance-found-button" value="Context"
+            onClick="javascript:addTextAreaElement('provenance-found', 'Context');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type='button' id="provenance-observed-button" value=""
-            onClick="addTextAreaElement('provenance-observed', TS.provenanceObserved);"
+          <input type='button' id="provenance-observed-button" value="Provenance Observed"
+            onClick="addTextAreaElement('provenance-observed', 'Provenance Observed');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="apparatus-criticus-button" value=""
-            onClick="javascript:addTextAreaElement('apparatus-criticus', TS.apparatusCriticus);"
+          <input type="button" id="apparatus-criticus-button" value="Apparatus Criticus"
+            onClick="javascript:addTextAreaElement('apparatus-criticus', 'Apparatus Criticus');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="translation-button" value=""
-            onClick="javascript:addTextAreaElement('translation', TS.translation);"
+          <input type="button" id="translation-button" value="Translation"
+            onClick="javascript:addTextAreaElement('translation', 'Translation');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="commentary-button" value=""
-            onClick="javascript:addTextAreaElement('commentary', TS.commentary);"
+          <input type="button" id="commentary-button" value="Commentary"
+            onClick="javascript:addTextAreaElement('commentary', 'Commentary');"
             class="btn btn-info btn-xs btn-elements">
 
-          <input type="button" id="bibliography-button" value=""
-            onClick="javascript:addTextAreaElement('bibliography', TS.bibliography);"
+          <input type="button" id="bibliography-button" value="Bibliography"
+            onClick="javascript:addTextAreaElement('bibliography', 'Bibliography');"
             class="btn btn-info btn-xs btn-elements">
 
         </div>
 
         <div class="row buffer"></div>
 
-        <div class="input-group flex-nowrap">
+        <div class="input-group">
 
           <textarea
             rows="1"
             id="title"
             name="title"
-            title=""
-            placeholder="" 
+            placeholder="Title"
             spellcheck="false"
             class="form-control"></textarea>
 
@@ -159,15 +154,14 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
           <textarea
             rows="1"
             id="inscription"
-            name="inscription"
-            placeholder=""
+            placeholder="Inscription Text"
             spellcheck="false"
             class="form-control"
             oninput="javascript:startLeidenToEpidocConversion();"></textarea>
 
           <input type="button"
             value="E"
-            id="inscription-additional-keyboard-button"
+            title="Greek Keyboard"
             class="btn btn-info btn-input-group"
             onClick="javascript:toggleAdditionalKeyboard('inscription');">
 
@@ -182,7 +176,7 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
           <input
             type="button"
             id="submit-button"
-            value=""
+            value="Save"
             onClick="javascript:finalCheckAndSubmit();"
             class="btn btn-primary btn-submit">
 
