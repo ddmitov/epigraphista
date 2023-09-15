@@ -5,19 +5,29 @@
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
 function convertLeidenToEpidoc(text) {
-  var unicodeBlocks =
-    '\u0041-\u005a\u0061-\u007a\u00aa\u00b5\u00ba\u00c0-\u00d6 ' +
-    '\u00d8-\u00f6\u00f8-\u01ba\u01bc-\u01bf ' +
-    '\u01c4-\u02ad\u0386\u0388-\u0481\u048c-\u0556\u0561-\u0587 ' +
-    '\u10a0-\u10c5\u1e00-\u1fbc\u1fbe\u1fc2-\u1fcc ' +
-    '\u1fd0-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ffc\u207f\u2102\u2107 ' +
-    '\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126 ' +
-    '\u2128\u212a-\u212d\u212f-\u2131\u2133\u2134\u2139\ufb00-\ufb17 ' +
-    '\uff21-\uff3a\uff41-\uff5a';
+  var unicodeBlocks = (
+    '\u0041-\u007a' + // Basic Latin
+    '\u0080-\u00ff' + // Latin-1 Supplement
+    '\u0180-\u024f' + // Latin Extended-B
+    '\u1e00-\u1eff' + // Latin Extended Additional
+    '\u0370-\u03ff' + // Greek and Coptic
+    '\u1f00-\u1fff' + // Greek Extended
+    '\u0400-\u04ff' + // Cyrillic
+    '\u0530-\u058f' + // Armenian
+    '\u10a0-\u10ff' + // Georgian
+    '\u2100-\u214f' + // Letterlike Symbols
+    '\u2070-\u209f' + // Superscripts and Subscripts
+    '\ufb00-\ufb4f' + // Alphabetic Presentation Forms
+    '\uff00-\uffef'   // Halfwidth and Fullwidth Forms
+  );
+
   var unicodeLetters = '[' + unicodeBlocks + ']';
   var unicodeLettersAndDigits = '[' + unicodeBlocks + '0-9]';
 
-  // SINGLE ANGLE BRACKET ENCLOSURES
+  /////////////////////////////////////
+  // SINGLE ANGLE BRACKET ENCLOSURES //
+  /////////////////////////////////////
+
   // The following three regular expressions will match
   // '<imp>', but '<<imp>>' will NOT match.
   text = text.replace(
@@ -35,12 +45,21 @@ function convertLeidenToEpidoc(text) {
     '<supplied reason="omitted">$1</supplied>'
   );
 
-  // DOUBLE CHARACTER ENCLOSURES
+  /////////////////////////////////
+  // DOUBLE CHARACTER ENCLOSURES //
+  /////////////////////////////////
+
   // Double Bracket:
-  text = text.replace(/\[\[((.)+)\]\]/g, '<del rend="erasure">$1</del>');
+  text = text.replace(
+    /\[\[((.)+)\]\]/g,
+    '<del rend="erasure">$1</del>'
+  );
 
   // Double Angle Bracket:
-  text = text.replace(/<<((.)+)>>/g, '<add place="overstrike">$1</add>');
+  text = text.replace(
+    /<<((.)+)>>/g,
+    '<add place="overstrike">$1</add>'
+  );
 
   // Double Parentheses:
   text = text.replace(
@@ -48,7 +67,10 @@ function convertLeidenToEpidoc(text) {
     '<g type="$1"/>'
   );
 
-  // SINGLE CHARACTER ENCLOSURES
+  /////////////////////////////////
+  // SINGLE CHARACTER ENCLOSURES //
+  /////////////////////////////////
+
   // Curly Bracket:
   text = text.replace(
     RegExp('\{((?:' + unicodeLetters + '|\s)+)\}', 'g'),
@@ -67,7 +89,10 @@ function convertLeidenToEpidoc(text) {
     '<add>$1</add>'
   );
 
-  // BRACKETS
+  //////////////
+  // BRACKETS //
+  //////////////
+
   // [ - - ?]
   text = text.replace(
     /\s*\[-\s(?:[-\s\]]+)\?\]\s*(\n)*/g,
@@ -95,18 +120,19 @@ function convertLeidenToEpidoc(text) {
 
   // [--]
   var lostCharactersRegExp = /([^\[]*)\[([-\s\]]+)\]/;
+
+  // The length of the second group of characters
+  // within the regular expression is measured.
+  // ([^\[]*)  -->  first group of characters, negative matching
+  // ([-\s\]]+)  -->  second group of characters
+  // no left square bracket could be placed
+  // before the opening left square bracket,
+  // so [--] will match, but [[--]], or erasure, will NOT match.
+  // Any other character repeated any number of times (*) will match.
+  // \[  -->  escaped, or litteral, left square bracket
+  // \]  -->  escaped, or litteral, right square bracket
+
   while (text.match(lostCharactersRegExp)) {
-    // The length of the second group of characters
-    // within the regular expression is measured.
-    // ([^\[]*)  -->  first group of characters
-    // [^\[]*  --> negative matching:
-    // no left square bracket could be placed
-    // before the opening left square bracket,
-    // so [--] will match, but [[--]], or erasure, will NOT match.
-    // Any other character repeated any number of times (*) will match.
-    // ([-\s\]]+)  -->  second group of characters
-    // \[  -->  escaped, or litteral, left square bracket
-    // \]  -->  escaped, or litteral, right square bracket
     text = text.replace(
       lostCharactersRegExp,
       '$1<gap reason="lost" extent="' + RegExp.$2.length + '" unit="character"/>'
@@ -115,12 +141,14 @@ function convertLeidenToEpidoc(text) {
 
   // [. .]
   var lostRegExp = /\[([\.\s]+)\]/;
+
   while (text.match(lostRegExp)) {
     // Brackets are not counted!
     text = text.replace(
       lostRegExp,
       '<gap reason="lost" extent="' +
-        (RegExp.lastMatch.length - 2) + '" unit="character"/>'
+        (RegExp.lastMatch.length - 2) +
+        '" unit="character"/>'
     );
   }
 
@@ -131,12 +159,21 @@ function convertLeidenToEpidoc(text) {
   );
 
   // [ab]
-  text = text.replace(/\[([^\]]+)\]/g, '<supplied reason="lost">$1</supplied>');
+  text = text.replace(
+    /\[([^\]]+)\]/g,
+    '<supplied reason="lost">$1</supplied>'
+  );
 
   // [ab newline
-  text = text.replace(/\[([^\n])+\n/g, '<supplied reason="lost">$1</supplied>');
+  text = text.replace(
+    /\[([^\n])+\n/g,
+    '<supplied reason="lost">$1</supplied>'
+  );
 
-  // PARENTHESES
+  /////////////////
+  // PARENTHESES //
+  /////////////////
+
   // Precedence and sequence of regular expressions
   // within this section of code matters!
   // Do not rearrange the places of the regular expressions
@@ -194,35 +231,50 @@ function convertLeidenToEpidoc(text) {
   );
 
   // (!)
-  text = text.replace(/\(!\)/g, '<note>!</note>');
+  text = text.replace(
+    /\(!\)/g,
+    '<note>!</note>'
+  );
 
   // (imp)era(tor)
   text = text.replace(
-    RegExp('\\((' + unicodeLettersAndDigits + '+)\\)' +
+    RegExp(
+      '\\((' + unicodeLettersAndDigits + '+)\\)' +
       '(' + unicodeLettersAndDigits + '+)' +
-      '\\((' + unicodeLettersAndDigits + '+)\\)', 'g'),
+      '\\((' + unicodeLettersAndDigits + '+)\\)',
+      'g'
+    ),
     '<expan><ex>$1</ex><abbr>$2</abbr><ex>$3</ex></expan>'
   );
 
   // imp(era)tor
   text = text.replace(
-    RegExp('(' + unicodeLettersAndDigits + '+)' +
+    RegExp(
+      '(' + unicodeLettersAndDigits + '+)' +
       '\\((' + unicodeLettersAndDigits + '+)\\)' +
-      '(' + unicodeLettersAndDigits + '+)', 'g'),
+      '(' + unicodeLettersAndDigits + '+)',
+      'g'
+    ),
     '<expan><abbr>$1</abbr><ex>$2</ex><abbr>$3</abbr></expan>'
   );
 
   // (im)perator
   text = text.replace(
-    RegExp('\\((' + unicodeLettersAndDigits + '+)\\)' +
-      '(' + unicodeLettersAndDigits + '+)', 'g'),
+    RegExp(
+      '\\((' + unicodeLettersAndDigits + '+)\\)' +
+      '(' + unicodeLettersAndDigits + '+)',
+      'g'
+    ),
     '<expan><ex>$1</ex><abbr>$2</abbr></expan>'
   );
 
   // imp(erator)
   text = text.replace(
-    RegExp('(' + unicodeLettersAndDigits + '+)' +
-      '\\((' + unicodeLettersAndDigits + '+)\\)', 'g'),
+    RegExp(
+      '(' + unicodeLettersAndDigits + '+)' +
+      '\\((' + unicodeLettersAndDigits + '+)\\)',
+      'g'
+    ),
     '<expan><abbr>$1</abbr><ex>$2</ex></expan>'
   );
 
@@ -250,7 +302,10 @@ function convertLeidenToEpidoc(text) {
     '<expan><abbr><am><g type="symbol"/></am></abbr><ex>$1</ex></expan>'
   );
 
-  // OTHER MARKUPS
+  ///////////////////
+  // OTHER MARKUPS //
+  ///////////////////
+
   // Underdots (Unicode 0323):
   text = text.replace(
     RegExp('((' + unicodeLetters + '\u0323)+)', 'g'),
@@ -259,6 +314,7 @@ function convertLeidenToEpidoc(text) {
 
   // Plus signs:
   var illegibleRegExp = /((\+)+)/;
+
   while (text.match(illegibleRegExp)) {
     text = text.replace(
       illegibleRegExp,
@@ -268,7 +324,10 @@ function convertLeidenToEpidoc(text) {
   }
 
   // Ellipsis:
-  text = text.replace(/\.\.\./g, '<gap reason="ellipsis"/>');
+  text = text.replace(
+    /\.\.\./g,
+    '<gap reason="ellipsis"/>'
+  );
 
   // Accented Letters (Unicode 0301):
   text = text.replace(
@@ -286,7 +345,10 @@ function convertLeidenToEpidoc(text) {
   // TURNED CAPITAL F 2132
   // ROMAN NUMERAL REVERSED ONE HUNDRED 2183
   // BOX DRAWINGS HEAVY VERTICAL AND RIGHT[Half H] 2523:
-  text = text.replace(/([Ⅎ+|Ↄ+|┣+])/g, '<g type="claudian_y"/>');
+  text = text.replace(
+    /([Ⅎ+|Ↄ+|┣+])/g,
+    '<g type="claudian_y"/>'
+  );
 
   // Ligatured Letters (Unicode 0361 - on first letter):
   text = text.replace(
@@ -306,7 +368,10 @@ function convertLeidenToEpidoc(text) {
   );
 
   // Text Direction Right to Left (Unicode LEFTWARDS ARROW 2190):
-  text = text.replace(/^((←)+)/g, '<lb rend="right-to-left"/>');
+  text = text.replace(
+    /^((←)+)/g,
+    '<lb rend="right-to-left"/>'
+  );
 
   text = text.replace(/<lb n=\"\d+\"\/>((←)+)/g, '<lb rend="right-to-left"/>');
 
@@ -314,7 +379,10 @@ function convertLeidenToEpidoc(text) {
   // remove any orphaned Unicode COMBINING DOT BELOW 0323:
   text = text.replace(/\u0323/g, '');
 
-  // Line numbers:
+  //////////////////
+  // LINE NUMBERS //
+  //////////////////
+
   var lines = text.split('\n');
 
   for (var lineNumber = 1; lineNumber < lines.length; lineNumber++) {
