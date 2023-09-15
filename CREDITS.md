@@ -19,10 +19,6 @@ https://www.w3schools.com/jsref/prop_style_marginbottom.asp
 https://www.w3schools.com/jsref/met_node_removechild.asp  
 https://www.w3schools.com/jsref/prop_textarea_value.asp  
 https://www.w3schools.com/jsref/jsref_length_string.asp  
-https://www.w3schools.com/jsref/event_oninput.asp  
-https://www.w3schools.com/jsref/prop_style_cursor.asp  
-https://www.w3schools.com/jsref/event_onpaste.asp  
-https://www.w3schools.com/jsref/met_html_focus.asp  
 https://www.w3schools.com/jsref/met_element_getelementsbytagname.asp  
 https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp  
 https://www.w3schools.com/js/js_htmldom_css.asp  
@@ -31,10 +27,7 @@ https://www.w3schools.com/tags/tag_textarea.asp
 
 https://stackoverflow.com/questions/11080620/how-to-remove-div-elements-in-javascript-using-their-id  
 https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom  
-https://stackoverflow.com/questions/70233730/bootstrap-5-aligning-buttons-in-a-row  
 https://stackoverflow.com/questions/17109702/remove-all-stylings-border-glow-from-textarea  
-
-https://javascript.plainenglish.io/how-to-insert-text-into-the-text-area-at-the-current-cursor-position-23a0baf0ddd9
 
 ## Perl 5
 
