@@ -17,14 +17,9 @@ function addTextAreaElement(id, placeholderText) {
       " spellcheck='false'" +
       " placeholder='" + placeholderText + "'></textarea>" +
       "<input type='button'" +
-      " value='E'" +
-      " title='Greek Keyboard'" +
-      " class='btn btn-info btn-input-group'" +
-      " onclick=\"javascript:toggleAdditionalKeyboard('" + id + "')\">" +
-      "<input type='button'" +
       " value='X'" +
       " title='Remove'" +
-      " class='btn btn-danger btn-input-group'" +
+      " class='btn btn-info btn-input-group'" +
       " onclick=\"javascript:clearElementGroup('" + id + "')\">" +
     "</div>";
 
