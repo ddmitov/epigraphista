@@ -4,142 +4,111 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
+// Based on code from the
+// Chapel Hill Electronic Text Converter Javascript
+// https://wiki.digitalclassicist.org/Chapel_Hill_Electronic_Text_Converter
+// https://sourceforge.net/projects/epidoc/files/OldFiles/chetc-js/r2/
+// https://cds.library.brown.edu/projects/chet-c/chetc.html
+
+// Some helpful utilities for the development of Regular Expressions:
+// https://regexr.com/
+// https://regexper.com/
+// https://pemistahl.github.io/grex-js/
+
+const unicodeBlocks = (
+  '\u0041-\u007a' + // Basic Latin
+  '\u0080-\u00ff' + // Latin-1 Supplement
+  '\u0180-\u024f' + // Latin Extended-B
+  '\u1e00-\u1eff' + // Latin Extended Additional
+  '\u0370-\u03ff' + // Greek and Coptic
+  '\u1f00-\u1fff' + // Greek Extended
+  '\u0400-\u04ff' + // Cyrillic
+  '\u0530-\u058f' + // Armenian
+  '\u10a0-\u10ff' + // Georgian
+  '\u2100-\u214f' + // Letterlike Symbols
+  '\u2070-\u209f' + // Superscripts and Subscripts
+  '\ufb00-\ufb4f' + // Alphabetic Presentation Forms
+  '\uff00-\uffef'   // Halfwidth and Fullwidth Forms
+);
+
+
 function convertLeidenToEpidoc(text) {
-  var unicodeBlocks = (
-    '\u0041-\u007a' + // Basic Latin
-    '\u0080-\u00ff' + // Latin-1 Supplement
-    '\u0180-\u024f' + // Latin Extended-B
-    '\u1e00-\u1eff' + // Latin Extended Additional
-    '\u0370-\u03ff' + // Greek and Coptic
-    '\u1f00-\u1fff' + // Greek Extended
-    '\u0400-\u04ff' + // Cyrillic
-    '\u0530-\u058f' + // Armenian
-    '\u10a0-\u10ff' + // Georgian
-    '\u2100-\u214f' + // Letterlike Symbols
-    '\u2070-\u209f' + // Superscripts and Subscripts
-    '\ufb00-\ufb4f' + // Alphabetic Presentation Forms
-    '\uff00-\uffef'   // Halfwidth and Fullwidth Forms
-  );
+  ///////////////////////////////
+  // DOUBLE BRACKET ENCLOSURES //
+  ///////////////////////////////
 
-  var unicodeLetters = '[' + unicodeBlocks + ']';
-  var unicodeLettersAndDigits = '[' + unicodeBlocks + '0-9]';
-
-  /////////////////////////////////////
-  // SINGLE ANGLE BRACKET ENCLOSURES //
-  /////////////////////////////////////
-
-  // The following three regular expressions will match
-  // '<imp>', but '<<imp>>' will NOT match.
+  // <<exemplum>> //
   text = text.replace(
-    RegExp('([^<])<((?:' + unicodeLetters + '|\s)+)>([^>])', 'g'),
-    '$1<supplied reason="omitted">$2</supplied>$3'
-  );
-
-  text = text.replace(
-    RegExp('<((?:' + unicodeLetters + '|\s)+)>$', 'g'),
-    '<supplied reason="omitted">$1</supplied>'
-  );
-
-  text = text.replace(
-    RegExp('^<((?:' + unicodeLetters + '|\s)+)>', 'g'),
-    '<supplied reason="omitted">$1</supplied>'
-  );
-
-  /////////////////////////////////
-  // DOUBLE CHARACTER ENCLOSURES //
-  /////////////////////////////////
-
-  // Double Bracket:
-  text = text.replace(
-    /\[\[((.)+)\]\]/g,
-    '<del rend="erasure">$1</del>'
-  );
-
-  // Double Angle Bracket:
-  text = text.replace(
-    /<<((.)+)>>/g,
+    RegExp('<<((?:[' + unicodeBlocks + ']|\s)+)>>', 'g'),
     '<add place="overstrike">$1</add>'
   );
 
-  // Double Parentheses:
+  // [[exemplum]] //
   text = text.replace(
-    RegExp('\\(\\(((?:' + unicodeLetters + '|\s)+)\\)\\)', 'g'),
+    RegExp('\\[\\[((?:[' + unicodeBlocks + ']|\s)+)\\]\\]', 'g'),
+    '<del rend="erasure">$1</del>'
+  );
+
+  // ((exemplum)) //
+  text = text.replace(
+    RegExp('\\(\\(((?:[' + unicodeBlocks + ']|\s)+)\\)\\)', 'g'),
     '<g type="$1"/>'
   );
 
-  /////////////////////////////////
-  // SINGLE CHARACTER ENCLOSURES //
-  /////////////////////////////////
+  ///////////////////////////////
+  // SINGLE BRACKET ENCLOSURES //
+  ///////////////////////////////
 
-  // Curly Bracket:
+  // <exemplum> //
+  // '<exemplum>' will match, but '<<exemplum>>' will NOT match.
   text = text.replace(
-    RegExp('\{((?:' + unicodeLetters + '|\s)+)\}', 'g'),
+    RegExp('([^<]){0,1}<((?:[' + unicodeBlocks + ']|\s)+)>([^>]|$)', 'g'),
+    '$1<supplied reason="omitted">$2</supplied>$3'
+  );
+
+  // {exemplum} //
+  text = text.replace(
+    RegExp('\{((?:[' + unicodeBlocks + ']|\s)+)\}', 'g'),
     '<sic>$1</sic>'
   );
 
-  // Corner Characters (Unicode Left 231C Right 231D):
+  // [c.2] //
   text = text.replace(
-    RegExp('⌜((?:' + unicodeLetters + '|\s)+)⌝', 'g'),
-    '<choice><sic>$1</sic><corr>$1</corr></choice>'
+    /\[c\.((?:\d)+)\]/g,
+    '<gap reason="lost" extent="$1" unit="character"/>'
   );
 
-  // Single Quotes:
-  text = text.replace(
-    RegExp('\'((?:' + unicodeLetters + '|\s)+)\'', 'g'),
-    '<add>$1</add>'
-  );
-
-  //////////////
-  // BRACKETS //
-  //////////////
-
-  // [ - - ?]
-  text = text.replace(
-    /\s*\[-\s(?:[-\s\]]+)\?\]\s*(\n)*/g,
-    '<gap reason="lost" extent="1" unit="line"/>'
-  );
-
-  // [- -] ?
-  // followed by space and followed by one or more new line character(s)
-  text = text.replace(
-    /-\s(?:[-\s\]]+)\?\s*(\n)*/g,
-    '<gap reason="lost" extent="unknown" unit="line"/>'
-  );
-
-  // [-]
+  // [-] //
   text = text.replace(
     /\[-\]/g,
     '<name><gap reason="lost" extent="unknown" unit="character"/></name>'
   );
 
-  // space [- -] space newline
+  // Lost Line //
+  // [- -]     //
   text = text.replace(
-    /\s*\[-\s(?:[-\s\]]+)\]\s*(\n)*/g,
-    '<gap reason="lost" extent="1" unit="line"/>$1'
+    /(^|\n){1}\[\-\s\-\](\s){0,}(\n|$){1}/g,
+    '$1<gap reason="lost" extent="1" unit="line"/>$3\n'
   );
 
-  // [--]
-  var lostCharactersRegExp = /([^\[]*)\[([-\s\]]+)\]/;
+  // Lost Line //
+  // [- -] ?   //
+  text = text.replace(
+    /(^|\n){1}\[\-\s\-\]\s\?(\n|$){1}/g,
+    '$1<gap reason="lost" extent="unknown" unit="line"/>$3'
+  );
 
-  // The length of the second group of characters
-  // within the regular expression is measured.
-  // ([^\[]*)  -->  first group of characters, negative matching
-  // ([-\s\]]+)  -->  second group of characters
-  // no left square bracket could be placed
-  // before the opening left square bracket,
-  // so [--] will match, but [[--]], or erasure, will NOT match.
-  // Any other character repeated any number of times (*) will match.
-  // \[  -->  escaped, or litteral, left square bracket
-  // \]  -->  escaped, or litteral, right square bracket
+  // [--] //
+  var lostCharactersRegExp = /([^\[]){0,1}\[([\-]+)\]([^\]]){0,1}/;
 
   while (text.match(lostCharactersRegExp)) {
     text = text.replace(
       lostCharactersRegExp,
-      '$1<gap reason="lost" extent="' + RegExp.$2.length + '" unit="character"/>'
+      '$1<gap reason="lost" extent="' + RegExp.$2.length + '" unit="character"/>$3'
     );
   }
 
-  // [. .]
+  // [. .] //
   var lostRegExp = /\[([\.\s]+)\]/;
 
   while (text.match(lostRegExp)) {
@@ -152,167 +121,117 @@ function convertLeidenToEpidoc(text) {
     );
   }
 
-  // [c.5]
-  text = text.replace(
-    /\[c\.((?:\d)+)\]/g,
-    '<gap reason="lost" extent="$1" unit="character"/>'
-  );
-
-  // [ab]
-  text = text.replace(
-    /\[([^\]]+)\]/g,
-    '<supplied reason="lost">$1</supplied>'
-  );
-
-  // [ab newline
-  text = text.replace(
-    /\[([^\n])+\n/g,
-    '<supplied reason="lost">$1</supplied>'
-  );
-
-  /////////////////
-  // PARENTHESES //
-  /////////////////
-
-  // Precedence and sequence of regular expressions
-  // within this section of code matters!
-  // Do not rearrange the places of the regular expressions
-  // without a good reason!
-
-  // (scil. imperator)
-  text = text.replace(
-    RegExp('\\(scil. ((?:' + unicodeLetters + '|\s)+)\\)', 'g'),
-    '<supplied reason="subaudible">$1</supplied>'
-  );
-
-  // ab(- -)
-  text = text.replace(/(\S+)\((-\s*)+\)/g, '<abbr>$1</abbr>');
-
-  // (- -)
-  text = text.replace(
-    /\(((?:(-)|\s)+)\)/g,
-    '<gap reason="omitted" extent="unknown" unit="character"/>'
-  );
-
-  // (vac.?)
-  text = text.replace(
-    /\(vac.(\?+)\)/g,
-    '<space extent="unknown" unit="character"/>'
-  );
-
-  // (vac.5)
-  text = text.replace(
-    /\(vac.((?:\d)+)\)/g,
-    '<space extent="$1" unit="character"/>'
-  );
-
-  // space vac space
-  text = text.replace(
-    /\svac\s/g,
-    '<space extent="unknown" unit="character"/>'
-  );
-
-  // space vacat space
-  text = text.replace(
-    /\svacat\s/g,
-    '<space extent="unknown" unit="character"/>'
-  );
-
-  // 'vac' at the beginning of a row foolowed by space
-  text = text.replace(
-    /^vac\s/g,
-    '<space extent="unknown" unit="character"/>'
-  );
-
-  // 'vacat' at the beginning of a row foolowed by space
-  text = text.replace(
-    /^vacat\s/g,
-    '<space extent="unknown" unit="character"/>'
-  );
-
-  // (!)
+  // (!) //
   text = text.replace(
     /\(!\)/g,
     '<note>!</note>'
   );
 
-  // (imp)era(tor)
+  // (scil. exemplum) //
+  text = text.replace(
+    RegExp('\\(scil. ((?:[' + unicodeBlocks + ']|\s)+)\\)', 'g'),
+    '<supplied reason="subaudible">$1</supplied>'
+  );
+
+  // exemplum(- -) //
+  text = text.replace(
+    /(\S+)\((-\s*)+\)/g,
+    '<abbr>$1</abbr>'
+  );
+
+  // (- -) //
+  text = text.replace(
+    /\(((?:(-)|\s)+)\)/g,
+    '<gap reason="omitted" extent="unknown" unit="character"/>'
+  );
+
+  // (vac.?) //
+  // vac.    //
+  // vac     //
+  // vacat   //
+  text = text.replace(
+    /(\(){0,1}vac(\.){0,1}(at){0,1}((\?)){0,1}(\){0,1}[^\.\d])/g,
+    '<space extent="unknown" unit="character"/>'
+  );
+
+  // (vac.2)  //
+  // (vac. 2) //
+  text = text.replace(
+    /\(vac\.(\s){0,}(\d){1,}\)/g,
+    '<space extent="$2" unit="character"/>'
+  );
+
+  // (ex)em(plum) //
   text = text.replace(
     RegExp(
-      '\\((' + unicodeLettersAndDigits + '+)\\)' +
-      '(' + unicodeLettersAndDigits + '+)' +
-      '\\((' + unicodeLettersAndDigits + '+)\\)',
+      '\\(([' + unicodeBlocks + '0-9]+)\\)' +
+      '([' + unicodeBlocks + '0-9]+)' +
+      '\\(([' + unicodeBlocks + '0-9]+)\\)',
       'g'
     ),
     '<expan><ex>$1</ex><abbr>$2</abbr><ex>$3</ex></expan>'
   );
 
-  // imp(era)tor
+  // ex(em)plum //
   text = text.replace(
     RegExp(
-      '(' + unicodeLettersAndDigits + '+)' +
-      '\\((' + unicodeLettersAndDigits + '+)\\)' +
-      '(' + unicodeLettersAndDigits + '+)',
+      '([' + unicodeBlocks + '0-9]+)' +
+      '\\(([' + unicodeBlocks + '0-9]+)\\)' +
+      '([' + unicodeBlocks + '0-9]+)',
       'g'
     ),
     '<expan><abbr>$1</abbr><ex>$2</ex><abbr>$3</abbr></expan>'
   );
 
-  // (im)perator
+  // (ex)emplum //
   text = text.replace(
     RegExp(
-      '\\((' + unicodeLettersAndDigits + '+)\\)' +
-      '(' + unicodeLettersAndDigits + '+)',
+      '\\(([' + unicodeBlocks + '0-9]+)\\)' +
+      '([' + unicodeBlocks + '0-9]+)',
       'g'
     ),
     '<expan><ex>$1</ex><abbr>$2</abbr></expan>'
   );
 
-  // imp(erator)
+  // ex(emplum) //
   text = text.replace(
     RegExp(
-      '(' + unicodeLettersAndDigits + '+)' +
-      '\\((' + unicodeLettersAndDigits + '+)\\)',
+      '([' + unicodeBlocks + '0-9]+)' +
+      '\\(([' + unicodeBlocks + '0-9]+)\\)',
       'g'
     ),
     '<expan><abbr>$1</abbr><ex>$2</ex></expan>'
   );
 
-  // (imp)<expan>
+  // (exemplum) //
   text = text.replace(
-    RegExp('\\((' + unicodeLettersAndDigits + '+)\\)<expan>', 'g'),
-    '<expan><ex>$1</ex>'
-  );
-
-  // </ex></expan>perator
-  text = text.replace(
-    RegExp('<\/ex><\/expan>(' + unicodeLettersAndDigits + '+)', 'g'),
-    '</ex><abbr>$1</abbr></expan>'
-  );
-
-  // </expan>(perator)
-  text = text.replace(
-    RegExp('<\/expan>\\((' + unicodeLettersAndDigits + '+)\\)', 'g'),
-    '<ex>$1</ex></expan>'
-  );
-
-  // (imp)
-  text = text.replace(
-    RegExp('\\(((?:' + unicodeLetters + '|\s)+)\\)', 'g'),
+    RegExp('\\(((?:[' + unicodeBlocks + ']|\s)+)\\)', 'g'),
     '<expan><abbr><am><g type="symbol"/></am></abbr><ex>$1</ex></expan>'
+  );
+
+  /////////////////////////////////
+  // SINGLE CHARACTER ENCLOSURES //
+  /////////////////////////////////
+
+  // 'exemplum' //
+  text = text.replace(
+    RegExp('\'((?:[' + unicodeBlocks + ']|\s)+)\'', 'g'),
+    '<add>$1</add>'
+  );
+
+  // Corner Characters               //
+  // TOP LEFT CORNER - Unicode 231C  //
+  // TOP RIGHT CORNER - Unicode 231D //
+  text = text.replace(
+    RegExp('⌜((?:[' + unicodeBlocks + ']|\s)+)⌝', 'g'),
+    '<choice><sic>$1</sic><corr>$1</corr></choice>'
   );
 
   ///////////////////
   // OTHER MARKUPS //
   ///////////////////
 
-  // Underdots (Unicode 0323):
-  text = text.replace(
-    RegExp('((' + unicodeLetters + '\u0323)+)', 'g'),
-    '<unclear>$1</unclear>'
-  );
-
-  // Plus signs:
+  // ++ //
   var illegibleRegExp = /((\+)+)/;
 
   while (text.match(illegibleRegExp)) {
@@ -323,60 +242,63 @@ function convertLeidenToEpidoc(text) {
     );
   }
 
-  // Ellipsis:
+  // ... //
   text = text.replace(
     /\.\.\./g,
     '<gap reason="ellipsis"/>'
   );
 
-  // Accented Letters (Unicode 0301):
+  // exempl- //
   text = text.replace(
-    RegExp('((' + unicodeLetters + '\u0301)+)', 'g'),
+    RegExp('([' + unicodeBlocks + '])(?:-)\n', 'g'),
+    '$1<lb type="worddiv"/>'
+  );
+
+  // Accented Letters - Unicode 0301 //
+  text = text.replace(
+    RegExp('(([' + unicodeBlocks + ']\u0301)+)', 'g'),
     '<hi rend="apex">$1</hi>'
   );
 
-  // Supralinear/Overline Characters (Unicode 0305):
+  // Ligatured Letters - Unicode 0361 //
   text = text.replace(
-    RegExp('((' + unicodeLetters + '́\u0305)+)', 'g'),
+    RegExp('(([' + unicodeBlocks + ']\u0361)+)', 'g'),
+    '<hi rend="ligature">$1</hi>'
+  );
+
+  // Underdots - Unicode 0323 //
+  text = text.replace(
+    RegExp('(([' + unicodeBlocks + ']\u0323)+)', 'g'),
+    '<unclear>$1</unclear>'
+  );
+
+  // Supralinear/Overline Characters - Unicode 0305 //
+  text = text.replace(
+    RegExp('(([' + unicodeBlocks + ']\u0305])+)', 'g'),
     '<hi rend="supraline">$1</hi>'
   );
 
-  // Claudian Letters:
-  // TURNED CAPITAL F 2132
-  // ROMAN NUMERAL REVERSED ONE HUNDRED 2183
-  // BOX DRAWINGS HEAVY VERTICAL AND RIGHT[Half H] 2523:
+  // Claudian Letters                                     //
+  // TURNED CAPITAL F - Unicode 2132                      //
+  // ROMAN NUMERAL REVERSED ONE HUNDRED - Unicode 2183    //
+  // BOX DRAWINGS HEAVY VERTICAL AND RIGHT - Unicode 2523 //
   text = text.replace(
     /([Ⅎ+|Ↄ+|┣+])/g,
     '<g type="claudian_y"/>'
   );
 
-  // Ligatured Letters (Unicode 0361 - on first letter):
-  text = text.replace(
-    RegExp('((' + unicodeLetters + '\u0361' + unicodeLetters + ')+)', 'g'),
-    '<hi rend="ligature">$1</hi>'
-  );
-
-  // Dash:
-  text = text.replace(
-    /-\s(?:[-\s\]]+)\s*(\n)*/g,
-    '<gap reason="lost" extent="unknown" unit="line"/>$1'
-  );
-
-  text = text.replace(
-    RegExp('(' + unicodeLetters + ')(?:-)\n', 'g'),
-    '$1<lb type="worddiv"/>'
-  );
-
-  // Text Direction Right to Left (Unicode LEFTWARDS ARROW 2190):
+  // Text Direction Right to Left (Unicode LEFTWARDS ARROW 2190) //
   text = text.replace(
     /^((←)+)/g,
     '<lb rend="right-to-left"/>'
   );
 
-  text = text.replace(/<lb n=\"\d+\"\/>((←)+)/g, '<lb rend="right-to-left"/>');
+  text = text.replace(
+    /<lb n=\"\d+\"\/>((←)+)/g,
+    '<lb rend="right-to-left"/>'
+  );
 
-  // Post-conversion cleanup -
-  // remove any orphaned Unicode COMBINING DOT BELOW 0323:
+  // Remove any COMBINING DOT BELOW - Unicode0323 //
   text = text.replace(/\u0323/g, '');
 
   //////////////////
@@ -386,7 +308,10 @@ function convertLeidenToEpidoc(text) {
   var lines = text.split('\n');
 
   for (var lineNumber = 1; lineNumber < lines.length; lineNumber++) {
-    text = text.replace(/\n/, '<lb n="' + (lineNumber + 1) + '"/>');
+    text = text.replace(
+      /\n/,
+      '<lb n="' + (lineNumber + 1) + '"/>'
+    );
   }
 
   text = '<lb n="1"/>' + text;
