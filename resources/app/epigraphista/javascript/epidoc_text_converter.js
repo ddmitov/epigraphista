@@ -5,7 +5,7 @@
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
 // Based on code from the
-// Chapel Hill Electronic Text Converter Javascript
+// Chapel Hill Electronic Text Converter Javascript:
 // https://wiki.digitalclassicist.org/Chapel_Hill_Electronic_Text_Converter
 // https://sourceforge.net/projects/epidoc/files/OldFiles/chetc-js/r2/
 // https://cds.library.brown.edu/projects/chet-c/chetc.html
@@ -14,6 +14,9 @@
 // https://regexr.com/
 // https://regexper.com/
 // https://pemistahl.github.io/grex-js/
+
+// Unicode Character Search:
+// https://www.fileformat.info/info/unicode/char/search.htm
 
 const unicodeBlocks = (
   '\u0041-\u007a' + // Basic Latin
@@ -84,15 +87,13 @@ function convertLeidenToEpidoc(text) {
     '<name><gap reason="lost" extent="unknown" unit="character"/></name>'
   );
 
-  // Lost Line //
-  // [- -]     //
+  // [- -] //
   text = text.replace(
     /(^|\n){1}\[\-\s\-\](\s){0,}(\n|$){1}/g,
     '$1<gap reason="lost" extent="1" unit="line"/>$3\n'
   );
 
-  // Lost Line //
-  // [- -] ?   //
+  // [- -] ? //
   text = text.replace(
     /(^|\n){1}\[\-\s\-\]\s\?(\n|$){1}/g,
     '$1<gap reason="lost" extent="unknown" unit="line"/>$3'
@@ -219,9 +220,9 @@ function convertLeidenToEpidoc(text) {
     '<add>$1</add>'
   );
 
-  // Corner Characters               //
   // TOP LEFT CORNER - Unicode 231C  //
   // TOP RIGHT CORNER - Unicode 231D //
+  // ⌜exemplum⌝ //
   text = text.replace(
     RegExp('⌜((?:[' + unicodeBlocks + ']|\s)+)⌝', 'g'),
     '<choice><sic>$1</sic><corr>$1</corr></choice>'
@@ -254,53 +255,6 @@ function convertLeidenToEpidoc(text) {
     '$1<lb type="worddiv"/>'
   );
 
-  // Accented Letters - Unicode 0301 //
-  text = text.replace(
-    RegExp('(([' + unicodeBlocks + ']\u0301)+)', 'g'),
-    '<hi rend="apex">$1</hi>'
-  );
-
-  // Ligatured Letters - Unicode 0361 //
-  text = text.replace(
-    RegExp('(([' + unicodeBlocks + ']\u0361)+)', 'g'),
-    '<hi rend="ligature">$1</hi>'
-  );
-
-  // Underdots - Unicode 0323 //
-  text = text.replace(
-    RegExp('(([' + unicodeBlocks + ']\u0323)+)', 'g'),
-    '<unclear>$1</unclear>'
-  );
-
-  // Supralinear/Overline Characters - Unicode 0305 //
-  text = text.replace(
-    RegExp('(([' + unicodeBlocks + ']\u0305])+)', 'g'),
-    '<hi rend="supraline">$1</hi>'
-  );
-
-  // Claudian Letters                                     //
-  // TURNED CAPITAL F - Unicode 2132                      //
-  // ROMAN NUMERAL REVERSED ONE HUNDRED - Unicode 2183    //
-  // BOX DRAWINGS HEAVY VERTICAL AND RIGHT - Unicode 2523 //
-  text = text.replace(
-    /([Ⅎ+|Ↄ+|┣+])/g,
-    '<g type="claudian_y"/>'
-  );
-
-  // Text Direction Right to Left (Unicode LEFTWARDS ARROW 2190) //
-  text = text.replace(
-    /^((←)+)/g,
-    '<lb rend="right-to-left"/>'
-  );
-
-  text = text.replace(
-    /<lb n=\"\d+\"\/>((←)+)/g,
-    '<lb rend="right-to-left"/>'
-  );
-
-  // Remove any COMBINING DOT BELOW - Unicode0323 //
-  text = text.replace(/\u0323/g, '');
-
   //////////////////
   // LINE NUMBERS //
   //////////////////
@@ -318,3 +272,41 @@ function convertLeidenToEpidoc(text) {
 
   return text;
 }
+
+/////////////////////
+// TESTING STRINGS //
+/////////////////////
+
+// Paste in the 'Inscription Text' textarea:
+
+//  1.  <<exemplum>>
+//  2.  [[exemplum]]
+//  3.  ((exemplum))
+//  4.  <exemplum>
+//  5.  {exemplum}
+//  6.  [c.2]
+//  7.  [-]
+//  8.  [- -]
+//  9.  [- -] ?
+//  10. [--]
+//  11. [. .]
+//  12. (!)
+//  13. (scil. exemplum)
+//  14. exemplum(- -)
+//  15. (- -)
+//  16. (vac.?)
+//  17. vac.
+//  18. vac
+//  19. vacat
+//  20. (vac.2)
+//  21. (vac. 2)
+//  22. (ex)em(plum)
+//  23. ex(em)plum
+//  24. (ex)emplum
+//  25. ex(emplum)
+//  26. (exemplum)
+//  27. 'exemplum'
+//  28. ⌜exemplum⌝
+//  29. ++
+//  30. ...
+//  31. exempl-
