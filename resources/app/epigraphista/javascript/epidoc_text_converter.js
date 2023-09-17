@@ -89,14 +89,14 @@ function convertLeidenToEpidoc(text) {
 
   // [- -] //
   text = text.replace(
-    /(^|\n){1}\[\-\s\-\](\s){0,}(\n|$){1}/g,
-    '$1<gap reason="lost" extent="1" unit="line"/>$3\n'
+    /(^|\n){1}([\s]){0,}\[\-\s\-\](\s){0,}(\n|$){1}/g,
+    '$1<gap reason="lost" extent="1" unit="line"/>\n'
   );
 
   // [- -] ? //
   text = text.replace(
-    /(^|\n){1}\[\-\s\-\]\s\?(\n|$){1}/g,
-    '$1<gap reason="lost" extent="unknown" unit="line"/>$3'
+    /(^|\n){1}([\s]){0,}\[\-\s\-\]\s\?(\n|$){1}/g,
+    '$1<gap reason="lost" extent="unknown" unit="line"/>'
   );
 
   // [--] //
@@ -279,34 +279,36 @@ function convertLeidenToEpidoc(text) {
 
 // Paste in the 'Inscription Text' textarea:
 
-//  1.  <<exemplum>>
-//  2.  [[exemplum]]
-//  3.  ((exemplum))
-//  4.  <exemplum>
-//  5.  {exemplum}
-//  6.  [c.2]
-//  7.  [-]
-//  8.  [- -]
-//  9.  [- -] ?
-//  10. [--]
-//  11. [. .]
-//  12. (!)
-//  13. (scil. exemplum)
-//  14. exemplum(- -)
-//  15. (- -)
-//  16. (vac.?)
-//  17. vac.
-//  18. vac
-//  19. vacat
-//  20. (vac.2)
-//  21. (vac. 2)
-//  22. (ex)em(plum)
-//  23. ex(em)plum
-//  24. (ex)emplum
-//  25. ex(emplum)
-//  26. (exemplum)
-//  27. 'exemplum'
-//  28. ⌜exemplum⌝
-//  29. ++
-//  30. ...
-//  31. exempl-
+// 1.  <<exemplum>>
+// 2.  [[exemplum]]
+// 3.  ((exemplum))
+// 4.  <exemplum>
+// 5.  {exemplum}
+// 6.  [c.2]
+// 7.  [-]
+// 8.  [--]
+// 9.  [. .]
+// 10. (!)
+// 11. (scil. exemplum)
+// 12. exemplum(- -)
+// 13. (- -)
+// 14. (vac.?)  TODO
+// 15. vac.     TODO
+// 16. vac      TODO
+// 17. vacat    TODO
+// 18. (vac.2)  TODO
+// 19. (vac. 2) TODO
+// 20. (ex)em(plum)
+// 21. ex(em)plum
+// 22. (ex)emplum
+// 23. ex(emplum)
+// 24. (exemplum)
+// 25. 'exemplum'
+// 26. ⌜exemplum⌝
+// 27. ++
+// 28. ...
+// 29. exempl- TODO
+
+// Paste in the 'Inscription Text' textarea without the comments:
+// [- -]
+// [- -] ?
