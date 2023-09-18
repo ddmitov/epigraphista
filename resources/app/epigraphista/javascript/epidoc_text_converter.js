@@ -5,7 +5,7 @@
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
 // Based on code from the
-// Chapel Hill Electronic Text Converter Javascript:
+// Chapel Hill Electronic Text Converter - Javascript:
 // https://wiki.digitalclassicist.org/Chapel_Hill_Electronic_Text_Converter
 // https://sourceforge.net/projects/epidoc/files/OldFiles/chetc-js/r2/
 // https://cds.library.brown.edu/projects/chet-c/chetc.html
@@ -146,20 +146,25 @@ function convertLeidenToEpidoc(text) {
     '<gap reason="omitted" extent="unknown" unit="character"/>'
   );
 
-  // (vac.?) //
-  // vac.    //
-  // vac     //
-  // vacat   //
-  text = text.replace(
-    /(\(){0,1}vac(\.){0,1}(at){0,1}((\?)){0,1}(\){0,1}[^\.\d])/g,
-    '<space extent="unknown" unit="character"/>'
-  );
-
   // (vac.2)  //
   // (vac. 2) //
   text = text.replace(
-    /\(vac\.(\s){0,}(\d){1,}\)/g,
-    '<space extent="$2" unit="character"/>'
+    /\(vac\.(\s){0,}(\d){1,}(\)){1}([\s\n]|$){0,1}/g,
+    '<space extent="$2" unit="character"/>$4'
+  );
+
+  // (vac.?) //
+  text = text.replace(
+    /(^|[\n\s]){1}(\(vac\.\?\))([\s\n]|$){0,1}/g,
+    '<space extent="unknown" unit="character"/>$3'
+  );
+
+  // vac.  //
+  // vac   //
+  // vacat //
+  text = text.replace(
+    /(^|[\n\s]){1}vac(\.){0,1}(at){0,1}([\s\n]|$){1}/g,
+    '<space extent="unknown" unit="character"/>$4'
   );
 
   // (ex)em(plum) //
@@ -292,12 +297,12 @@ function convertLeidenToEpidoc(text) {
 // 11. (scil. exemplum)
 // 12. exemplum(- -)
 // 13. (- -)
-// 14. (vac.?)  TODO
-// 15. vac.     TODO
-// 16. vac      TODO
-// 17. vacat    TODO
-// 18. (vac.2)  TODO
-// 19. (vac. 2) TODO
+// 14. (vac.2)
+// 15. (vac. 2)
+// 16. (vac.?)
+// 17. vac.
+// 18. vac
+// 19. vacat
 // 20. (ex)em(plum)
 // 21. ex(em)plum
 // 22. (ex)emplum
@@ -307,8 +312,10 @@ function convertLeidenToEpidoc(text) {
 // 26. ⌜exemplum⌝
 // 27. ++
 // 28. ...
-// 29. exempl- TODO
 
 // Paste in the 'Inscription Text' textarea without the comments:
 // [- -]
 // [- -] ?
+
+// Paste in the 'Inscription Text' textarea and add a new line bellow:
+// exempl-
