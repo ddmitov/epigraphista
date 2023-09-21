@@ -5,25 +5,37 @@
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title>{TITLE}</title>
+                <title>
+                    {TITLE}
+                </title>
             </titleStmt>
             <publicationStmt>
                 <authority/>
-                <idno type="filename">{FILENAME}</idno>
+                <idno type="filename">
+                    {FILENAME}
+                </idno>
             </publicationStmt>
             <sourceDesc>
                 <msDesc>
                     <msIdentifier>
-                        <repository>{REPOSITORY}</repository>
-                        <idno>{IDNO}</idno>
+                        <repository>
+                            {REPOSITORY}
+                        </repository>
+                        <idno>
+                            {IDNO}
+                        </idno>
                     </msIdentifier>
                     <physDesc>
                         <objectDesc>
                             <supportDesc>
                                 <support>
                                     {SUPPORT}
-                                    <material>{MATERIAL}</material>
-                                    <objectType>{TYPE}</objectType>
+                                    <material>
+                                        {MATERIAL}
+                                    </material>
+                                    <objectType>
+                                        {TYPE}
+                                    </objectType>
                                 </support>
                             </supportDesc>
                             <layoutDesc>
@@ -40,8 +52,12 @@
                     </physDesc>
                     <history>
                         <origin>
-                            <origPlace>{ORIG_PLACE}</origPlace>
-                            <origDate>{ORIG_DATE}</origDate>
+                            <origPlace>
+                                {ORIG_PLACE}
+                            </origPlace>
+                            <origDate>
+                                {ORIG_DATE}
+                            </origDate>
                         </origin>
                         <provenance type="found">
                             {PROVENANCE_FOUND}

@@ -25,26 +25,13 @@ function addTextAreaElement(id, placeholderText) {
 
   var textElementInputGroup = document.createElement("div");
   textElementInputGroup.setAttribute("class", "input-group");
+  textElementInputGroup.setAttribute("id", id + "-group");
   textElementInputGroup.innerHTML = textElementContents;
 
-  var textElementBox = document.createElement("div");
-  textElementBox.setAttribute("class", "form-group col-xs-12");
-  textElementBox.appendChild(textElementInputGroup);
-
-  var textElementRow = document.createElement("div");
-  textElementRow.setAttribute("class", "row");
-  textElementRow.appendChild(textElementBox);
-
-  var placeholderElement = document.getElementById(id + "-group");
-
-  var textElementAdditionalKeyboardPlaceholder = document.createElement("div");
-  textElementAdditionalKeyboardPlaceholder.setAttribute("id", id + "-additional-keyboard");
-
-  placeholderElement.appendChild(textElementAdditionalKeyboardPlaceholder);
-  placeholderElement.appendChild(textElementRow);
+  var placeholderElement = document.getElementById("textarrea-elements");
+  placeholderElement.appendChild(textElementInputGroup);
 
   textElement = document.getElementById(id);
-
   textElement.setAttribute(
     "style", "height:" + (textElement.scrollHeight) + "px; overflow-y: hidden;"
   );
@@ -56,8 +43,8 @@ function addTextAreaElement(id, placeholderText) {
 }
 
 
-function clearElementGroup(partialId){
-  var placeholderElement = document.getElementById(partialId + "-group");
+function clearElementGroup(id){
+  var placeholderElement = document.getElementById(id + "-group");
   var textEntered = false;
   var textFields = new Array();
 
@@ -87,11 +74,9 @@ function clearElementGroup(partialId){
   }
 
   if (clearElement == true) {
-    while (placeholderElement.hasChildNodes()) {
-      placeholderElement.removeChild(placeholderElement.firstChild);
-    }
+    placeholderElement.parentElement.removeChild(placeholderElement);
 
-    var buttonToEnable = document.getElementById(partialId + "-button");
+    var buttonToEnable = document.getElementById(id + "-button");
     buttonToEnable.setAttribute("class", "btn btn-info btn-xs");
     buttonToEnable.disabled = false;
   }
@@ -124,16 +109,8 @@ function startLeidenToEpidocConversion() {
     } else {
       var inscriptionHtmlContents = "<pre id='inscription-html' style='form-control'></pre>";
 
-      var textElementBox = document.createElement("div");
-      textElementBox.setAttribute("class", "col-xs-12");
-      textElementBox.innerHTML = inscriptionHtmlContents;
-    
-      var textElementRow = document.createElement("div");
-      textElementRow.setAttribute("class", "row");
-      textElementRow.appendChild(textElementBox);
-
       placeholderElement = document.getElementById("inscription-html-group")
-      placeholderElement.appendChild(textElementRow);
+      placeholderElement.innerHTML = inscriptionHtmlContents;
 
       document.getElementById("inscription-html").innerHTML = epidocHtml;
     }
