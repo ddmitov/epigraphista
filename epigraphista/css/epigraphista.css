@@ -1,0 +1,59 @@
+/*
+Epigraphista - EpiDoc XML file creator
+Epigraphista is licensed under the terms of GNU GPL version 3.
+Dimitar D. Mitov, 2015 - 2018, 2023.
+*/
+
+html * {
+  font-family: "Open Sans", "FreeSans", "Arial Unicode MS";
+}
+
+textarea {
+  border:     1px;
+  outline:    none;
+  box-shadow: none;
+  resize:     none;
+}
+
+pre {
+  margin-top:       0px;
+  margin-bottom:    6px;
+  padding-top:      6px;
+  padding-bottom:   6px;
+  padding-left:     12px;
+  padding-right:    12px;
+  border-radius:    6px;
+  font-size:        16px;
+  background-color: white;
+  color: black;
+}
+
+.buffer {
+  margin-top:    8px;
+  margin-bottom: 8px;
+}
+
+.input-group {
+  margin-top:    2px;
+  margin-bottom: 2px;
+}
+
+.btn, .btn:disabled {
+  margin-top:    6px;
+  margin-bottom: 6px;
+  margin-left:   2px;
+  margin-right:  2px;
+}
+
+.btn-input-group {
+  border:        1px;
+  margin-top:    0px;
+  margin-bottom: 0px;
+  margin-left:   0px;
+  margin-right:  0px;
+}
+
+.btn-main {
+  margin-top:    4px;
+  margin-bottom: 4px;
+}

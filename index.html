@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<!--
+Epigraphista - EpiDoc XML file creator
+Epigraphista is licensed under the terms of GNU GPL version 3.
+Dimitar D. Mitov, 2015 - 2018, 2023.
+-->
+
+  <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <title>Epigraphista</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" media="all">
+    <script src="bootstrap/javascript/bootstrap.bundle.min.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
+    <script src="epigraphista/javascript/epidoc_text_converter.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/epidoc_text_highlighter.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/epidoc_xml_composer.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/layout_functions.js" charset="utf-8"></script>
+    <script src="epigraphista/javascript/layout_initialization.js" charset="utf-8"></script>
+
+  </head>
+
+  <body>
+  
+    <div class="container-fluid" id="container">
+
+      <div class="row buffer"></div>
+
+      <div class="container text-center">
+
+        <input type="button" id="repository-button" value="Repository"
+          onClick="javascript:addTextAreaElement('repository', 'Repository')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="idno-button" value="ID Number"
+          onClick="javascript:addTextAreaElement('idno', 'ID Number')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="support-button" value="Monument Description"
+          onClick="javascript:addTextAreaElement('support', 'Monument Description')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="material-button" value="Material"
+          onClick="javascript:addTextAreaElement('material', 'Material')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="type-button" value="Category"
+          onClick="javascript:addTextAreaElement('type', 'Category')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="layout-button" value="Layout Description"
+          onClick="javascript:addTextAreaElement('layout', 'Layout Description')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="hand-note-button" value="Hand Note"
+          onClick="javascript:addTextAreaElement('hand-note', 'Hand Note')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="orig-place-button" value="Place of Origin"
+          onClick="javascript:addTextAreaElement('orig-place', 'Place of Origin')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="orig-date-button" value="Date of Origin"
+          onClick="javascript:addTextAreaElement('orig-date', 'Date of Origin')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="provenance-found-button" value="Context"
+          onClick="javascript:addTextAreaElement('provenance-found', 'Context')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type='button' id="provenance-observed-button" value="Provenance Observed"
+          onClick="addTextAreaElement('provenance-observed', 'Provenance Observed')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="apparatus-criticus-button" value="Apparatus Criticus"
+          onClick="javascript:addTextAreaElement('apparatus-criticus', 'Apparatus Criticus')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="translation-button" value="Translation"
+          onClick="javascript:addTextAreaElement('translation', 'Translation')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="commentary-button" value="Commentary"
+          onClick="javascript:addTextAreaElement('commentary', 'Commentary')"
+          class="btn btn-info btn-xs btn-elements">
+
+        <input type="button" id="bibliography-button" value="Bibliography"
+          onClick="javascript:addTextAreaElement('bibliography', 'Bibliography')"
+          class="btn btn-info btn-xs btn-elements">
+
+      </div>
+
+      <div class="row buffer"></div>
+
+      <div class="input-group">
+
+        <textarea
+          rows="1"
+          id="title"
+          placeholder="Title"
+          spellcheck="false"
+          class="form-control"></textarea>
+
+      </div>
+
+      <div id="textarrea-elements" class="row buffer"></div>
+
+      <div class="input-group">
+
+        <textarea
+          rows="1"
+          id="inscription"
+          placeholder="Inscription Text"
+          spellcheck="false"
+          class="form-control"
+          oninput="javascript:startLeidenToEpidocConversion()"></textarea>
+
+      </div>
+
+      <textarea id="inscription-xml" hidden></textarea>
+
+      <div id="inscription-html-group" class="buffer"></div>
+
+      <div id="textarrea-elements" class="row buffer"></div>
+
+      <div id="main-button-group" class="container text-center">
+
+        <input
+          type="button"
+          value="Save EpiDoc XML"
+          onClick="javascript:saveEpiDocXml()"
+          class="btn btn-primary btn-main">
+
+        <input
+          type="button"
+          value="New EpiDoc XML"
+          onClick="javascript:getInitialLayout()"
+          class="btn btn-primary btn-main">
+
+      </div>
+
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', initializeLayout(), false);
+
+      var xmlTemplate = null;
+
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            xmlTemplate = xhttp.responseText;
+          }
+      };
+
+      xhttp.open('GET', 'epigraphista/xml/template.xml', true);
+      xhttp.send();
+    </script>
+
+  </body>
+
+</html>

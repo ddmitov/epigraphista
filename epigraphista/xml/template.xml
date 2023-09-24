@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:space="preserve" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>
+                    {title}
+                </title>
+            </titleStmt>
+            <publicationStmt>
+                <authority/>
+                <idno type="filename">
+                    {filename}
+                </idno>
+            </publicationStmt>
+            <sourceDesc>
+                <msDesc>
+                    <msIdentifier>
+                        <repository>
+                            {repository}
+                        </repository>
+                        <idno>
+                            {idno}
+                        </idno>
+                    </msIdentifier>
+                    <physDesc>
+                        <objectDesc>
+                            <supportDesc>
+                                <support>
+                                    {support}
+                                    <material>
+                                        {material}
+                                    </material>
+                                    <objectType>
+                                        {type}
+                                    </objectType>
+                                </support>
+                            </supportDesc>
+                            <layoutDesc>
+                                <layout>
+                                    {layout}
+                                </layout>
+                            </layoutDesc>
+                        </objectDesc>
+                        <handDesc>
+                            <handNote>
+                                {hand-note}
+                            </handNote>
+                        </handDesc>
+                    </physDesc>
+                    <history>
+                        <origin>
+                            <origPlace>
+                                {orig-place}
+                            </origPlace>
+                            <origDate>
+                                {orig-date}
+                            </origDate>
+                        </origin>
+                        <provenance type="found">
+                            {provenance-found}
+                        </provenance>
+                        <provenance type="observed">
+                            {provenance-observed}
+                        </provenance>
+                    </history>
+                </msDesc>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div type="edition">
+                <ab>
+                    {inscription-xml}
+                </ab>
+            </div>
+            <div type="apparatus">
+                <p>
+                    {apparatus-criticus}
+                </p>
+            </div>
+            <div type="translation">
+                <p>
+                    {translation}
+                </p>
+            </div>
+            <div type="commentary">
+                <p>
+                    {commentary}
+                </p>
+            </div>
+            <div type="bibliography">
+                <p>
+                    {bibliography}
+                </p>
+            </div>
+        </body>
+    </text>
+</TEI>
