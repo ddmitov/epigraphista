@@ -8,10 +8,12 @@ Patientia tua in studiis meis computatoriis auxilium meum maximum!
 http://epidoc.cvs.sourceforge.net/epidoc/chetc-js/  
 http://epidocumentation.pbworks.com/w/page/11681051/ChetCjs  
 
-## Frontend
+## Bootstrap
 
 http://getbootstrap.com/  
 https://bootswatch.com/darkly/  
+
+## JavaScript
 
 https://www.w3schools.com/jsref/met_node_appendchild.asp  
 https://www.w3schools.com/jsref/met_element_setattribute.asp  
@@ -28,8 +30,3 @@ https://www.w3schools.com/tags/tag_textarea.asp
 https://stackoverflow.com/questions/11080620/how-to-remove-div-elements-in-javascript-using-their-id  
 https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom  
 https://stackoverflow.com/questions/17109702/remove-all-stylings-border-glow-from-textarea  
-
-## Perl 5
-
-https://stackoverflow.com/questions/1003632/how-can-i-see-if-a-perl-hash-already-has-a-certain-key  
-https://stackoverflow.com/questions/701458/how-can-i-create-a-directory-if-one-doesnt-exist-using-perl  

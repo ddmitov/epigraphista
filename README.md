@@ -1,12 +1,6 @@
 # Epigraphista
 
-Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator.  
-It is a JavaScript and Perl 5 desktop application using [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser) for its graphical interface.
-
-## Requirements
-
-* Linux or Windows Perl 5 distribution
-* Linux or Windows [Perl Executing Browser](https://github.com/ddmitov/perl-executing-browser)
+Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator implemented as a static page web application.
 
 ## [Thanks and Credits](CREDITS.md)
 
