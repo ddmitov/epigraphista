@@ -21,7 +21,7 @@ function startLeidenToEpidocConversion () {
     document.getElementById('inscription-xml').value = epidocXml
 
     // Syntax highlight EpiDoc text:
-    const epidocHtml = syntaxHighlightEpidocText(epidocXml)
+    const epidocHtml = syntaxHighlightEpidoc(epidocXml)
 
     // Syntax-highlighted EpiDoc text is displayed only
     // if Leiden text is enetered in the 'inscription' textarrea:
