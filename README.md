@@ -1,6 +1,6 @@
 # Epigraphista
 
-Epigraphista is an [EpiDoc](https://sourceforge.net/p/epidoc/wiki/Home/) XML file creator implemented as a static page web application.
+Epigraphista is an [EpiDoc](https://epidoc.stoa.org/) XML file creator implemented as a static page web application.
 
 ## [Thanks and Credits](CREDITS.md)
 
