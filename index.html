@@ -148,20 +148,20 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', initializeLayout(), false);
+      document.addEventListener('DOMContentLoaded', initializeLayout(), false)
 
-      var xmlTemplate = null;
+      var xmlTemplate = null
 
-      var xhttp = new XMLHttpRequest();
+      var xhttp = new XMLHttpRequest()
 
       xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             xmlTemplate = xhttp.responseText;
           }
-      };
+      }
 
-      xhttp.open('GET', 'epigraphista/xml/template.xml', true);
-      xhttp.send();
+      xhttp.open('GET', 'epigraphista/xml/template.xml', true)
+      xhttp.send()
     </script>
 
   </body>
