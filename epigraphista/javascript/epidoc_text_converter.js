@@ -160,6 +160,7 @@ function convertLeidenToEpidoc (text) {
   text = text.replace(/(\S+)\((-\s*)+\)/g, '<abbr>$1</abbr>')
 
   // (- -) //
+  // TO DO
   text = text.replace(
     /\(((?:(-)|\s)+)\)/g,
     '<gap reason="omitted" extent="unknown" unit="character"/>'
@@ -167,12 +168,16 @@ function convertLeidenToEpidoc (text) {
 
   // (vac.2)  //
   // (vac. 2) //
+  // visual explanation:
+  // https://regexper.com/#%5C%28vac%5C.%28%5Cs%29%7B0%2C%7D%28%5Cd%29%7B1%2C%7D%5C%29%28%5B%5Cs%5Cn%5D%7C%24%29%7B0%2C1%7D
   text = text.replace(
-    /\(vac\.(\s){0,}(\d){1,}(\)){1}([\s\n]|$){0,1}/g,
-    '<space extent="$2" unit="character"/>$4'
+    /\(vac\.(\s){0,}(\d){1,}\)([\s\n]|$){0,1}/g,
+    '<space extent="$2" unit="character"/>$3'
   )
 
   // (vac.?) //
+  // visual explanation:
+  // https://regexper.com/#%28%5E%7C%5B%5Cn%5Cs%5D%29%7B1%7D%28%5C%28vac%5C.%5C%3F%5C%29%29%28%5B%5Cs%5Cn%5D%7C%24%29%7B0%2C1%7D
   text = text.replace(
     /(^|[\n\s]){1}(\(vac\.\?\))([\s\n]|$){0,1}/g,
     '<space extent="unknown" unit="character"/>$3'
@@ -181,52 +186,63 @@ function convertLeidenToEpidoc (text) {
   // vac.  //
   // vac   //
   // vacat //
+  // visual explanation:
+  // https://regexper.com/#%28%5E%7C%5B%5Cn%5Cs%5D%29%7B1%7Dvac%28%5C.%29%7B0%2C1%7D%28at%29%7B0%2C1%7D%28%5B%5Cs%5Cn%5D%7C%24%29%7B1%7D
   text = text.replace(
     /(^|[\n\s]){1}vac(\.){0,1}(at){0,1}([\s\n]|$){1}/g,
     '<space extent="unknown" unit="character"/>$4'
   )
 
   // (ex)em(plum) //
+  // visual explanation:
+  // https://regexper.com/#%5C%28%28%5Ba-z%5D%2B%29%5C%29%28%5Ba-z%5D%2B%29%5C%28%28%5Ba-z%5D%2B%29%5C%29
   text = text.replace(
     RegExp(
-      '\\(([' + unicodeBlocks + '0-9]+)\\)' +
-      '([' + unicodeBlocks + '0-9]+)' +
-      '\\(([' + unicodeBlocks + '0-9]+)\\)',
+      '\\(([' + unicodeBlocks + ']+)\\)' +
+      '([' + unicodeBlocks + ']+)' +
+      '\\(([' + unicodeBlocks + ']+)\\)',
       'g'
     ),
     '<expan><ex>$1</ex><abbr>$2</abbr><ex>$3</ex></expan>'
   )
 
   // ex(em)plum //
+  // visual explanation:
+  // https://regexper.com/#%28%5Ba-z%5D%2B%29%5C%28%28%5Ba-z%5D%2B%29%5C%29%28%5Ba-z%5D%2B%29
   text = text.replace(
     RegExp(
-      '([' + unicodeBlocks + '0-9]+)' +
-      '\\(([' + unicodeBlocks + '0-9]+)\\)' +
-      '([' + unicodeBlocks + '0-9]+)',
+      '([' + unicodeBlocks + ']+)' +
+      '\\(([' + unicodeBlocks + ']+)\\)' +
+      '([' + unicodeBlocks + ']+)',
       'g'
     ),
     '<expan><abbr>$1</abbr><ex>$2</ex><abbr>$3</abbr></expan>'
   )
 
   // (ex)emplum //
+  // visual explanation:
+  // https://regexper.com/#%5C%28%28%5Ba-z%5D%2B%29%5C%29%28%5Ba-z%5D%2B%29
   text = text.replace(
     RegExp(
-      '\\(([' + unicodeBlocks + '0-9]+)\\)' + '([' + unicodeBlocks + '0-9]+)',
+      '\\(([' + unicodeBlocks + ']+)\\)' + '([' + unicodeBlocks + ']+)',
       'g'
     ),
     '<expan><ex>$1</ex><abbr>$2</abbr></expan>'
   )
 
   // ex(emplum) //
+  // visual explanation:
+  // https://regexper.com/#%28%5Ba-z%5D%2B%29%5C%28%28%5Ba-z%5D%2B%29%5C%29
   text = text.replace(
     RegExp(
-      '([' + unicodeBlocks + '0-9]+)' + '\\(([' + unicodeBlocks + '0-9]+)\\)',
+      '([' + unicodeBlocks + ']+)' + '\\(([' + unicodeBlocks + ']+)\\)',
       'g'
     ),
     '<expan><abbr>$1</abbr><ex>$2</ex></expan>'
   )
 
   // (exemplum) //
+  // TO DO
   text = text.replace(
     RegExp('\\(((?:[' + unicodeBlocks + ']|s)+)\\)', 'g'),
     '<expan><abbr><am><g type="symbol"/></am></abbr><ex>$1</ex></expan>'
@@ -237,16 +253,20 @@ function convertLeidenToEpidoc (text) {
   // /////////////////////////// //
 
   // 'exemplum' //
+  // visual explanation:
+  // https://regexper.com/#%5C'%28%3F%3A%5Ba-z%5D%7C%5Cs%29%2B%5C'
   text = text.replace(
-    RegExp("'((?:[" + unicodeBlocks + "]|s)+)'", 'g'),
+    RegExp('\'((?:[' + unicodeBlocks + ']|\\s)+)\'', 'g'),
     '<add>$1</add>'
   )
 
+  // ⌜exemplum⌝ //
   // TOP LEFT CORNER - Unicode 231C  //
   // TOP RIGHT CORNER - Unicode 231D //
-  // ⌜exemplum⌝ //
+  // visual explanation:
+  // https://regexper.com/#%5C'%28%28%3F%3A%5Ba-z%5D%7C%5Cs%29%2B%29%5C'
   text = text.replace(
-    RegExp('⌜((?:[' + unicodeBlocks + ']|s)+)⌝', 'g'),
+    RegExp('⌜(([' + unicodeBlocks + ']|\\s){1,})⌝', 'g'),
     '<choice><sic>$1</sic><corr>$1</corr></choice>'
   )
 
@@ -268,12 +288,6 @@ function convertLeidenToEpidoc (text) {
 
   // ... //
   text = text.replace(/\.\.\./g, '<gap reason="ellipsis"/>')
-
-  // exempl- //
-  text = text.replace(
-    RegExp('([' + unicodeBlocks + '])(?:-)\n', 'g'),
-    '$1<lb type="worddiv"/>'
-  )
 
   // //////////// //
   // LINE NUMBERS //
@@ -326,10 +340,6 @@ function convertLeidenToEpidoc (text) {
 // 28. ...
 
 // Paste in the 'Inscription Text' textarea
-// without the comment mark and with nothing else on the line :
+// without the comment mark and with nothing else on the line:
 // [- -]
 // [- -] ?
-
-// Paste in the 'Inscription Text' textarea
-// without the comment mark and add a new line bellow:
-// exempl-
