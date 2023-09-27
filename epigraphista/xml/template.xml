@@ -6,64 +6,100 @@
         <fileDesc>
             <titleStmt>
                 <title>
-                    {title}
+                    {"id": "title"}
                 </title>
             </titleStmt>
             <publicationStmt>
                 <authority/>
                 <idno type="filename">
-                    {filename}
+                    {
+                        "id": "filename",
+                        "description": "Filename"
+                    }
                 </idno>
             </publicationStmt>
             <sourceDesc>
                 <msDesc>
                     <msIdentifier>
                         <repository>
-                            {repository}
+                            {
+                                "id": "repository",
+                                "description": "Repository"
+                            }
                         </repository>
                         <idno>
-                            {idno}
+                            {
+                                "id": "idno",
+                                "description": "ID Number"
+                            }
                         </idno>
                     </msIdentifier>
                     <physDesc>
                         <objectDesc>
                             <supportDesc>
                                 <support>
-                                    {support}
+                                    {
+                                        "id": "support",
+                                        "description": "Monument Description"
+                                    }
                                     <material>
-                                        {material}
+                                        {
+                                            "id": "material",
+                                            "description": "Material"
+                                        }
                                     </material>
                                     <objectType>
-                                        {type}
+                                        {
+                                            "id": "type",
+                                            "description": "Type"
+                                        }
                                     </objectType>
                                 </support>
                             </supportDesc>
                             <layoutDesc>
                                 <layout>
-                                    {layout}
+                                    {
+                                        "id": "layout",
+                                        "description": "Layout Description"
+                                    }
                                 </layout>
                             </layoutDesc>
                         </objectDesc>
                         <handDesc>
                             <handNote>
-                                {hand-note}
+                                {
+                                    "id": "hand-note",
+                                    "description": "Hand Note"
+                                }
                             </handNote>
                         </handDesc>
                     </physDesc>
                     <history>
                         <origin>
                             <origPlace>
-                                {orig-place}
+                                {
+                                    "id": "orig-place",
+                                    "description": "Place of Origin"
+                                }
                             </origPlace>
                             <origDate>
-                                {orig-date}
+                                {
+                                    "id": "orig-date",
+                                    "description": "Date of Origin"
+                                }
                             </origDate>
                         </origin>
                         <provenance type="found">
-                            {provenance-found}
+                            {
+                                "id": "provenance-found",
+                                "description": "Provenance Found"
+                            }
                         </provenance>
                         <provenance type="observed">
-                            {provenance-observed}
+                            {
+                                "id": "provenance-observed",
+                                "description": "Provenance Observed"
+                            }
                         </provenance>
                     </history>
                 </msDesc>
@@ -74,27 +110,39 @@
         <body>
             <div type="edition">
                 <ab>
-                    {inscription-xml}
+                    {"id": "inscription-xml"}
                 </ab>
             </div>
             <div type="apparatus">
                 <p>
-                    {apparatus-criticus}
+                    {
+                        "id": "apparatus",
+                        "description": "Apparatus Criticus"
+                    }
                 </p>
             </div>
             <div type="translation">
                 <p>
-                    {translation}
+                    {
+                        "id": "translation",
+                        "description": "Translation"
+                    }
                 </p>
             </div>
             <div type="commentary">
                 <p>
-                    {commentary}
+                    {
+                        "id": "commentary",
+                        "description": "Commentary"
+                    }
                 </p>
             </div>
             <div type="bibliography">
                 <p>
-                    {bibliography}
+                    {
+                        "id": "bibliography",
+                        "description": "Bibliography"
+                    }
                 </p>
             </div>
         </body>

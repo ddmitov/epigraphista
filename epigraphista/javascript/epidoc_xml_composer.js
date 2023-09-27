@@ -25,18 +25,18 @@ function startLeidenToEpidocConversion () {
 
     // Syntax-highlighted EpiDoc text is displayed only
     // if Leiden text is enetered in the 'inscription' textarrea:
-    if (document.getElementById('inscription-html')) {
-      document.getElementById('inscription-html').innerHTML = epidocHtml
+    if (document.getElementById('inscription-html-pre')) {
+      document.getElementById('inscription-html-pre').innerHTML = epidocHtml
     } else {
       const inscriptionHtmlContents =
-        '<pre id="inscription-html" style="form-control"></pre>'
+        '<pre id="inscription-html-pre" style="form-control"></pre>'
 
       const placeholderElement = document.getElementById(
-        'inscription-html-group'
+        'inscription-html'
       )
       placeholderElement.innerHTML = inscriptionHtmlContents
 
-      document.getElementById('inscription-html').innerHTML = epidocHtml
+      document.getElementById('inscription-html-pre').innerHTML = epidocHtml
     }
   }
 }
@@ -68,20 +68,25 @@ function saveEpiDocXml () {
 
   for (let index = 0; index < textFields.length; index++) {
     window.xmlTemplate = window.xmlTemplate.replace(
-      RegExp('\\{' + textFields[index].id + '\\}', 'g'),
+      RegExp(
+        '[\\s|\\n]{0,}\\{[\\s|\\n]{0,}id:[\\s]{0,}"' +
+        textFields[index].id +
+        '"[^}]{0,}\\}[\\s|\\n]{0,}',
+        'g'
+      ),
       textFields[index].value
     )
   }
 
   window.xmlTemplate = window.xmlTemplate.replace(
-    /[\s|\n]{0,}\{[\w|-]{1,}\}[\s|\n]{0,}/g,
+    /[\s|\n]{0,}\{[^}]{0,}\}[\s|\n]{0,}/g,
     ''
   )
 
   // Create a hidden link and click it programattically
   // to initiate EpiDoc XML file save:
   let filename = document.getElementById('title').value
-  filename = filename.replace(/([\\s]{1,})/g, '_')
+  filename = filename.replace(/([\s]{1,})/g, '_')
 
   const link = document.createElement('a')
 
