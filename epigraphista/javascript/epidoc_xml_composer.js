@@ -68,18 +68,21 @@ function saveEpiDocXml () {
 
   for (let index = 0; index < textFields.length; index++) {
     window.xmlTemplate = window.xmlTemplate.replace(
+      // visual explanation:
+      // https://regexper.com/#%5B%5Cs%5Cn%5D%7B0%2C%7D%5C%7B%22id%22%3A%5B%5Cs%5D%7B0%2C%7D%22example%22%5B%5E%7B%7D%5D%7B0%2C%7D%5C%7D%5B%5Cs%5Cn%5D%7B0%2C%7D
       RegExp(
-        '[\\s|\\n]{0,}\\{[\\s|\\n]{0,}id:[\\s]{0,}"' +
+        '[\\s\\n]{0,}\\{"id":[\\s]{0,}"' +
         textFields[index].id +
-        '"[^}]{0,}\\}[\\s|\\n]{0,}',
-        'g'
+        '"[^{}]{0,}\\}[\\s\\n]{0,}'
       ),
       textFields[index].value
     )
   }
 
+  // visual explanation:
+  // https://regexper.com/#%5B%5Cs%5Cn%5D%7B0%2C%7D%5C%7B%5B%5E%7B%7D%5D%7B0%2C%7D%5C%7D%5B%5Cs%5Cn%5D%7B0%2C%7D
   window.xmlTemplate = window.xmlTemplate.replace(
-    /[\s|\n]{0,}\{[^}]{0,}\}[\s|\n]{0,}/g,
+    /[\s\n]{0,}\{[^{}]{0,}\}[\s\n]{0,}/g,
     ''
   )
 

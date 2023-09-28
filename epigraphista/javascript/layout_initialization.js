@@ -11,7 +11,9 @@ function initializeLayout () {
   const buttonTemplate = document.getElementById('button-template')
   const buttonContainer = document.getElementById('button-elements')
 
-  const jsonSnippetRegExp = /\{[^}]{0,}\}/g
+  // visual explanation:
+  // https://regexper.com/#%5C%7B%5B%5E%7B%7D%5D%7B0%2C%7D%5C%7D
+  const jsonSnippetRegExp = /\{[^{}]{0,}\}/g
   const jsonSnippets = window.xmlTemplate.match(jsonSnippetRegExp)
 
   for (let index = 0; index < jsonSnippets.length; index++) {
