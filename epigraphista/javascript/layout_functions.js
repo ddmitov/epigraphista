@@ -4,14 +4,15 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
-function addTextAreaElement (id, placeholderText) {
+function addTextAreaElement (id, description) {
   const textElementContents = '' +
     '<div class="input-group flex-nowrap">' +
     '<textarea rows="1"' +
     ' id="' + id + '"' +
+    ' title="' + description + '"' +
+    ' placeholder="' + description + '"' +
     ' class="form-control"' +
-    ' spellcheck="false"' +
-    ' placeholder="' + placeholderText + '"></textarea>' +
+    ' spellcheck="false"></textarea>' +
     '<input type="button"' +
     ' value="X"' +
     ' title="Remove"' +
