@@ -12,10 +12,7 @@
             <publicationStmt>
                 <authority/>
                 <idno type="filename">
-                    {
-                        "id": "filename",
-                        "description": "Filename"
-                    }
+                    {"id": "filename"}
                 </idno>
             </publicationStmt>
             <sourceDesc>

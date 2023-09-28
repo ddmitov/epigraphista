@@ -45,15 +45,23 @@ function saveEpiDocXml () {
   // Check for title:
   const title = document.getElementById('title').value
 
-  if (title.length < 3) {
+  if (title.length < 1) {
     alert('Please, provide a title for the inscription!')
     return false
   }
 
-  // Check for epigraphic text:
-  const epigraphicText = document.getElementById('inscription').value
+  // Check for filename:
+  const filename = document.getElementById('filename').value
 
-  if (epigraphicText.length < 3) {
+  if (filename.length < 1) {
+    alert('Please, provide a filename for the inscription!')
+    return false
+  }
+
+  // Check for inscription text:
+  const inscriptionText = document.getElementById('inscription').value
+
+  if (inscriptionText.length < 3) {
     alert('Please, provide the text of the inscription!')
     return false
   }
@@ -88,9 +96,6 @@ function saveEpiDocXml () {
 
   // Create a hidden link and click it programattically
   // to initiate EpiDoc XML file save:
-  let filename = document.getElementById('title').value
-  filename = filename.replace(/([\s]{1,})/g, '_')
-
   const link = document.createElement('a')
 
   link.setAttribute('id', 'hidden-download-link')
@@ -101,7 +106,7 @@ function saveEpiDocXml () {
     'data:text/xml;charset=utf-8,' + encodeURIComponent(window.xmlTemplate)
   )
 
-  link.setAttribute('download', filename + '.xml')
+  link.setAttribute('download', filename)
 
   const buttonsElement = document.getElementById('main-button-group')
   buttonsElement.appendChild(link)
