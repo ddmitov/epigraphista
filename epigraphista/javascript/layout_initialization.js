@@ -31,7 +31,7 @@ function initializeLayout () {
 
       buttonElement.querySelector('input').setAttribute(
         'onClick',
-        'javascript:addTextAreaElement(\'' +
+        'javascript:addTextAreaGroup(\'' +
           inputObject.id +
           '\', \'' +
           inputObject.description +
@@ -46,7 +46,7 @@ function initializeLayout () {
   setAutoResizeForTextArreas()
 
   // Copy the original contents of the page.
-  // It will be restored without reload after inscription text is successfully saved.
+  // It will be restored when user clicks the 'New EpiDoc XML' button.
   originalContainerContents =
     document.getElementsByClassName('container-fluid')[0].innerHTML
 }

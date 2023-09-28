@@ -71,17 +71,22 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
         <textarea
           rows="1"
           id="inscription"
-          title="Inscription Text"
-          placeholder="Inscription Text"
+          title="Leiden Inscription Text"
+          placeholder="Leiden Inscription Text"
           spellcheck="false"
           class="form-control"
-          oninput="javascript:startLeidenToEpidocConversion()"></textarea>
+          oninput="javascript:prepareEpiDocXml()"></textarea>
 
       </div>
 
       <textarea id="inscription-xml" hidden></textarea>
 
-      <div id="inscription-html" class="buffer"></div>
+      <div id="textarrea-elements" class="row buffer"></div>
+
+      <pre
+        id="inscription-html"
+        class="form-control"
+        title="EpiDoc XML Inscription Fragment">EpiDoc XML Inscription Fragment</pre>
 
       <div id="textarrea-elements" class="row buffer"></div>
 

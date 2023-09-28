@@ -4,7 +4,7 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
-function addTextAreaElement (id, description) {
+function addTextAreaGroup (id, description) {
   const textElementContents = '' +
     '<div class="input-group flex-nowrap">' +
     '<textarea rows="1"' +
@@ -17,7 +17,7 @@ function addTextAreaElement (id, description) {
     ' value="X"' +
     ' title="Remove"' +
     ' class="btn btn-info btn-input-group"' +
-    ' onclick="javascript:clearElementGroup(\'' + id + '\')">' +
+    ' onclick="javascript:clearTextAreaGroup(\'' + id + '\')">' +
     '</div>'
 
   const textElementInputGroup = document.createElement('div')
@@ -40,7 +40,7 @@ function addTextAreaElement (id, description) {
   buttonToDisable.disabled = true
 }
 
-function clearElementGroup (id) {
+function clearTextAreaGroup (id) {
   const placeholderElement = document.getElementById(id + '-group')
   const textFields = placeholderElement.getElementsByTagName('textarea')
 
@@ -75,4 +75,26 @@ function clearElementGroup (id) {
     buttonToEnable.setAttribute('class', 'btn btn-info btn-xs')
     buttonToEnable.disabled = false
   }
+}
+
+function syntaxHighlightEpiDocXml (epiDocFragment) {
+  // Escape opening angle bracket '<':
+  epiDocFragment = epiDocFragment.replace(/</g, '&lt;')
+
+  // Escape closing angle bracket '>':
+  epiDocFragment = epiDocFragment.replace(/>/g, '&gt;')
+
+  // Escape quotes:
+  epiDocFragment = epiDocFragment.replace(/'/g, '&quot;')
+  epiDocFragment = epiDocFragment.replace(/"/g, '&quot;')
+
+  // Highlight all EpiDoc XML tags:
+  epiDocFragment = epiDocFragment.replace(/&lt;/g, '<font color="blue">&lt;')
+  epiDocFragment = epiDocFragment.replace(/&gt;/g, '&gt;</font>')
+
+  // Insert line breaks, but not on the first line:
+  epiDocFragment = epiDocFragment.replace(/&lt;lb/g, '<br>&lt;lb')
+  epiDocFragment = epiDocFragment.replace(/<br>/, '')
+
+  return epiDocFragment
 }

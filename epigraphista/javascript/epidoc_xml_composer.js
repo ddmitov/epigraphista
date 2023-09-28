@@ -4,41 +4,17 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
-function startLeidenToEpidocConversion () {
+function prepareEpiDocXml () {
   // Get the Leiden text and convert it to EpiDoc text:
   const leidenText = document.getElementById('inscription').value
+  const epidocXml = convertLeidenToEpidoc(leidenText)
 
-  if (leidenText.length === 0) {
-    document.getElementById('inscription-xml').value = ''
+  // Place the inscription EpiDoc XML fragment in a hidden textarea:
+  document.getElementById('inscription-xml').value = epidocXml
 
-    clearElementGroup('inscription-html')
-  }
-
-  if (leidenText.length > 0) {
-    const epidocXml = convertLeidenToEpidoc(leidenText)
-
-    // Place all results in the HTML DOM tree:
-    document.getElementById('inscription-xml').value = epidocXml
-
-    // Syntax highlight EpiDoc text:
-    const epidocHtml = syntaxHighlightEpidoc(epidocXml)
-
-    // Syntax-highlighted EpiDoc text is displayed only
-    // if Leiden text is enetered in the 'inscription' textarrea:
-    if (document.getElementById('inscription-html-pre')) {
-      document.getElementById('inscription-html-pre').innerHTML = epidocHtml
-    } else {
-      const inscriptionHtmlContents =
-        '<pre id="inscription-html-pre" style="form-control"></pre>'
-
-      const placeholderElement = document.getElementById(
-        'inscription-html'
-      )
-      placeholderElement.innerHTML = inscriptionHtmlContents
-
-      document.getElementById('inscription-html-pre').innerHTML = epidocHtml
-    }
-  }
+  // Syntax highlight the inscription EpiDoc XML fragment:
+  const epidocHtml = syntaxHighlightEpiDocXml(epidocXml)
+  document.getElementById('inscription-html').innerHTML = epidocHtml
 }
 
 function saveEpiDocXml () {
@@ -65,10 +41,6 @@ function saveEpiDocXml () {
     alert('Please, provide the text of the inscription!')
     return false
   }
-
-  // Convert to EpiDoc XML again
-  // if text is enetered at the last moment before file save:
-  startLeidenToEpidocConversion()
 
   // Fill the EpiDoc XML template with user-provided data:
   const containerElement = document.getElementById('container')
