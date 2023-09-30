@@ -18,7 +18,6 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
     <script src="bootstrap/javascript/bootstrap.bundle.min.js" charset="utf-8"></script>
 
     <link rel="stylesheet" type="text/css" href="epigraphista/css/epigraphista.css" media="all">
-    <script src="epigraphista/javascript/epidoc_text_highlighter.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/epidoc_xml_composer.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/layout_functions.js" charset="utf-8"></script>
     <script src="epigraphista/javascript/layout_initialization.js" charset="utf-8"></script>
@@ -32,9 +31,7 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
       <div class="row buffer"></div>
 
-      <div id="button-elements" class="container text-center">
-
-      </div>
+      <div id="button-elements" class="container text-center"></div>
 
       <div class="row buffer"></div>
 
@@ -70,9 +67,9 @@ Dimitar D. Mitov, 2015 - 2018, 2023.
 
         <textarea
           rows="1"
-          id="inscription"
-          title="Leiden Inscription Text"
-          placeholder="Leiden Inscription Text"
+          id="inscription-leiden"
+          title="Leiden+ Inscription Text"
+          placeholder="Leiden+ Inscription Text"
           spellcheck="false"
           class="form-control"
           oninput="javascript:prepareEpiDocXml()"></textarea>

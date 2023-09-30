@@ -34,6 +34,11 @@ const unicodeBlocks =
   '\uff00-\uffef' // Halfwidth and Fullwidth Forms
 
 function convertLeidenToEpidoc (text) {
+  // Convert only non-zero length Leiden text:
+  if (text.length === 0) {
+    return text
+  }
+
   // ////////////////////////// //
   // ANGLED BRACKETS ENCLOSURES //
   // ////////////////////////// //
