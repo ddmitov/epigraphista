@@ -22,7 +22,7 @@ function prepareEpiDocXml () {
     document.getElementById('inscription-xml').value = epidocXml
 
     // Syntax highlight the inscription EpiDoc XML fragment:
-    const epidocHtml = syntaxHighlightEpiDocXml(epidocXml)
+    const epidocHtml = syntaxHighlightXml(epidocXml)
     document.getElementById('inscription-html').innerHTML = epidocHtml
   }
 }

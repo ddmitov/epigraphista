@@ -77,24 +77,22 @@ function clearTextAreaGroup (id) {
   }
 }
 
-function syntaxHighlightEpiDocXml (epiDocFragment) {
-  // Escape opening angle bracket '<':
-  epiDocFragment = epiDocFragment.replace(/</g, '&lt;')
-
-  // Escape closing angle bracket '>':
-  epiDocFragment = epiDocFragment.replace(/>/g, '&gt;')
+function syntaxHighlightXml (xml) {
+  // Escape angle brackets:
+  xml = xml.replace(/</g, '&lt;')
+  xml = xml.replace(/>/g, '&gt;')
 
   // Escape quotes:
-  epiDocFragment = epiDocFragment.replace(/'/g, '&quot;')
-  epiDocFragment = epiDocFragment.replace(/"/g, '&quot;')
+  xml = xml.replace(/'/g, '&quot;')
+  xml = xml.replace(/"/g, '&quot;')
 
-  // Highlight all EpiDoc XML tags:
-  epiDocFragment = epiDocFragment.replace(/&lt;/g, '<font color="blue">&lt;')
-  epiDocFragment = epiDocFragment.replace(/&gt;/g, '&gt;</font>')
+  // Highlight XML tags:
+  xml = xml.replace(/&lt;/g, '<font color="blue">&lt;')
+  xml = xml.replace(/&gt;/g, '&gt;</font>')
 
   // Insert line breaks, but not on the first line:
-  epiDocFragment = epiDocFragment.replace(/&lt;lb/g, '<br>&lt;lb')
-  epiDocFragment = epiDocFragment.replace(/<br>/, '')
+  xml = xml.replace(/&lt;lb/g, '<br>&lt;lb')
+  xml = xml.replace(/<br>/, '')
 
-  return epiDocFragment
+  return xml
 }
