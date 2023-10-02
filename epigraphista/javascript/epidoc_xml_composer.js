@@ -28,14 +28,6 @@ function prepareEpiDocXml () {
 }
 
 function saveEpiDocXml () {
-  // Check for title:
-  const title = document.getElementById('title').value
-
-  if (title.length < 1) {
-    alert('Please, provide a title for the inscription!')
-    return false
-  }
-
   // Check for filename:
   const filename = document.getElementById('filename').value
 

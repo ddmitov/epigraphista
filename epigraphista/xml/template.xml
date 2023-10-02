@@ -6,97 +6,64 @@
         <fileDesc>
             <titleStmt>
                 <title>
-                    {"id": "title"}
+                    {"id":"title","description":"Title"}
                 </title>
             </titleStmt>
             <publicationStmt>
                 <authority/>
                 <idno type="filename">
-                    {"id": "filename"}
+                    {"id":"filename"}
                 </idno>
             </publicationStmt>
             <sourceDesc>
                 <msDesc>
                     <msIdentifier>
                         <repository>
-                            {
-                                "id": "repository",
-                                "description": "Repository"
-                            }
+                            {"id":"repository","description":"Repository"}
                         </repository>
                         <idno>
-                            {
-                                "id": "idno",
-                                "description": "ID Number"
-                            }
+                            {"id":"idno","description":"ID Number"}
                         </idno>
                     </msIdentifier>
                     <physDesc>
                         <objectDesc>
                             <supportDesc>
                                 <support>
-                                    {
-                                        "id": "support",
-                                        "description": "Monument Description"
-                                    }
+                                    {"id":"support","description":"Monument Description"}
                                     <material>
-                                        {
-                                            "id": "material",
-                                            "description": "Material"
-                                        }
+                                        {"id":"material","description":"Material"}
                                     </material>
                                     <objectType>
-                                        {
-                                            "id": "type",
-                                            "description": "Type"
-                                        }
+                                        {"id":"type","description":"Type"}
                                     </objectType>
                                 </support>
                             </supportDesc>
                             <layoutDesc>
                                 <layout>
-                                    {
-                                        "id": "layout",
-                                        "description": "Layout Description"
-                                    }
+                                    {"id":"layout","description":"Layout Description"}
                                 </layout>
                             </layoutDesc>
                         </objectDesc>
                         <handDesc>
                             <handNote>
-                                {
-                                    "id": "hand-note",
-                                    "description": "Hand Note"
-                                }
+                                {"id":"hand-note","description":"Hand Note"}
                             </handNote>
                         </handDesc>
                     </physDesc>
                     <history>
                         <origin>
                             <origPlace>
-                                {
-                                    "id": "orig-place",
-                                    "description": "Place of Origin"
-                                }
+                                {"id":"orig-place","description":"Place of Origin"}
                             </origPlace>
                             <origDate>
-                                {
-                                    "id": "orig-date",
-                                    "description": "Date of Origin"
-                                }
+                                {"id":"orig-date","description":"Date of Origin"}
                             </origDate>
                         </origin>
                         <provenance type="found">
-                            {
-                                "id": "provenance-found",
-                                "description": "Provenance Found"
-                            }
+                            {"id":"provenance-found","description":"Provenance Found"}
                         </provenance>
                         <provenance type="observed">
-                            {
-                                "id": "provenance-observed",
-                                "description": "Provenance Observed"
-                            }
+                            {"id":"provenance-observed","description":"Provenance Observed"}
                         </provenance>
                     </history>
                 </msDesc>
@@ -107,39 +74,27 @@
         <body>
             <div type="edition">
                 <ab>
-                    {"id": "inscription-xml"}
+                    {"id":"inscription-xml"}
                 </ab>
             </div>
             <div type="apparatus">
                 <p>
-                    {
-                        "id": "apparatus",
-                        "description": "Apparatus Criticus"
-                    }
+                    {"id":"apparatus","description":"Apparatus Criticus"}
                 </p>
             </div>
             <div type="translation">
                 <p>
-                    {
-                        "id": "translation",
-                        "description": "Translation"
-                    }
+                    {"id":"translation","description":"Translation"}
                 </p>
             </div>
             <div type="commentary">
                 <p>
-                    {
-                        "id": "commentary",
-                        "description": "Commentary"
-                    }
+                    {"id":"commentary","description":"Commentary"}
                 </p>
             </div>
             <div type="bibliography">
                 <p>
-                    {
-                        "id": "bibliography",
-                        "description": "Bibliography"
-                    }
+                    {"id":"bibliography","description":"Bibliography"}
                 </p>
             </div>
         </body>
