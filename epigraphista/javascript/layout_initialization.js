@@ -49,6 +49,8 @@ function initializeLayout () {
   // It will be restored when user clicks the 'New EpiDoc XML' button.
   originalContainerContents =
     document.getElementsByClassName('container-fluid')[0].innerHTML
+
+  return true
 }
 
 function setAutoResizeForTextArreas () {
@@ -62,11 +64,15 @@ function setAutoResizeForTextArreas () {
     )
     textArreas[index].addEventListener('input', autoResizeTextArrea, false)
   }
+
+  return true
 }
 
 function autoResizeTextArrea () {
   this.style.height = 0
   this.style.height = this.scrollHeight + 'px'
+
+  return true
 }
 
 function getInitialLayout () {
@@ -75,4 +81,6 @@ function getInitialLayout () {
 
   // Set autoresize for all textarrea elements:
   setAutoResizeForTextArreas()
+
+  return true
 }

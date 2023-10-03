@@ -25,6 +25,8 @@ function prepareEpiDocXml () {
     const epidocHtml = syntaxHighlightXml(epidocXml)
     document.getElementById('inscription-html').innerHTML = epidocHtml
   }
+
+  return true
 }
 
 function saveEpiDocXml () {
@@ -86,4 +88,6 @@ function saveEpiDocXml () {
   buttonsElement.appendChild(link)
 
   document.getElementById('hidden-download-link').click()
+
+  return true
 }

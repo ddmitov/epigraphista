@@ -38,27 +38,21 @@ function addTextAreaGroup (id, description) {
   const buttonToDisable = document.getElementById(id + '-button')
   buttonToDisable.setAttribute('class', 'btn btn-info btn-xs disabled')
   buttonToDisable.disabled = true
+
+  return true
 }
 
 function clearTextAreaGroup (id) {
   const placeholderElement = document.getElementById(id + '-group')
   const textFields = placeholderElement.getElementsByTagName('textarea')
 
-  let textEntered = false
-
-  for (let index = 0; index < textFields.length; index++) {
-    if (textFields[index].value.length > 0) {
-      textEntered = true
-    }
-  }
-
   let clearElement = false
 
-  if (textEntered === false) {
+  if (textFields[0].value.length === 0) {
     clearElement = true
   }
 
-  if (textEntered === true) {
+  if (textFields[0].value.length > 0) {
     const clearElementConfirmation = confirm(
       'Are you sure you want to delete this non-empty element?'
     )
@@ -75,6 +69,8 @@ function clearTextAreaGroup (id) {
     buttonToEnable.setAttribute('class', 'btn btn-info btn-xs')
     buttonToEnable.disabled = false
   }
+
+  return true
 }
 
 function syntaxHighlightXml (xml) {
