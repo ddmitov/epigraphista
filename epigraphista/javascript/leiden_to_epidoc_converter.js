@@ -10,19 +10,19 @@
 // https://sourceforge.net/projects/epidoc/files/OldFiles/chetc-js/r2/
 // https://cds.library.brown.edu/projects/chet-c/chetc.html
 
-// All names and numbers of text patterns here follow the table
+// All names and numbers of text patterns within this code follow the table
 // "Leiden/Leiden+ and EpiDoc Quick Reference (after Krummrey-Panciera)"
 // by Gabriel Bodard 2017-03-17 available at
 // https://svn.code.sf.net/p/epidoc/code/trunk/guidelines/msword/cheatsheet.pdf
 
-// For development and testing of Regular Expressions go to the RegExr tool at
+// For development and testing of regular expressions go to the RegExr tool at
 // https://regexr.com/
 
-// For visual representation of Regular Expressions go to the Regexper toool at
+// For visual representation of regular expressions go to the Regexper toool at
 // https://regexper.com/
 
-const unicodeBlocks =
-  'a-zA-Z' + // Basic Latin
+const unicodeLetters =
+  'a-zA-Z' +
   '\u0080-\u00ff' + // Latin-1 Supplement
   '\u0180-\u024f' + // Latin Extended-B
   '\u1e00-\u1eff' + // Latin Extended Additional
@@ -53,10 +53,10 @@ function convertLeidenToEpidoc (text) {
   // <ab>
   // IX.2 "Omitted letters added by editor"
   // Use the following Latin-only version
-  // for Regexper visualization at https://regexper.com/
+  // at https://regexper.com/ for regular expression visualization:
   // <([a-z]{1,})>
   text = text.replace(
-    RegExp('<([' + unicodeBlocks + ']{1,})>', 'g'),
+    RegExp('<([' + unicodeLetters + ']{1,})>', 'g'),
     '<supplied reason="omitted">$1</supplied>'
   )
 
@@ -67,10 +67,10 @@ function convertLeidenToEpidoc (text) {
   // ((ab))
   // X.3 "Expansion of symbol"
   // Use the following Latin-only version
-  // for Regexper visualization at https://regexper.com/
+  // at https://regexper.com/ for regular expression visualization:
   // \(\(([a-z]{1,})\)\)
   text = text.replace(
-    RegExp('\\(\\(([' + unicodeBlocks + ']{1,})\\)\\)', 'g'),
+    RegExp('\\(\\(([' + unicodeLetters + ']{1,})\\)\\)', 'g'),
     '<expan><ex>$1</ex></expan>'
   )
 
@@ -81,11 +81,11 @@ function convertLeidenToEpidoc (text) {
   // [ab]
   // VIII.1 "Characters lost but restored"
   // Use the following Latin-only version
-  // for Regexper visualization at https://regexper.com/
+  // at https://regexper.com/ for regular expression visualization:
   // (^|[^[]{1,1})\[([a-z]{1,})\]([^\]]{1,1}|$)
   text = text.replace(
     RegExp(
-      '(^|[^[]{1,1})\\[([' + unicodeBlocks + ']{1,})\\]([^\\]]{1,1}|$)',
+      '(^|[^[]{1,1})\\[([' + unicodeLetters + ']{1,})\\]([^\\]]{1,1}|$)',
       'g'
     ),
     '$1<supplied reason="lost">$2</supplied>$3'
@@ -93,9 +93,21 @@ function convertLeidenToEpidoc (text) {
 
   // [[ab]]
   // V.1 "Erased"
+  // Use the following Latin-only version
+  // at https://regexper.com/ for regular expression visualization:
+  // \[\[([a-z]{1,})\]\]
   text = text.replace(
-    /\[\[([^[\]]{1,})\]\]/g,
+    RegExp('\\[\\[([' + unicodeLetters + ']{1,})\\]\\]', 'g'),
     '<del rend="erasure">$1</del>'
+  )
+
+  // [[[.3]]]
+  // V.3 "Erased and lost"
+  text = text.replace(
+    /\[\[\[\.([\d]{1,})\]\]\]/g,
+    '<del rend="erasure">' +
+    '<gap reason="lost" quantity="$1" unit="character"/>' +
+    '</del>'
   )
 
   // [ca.2]
@@ -112,10 +124,10 @@ function convertLeidenToEpidoc (text) {
   // {ab}
   // IX.1 "Superfluous letters suppressed by editor"
   // Use the following Latin-only version
-  // for Regexper visualization at https://regexper.com/
+  // at https://regexper.com/ for regular expression visualization:
   // \{([a-z]{1,})\}
   text = text.replace(
-    RegExp('\\{([' + unicodeBlocks + ']{1,})\\}', 'g'),
+    RegExp('\\{([' + unicodeLetters + ']{1,})\\}', 'g'),
     '<surplus>$1</surplus>'
   )
 
@@ -177,14 +189,15 @@ function convertLeidenToEpidoc (text) {
 
 // Paste in the 'Leiden+ Inscription Text' textarea:
 
-// 1.  <ab>    //
-// 2.  ((ab))  //
-// 3.  [[ab]]  //
-// 4   [ab]    //
-// 5.  [ca.2]  //
-// 6.  {ab}    //
-// 7.  /*!*/   //
-// 8.  /*sic*/ //
-// 9.  vac.2   //
-// 10.  vac.?  //
-// 11. *leaf*  //
+//  1. <ab>     //
+//  2. ((ab))   //
+//  3. [[ab]]   //
+//  4. [[[.3]]] //
+//  5  [ab]     //
+//  6. [ca.2]   //
+//  7. {ab}     //
+//  8. /*!*/    //
+//  9. /*sic*/  //
+// 10. vac.2    //
+// 11. vac.?    //
+// 12. *leaf*   //
