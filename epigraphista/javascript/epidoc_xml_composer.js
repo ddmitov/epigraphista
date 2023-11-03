@@ -4,6 +4,9 @@
 // Epigraphista is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2015 - 2018, 2023.
 
+// For visual representation of regular expressions go to the Regexper toool at
+// https://regexper.com/
+
 function prepareEpiDocXml () {
   // Get the Leiden text:
   const leidenText = document.getElementById('inscription-leiden').value
@@ -34,15 +37,27 @@ function saveEpiDocXml () {
   const filename = document.getElementById('filename').value
 
   if (filename.length < 1) {
-    alert('Please, provide a filename for the inscription!')
+    const modal = bootstrap.Modal.getOrCreateInstance(
+      document.getElementById('modal-message')
+    )
+    document.getElementById('modal-message-text').innerText =
+      'Please, provide a filename for the inscription!'
+    modal.show()
+
     return false
   }
 
   // Check for inscription text:
-  const inscriptionText = document.getElementById('inscription').value
+  const inscriptionText = document.getElementById('inscription-leiden').value
 
   if (inscriptionText.length < 3) {
-    alert('Please, provide the text of the inscription!')
+    const modal = bootstrap.Modal.getOrCreateInstance(
+      document.getElementById('modal-message')
+    )
+    document.getElementById('modal-message-text').innerText =
+      'Please, provide the text of the inscription!'
+    modal.show()
+
     return false
   }
 
@@ -52,8 +67,6 @@ function saveEpiDocXml () {
 
   for (let index = 0; index < textFields.length; index++) {
     window.xmlTemplate = window.xmlTemplate.replace(
-      // visual explanation:
-      // https://regexper.com/#%5B%5Cs%5Cn%5D%7B0%2C%7D%5C%7B%22id%22%3A%5B%5Cs%5D%7B0%2C%7D%22example%22%5B%5E%7B%7D%5D%7B0%2C%7D%5C%7D%5B%5Cs%5Cn%5D%7B0%2C%7D
       RegExp(
         '[\\s\\n]{0,}\\{"id":[\\s]{0,}"' +
           textFields[index].id +
@@ -63,8 +76,6 @@ function saveEpiDocXml () {
     )
   }
 
-  // visual explanation:
-  // https://regexper.com/#%5B%5Cs%5Cn%5D%7B0%2C%7D%5C%7B%5B%5E%7B%7D%5D%7B0%2C%7D%5C%7D%5B%5Cs%5Cn%5D%7B0%2C%7D
   window.xmlTemplate = window.xmlTemplate.replace(
     /[\s\n]{0,}\{[^{}]{0,}\}[\s\n]{0,}/g,
     ''
