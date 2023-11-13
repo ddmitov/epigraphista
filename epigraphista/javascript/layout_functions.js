@@ -46,31 +46,51 @@ function clearTextAreaGroup (id) {
   const placeholderElement = document.getElementById(id + '-group')
   const textFields = placeholderElement.getElementsByTagName('textarea')
 
-  let clearElement = false
-
   if (textFields[0].value.length === 0) {
-    clearElement = true
+    removeElement(id)
   }
 
   if (textFields[0].value.length > 0) {
-    const clearElementConfirmation = confirm(
-      'Are you sure you want to delete this non-empty element?'
-    )
-
-    if (clearElementConfirmation === true) {
-      clearElement = true
-    }
-  }
-
-  if (clearElement === true) {
-    placeholderElement.parentElement.removeChild(placeholderElement)
-
-    const buttonToEnable = document.getElementById(id + '-button')
-    buttonToEnable.setAttribute('class', 'btn btn-info btn-xs')
-    buttonToEnable.disabled = false
+    const confirmText = 'Are you sure you want to delete this non-empty element?'
+    bootstrapConfirm(confirmText, 'removeElement', id)
   }
 
   return true
+}
+
+function removeElement (id) {
+  const placeholderElement = document.getElementById(id + '-group')
+  placeholderElement.parentElement.removeChild(placeholderElement)
+
+  const buttonToEnable = document.getElementById(id + '-button')
+  buttonToEnable.setAttribute('class', 'btn btn-info btn-xs')
+  buttonToEnable.disabled = false
+}
+
+function bootstrapAlert (alertText) {
+  const modal = bootstrap.Modal.getOrCreateInstance(
+    document.getElementById('modal-alert')
+  )
+
+  document.getElementById('modal-alert-text').innerText = alertText
+
+  modal.show()
+}
+
+function bootstrapConfirm (confirmText, confirmFunction, confirmFunctionParam) {
+  const modal = bootstrap.Modal.getOrCreateInstance(
+    document.getElementById('modal-confirm')
+  )
+
+  document.getElementById('modal-confirm-text').innerText = confirmText
+
+  const confirmButton = document.getElementById('modal-confirm-button')
+
+  confirmButton.addEventListener('click', function () {
+    window[confirmFunction](confirmFunctionParam)
+  })
+
+  modal.show()
 }
 
 function syntaxHighlightXml (xml) {

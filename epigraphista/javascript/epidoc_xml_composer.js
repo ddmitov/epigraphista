@@ -37,12 +37,7 @@ function saveEpiDocXml () {
   const filename = document.getElementById('filename').value
 
   if (filename.length < 1) {
-    const modal = bootstrap.Modal.getOrCreateInstance(
-      document.getElementById('modal-message')
-    )
-    document.getElementById('modal-message-text').innerText =
-      'Please, provide a filename for the inscription!'
-    modal.show()
+    bootstrapAlert('Please, provide a filename for the inscription!')
 
     return false
   }
@@ -51,12 +46,7 @@ function saveEpiDocXml () {
   const inscriptionText = document.getElementById('inscription-leiden').value
 
   if (inscriptionText.length < 3) {
-    const modal = bootstrap.Modal.getOrCreateInstance(
-      document.getElementById('modal-message')
-    )
-    document.getElementById('modal-message-text').innerText =
-      'Please, provide the text of the inscription!'
-    modal.show()
+    bootstrapAlert('Please, provide the text of the inscription!')
 
     return false
   }
